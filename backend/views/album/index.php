@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\AlbumSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Albums';
+$this->title = 'Álbuns';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="album-index">
@@ -16,24 +16,37 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Album', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Álbum', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="fundo-form">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                'id',
+                'nome',
+                ['label' => 'Data de Lançamento',
+                    'attribute' => 'data_lancamento'],
 
-            'id',
-            'nome',
-            'data_lancamento',
-            'preco',
-            'id_artista',
-            //'id_genero',
-            //'id_subgenero',
+                ['label' => 'Preço (€)',
+                    'attribute' => 'preco'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                ['label' => 'Artista',
+                    'attribute' => 'id_artista'],
+
+                ['label' => 'Género',
+                    'attribute' => 'id_genero'],
+
+                ['class' => 'yii\grid\ActionColumn',
+                    'header'=>"Ações",
+                    'headerOptions' => [
+                        'style' => 'color:#3277b3'
+                    ],
+                ],
+            ],
+        ]); ?>
+    </div>
+
 </div>
