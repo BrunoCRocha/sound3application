@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Ver Comentários', ['comment/index', 'post_id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
     <div class="fundo-form">
         <?= DetailView::widget([
@@ -39,5 +40,21 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </div>
 
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'conteudo',
+            'data_criacao',
+            'id_utilizador',
+            'id_album',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 
 </div>

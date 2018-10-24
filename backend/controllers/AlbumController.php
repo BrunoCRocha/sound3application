@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\Comment;
 use Yii;
 use common\models\Album;
 use common\models\AlbumSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,9 +54,20 @@ class AlbumController extends Controller
      */
     public function actionView($id)
     {
+        $query = Comment::find()->where(['post_id' => $id]);
+
+        $provider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'provider' => $provider
         ]);
+
+        /*return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);*/
     }
 
     /**
