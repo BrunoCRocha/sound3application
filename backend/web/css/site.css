@@ -15,10 +15,9 @@ body {
     align:center;
     text-align: center;
 }
-
 #bo-fundo{
-     background-color: white;
- }
+    background-color: white;
+}
 .bo-botao{
     height: 100%;
     width:100%;
@@ -27,7 +26,20 @@ body {
 .texto-botao{
     color:black;
 }
-    /*FIM HOME BackOffice*/
+/*FIM HOME BackOffice*/
+/*INICIO Artita*/
+.fundo-form{
+   /* width: 80%;*/
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-right: 20px;
+    background-color: white;
+    border-radius: 25px;
+}
+/*FIM Artista*/
+
+
 
 .wrap {
     min-height: 100%;
