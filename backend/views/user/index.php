@@ -16,27 +16,33 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="fundo-form">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                'id',
+                'username',
+                'auth_key',
+                'password_hash',
+                'password_reset_token',
+                //'email:email',
+                //'status',
+                //'created_at',
+                //'updated_at',
 
-            'id',
-            'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            //'email:email',
-            //'status',
-            //'created_at',
-            //'updated_at',
-            //'telefone',
+                ['class' => 'yii\grid\ActionColumn',
+                    'header'=>"Ações",
+                    'headerOptions' => [
+                        'style' => 'color:#3277b3'
+                    ],
+                ],
+            ],
+        ]); ?>
+    </div>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 </div>

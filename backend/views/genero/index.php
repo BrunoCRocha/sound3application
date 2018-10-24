@@ -30,7 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['label' => 'Descrição',
                     'attribute' => 'descricao'],
 
-                ['class' => 'yii\grid\ActionColumn'],
+                ['class' => 'yii\grid\ActionColumn',
+                    'header'=>"Ações",
+                    'headerOptions' => [
+                        'style' => 'color:#3277b3'
+                    ],
+                ],
             ],
         ]); ?>
     </div>
