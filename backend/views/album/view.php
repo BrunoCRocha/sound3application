@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Ver Comentários', ['comment/index', 'post_id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver Comentários', ['comment/index', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
     <div class="fundo-form">
         <?= DetailView::widget([
@@ -39,5 +39,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </div>
-
 </div>
