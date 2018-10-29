@@ -10,18 +10,13 @@ use yii\grid\GridView;
 $this->title = 'Compras';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="compra-index">
+<div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h1><?= 'Compras' ?></h1>
 
-    <p>
-        <?= Html::a('Create Compra', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <div class="fundo-form">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
@@ -34,5 +29,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]); ?>
     </div>
-
 </div>
