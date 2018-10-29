@@ -16,9 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Album', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Álbum', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
     <div class="fundo-form">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -28,13 +27,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'id',
                 'nome',
-                'data_lancamento',
-                'preco',
-                'id_artista',
-                //'id_genero',
-                //'id_subgenero',
+                ['label' => 'Data de Lançamento',
+                    'attribute' => 'data_lancamento'],
 
-                ['class' => 'yii\grid\ActionColumn'],
+                ['label' => 'Preço (€)',
+                    'attribute' => 'preco'],
+
+                ['label' => 'Artista',
+                    'attribute' => 'id_artista'],
+
+                ['label' => 'Género',
+                    'attribute' => 'id_genero'],
+
+                ['class' => 'yii\grid\ActionColumn',
+                    'header'=>"Ações",
+                    'headerOptions' => [
+                        'style' => 'color:#3277b3'
+                    ],
+                ],
             ],
         ]); ?>
     </div>

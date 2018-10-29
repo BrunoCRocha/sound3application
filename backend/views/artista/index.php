@@ -32,7 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['label' => 'Data de Início de Carreira',
                     'attribute' => 'data_ini_carreira',
                 ],
-                ['class' => 'yii\grid\ActionColumn'],
+                ['class' => 'yii\grid\ActionColumn',
+
+                    'header'=>"Ações",
+                    'headerOptions' => [
+                        'style' => 'color:#3277b3',
+                    ],
+                ],
             ],
         ]); ?>
     </div>
