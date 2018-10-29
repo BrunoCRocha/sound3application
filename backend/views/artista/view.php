@@ -23,8 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Ver Comentários', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Ver Compras', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
     <div class="fundo-form">
         <?= DetailView::widget([
