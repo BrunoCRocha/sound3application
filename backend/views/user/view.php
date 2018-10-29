@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <span style="float: right"><?= Html::a('Ver Favoritos', ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+            <?= Html::a('Ver Compras', ['ver-compras', 'id' => $model->id], ['class' => 'btn btn-info']) ?></span>
     </p>
     <div class="fundo-form">
         <?= DetailView::widget([
