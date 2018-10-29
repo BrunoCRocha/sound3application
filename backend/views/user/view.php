@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = $model->id;
+$this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <span style="float: right"><?= Html::a('Ver Favoritos', ['update', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+            <?= Html::a('Ver Compras', ['ver-compras', 'id' => $model->id], ['class' => 'btn btn-info']) ?></span>
     </p>
 
     <?= DetailView::widget([
