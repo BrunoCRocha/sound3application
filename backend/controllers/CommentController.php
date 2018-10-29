@@ -2,19 +2,17 @@
 
 namespace backend\controllers;
 
-use common\models\Comment;
 use Yii;
-use common\models\Album;
-use common\models\AlbumSearch;
-use yii\data\ActiveDataProvider;
+use common\models\Comment;
+use common\models\CommentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AlbumController implements the CRUD actions for Album model.
+ * CommentController implements the CRUD actions for Comment model.
  */
-class AlbumController extends Controller
+class CommentController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,12 +30,12 @@ class AlbumController extends Controller
     }
 
     /**
-     * Lists all Album models.
+     * Lists all Comment models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AlbumSearch();
+        $searchModel = new CommentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,37 +45,26 @@ class AlbumController extends Controller
     }
 
     /**
-     * Displays a single Album model.
+     * Displays a single Comment model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $query = Comment::find()->where(['post_id' => $id]);
-
-        $provider = new ActiveDataProvider([
-            'query' => $query
-        ]);
-
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'provider' => $provider
         ]);
-
-        /*return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);*/
     }
 
     /**
-     * Creates a new Album model.
+     * Creates a new Comment model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Album();
+        $model = new Comment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -89,7 +76,7 @@ class AlbumController extends Controller
     }
 
     /**
-     * Updates an existing Album model.
+     * Updates an existing Comment model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -109,7 +96,7 @@ class AlbumController extends Controller
     }
 
     /**
-     * Deletes an existing Album model.
+     * Deletes an existing Comment model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -123,15 +110,15 @@ class AlbumController extends Controller
     }
 
     /**
-     * Finds the Album model based on its primary key value.
+     * Finds the Comment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Album the loaded model
+     * @return Comment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Album::findOne($id)) !== null) {
+        if (($model = Comment::findOne($id)) !== null) {
             return $model;
         }
 
