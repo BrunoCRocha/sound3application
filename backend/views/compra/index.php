@@ -18,19 +18,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Compra', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="fundo-form">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                'id',
+                'data_compra',
+                'valor_total',
+                'id_utilizador',
 
-            'id',
-            'data_compra',
-            'valor_total',
-            'id_utilizador',
+                ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]); ?>
+    </div>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 </div>

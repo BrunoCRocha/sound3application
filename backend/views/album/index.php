@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\AlbumSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Albums';
+$this->title = 'Álbuns';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="album-index">
@@ -19,21 +19,23 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Album', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <div class="fundo-form">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'nome',
-            'data_lancamento',
-            'preco',
-            'id_artista',
-            //'id_genero',
-            //'id_subgenero',
+                'id',
+                'nome',
+                'data_lancamento',
+                'preco',
+                'id_artista',
+                //'id_genero',
+                //'id_subgenero',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]); ?>
+    </div>
 </div>
