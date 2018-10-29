@@ -2,9 +2,12 @@
 
 namespace backend\controllers;
 
+use common\models\Compra;
+use common\models\CompraSearch;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -107,6 +110,16 @@ class UserController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionVercompras($id){
+        $query = Compra::find()->where(['id_utilizador' => $id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query]);
+
+        return $this->render('vercompras', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
