@@ -15,7 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
         <div class="fundo-form" >
             <?= $this->render('_form', [
-                'model' => $model,
+                'listAlbum' => $listAlbum,
+                    'model' => $model
+
             ]) ?>
         </div>
 

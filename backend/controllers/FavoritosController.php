@@ -2,24 +2,22 @@
 
 namespace backend\controllers;
 
-use common\models\Artista;
-use common\models\Comment;
-use common\models\ConterGenero;
-use common\models\Genero;
+use common\models\Fav_Artista;
+use common\models\Fav_Genero;
+use common\models\Fav_Musica;
 use common\models\User;
 use Yii;
-use common\models\Album;
-use common\models\AlbumSearch;
+use common\models\Fav_Album;
+use common\models\Fav_AlbumSearch;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AlbumController implements the CRUD actions for Album model.
+ * Fav_AlbumController implements the CRUD actions for Fav_Album model.
  */
-class AlbumController extends Controller
+class FavoritosController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -37,12 +35,70 @@ class AlbumController extends Controller
     }
 
     /**
-     * Lists all Album models.
+     * Lists all Fav_Album models.
      * @return mixed
      */
+
+    public function actionShowgenero($idUtilizador){
+
+        $query_genero = Fav_Genero::find()->where(['id_utilizador' => $idUtilizador]);
+        $tipo="genero";
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query_genero]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'idUtilizador' =>$idUtilizador,
+            'tipo' => $tipo
+        ]);
+    }
+
+    public function actionShowartista($idUtilizador){
+
+        $query_artista = Fav_Artista::find()->where(['id_utilizador' => $idUtilizador]);
+        $tipo="artista";
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query_artista]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'idUtilizador' =>$idUtilizador,
+            'tipo' => $tipo
+        ]);
+    }
+
+    public function actionShowalbum($idUtilizador){
+
+        $query_album = Fav_Album::find()->where(['id_utilizador' => $idUtilizador]);
+        $tipo="album";
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query_album]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'idUtilizador' =>$idUtilizador,
+            'tipo' => $tipo
+        ]);
+    }
+
+    public function actionShowmusica($idUtilizador){
+
+        $query_musica = Fav_Musica::find()->where(['id_utilizador' => $idUtilizador]);
+        $tipo="musica";
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query_musica]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'idUtilizador' =>$idUtilizador,
+            'tipo' => $tipo
+        ]);
+    }
+
+
     public function actionIndex()
     {
-        $searchModel = new AlbumSearch();
+        $searchModel = new Fav_AlbumSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -52,62 +108,38 @@ class AlbumController extends Controller
     }
 
     /**
-     * Displays a single Album model.
+     * Displays a single Fav_Album model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $query = Comment::find()->where(['post_id' => $id]);
-
-        $provider = new ActiveDataProvider([
-            'query' => $query
-        ]);
-
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'provider' => $provider
         ]);
-
-        /*return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);*/
     }
 
     /**
-     * Creates a new Album model.
+     * Creates a new Fav_Album model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Album();
+        $model = new Fav_Album();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-
-        $query_artista = Artista::find()->all();
-        $listArtista=ArrayHelper::map($query_artista, 'id', 'nome');
-
-        $query_genero= Genero::find()->all();
-        $listGenero=ArrayHelper::map($query_genero,'id','nome');
-
-        $query_subgenero = ConterGenero::find()->all();
-        $listSubGenero=ArrayHelper::map($query_subgenero,'id','nome');
-
-        return $this->render('create', array(
-            'listArtista' => $listArtista,
-            'listGenero' =>$listGenero,
-            'listSubGenero' =>$listSubGenero,
-            'model' => $model
-        ));
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Album model.
+     * Updates an existing Fav_Album model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -127,7 +159,7 @@ class AlbumController extends Controller
     }
 
     /**
-     * Deletes an existing Album model.
+     * Deletes an existing Fav_Album model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -141,33 +173,18 @@ class AlbumController extends Controller
     }
 
     /**
-     * Finds the Album model based on its primary key value.
+     * Finds the Fav_Album model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Album the loaded model
+     * @return Fav_Album the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-//ArrayHelper::map($query_subgenero,'id','nome');
-
     protected function findModel($id)
     {
-        if (($model = Album::findOne($id)) !== null) {
+        if (($model = Fav_Album::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
-
-/*protected function findModel($id)
-{
-    if (($model = Album::findOne($id)) !== null) {
-        $query = Artista::findOne($model->id_artista);
-        var_dump($query);
-        $model->id_artista = $query->nome;
-
-        return $model;
-    }
-
-    throw new NotFoundHttpException('The requested page does not exist.');
-}*/
