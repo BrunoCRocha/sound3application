@@ -6,9 +6,10 @@
         ['class' => 'yii\grid\SerialColumn'],
 
         'id',
-        'id_utilizador',
-        'id_genero',
-        'id_subgenero',
+
+        ['label' => 'Género',
+            'attribute' => 'nome',
+        ],
 
         ['class' => 'yii\grid\ActionColumn'],
     ],

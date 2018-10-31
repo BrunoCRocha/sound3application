@@ -6,9 +6,22 @@
         ['class' => 'yii\grid\SerialColumn'],
 
         'id',
-        'id_utilizador',
-        'id_musica',
+
+        ['label' => 'Música',
+            'attribute' => 'id_musica',
+            'value' => 'musica.nome'
+        ],
+
+        ['label' => 'Artista',
+            'attribute' => 'id_musica',
+            'value' => 'musica.album.artista.nome'
+        ],
+
+        ['label' => 'Album',
+            'attribute' => 'id_musica',
+            'value' => 'musica.album.nome'
+        ],
 
         ['class' => 'yii\grid\ActionColumn'],
-    ],
+    ]
 ]); ?>

@@ -6,9 +6,8 @@
         ['class' => 'yii\grid\SerialColumn'],
 
         'id',
-        'id_utilizador',
-        'id_artista',
-
-        ['class' => 'yii\grid\ActionColumn'],
+        ['label' => 'Artista',
+            'attribute' => 'nome',
+        ],
     ],
 ]); ?>
