@@ -34,10 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'preco'],
 
                 ['label' => 'Artista',
-                    'attribute' => 'id_artista'],
+                    'attribute' => 'id_artista',
+                    'value' => 'artista.nome',
+                ],
 
                 ['label' => 'Género',
-                    'attribute' => 'id_genero'],
+                    'attribute' => 'id_genero',
+                    'value' => 'genero.nome',
+                ],
 
                 ['class' => 'yii\grid\ActionColumn',
                     'header'=>"Ações",

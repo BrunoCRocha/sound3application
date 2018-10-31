@@ -32,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'nome',
                 'duracao',
                 'preco',
-                'id_album',
+                [
+                    'attribute' => 'album',
+                    'value' => $model->album->nome,
+                ],
+                //'id_album',
             ],
         ]) ?>
     </div>

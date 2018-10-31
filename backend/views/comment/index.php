@@ -28,8 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'conteudo',
             'data_criacao',
-            'id_utilizador',
-            'id_album',
+            [
+                'attribute' => 'id_utilizador',
+                'value' => 'utilizador.username',
+            ],
+            [
+                'attribute' => 'id_album',
+                'value' => 'album.nome',
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

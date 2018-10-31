@@ -59,9 +59,9 @@ class Album extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'data_lancamento' => 'Data Lancamento',
             'preco' => 'Preco',
-            'id_artista' => 'Id Artista',
-            'id_genero' => 'Id Genero',
-            'id_subgenero' => 'Id Subgenero',
+            'id_artista' => 'Artista',
+            'id_genero' => 'Genero',
+            'id_subgenero' => 'Subgenero',
         ];
     }
 
