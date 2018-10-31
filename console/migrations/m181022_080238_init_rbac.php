@@ -29,27 +29,32 @@ class m181022_080238_init_rbac extends Migration
     {
         $auth = Yii::$app->authManager;
 
-        // add "createComment" permission
-        $createComment = $auth->createPermission('createComment');
-        $createComment->description = 'Create a comment';
-        $auth->add($createComment);
+        // add "edita privolegios" permission
+        $editPrivilegios = $auth->createPermission('editPrivilegios');
+        $editPrivilegios->description = 'Editar Privilegios';
+        $auth->add($editPrivilegios);
 
-        // add "updateComment" permission
-        $updateComment = $auth->createPermission('updateComment');
-        $updateComment->description = 'Update a comment';
-        $auth->add($updateComment);
+        // add "Gere BackOffice" permission
+        $gereBackOffice = $auth->createPermission('gereBackOffice');
+        $gereBackOffice->description = 'Gere BackOffice';
+        $auth->add($gereBackOffice);
 
         // add "author" role and give this role the "createComment" permission
-        $author = $auth->createRole('author');
-        $auth->add($author);
-        $auth->addChild($author, $createComment);
+        $admin = $auth->createRole('Admin');
+        $auth->add($admin);
+        $auth->addChild($admin, $editPrivilegios);
 
         // add "admin" role and give this role the "updateComment" permission
         // as well as the permissions of the "author" role
-        $admin = $auth->createRole('admin');
-        $auth->add($admin);
-        $auth->addChild($admin, $updateComment);
-        $auth->addChild($admin, $author);
+        $mod = $auth->createRole('moderador');
+        $auth->add($mod);
+        $auth->addChild($mod, $gereBackOffice);
+        $auth->addChild($admin, $mod);
+
+        $normal=$auth->createRole('User Normal');
+        $auth->addChild($normal);
+        
+
     }
 
 
