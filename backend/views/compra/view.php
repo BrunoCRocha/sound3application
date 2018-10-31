@@ -1,5 +1,6 @@
 <?php
 
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -7,7 +8,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Compra */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Compras', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Compras', 'url' => ['vercompra' , 'id' => $model->id_utilizador]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="compra-view">
@@ -34,5 +35,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_utilizador',
         ],
     ]) ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+
+                'id',
+                'nome',
+                ['label' => 'Duração',
+                    'attribute' => 'duracao'],
+                ['label' => 'Preço (€)',
+                    'attribute' => 'preco'],
+                ['label' => 'Id Álbum',
+                    'attribute' => 'id_album'],
+            ],
+    ])
+
+    ?>
 
 </div>

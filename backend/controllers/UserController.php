@@ -112,16 +112,6 @@ class UserController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionVercompras($id){
-        $query = Compra::find()->where(['id_utilizador' => $id]);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query]);
-
-        return $this->render('vercompras', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
