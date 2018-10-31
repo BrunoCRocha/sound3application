@@ -2,7 +2,9 @@
 
 namespace backend\controllers;
 
+use common\models\Artista;
 use common\models\Comment;
+use common\models\User;
 use Yii;
 use common\models\Album;
 use common\models\AlbumSearch;
@@ -129,6 +131,8 @@ class AlbumController extends Controller
      * @return Album the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+//ArrayHelper::map($query_subgenero,'id','nome');
+
     protected function findModel($id)
     {
         if (($model = Album::findOne($id)) !== null) {
@@ -138,3 +142,16 @@ class AlbumController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
+
+/*protected function findModel($id)
+{
+    if (($model = Album::findOne($id)) !== null) {
+        $query = Artista::findOne($model->id_artista);
+        var_dump($query);
+        $model->id_artista = $query->nome;
+
+        return $model;
+    }
+
+    throw new NotFoundHttpException('The requested page does not exist.');
+}*/

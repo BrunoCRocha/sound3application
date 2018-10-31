@@ -63,6 +63,7 @@ class MusicaSearch extends Musica
             'id' => $this->id,
             'preco' => $this->preco,
             'id_album' => $this->id_album,
+            'album' =>$this->nome,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])

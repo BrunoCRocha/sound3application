@@ -33,8 +33,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'nome',
                 'data_lancamento',
                 'preco',
-                'id_artista',
-                'id_genero',
+                //'id_artista',
+                [
+                    'attribute' => 'id_artista',
+                    'value' => $model->artista->nome, // or use 'usertable.name'
+                ],
+                [
+                    'attribute' => 'id_genero',
+                    'value' => $model->genero->nome, // or use 'usertable.name'
+                ],
+                //'id_genero',
                 'id_subgenero',
             ],
         ]) ?>
