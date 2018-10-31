@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Compra;
 use common\models\CompraSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -44,6 +45,16 @@ class CompraController extends Controller
         ]);
     }
 
+    public function actionVercompra($id){
+        $query = Compra::find()->where(['id_utilizador' => $id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Compra model.
      * @param integer $id
@@ -52,6 +63,8 @@ class CompraController extends Controller
      */
     public function actionView($id)
     {
+
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

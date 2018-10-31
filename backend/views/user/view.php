@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
         <span style="float:right">
-            <?= Html::a('Ver Compras', ['vercompras', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+            <?= Html::a('Ver Compras', ['compra/vercompra', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
             <?= Html::a('Ver Favoritos', ['', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
         </span>
 

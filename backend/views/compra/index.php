@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="fundo-form">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
