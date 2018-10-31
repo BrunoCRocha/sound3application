@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Comment;
 use common\models\CommentSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,15 +34,27 @@ class CommentController extends Controller
      * Lists all Comment models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
-        $searchModel = new CommentSearch();
+        /*$searchModel = new CommentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);*/
+
+
+        $query = Comment::find()->where(['id_album' => $id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
         ]);
+        return $this->render('index', [
+            'searchModel' => $this->findModel($id),
+            'dataProvider' => $dataProvider
+        ]);
+
     }
 
     /**
