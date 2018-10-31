@@ -32,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'data_compra',
             'valor_total',
-            'id_utilizador',
+            //'id_utilizador',
+            [
+                'attribute' => 'id_utilizador',
+                'value' => $model->utilizador->username,
+            ],
 
         ],
     ]) ?>
