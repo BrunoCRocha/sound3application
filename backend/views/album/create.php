@@ -15,8 +15,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="fundo-form">
         <?= $this->render('_form', array(
-            'model' => $model,
-            'listAlbum' => $listAlbum)
+                'model' => $model,
+                'listArtista' =>$listArtista,
+                'listGenero' => $listGenero,
+                'listSubGenero' =>$listSubGenero
+
+                )
         ) ?>
     </div>
 

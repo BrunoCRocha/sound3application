@@ -12,16 +12,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<?php
-$query_artista = Artista::find()->all();
-$listArtita=ArrayHelper::map($query_artista, 'id', 'nome');
 
-$query_genero= Genero::find()->all();
-$listaGenero=ArrayHelper::map($query_genero,'id','nome');
-
-$query_subgenero = ConterGenero::find()->all();
-$listaSubGenero=ArrayHelper::map($query_subgenero,'id','nome');
-?>
 
 <div class="album-form">
 
@@ -34,18 +25,17 @@ $listaSubGenero=ArrayHelper::map($query_subgenero,'id','nome');
     <?= $form->field($model, 'preco')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'id_artista')->label('Artista')->dropDownList(
-        $listArtita,
-        array('prompt' => 'Selecione o Artista')
-
+            $listArtista,
+            array('prompt' => 'Selecione o Artista')
     ) ?>
 
     <?= $form->field($model, 'id_genero')->label('Género')->dropDownList(
-            $listaGenero,
+            $listGenero,
             array('prompt' => 'Selecione o Género')
     ) ?>
 
     <?= $form->field($model, 'id_subgenero')->label('SubGénero')->dropDownList(
-            $listaSubGenero,
+            $listSubGenero,
             array('prompt' => 'Selecione o SubGéneros')
     ) ?>
 
