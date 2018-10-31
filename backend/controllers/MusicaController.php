@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\Album;
 use Yii;
 use common\models\Musica;
 use common\models\MusicaSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -70,10 +72,17 @@ class MusicaController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        $query_album = Album::find()->all();
+        $listAlbum=ArrayHelper::map($query_album, 'id', 'nome');
+
+
+        return $this->render('create', array(
+            'listAlbum' => $listAlbum,
+            'model' => $model
+        ));
+
     }
+
 
     /**
      * Updates an existing Musica model.

@@ -112,4 +112,9 @@ class Album extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Musica::className(), ['id_album' => 'id']);
     }
+
+    public function __toString()
+    {
+        return $this->nome;
+    }
 }
