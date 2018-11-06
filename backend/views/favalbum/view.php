@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Fav_Artista */
+/* @var $model common\models\Fav_Album */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Fav  Artistas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Fav  Albums', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="fav--artista-view">
+<div class="fav--album-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -25,13 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'id_utilizador',
-            'id_artista',
-        ],
-    ]) ?>
+    <div class="fundo-form">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                'id',
+                'id_utilizador',
+                'id_album',
+            ],
+        ]) ?>
+    </div>
+
 
 </div>

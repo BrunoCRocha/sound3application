@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Fav_Genero;
 use common\models\Fav_GeneroSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * Fav_GeneroController implements the CRUD actions for Fav_Genero model.
  */
-class Fav_GeneroController extends Controller
+class FavgeneroController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -33,14 +34,19 @@ class Fav_GeneroController extends Controller
      * Lists all Fav_Genero models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($idUtilizador)
     {
-        $searchModel = new Fav_GeneroSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $query_genero = Fav_Genero::find()->where(['id_utilizador' => $idUtilizador]);
+        $tipo="genero";
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query_genero]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'idUtilizador' =>$idUtilizador,
+            'tipo' => $tipo
         ]);
     }
 
@@ -104,9 +110,10 @@ class Fav_GeneroController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'idUtilizador' => $model->id_utilizador]);
     }
 
     /**

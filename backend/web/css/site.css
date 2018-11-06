@@ -35,12 +35,26 @@ body {
     padding-top: 10px;
     padding-right: 20px;
     background-color: white;
-    border-radius: 25px;
+    border-radius: 20px;
 }
 
 /*FIM Artista*/
 
+/*INICIO COMPRAS*/
+.form_compras{
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+/*FIM COMPRAS*/
 
+/*INICIO ALBUM*/
+.botoes_extra{
+    float:right;
+}
+/*FIM ALBUM*/
 
 .wrap {
     min-height: 100%;

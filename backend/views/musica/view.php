@@ -30,9 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'attributes' => [
                 'id',
                 'nome',
-                'duracao',
-                'preco',
-                [
+                ['label'=>'Duração',
+                    'attribute'=>'duracao'],
+                ['label'=>'Preço (€)',
+                    'attribute'=>'preco'],
+                ['label'=>'Álbum',
                     'attribute' => 'album',
                     'value' => $model->album->nome,
                 ],

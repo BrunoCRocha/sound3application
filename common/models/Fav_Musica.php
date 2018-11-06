@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "fav_musica".
+ * This is the model class for table "favmusica".
  *
  * @property int $id
  * @property int $id_utilizador

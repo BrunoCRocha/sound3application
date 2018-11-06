@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -25,14 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'id_utilizador',
-            'id_genero',
-            'id_subgenero',
-        ],
-    ]) ?>
+    <div class="fundo-form">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                'id',
+                'id_utilizador',
+                'id_genero',
+                'id_subgenero',
+            ],
+        ]) ?>
+    </div>
+
 
 </div>

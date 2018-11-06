@@ -3,16 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Fav_Artista;
-use common\models\Fav_ArtistaSearch;
+use common\models\Fav_Album;
+use common\models\Fav_AlbumSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * Fav_ArtistaController implements the CRUD actions for Fav_Artista model.
+ * FavalbumController implements the CRUD actions for Fav_Album model.
  */
-class Fav_ArtistaController extends Controller
+class FavalbumController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,22 +31,25 @@ class Fav_ArtistaController extends Controller
     }
 
     /**
-     * Lists all Fav_Artista models.
+     * Lists all Fav_Album models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($idUtilizador)
     {
-        $searchModel = new Fav_ArtistaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query_album = Fav_Album::find()->where(['id_utilizador' => $idUtilizador]);
+        $tipo="album";
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query_album]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'idUtilizador' =>$idUtilizador,
+            'tipo' => $tipo
         ]);
     }
 
     /**
-     * Displays a single Fav_Artista model.
+     * Displays a single Fav_Album model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +62,13 @@ class Fav_ArtistaController extends Controller
     }
 
     /**
-     * Creates a new Fav_Artista model.
+     * Creates a new Fav_Album model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Fav_Artista();
+        $model = new Fav_Album();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +80,7 @@ class Fav_ArtistaController extends Controller
     }
 
     /**
-     * Updates an existing Fav_Artista model.
+     * Updates an existing Fav_Album model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +100,7 @@ class Fav_ArtistaController extends Controller
     }
 
     /**
-     * Deletes an existing Fav_Artista model.
+     * Deletes an existing Fav_Album model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,21 +108,22 @@ class Fav_ArtistaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'idUtilizador' => $model->id_utilizador]);
     }
 
     /**
-     * Finds the Fav_Artista model based on its primary key value.
+     * Finds the Fav_Album model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Fav_Artista the loaded model
+     * @return Fav_Album the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Fav_Artista::findOne($id)) !== null) {
+        if (($model = Fav_Album::findOne($id)) !== null) {
             return $model;
         }
 

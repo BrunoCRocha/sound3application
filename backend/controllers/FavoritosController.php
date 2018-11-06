@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * Fav_AlbumController implements the CRUD actions for Fav_Album model.
+ * FavalbumController implements the CRUD actions for Fav_Album model.
  */
 class FavoritosController extends Controller
 {
@@ -39,69 +39,13 @@ class FavoritosController extends Controller
      * @return mixed
      */
 
-    public function actionShowgenero($idUtilizador){
-
-        $query_genero = Fav_Genero::find()->where(['id_utilizador' => $idUtilizador]);
-        $tipo="genero";
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query_genero]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'idUtilizador' =>$idUtilizador,
-            'tipo' => $tipo
-        ]);
-    }
-
-    public function actionShowartista($idUtilizador){
-
-        $query_artista = Fav_Artista::find()->where(['id_utilizador' => $idUtilizador]);
-        $tipo="artista";
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query_artista]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'idUtilizador' =>$idUtilizador,
-            'tipo' => $tipo
-        ]);
-    }
-
-    public function actionShowalbum($idUtilizador){
-
-        $query_album = Fav_Album::find()->where(['id_utilizador' => $idUtilizador]);
-        $tipo="album";
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query_album]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'idUtilizador' =>$idUtilizador,
-            'tipo' => $tipo
-        ]);
-    }
-
-    public function actionShowmusica($idUtilizador){
-
-        $query_musica = Fav_Musica::find()->where(['id_utilizador' => $idUtilizador]);
-        $tipo="musica";
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query_musica]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'idUtilizador' =>$idUtilizador,
-            'tipo' => $tipo
-        ]);
-    }
-
-
-    public function actionIndex()
+    public function actionIndex($idUtilizador)
     {
         $searchModel = new Fav_AlbumSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'idUtilizador' =>$idUtilizador,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

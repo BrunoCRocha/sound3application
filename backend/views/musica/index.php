@@ -29,12 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'nome',
                 ['label' => 'Duração',
                     'attribute' => 'duracao'],
-                ['label' => 'Preço (€)',
-                    'attribute' => 'preco'],
                 ['label' => 'Álbum',
                     'attribute' => 'id_album',
                     'value' => 'album.nome'
                 ],
+                ['label' => 'Preço (€)',
+                    'attribute' => 'preco'],
+
 
                 ['class' => 'yii\grid\ActionColumn',
                     'header'=>"Ações",

@@ -3,16 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Fav_Musica;
-use common\models\Fav_MusicaSearch;
+use common\models\LinhaCompra;
+use common\models\LinhaCompraSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * Fav_MusicaController implements the CRUD actions for Fav_Musica model.
+ * LinhaCompraController implements the CRUD actions for LinhaCompra model.
  */
-class Fav_MusicaController extends Controller
+class LinhaCompraController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,22 +31,28 @@ class Fav_MusicaController extends Controller
     }
 
     /**
-     * Lists all Fav_Musica models.
+     * Lists all LinhaCompra models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
-        $searchModel = new Fav_MusicaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        var_dump($id);
+        die;
+        $query = LinhaCompra::find()->where(['id_compra' => $id]);
+
+        $searchModel = new LinhaCompraSearch();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query]);
+
+        return $this->render('index', array(
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+        ));
     }
 
     /**
-     * Displays a single Fav_Musica model.
+     * Displays a single LinhaCompra model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +65,13 @@ class Fav_MusicaController extends Controller
     }
 
     /**
-     * Creates a new Fav_Musica model.
+     * Creates a new LinhaCompra model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Fav_Musica();
+        $model = new LinhaCompra();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +83,7 @@ class Fav_MusicaController extends Controller
     }
 
     /**
-     * Updates an existing Fav_Musica model.
+     * Updates an existing LinhaCompra model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +103,7 @@ class Fav_MusicaController extends Controller
     }
 
     /**
-     * Deletes an existing Fav_Musica model.
+     * Deletes an existing LinhaCompra model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +117,15 @@ class Fav_MusicaController extends Controller
     }
 
     /**
-     * Finds the Fav_Musica model based on its primary key value.
+     * Finds the LinhaCompra model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Fav_Musica the loaded model
+     * @return LinhaCompra the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Fav_Musica::findOne($id)) !== null) {
+        if (($model = LinhaCompra::findOne($id)) !== null) {
             return $model;
         }
 

@@ -2,19 +2,18 @@
 
 namespace backend\controllers;
 
-use common\models\LinhaCompra;
 use Yii;
-use common\models\Compra;
-use common\models\CompraSearch;
+use common\models\Fav_Artista;
+use common\models\Fav_ArtistaSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CompraController implements the CRUD actions for Compra model.
+ * FavartistaController implements the CRUD actions for Fav_Artista model.
  */
-class CompraController extends Controller
+class FavartistaController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,53 +31,44 @@ class CompraController extends Controller
     }
 
     /**
-     * Lists all Compra models.
+     * Lists all Fav_Artista models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex( $idUtilizador)
     {
-        $searchModel = new CompraSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionVercompra($id){
-        $query = Compra::find()->where(['id_utilizador' => $id]);
+        $query_artista = Fav_Artista::find()->where(['id_utilizador' => $idUtilizador]);
+        $tipo="artista";
         $dataProvider = new ActiveDataProvider([
-            'query' => $query]);
+            'query' => $query_artista]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'idUtilizador' =>$idUtilizador,
+            'tipo' => $tipo
         ]);
     }
 
     /**
-     * Displays a single Compra model.
+     * Displays a single Fav_Artista model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Compra model.
+     * Creates a new Fav_Artista model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Compra();
+        $model = new Fav_Artista();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -90,7 +80,7 @@ class CompraController extends Controller
     }
 
     /**
-     * Updates an existing Compra model.
+     * Updates an existing Fav_Artista model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +100,7 @@ class CompraController extends Controller
     }
 
     /**
-     * Deletes an existing Compra model.
+     * Deletes an existing Fav_Artista model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -118,26 +108,25 @@ class CompraController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'idUtilizador' => $model->id_utilizador]);
     }
 
     /**
-     * Finds the Compra model based on its primary key value.
+     * Finds the Fav_Artista model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Compra the loaded model
+     * @return Fav_Artista the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Compra::findOne($id)) !== null) {
+        if (($model = Fav_Artista::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-
 }

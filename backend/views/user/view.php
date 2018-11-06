@@ -23,9 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <span style="float:right">
+        <span class="botoes_extra">
             <?= Html::a('Ver Compras', ['compra/vercompra', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-            <?= Html::a('Ver Favoritos', ['favoritos/showgenero', 'idUtilizador' => $model->id], ['class' => 'btn btn-info']) ?>
+            <?= Html::a('Ver Favoritos', ['favgenero/index', 'idUtilizador' => $model->id], ['class' => 'btn btn-info']) ?>
         </span>
 
     </p>
