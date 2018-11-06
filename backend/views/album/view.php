@@ -23,7 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Ver Comentários', ['comment/index', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <span class="botoes_extra">
+            <?= Html::a('Ver Comentários', ['comment/index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        </span>
+
     </p>
     <div class="fundo-form">
         <?= DetailView::widget([
@@ -31,19 +34,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'attributes' => [
                 'id',
                 'nome',
-                'data_lancamento',
-                'preco',
+                ['label'=>'Data de Lançamento',
+                    'attribute' =>'data_lancamento'],
+                ['label'=>'Preço',
+                    'attribute'=>'preco'],
                 //'id_artista',
-                [
+                ['label'=>'Artista',
                     'attribute' => 'id_artista',
                     'value' => $model->artista->nome, // or use 'usertable.name'
                 ],
-                [
+                ['label'=>'Género',
                     'attribute' => 'id_genero',
                     'value' => $model->genero->nome, // or use 'usertable.name'
                 ],
-                //'id_genero',
-                'id_subgenero',
+                ['label'=>'SubGénero',
+                    'attribute'=>'id_subgenero'],
+
             ],
         ]) ?>
     </div>
