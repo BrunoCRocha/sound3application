@@ -13,7 +13,6 @@ DROP TABLE IF EXISTS conter_genero;
 DROP TABLE IF EXISTS genero;
 DROP TABLE IF EXISTS artista;
 DROP TABLE IF EXISTS compra;
-DROP TABLE IF EXISTS user;
 
 /*CREATE TABLE user(
 	id int(10) PRIMARY KEY AUTO_INCREMENT,
@@ -27,7 +26,7 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE compra(
 	id int(10) PRIMARY KEY AUTO_INCREMENT,
 	data_compra DATE NOT NULL,
-	valor_total decimal NOT NULL,
+	valor_total float(10) NOT NULL,
 	id_utilizador int(10) NOT NULL,
 	FOREIGN KEY (id_utilizador) REFERENCES user(id)
 	/*FK*/
@@ -79,7 +78,6 @@ CREATE TABLE musica(
 ) ENGINE=InnoDB;
 
 CREATE TABLE linha_compra(
-	id int(10) AUTO_INCREMENT,
 	id_compra int(10) NOT NULL,
 	id_musica int(10) NOT NULL,
 	FOREIGN KEY (id_compra) REFERENCES compra(id),
@@ -98,7 +96,6 @@ CREATE TABLE comment(
 ) ENGINE=InnoDB;
 
 CREATE TABLE fav_artista(
-	id int(10) AUTO_INCREMENT,
 	id_utilizador int(10) NOT NULL,
 	id_artista int(10) NOT NULL,
 	FOREIGN KEY (id_utilizador) REFERENCES user(id),
@@ -107,7 +104,6 @@ CREATE TABLE fav_artista(
 ) ENGINE=InnoDB;
 
 CREATE TABLE fav_album(
-	id int(10) AUTO_INCREMENT,
 	id_utilizador int(10) NOT NULL,
 	id_album int(10) NOT NULL,
 	FOREIGN KEY (id_utilizador) REFERENCES user(id),
@@ -116,7 +112,6 @@ CREATE TABLE fav_album(
 ) ENGINE=InnoDB;
 
 CREATE TABLE fav_musica(
-	id int(10)  AUTO_INCREMENT,
 	id_utilizador int(10) NOT NULL,
 	id_musica int(10) NOT NULL,
 	FOREIGN KEY (id_utilizador) REFERENCES user(id),
@@ -125,7 +120,6 @@ CREATE TABLE fav_musica(
 ) ENGINE=InnoDB;
 
 CREATE TABLE fav_genero(
-	id int(10) AUTO_INCREMENT,
 	id_utilizador int(10) NOT NULL,
 	id_genero int(10) NOT NULL,
 	id_subgenero int(10),
