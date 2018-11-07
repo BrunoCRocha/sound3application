@@ -15,14 +15,14 @@ DROP TABLE IF EXISTS artista;
 DROP TABLE IF EXISTS compra;
 DROP TABLE IF EXISTS user;
 
-CREATE TABLE user(
+/*CREATE TABLE user(
 	id int(10) PRIMARY KEY AUTO_INCREMENT,
 	nome varchar(100) NOT NULL,
 	email VARCHAR(50) NOT NULL UNIQUE,
 	password CHAR(40) NOT NULL,
 	telefone VARCHAR(9) UNIQUE,
 	data_nascimento DATE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB;*/
 
 CREATE TABLE compra(
 	id int(10) PRIMARY KEY AUTO_INCREMENT,
@@ -48,6 +48,7 @@ CREATE TABLE genero(
 
 CREATE TABLE conter_genero(
 	id_subgenero int(10) PRIMARY KEY AUTO_INCREMENT,
+	nome varchar(50) NOT NULL,
 	id_genero int(10) NOT NULL,
 	FOREIGN KEY (id_genero) REFERENCES genero(id)
 ) ENGINE=InnoDB;
@@ -60,6 +61,7 @@ CREATE TABLE album(
 	id_artista int(10) NOT NULL,
 	id_genero int(10) NOT NULL,
 	id_subgenero int(10),
+	caminhoImagem varchar(300) NOT NULL,
 	FOREIGN KEY (id_artista) REFERENCES artista(id),
 	FOREIGN KEY (id_genero) REFERENCES genero(id),
 	FOREIGN KEY (id_subgenero) REFERENCES conter_genero(id_subgenero)
@@ -69,17 +71,20 @@ CREATE TABLE musica(
 	id int(10) PRIMARY KEY AUTO_INCREMENT,
 	nome varchar(50) NOT NULL,
 	duracao varchar(6) NOT NULL,
-	preco decimal(10) NOT NULL,
+	preco float(10) NOT NULL,
 	id_album int(10) NOT NULL,
+	posicao int(10) NOT NULL,
+	caminhoMP3 varchar(300) NOT NULL,
 	FOREIGN KEY (id_album) REFERENCES album(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE linha_compra(
-	id int(10) PRIMARY KEY AUTO_INCREMENT,
+	id int(10) AUTO_INCREMENT,
 	id_compra int(10) NOT NULL,
 	id_musica int(10) NOT NULL,
 	FOREIGN KEY (id_compra) REFERENCES compra(id),
-	FOREIGN KEY (id_musica) REFERENCES musica(id)
+	FOREIGN KEY (id_musica) REFERENCES musica(id),
+	CONSTRAINT compra_musica PRIMARY KEY (id_compra, id_musica)
 ) ENGINE=InnoDB;
 
 CREATE TABLE comment(
@@ -93,35 +98,39 @@ CREATE TABLE comment(
 ) ENGINE=InnoDB;
 
 CREATE TABLE fav_artista(
-	id int(10) PRIMARY KEY AUTO_INCREMENT,
+	id int(10) AUTO_INCREMENT,
 	id_utilizador int(10) NOT NULL,
 	id_artista int(10) NOT NULL,
 	FOREIGN KEY (id_utilizador) REFERENCES user(id),
-	FOREIGN KEY (id_artista) REFERENCES artista(id)
+	FOREIGN KEY (id_artista) REFERENCES artista(id),
+	CONSTRAINT utilizador_artista PRIMARY KEY (id_utilizador, id_artista)
 ) ENGINE=InnoDB;
 
 CREATE TABLE fav_album(
-	id int(10) PRIMARY KEY AUTO_INCREMENT,
+	id int(10) AUTO_INCREMENT,
 	id_utilizador int(10) NOT NULL,
 	id_album int(10) NOT NULL,
 	FOREIGN KEY (id_utilizador) REFERENCES user(id),
-	FOREIGN KEY (id_album) REFERENCES album(id)
+	FOREIGN KEY (id_album) REFERENCES album(id),
+	CONSTRAINT utilizador_album PRIMARY KEY (id_utilizador, id_album)
 ) ENGINE=InnoDB;
 
 CREATE TABLE fav_musica(
-	id int(10) PRIMARY KEY AUTO_INCREMENT,
+	id int(10)  AUTO_INCREMENT,
 	id_utilizador int(10) NOT NULL,
 	id_musica int(10) NOT NULL,
 	FOREIGN KEY (id_utilizador) REFERENCES user(id),
-	FOREIGN KEY (id_musica) REFERENCES musica(id)
+	FOREIGN KEY (id_musica) REFERENCES musica(id),
+	CONSTRAINT utilizador_musica PRIMARY KEY (id_utilizador, id_musica)
 ) ENGINE=InnoDB;
 
 CREATE TABLE fav_genero(
-	id int(10) PRIMARY KEY AUTO_INCREMENT,
+	id int(10) AUTO_INCREMENT,
 	id_utilizador int(10) NOT NULL,
 	id_genero int(10) NOT NULL,
 	id_subgenero int(10),
 	FOREIGN KEY (id_utilizador) REFERENCES user(id),
 	FOREIGN KEY (id_genero) REFERENCES genero(id),
-	FOREIGN KEY (id_subgenero) REFERENCES conter_genero(id_subgenero)
+	FOREIGN KEY (id_subgenero) REFERENCES conter_genero(id_subgenero),
+	CONSTRAINT utilizador_genero PRIMARY KEY (id_utilizador, id_genero)
 ) ENGINE=InnoDB;
