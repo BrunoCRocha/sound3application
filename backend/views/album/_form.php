@@ -34,10 +34,6 @@ use yii\widgets\ActiveForm;
             array('prompt' => 'Selecione o Género')
     ) ?>
 
-    <?= $form->field($model, 'id_subgenero')->label('SubGénero')->dropDownList(
-            $listSubGenero,
-            array('prompt' => 'Selecione o SubGéneros')
-    ) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
