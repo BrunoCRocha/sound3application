@@ -2,6 +2,8 @@ html,
 body {
     height: 100%;
     background-image: url("city_full.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     /*background: #D3CCE3;
     background: -webkit-linear-gradient(to bottom, #E9E4F0, #D3CCE3);
     background: linear-gradient(to bottom, #E9E4F0, #D3CCE3);*/
@@ -10,6 +12,27 @@ body {
 /*NOVO CSS*/
 .rowTitle{
     padding-left: 15px;
+}
+
+#firediv{
+    height: 500px;
+}
+
+#imagens{
+    margin-left: 20px;
+    display: flex;
+    padding-top: 30px;
+}
+
+#imagem{
+    flex: 33.33%;
+    padding: 5px;
+    text-align: center;
+}
+
+#pills_nav{
+    display: flex;
+    justify-content: center;
 }
 
 
