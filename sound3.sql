@@ -9,7 +9,6 @@ DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS linha_compra;
 DROP TABLE IF EXISTS musica;
 DROP TABLE IF EXISTS album;
-DROP TABLE IF EXISTS conter_genero;
 DROP TABLE IF EXISTS genero;
 DROP TABLE IF EXISTS artista;
 DROP TABLE IF EXISTS compra;
@@ -45,25 +44,16 @@ CREATE TABLE genero(
 	descricao varchar(250)
 ) ENGINE=InnoDB;
 
-CREATE TABLE conter_genero(
-	id_subgenero int(10) PRIMARY KEY AUTO_INCREMENT,
-	nome varchar(50) NOT NULL,
-	id_genero int(10) NOT NULL,
-	FOREIGN KEY (id_genero) REFERENCES genero(id)
-) ENGINE=InnoDB;
-
 CREATE TABLE album(
 	id int(10) PRIMARY KEY AUTO_INCREMENT,
 	nome varchar(50) NOT NULL,
 	data_lancamento DATE,
-	preco decimal(10) NOT NULL,
+	preco float(10) NOT NULL,
 	id_artista int(10) NOT NULL,
 	id_genero int(10) NOT NULL,
-	id_subgenero int(10),
 	caminhoImagem varchar(300) NOT NULL,
 	FOREIGN KEY (id_artista) REFERENCES artista(id),
-	FOREIGN KEY (id_genero) REFERENCES genero(id),
-	FOREIGN KEY (id_subgenero) REFERENCES conter_genero(id_subgenero)
+	FOREIGN KEY (id_genero) REFERENCES genero(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE musica(
@@ -122,9 +112,7 @@ CREATE TABLE fav_musica(
 CREATE TABLE fav_genero(
 	id_utilizador int(10) NOT NULL,
 	id_genero int(10) NOT NULL,
-	id_subgenero int(10),
 	FOREIGN KEY (id_utilizador) REFERENCES user(id),
 	FOREIGN KEY (id_genero) REFERENCES genero(id),
-	FOREIGN KEY (id_subgenero) REFERENCES conter_genero(id_subgenero),
 	CONSTRAINT utilizador_genero PRIMARY KEY (id_utilizador, id_genero)
 ) ENGINE=InnoDB;

@@ -14,12 +14,14 @@ use Yii;
  * @property int $id_artista
  * @property int $id_genero
  * @property int $id_subgenero
+ * @property string $caminhoImagem
  *
  * @property Artista $artista
  * @property Genero $genero
  * @property ConterGenero $subgenero
  * @property Comment[] $comments
  * @property FavAlbum[] $favAlbums
+ * @property User[] $utilizadors
  * @property Musica[] $musicas
  */
 class Album extends \yii\db\ActiveRecord
@@ -38,14 +40,14 @@ class Album extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'preco', 'id_artista', 'id_genero'], 'required'],
+            [['nome', 'preco', 'id_artista', 'id_genero', 'caminhoImagem'], 'required'],
             [['data_lancamento'], 'safe'],
             [['preco'], 'number'],
             [['id_artista', 'id_genero', 'id_subgenero'], 'integer'],
             [['nome'], 'string', 'max' => 50],
+            [['caminhoImagem'], 'string', 'max' => 300],
             [['id_artista'], 'exist', 'skipOnError' => true, 'targetClass' => Artista::className(), 'targetAttribute' => ['id_artista' => 'id']],
-            [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['id_genero' => 'id']],
-            [['id_subgenero'], 'exist', 'skipOnError' => true, 'targetClass' => ConterGenero::className(), 'targetAttribute' => ['id_subgenero' => 'id_subgenero']],
+            [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['id_genero' => 'id']]
         ];
     }
 
@@ -59,9 +61,10 @@ class Album extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'data_lancamento' => 'Data Lancamento',
             'preco' => 'Preco',
-            'id_artista' => 'Artista',
-            'id_genero' => 'Genero',
-            'id_subgenero' => 'Subgenero',
+            'id_artista' => 'Id Artista',
+            'id_genero' => 'Id Genero',
+            'id_subgenero' => 'Id Subgenero',
+            'caminhoImagem' => 'Caminho Imagem',
         ];
     }
 
@@ -108,13 +111,16 @@ class Album extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getUtilizadors()
+    {
+        return $this->hasMany(User::className(), ['id' => 'id_utilizador'])->viaTable('fav_album', ['id_album' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getMusicas()
     {
         return $this->hasMany(Musica::className(), ['id_album' => 'id']);
-    }
-
-    public function __toString()
-    {
-        return $this->nome;
     }
 }
