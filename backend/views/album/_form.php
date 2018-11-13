@@ -6,6 +6,7 @@ use common\models\Genero;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Album */
@@ -20,7 +21,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'data_lancamento')->textInput() ?>
+    <?= $form->field($model, 'data_lancamento')->widget(DatePicker::className(), [
+        'inline' => false,
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-m-dd',
+        ],
+    ]) ?>
 
     <?= $form->field($model, 'preco')->textInput(['maxlength' => true]) ?>
 
@@ -33,6 +40,7 @@ use yii\widgets\ActiveForm;
             $listGenero,
             array('prompt' => 'Selecione o Género')
     ) ?>
+
 
 
     <div class="form-group">

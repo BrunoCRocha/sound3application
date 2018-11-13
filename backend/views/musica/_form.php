@@ -26,6 +26,9 @@ use common\models\Album;
             $listAlbum,
             array('prompt' => 'Selecione o Álbum')
     )?>
+    <?= $form->field($model, 'posicao')->label('Posição no Álbum')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'caminhoMP3')->label('Caminho Música')->textInput(['maxlength' => true])  ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

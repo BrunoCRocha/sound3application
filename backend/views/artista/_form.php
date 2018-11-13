@@ -11,7 +11,6 @@ use dosamigos\datepicker\DatePicker;
 
 <div class="artista-form">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <div class="fundo-form">
 
         <?php $form = ActiveForm::begin(); ?>
@@ -28,9 +27,12 @@ use dosamigos\datepicker\DatePicker;
             ],
         ]) ?>
 
+        <?= $form->field($model, 'caminhoImagem')->label('Imagem')->fileInput() ?>
+
         <div class="form-group">
             <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
         </div>
+        <?php ActiveForm::end(); ?>
     </div>
 
 

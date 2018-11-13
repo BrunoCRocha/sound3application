@@ -19,6 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Fav  Artista', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <img src="">
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
