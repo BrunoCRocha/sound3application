@@ -10,11 +10,9 @@ use Yii;
  * @property int $id
  * @property int $id_utilizador
  * @property int $id_genero
- * @property int $id_subgenero
  *
  * @property User $utilizador
  * @property Genero $genero
- * @property ConterGenero $subgenero
  */
 class Fav_Genero extends \yii\db\ActiveRecord
 {
@@ -36,7 +34,6 @@ class Fav_Genero extends \yii\db\ActiveRecord
             [['id_utilizador', 'id_genero', 'id_subgenero'], 'integer'],
             [['id_utilizador'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_utilizador' => 'id']],
             [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['id_genero' => 'id']],
-            [['id_subgenero'], 'exist', 'skipOnError' => true, 'targetClass' => ConterGenero::className(), 'targetAttribute' => ['id_subgenero' => 'id_subgenero']],
         ];
     }
 
@@ -48,8 +45,7 @@ class Fav_Genero extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_utilizador' => 'Id Utilizador',
-            'id_genero' => 'Id Genero',
-            'id_subgenero' => 'Id Subgenero',
+            'id_genero' => 'Id Genero'
         ];
     }
 
@@ -72,8 +68,5 @@ class Fav_Genero extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubgenero()
-    {
-        return $this->hasOne(ConterGenero::className(), ['id_subgenero' => 'id_subgenero']);
-    }
+
 }

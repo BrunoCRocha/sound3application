@@ -35,13 +35,15 @@ CREATE TABLE artista(
 	id int(10) PRIMARY KEY AUTO_INCREMENT,
 	nome varchar(50) NOT NULL,
 	nacionalidade varchar(25),
-	data_ini_carreira DATE
+	data_ini_carreira DATE,
+	caminhoImagem varchar (300)
 ) ENGINE=InnoDB;
 
 CREATE TABLE genero(
 	id int(10) PRIMARY KEY AUTO_INCREMENT,
 	nome varchar(50) NOT NULL,
-	descricao varchar(250)
+	descricao varchar(250),
+	caminhoImagem varchar (300)
 ) ENGINE=InnoDB;
 
 CREATE TABLE album(
@@ -51,7 +53,7 @@ CREATE TABLE album(
 	preco float(10) NOT NULL,
 	id_artista int(10) NOT NULL,
 	id_genero int(10) NOT NULL,
-	caminhoImagem varchar(300) NOT NULL,
+	caminhoImagem varchar(300),
 	FOREIGN KEY (id_artista) REFERENCES artista(id),
 	FOREIGN KEY (id_genero) REFERENCES genero(id)
 ) ENGINE=InnoDB;
@@ -62,8 +64,8 @@ CREATE TABLE musica(
 	duracao varchar(6) NOT NULL,
 	preco float(10) NOT NULL,
 	id_album int(10) NOT NULL,
-	posicao int(10) NOT NULL,
-	caminhoMP3 varchar(300) NOT NULL,
+	posicao int(10),
+	caminhoMP3 varchar(300),
 	FOREIGN KEY (id_album) REFERENCES album(id)
 ) ENGINE=InnoDB;
 
