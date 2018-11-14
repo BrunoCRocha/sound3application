@@ -7,6 +7,7 @@ use common\models\CompraSearch;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
+use yii\bootstrap\Alert;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -69,13 +70,24 @@ class UserController extends Controller
     {
         $model = new User();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        if (\Yii::$app->user->can('createUser')) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+        $role = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
+
+        var_dump($role);?>
+
+
+        <script type="text/javascript">
+            alert(<?php// $role?>);
+        </script>
+        <?php
     }
 
     /**
