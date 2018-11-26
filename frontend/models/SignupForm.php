@@ -51,9 +51,9 @@ class SignupForm extends Model
             $user->generateAuthKey();
             $user->save(false);
 
-            // the following three lines were added:
+             //the following three lines were added:
             $auth = \Yii::$app->authManager;
-            $role = $auth->getRole('admin');
+            $role = $auth->getRole('cliente');
             //$role = $auth->getRole('cliente');
 
             $auth->assign($role, $user->getId());

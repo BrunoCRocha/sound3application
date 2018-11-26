@@ -11,6 +11,7 @@ use Yii;
  * @property string $nome
  * @property string $data_lancamento
  * @property string $preco
+ * @property string $caminhoImagem
  * @property int $id_artista
  * @property int $id_genero
  * @property int $id_subgenero
@@ -38,11 +39,12 @@ class Album extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'preco', 'id_artista', 'id_genero'], 'required'],
+            [['nome', 'preco', 'caminhoImagem', 'id_artista', 'id_genero'], 'required'],
             [['data_lancamento'], 'safe'],
             [['preco'], 'number'],
             [['id_artista', 'id_genero', 'id_subgenero'], 'integer'],
             [['nome'], 'string', 'max' => 50],
+            [['caminhoImagem'], 'string', 'max' => 250],
             [['id_artista'], 'exist', 'skipOnError' => true, 'targetClass' => Artista::className(), 'targetAttribute' => ['id_artista' => 'id']],
             [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['id_genero' => 'id']],
             [['id_subgenero'], 'exist', 'skipOnError' => true, 'targetClass' => ConterGenero::className(), 'targetAttribute' => ['id_subgenero' => 'id_subgenero']],
@@ -59,9 +61,10 @@ class Album extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'data_lancamento' => 'Data Lancamento',
             'preco' => 'Preco',
-            'id_artista' => 'Artista',
-            'id_genero' => 'Genero',
-            'id_subgenero' => 'Subgenero',
+            'caminhoImagem' => 'Caminho Imagem',
+            'id_artista' => 'Id Artista',
+            'id_genero' => 'Id Genero',
+            'id_subgenero' => 'Id Subgenero',
         ];
     }
 
@@ -111,10 +114,5 @@ class Album extends \yii\db\ActiveRecord
     public function getMusicas()
     {
         return $this->hasMany(Musica::className(), ['id_album' => 'id']);
-    }
-
-    public function __toString()
-    {
-        return $this->nome;
     }
 }

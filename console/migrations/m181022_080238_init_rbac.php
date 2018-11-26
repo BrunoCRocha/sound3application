@@ -52,7 +52,7 @@ class m181022_080238_init_rbac extends Migration
         // add "create Género" permission
         $createGenero = $auth->createPermission('createGenero');
         $createGenero->description = 'Criar Genero';
-        $auth->add($createUtilizador);
+        $auth->add($createGenero);
 
         // add "read Género" permission
         $readGenero = $auth->createPermission('readGenero');
@@ -224,11 +224,14 @@ class m181022_080238_init_rbac extends Migration
         $deleteFavmusica->description = 'Apagar dados de Favmusica';
         $auth->add($deleteFavmusica);
 
+
+
         // add "moderador" role
         $mod = $auth->createRole('Moderador');
         $auth->add($mod);
         // give this role the CRUD permissions for the USERS table
-
+        $auth->addChild($mod, $createUtilizador);
+        $auth->addChild($mod, $deleteUtilizador);
         $auth->addChild($mod, $readUtilizador);
         $auth->addChild($mod, $updateUtilizador);
 
@@ -261,7 +264,7 @@ class m181022_080238_init_rbac extends Migration
         $auth->addChild($mod, $readCompra);
         // give this role the CRUD permissions for the Fav_genero table
         $auth->addChild($mod, $readFavgenero);
-        $auth->addChild($mod, $deleteGenero);
+        $auth->addChild($mod, $deleteFavgenero);
         // give this role the CRUD permissions for the Fav_artista table
         $auth->addChild($mod, $readFavartista);
         $auth->addChild($mod, $deleteFavartista);
@@ -275,10 +278,7 @@ class m181022_080238_init_rbac extends Migration
         //add admin role and give it moderador permissions and more
         $admin = $auth->createRole('admin');
         $auth->add($admin);
-        $auth->addChild($admin,$mod);
-        //add create and delete user permissions
-        $auth->addChild($mod, $createUtilizador);
-        $auth->addChild($mod, $deleteUtilizador);
+
         //add delete compra permission
         $auth->addChild($admin, $deleteCompra);
 
@@ -310,7 +310,9 @@ class m181022_080238_init_rbac extends Migration
         $auth->addChild($cliente, $readFavmusica);
         $auth->addChild($cliente, $deleteFavmusica);
 
-        $auth->assign($admin, 4);
+        $auth->addChild($admin,$mod);
+
+        $auth->assign($admin, 1);
 
     }
 

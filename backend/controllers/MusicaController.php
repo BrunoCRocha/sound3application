@@ -28,6 +28,32 @@ class MusicaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['view','create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['readMusica'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createMusica'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['updateMusica'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['deleteMusica'],
+                        ],
+                    ],
+                ],
         ];
     }
 

@@ -2,12 +2,16 @@
 
 namespace backend\controllers;
 
+use common\models\UploadForm;
 use Yii;
 use common\models\Genero;
 use common\models\GeneroSearch;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Request;
+use yii\web\UploadedFile;
 
 /**
  * GeneroController implements the CRUD actions for Genero model.
@@ -26,6 +30,32 @@ class GeneroController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['view','create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['readGenero'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createGenero'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['updateGenero'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['deleteGenero'],
+                        ],
+                    ],
+                ],
         ];
     }
 
@@ -94,6 +124,30 @@ class GeneroController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionImageupload()
+    {
+        var_dump('genero/imageupload');
+        die();
+
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                $idgenero=$request->get('id');
+                $genero= Genero::findOne($idgenero);
+                if($genero != null){
+                    $genero->caminhoImagem = $model->caminhoFinal;
+                }
+                return;
+            }
+        }
+
+        return $this->render('upload', ['model' => $genero]);
+    }
+
 
     /**
      * Deletes an existing Genero model.
