@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property string $nacionalidade
+ * @property string $caminhoImagem
  * @property string $data_ini_carreira
  *
  * @property Album[] $albums
@@ -31,10 +32,11 @@ class Artista extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome'], 'required'],
+            [['nome', 'caminhoImagem'], 'required'],
             [['data_ini_carreira'], 'safe'],
             [['nome'], 'string', 'max' => 50],
             [['nacionalidade'], 'string', 'max' => 25],
+            [['caminhoImagem'], 'string', 'max' => 250],
         ];
     }
 
@@ -47,6 +49,7 @@ class Artista extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'nacionalidade' => 'Nacionalidade',
+            'caminhoImagem' => 'Caminho Imagem',
             'data_ini_carreira' => 'Data Ini Carreira',
         ];
     }

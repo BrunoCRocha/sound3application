@@ -10,10 +10,11 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property string $descricao
+ * @property string $caminhoImagem
  *
  * @property Album[] $albums
- * @property ConterGenero[] $conterGeneros
  * @property FavGenero[] $favGeneros
+ * @property User[] $utilizadors
  */
 class Genero extends \yii\db\ActiveRecord
 {
@@ -34,6 +35,7 @@ class Genero extends \yii\db\ActiveRecord
             [['nome'], 'required'],
             [['nome'], 'string', 'max' => 50],
             [['descricao'], 'string', 'max' => 250],
+            [['caminhoImagem'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -46,6 +48,7 @@ class Genero extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'descricao' => 'Descricao',
+            'caminhoImagem' => 'Caminho Imagem',
         ];
     }
 
@@ -60,16 +63,16 @@ class Genero extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getConterGeneros()
+    public function getFavGeneros()
     {
-        return $this->hasMany(ConterGenero::className(), ['id_genero' => 'id']);
+        return $this->hasMany(FavGenero::className(), ['id_genero' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFavGeneros()
+    public function getUtilizador()
     {
-        return $this->hasMany(FavGenero::className(), ['id_genero' => 'id']);
+        return $this->hasMany(User::className(), ['id' => 'id_utilizador'])->viaTable('fav_genero', ['id_genero' => 'id']);
     }
 }

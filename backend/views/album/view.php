@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -52,5 +54,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ],
         ]) ?>
+
+        <?php
+        $modelUpload = new \common\models\UploadForm();
+        $form = ActiveForm::begin(['action' => [Url::toRoute('genero/imageupload')],
+            'options' => ['method' => 'post','enctype' => 'multipart/form-data'
+
+            ]]) ?>
+
+        <?= $form->field($modelUpload, 'imageFile')->fileInput() ?>
+
+        <button>Submit</button>
+
+        <?php ActiveForm::end() ?>
     </div>
 </div>
