@@ -16,12 +16,35 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
+    <link rel="stylesheet" href="../web/ficheiros_css/musicas.css">
+    <link rel="stylesheet" href="../web/ficheiros_css/home.css">
+    <link rel="stylesheet" href="../web/ficheiros_css/album.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style>
+        .navbar-default{
+            background-color: #ffffff;
+        }
+    </style>
+
+    <script>
+        jQuery(document).ready(function($) {
+            $('.resume') .hide()
+            $('a[href^="#"]').on('click', function() {
+                $('.resume') .hide()
+                var target = $(this).attr('href');
+                $('.resume'+target).toggle();
+            });
+        });
+    </script>
+
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -55,8 +78,8 @@ AppAsset::register($this);
         ];*/
 
         $menuItems[] = ['label' => 'Home', 'url' => ['/site/home']];
-        $menuItems[] = ['label' => 'Favoritos', 'url' => ['/site/favoritos']];
-        $menuItems[] = ['label' => 'Carrinho', 'url' => ['/site/carrinho']];
+        $menuItems[] = ['label' => 'Favoritos', 'url' => ['/comment/favoritos']];
+        $menuItems[] = ['label' => 'Carrinho', 'url' => ['/compra/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -75,7 +98,7 @@ AppAsset::register($this);
 
     ?>
 
-    <div class="container">
+    <div class="container" id="container_pagina">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -84,7 +107,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
+<footer class="footer" id="id_footer">
     <div class="container">
         <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 

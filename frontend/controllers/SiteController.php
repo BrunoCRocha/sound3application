@@ -1,6 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Compra;
+use common\models\LinhaCompra;
+use common\models\User;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -72,7 +75,29 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $ids = LinhaCompra::find()->select('id_musica')->distinct()->all();
+
+        foreach ($ids as $id){
+            /*array_push($numeroVendas,[$id =>LinhaCompra::find()
+                ->where(['id_musica' => $id])
+                ->count()]);*/
+
+            $numeroVendas = LinhaCompra::find()
+                ->where(['id_musica' => $id])
+                ->count();
+
+
+            $valores[$id->id_musica] = $numeroVendas;
+
+        }
+
+        var_dump($valores);
+        die();
+
+        return $this->render('index',[
+            'numeroVendas' =>$numeroVendas
+        ]);
+
     }
 
     /**
