@@ -61,7 +61,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'id_genero',
                     'value' => $model->genero->nome, // or use 'usertable.name'
                 ]
-
             ],
         ]) ?>
 

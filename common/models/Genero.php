@@ -32,7 +32,7 @@ class Genero extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome'], 'required'],
+            [['nome', 'caminhoImagem'], 'required'],
             [['nome'], 'string', 'max' => 50],
             [['descricao'], 'string', 'max' => 250],
             [['caminhoImagem'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
@@ -71,7 +71,7 @@ class Genero extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUtilizador()
+    public function getUtilizadors()
     {
         return $this->hasMany(User::className(), ['id' => 'id_utilizador'])->viaTable('fav_genero', ['id_genero' => 'id']);
     }

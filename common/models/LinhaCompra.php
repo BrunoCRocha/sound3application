@@ -7,7 +7,6 @@ use Yii;
 /**
  * This is the model class for table "linha_compra".
  *
- * @property int $id
  * @property int $id_compra
  * @property int $id_musica
  *
@@ -32,6 +31,7 @@ class LinhaCompra extends \yii\db\ActiveRecord
         return [
             [['id_compra', 'id_musica'], 'required'],
             [['id_compra', 'id_musica'], 'integer'],
+            [['id_compra', 'id_musica'], 'unique', 'targetAttribute' => ['id_compra', 'id_musica']],
             [['id_compra'], 'exist', 'skipOnError' => true, 'targetClass' => Compra::className(), 'targetAttribute' => ['id_compra' => 'id']],
             [['id_musica'], 'exist', 'skipOnError' => true, 'targetClass' => Musica::className(), 'targetAttribute' => ['id_musica' => 'id']],
         ];
@@ -43,7 +43,6 @@ class LinhaCompra extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
             'id_compra' => 'Id Compra',
             'id_musica' => 'Id Musica',
         ];

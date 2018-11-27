@@ -14,13 +14,12 @@ use Yii;
  * @property string $caminhoImagem
  * @property int $id_artista
  * @property int $id_genero
- * @property int $id_subgenero
  *
  * @property Artista $artista
  * @property Genero $genero
- * @property ConterGenero $subgenero
  * @property Comment[] $comments
  * @property FavAlbum[] $favAlbums
+ * @property User[] $utilizadors
  * @property Musica[] $musicas
  */
 class Album extends \yii\db\ActiveRecord
@@ -81,11 +80,6 @@ class Album extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Genero::className(), ['id' => 'id_genero']);
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-
 
     /**
      * @return \yii\db\ActiveQuery

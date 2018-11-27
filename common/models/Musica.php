@@ -10,11 +10,15 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property string $duracao
- * @property string $preco
+ * @property double $preco
  * @property int $id_album
+ * @property int $posicao
+ * @property string $caminhoMP3
  *
  * @property FavMusica[] $favMusicas
+ * @property User[] $utilizadors
  * @property LinhaCompra[] $linhaCompras
+ * @property Compra[] $compras
  * @property Album $album
  */
 class Musica extends \yii\db\ActiveRecord
@@ -33,11 +37,12 @@ class Musica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'duracao', 'preco', 'id_album'], 'required'],
+            [['nome', 'duracao', 'preco', 'id_album', 'posicao', 'caminhoMP3'], 'required'],
             [['preco'], 'number'],
-            [['id_album'], 'integer'],
+            [['id_album', 'posicao'], 'integer'],
             [['nome'], 'string', 'max' => 50],
             [['duracao'], 'string', 'max' => 6],
+            [['caminhoMP3'], 'string', 'max' => 300],
             [['id_album'], 'exist', 'skipOnError' => true, 'targetClass' => Album::className(), 'targetAttribute' => ['id_album' => 'id']],
         ];
     }
@@ -53,6 +58,8 @@ class Musica extends \yii\db\ActiveRecord
             'duracao' => 'Duracao',
             'preco' => 'Preco',
             'id_album' => 'Id Album',
+            'posicao' => 'Posicao',
+            'caminhoMP3' => 'Caminho Mp3',
         ];
     }
 
@@ -67,9 +74,25 @@ class Musica extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getUtilizadors()
+    {
+        return $this->hasMany(User::className(), ['id' => 'id_utilizador'])->viaTable('fav_musica', ['id_musica' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getLinhaCompras()
     {
         return $this->hasMany(LinhaCompra::className(), ['id_musica' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompras()
+    {
+        return $this->hasMany(Compra::className(), ['id' => 'id_compra'])->viaTable('linha_compra', ['id_musica' => 'id']);
     }
 
     /**
