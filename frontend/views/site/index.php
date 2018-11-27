@@ -4,32 +4,34 @@
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
+<div class="site-index" id="display">
 
-    <div class="body-content">
+    <div class="body-content" >
+        <ul id="pills_nav" >
+            <li><a href="#menu_home" onclick="return false">Home</a></li>
+            <li><a href="#menu_albums" onclick="return false">Album</a></li>
+            <li><a href="#menu_musicas" onclick="return false">Musicas</a></li>
+            <li><a href="#menu_artistas" onclick="return false">Artistas</a></li>
+        </ul>
 
-        <div class="container">
-            <ul class="nav nav-pills" id="pills_nav">
-                <li class="active"><a data-toggle="pill" href="#menu_home">Home</a></li>
-                <li><a data-toggle="pill" href="#menu_albuns">Albuns</a></li>
-                <li><a data-toggle="pill" href="#menu_musicas">Músicas</a></li>
-                <li><a data-toggle="pill" href="#menu_artistas">Artistas</a></li>
-            </ul>
+        <hr id="hr_pills" width="50%">
 
-            <div class="tab-content">
-                <div id="menu_home" class="tab-pane fade in active">
+            <div class="tab-content" >
+                <div id="menu_home" class="resume">
                     <?php require_once('miniFiles/home_site.php')?>
                 </div>
-                <div id="menu_albuns" class="tab-pane fade">
+                <div id="menu_albums" class="resume">
                     <?php require_once('miniFiles/albuns_site.php')?>
                 </div>
-                <div id="menu_musicas" class="tab-pane fade">
+                <div id="menu_musicas" class="resume">
                     <?php require_once('miniFiles/musicas_site.php')?>
                 </div>
-                <div id="menu_artistas" class="tab-pane fade">
+                <div id="menu_artistas" class="resume">
                     <?php require_once('miniFiles/artistas_site.php')?>
                 </div>
             </div>
-        </div>
+
+
+
     </div>
 </div>

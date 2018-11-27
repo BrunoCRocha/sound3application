@@ -1,0 +1,66 @@
+#pills_nav li>a{
+    display: inline-block;
+    padding: 20px;
+    color: #0f0f0f;
+    font-size: 25px;
+    text-decoration: none;
+
+}
+
+#pills_nav li>a:hover,
+#pills_nav li>a:active
+{
+    color: #f40;
+}
+
+
+.imagem{
+    width: 140px;
+    height: auto;
+    display: flex;
+    align-content: center;
+}
+
+#caixa_conteudo img{
+    -webkit-filter: drop-shadow(2px 2px 2px #222);
+    filter: drop-shadow(2px 2px 2px #222);
+}
+
+#espaço{
+    margin-top: 80px;
+}
+
+#caixa_conteudo h2{
+    margin-top: 10px;
+    font-size: 25px;
+}
+#caixa_conteudo h3{
+    margin-top: 6px;
+    font-size: 17px;
+}
+
+#fds{
+     margin-left: 13%;
+ }
+
+#pills_nav{
+    display: flex;
+    justify-content: center;
+}
+
+#menu_home {
+    alignment: center;
+    width: 100%;
+    height: 100%;
+}
+
+#container_pagina{
+    height: 100%;
+    width: 80%;
+    background: #ffffff;
+}
+
+#id_footer{
+    margin-top: 30px;
+    height: 70px;
+}
