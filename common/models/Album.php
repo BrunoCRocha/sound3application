@@ -10,7 +10,12 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property string $data_lancamento
+<<<<<<< HEAD
+ * @property string $preco
+ * @property string $caminhoImagem
+=======
  * @property double $preco
+>>>>>>> de05052e9037f180d62e58cf1e871a278b8ddcca
  * @property int $id_artista
  * @property int $id_genero
  * @property string $caminhoImagem
@@ -100,27 +105,8 @@ class Album extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUtilizadors()
-    {
-        return $this->hasMany(User::className(), ['id' => 'id_utilizador'])->viaTable('fav_album', ['id_album' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getMusicas()
     {
         return $this->hasMany(Musica::className(), ['id_album' => 'id']);
-    }
-
-    public function upload(){
-        if ($this->validate()) {
-            $caminho = Yii::getAlias('@album');
-            $rand = md5(uniqid(rand(), true));
-                $this->caminhoImagem->saveAs($caminho.'/'.$rand.'.'.$this->caminhoImagem->extension);
-            return true;
-        } else {
-            return false;
-        }
     }
 }

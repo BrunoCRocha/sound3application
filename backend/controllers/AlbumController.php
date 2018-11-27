@@ -6,6 +6,7 @@ use common\models\Artista;
 use common\models\Comment;
 use common\models\ConterGenero;
 use common\models\Genero;
+use common\models\UploadForm;
 use common\models\User;
 use Yii;
 use common\models\Album;
@@ -15,6 +16,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * AlbumController implements the CRUD actions for Album model.
@@ -33,6 +35,32 @@ class AlbumController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['view','create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['admin','mod'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['admin','mod'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['admin','mod'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['admin','mod'],
+                        ],
+                    ],
+                ],
         ];
     }
 
@@ -73,6 +101,29 @@ class AlbumController extends Controller
         /*return $this->render('view', [
             'model' => $this->findModel($id),
         ]);*/
+    }
+
+    public function actionImageupload()
+    {
+        var_dump('album/imageupload');
+        die();
+
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                $idalbum=$request->get('id');
+                $album= Album::findOne($idalbum);
+                if($album != null){
+                    $album->caminhoImagem = $model->caminhoFinal;
+                }
+                return;
+            }
+        }
+
+        return $this->render('view', ['model' => $album]);
     }
 
     /**

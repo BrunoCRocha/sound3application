@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property string $nacionalidade
+ * @property string $caminhoImagem
  * @property string $data_ini_carreira
  * @property string $caminhoImagem
  *
@@ -50,6 +51,7 @@ class Artista extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'nacionalidade' => 'Nacionalidade',
+            'caminhoImagem' => 'Caminho Imagem',
             'data_ini_carreira' => 'Data Ini Carreira',
             'caminhoImagem' => 'Caminho Imagem',
         ];

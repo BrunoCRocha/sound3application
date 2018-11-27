@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+use common\models\UploadForm;
 use Yii;
 use common\models\Artista;
 use common\models\ArtistaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ArtistaController implements the CRUD actions for Artista model.
@@ -26,6 +28,32 @@ class ArtistaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['view','create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['readArtista'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createArtista'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['updateArtista'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['deleteArtista'],
+                        ],
+                    ],
+                ],
         ];
     }
 
@@ -42,6 +70,29 @@ class ArtistaController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionImageupload()
+    {
+        var_dump('artista/imageupload');
+        die();
+
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                $idartista=$request->get('id');
+                $artista = Artista::findOne($idartista);
+                if($artista != null){
+                    $artista->caminhoImagem = $model->caminhoFinal;
+                }
+                return;
+            }
+        }
+
+        return $this->render('view', ['model' => $artista]);
     }
 
     /**

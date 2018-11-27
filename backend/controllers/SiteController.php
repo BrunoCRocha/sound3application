@@ -1,11 +1,13 @@
 <?php
 namespace backend\controllers;
 
+use common\models\UploadForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -22,7 +24,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'upload', 'download'],
                         'allow' => true,
                     ],
                     [
@@ -70,7 +72,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest && Yii::$app->user->can('readUtilizador')) {
             return $this->goHome();
         }
 
@@ -84,6 +86,25 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionUpload()
+    {
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                return;
+            }
+        }
+
+        return $this->render('upload', ['model' => $model]);
+    }
+
+    public function actionDownload(){
+        return \Yii::$app->response->sendFile('C:\wamp64\www\sound3application\backend\web\img\genero\Capa-Meteora.jpg');
     }
 
     /**

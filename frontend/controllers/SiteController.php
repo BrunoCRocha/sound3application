@@ -88,6 +88,10 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+            var_dump(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()));
+            die();
+
             return $this->goBack();
         } else {
             $model->password = '';
