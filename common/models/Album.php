@@ -14,11 +14,9 @@ use Yii;
  * @property string $preco
  * @property string $caminhoImagem
 =======
- * @property double $preco
 >>>>>>> de05052e9037f180d62e58cf1e871a278b8ddcca
  * @property int $id_artista
  * @property int $id_genero
- * @property string $caminhoImagem
  *
  * @property Artista $artista
  * @property Genero $genero
@@ -43,12 +41,12 @@ class Album extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'preco', 'id_artista', 'id_genero', 'caminhoImagem'], 'required'],
+            [['nome', 'preco', 'id_artista', 'id_genero'], 'required'],
             [['data_lancamento'], 'safe'],
             [['preco'], 'number'],
             [['id_artista', 'id_genero'], 'integer'],
             [['nome'], 'string', 'max' => 50],
-            [['caminhoImagem'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['caminhoImagem'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
             [['id_artista'], 'exist', 'skipOnError' => true, 'targetClass' => Artista::className(), 'targetAttribute' => ['id_artista' => 'id']],
             [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['id_genero' => 'id']],
         ];

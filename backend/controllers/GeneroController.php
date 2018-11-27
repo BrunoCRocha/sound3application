@@ -37,22 +37,22 @@ class GeneroController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['readGenero'],
+                            'roles' => ['admin','mod'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createGenero'],
+                            'roles' => ['admin','mod'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateGenero'],
+                            'roles' => ['admin','mod'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['deleteGenero'],
+                            'roles' => ['admin','mod'],
                         ],
                     ],
                 ],
