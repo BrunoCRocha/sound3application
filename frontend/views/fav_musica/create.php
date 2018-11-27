@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ConterGenero */
+/* @var $model common\models\Fav_Musica */
 
-$this->title = 'Create Conter Genero';
-$this->params['breadcrumbs'][] = ['label' => 'Conter Generos', 'url' => ['index']];
+$this->title = 'Create Fav  Musica';
+$this->params['breadcrumbs'][] = ['label' => 'Fav  Musicas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="conter-genero-create">
+<div class="fav--musica-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

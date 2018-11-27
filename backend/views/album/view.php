@@ -50,7 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => $model->genero->nome, // or use 'usertable.name'
                 ],
                 ['label'=>'SubGénero',
-                    'attribute'=>'id_subgenero'],
+                    'attribute'=>'id_subgenero',
+                   // 'value' => $model->conter_genero->nome,
+                ],
 
             ],
         ]) ?>

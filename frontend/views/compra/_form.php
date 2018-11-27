@@ -4,15 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ConterGenero */
+/* @var $model common\models\Compra */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="conter-genero-form">
+<div class="compra-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_genero')->textInput() ?>
+    <?= $form->field($model, 'data_compra')->textInput() ?>
+
+    <?= $form->field($model, 'valor_total')->textInput() ?>
+
+    <?= $form->field($model, 'id_utilizador')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -1,18 +1,18 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use Yii;
-use common\models\ConterGenero;
-use common\models\ConterGeneroSearch;
+use common\models\Fav_Genero;
+use common\models\Fav_GeneroSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ConterGeneroController implements the CRUD actions for ConterGenero model.
+ * FavgeneroController implements the CRUD actions for Fav_Genero model.
  */
-class ConterGeneroController extends Controller
+class FavgeneroController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ConterGeneroController extends Controller
     }
 
     /**
-     * Lists all ConterGenero models.
+     * Lists all Fav_Genero models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ConterGeneroSearch();
+        $searchModel = new Fav_GeneroSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,29 +45,30 @@ class ConterGeneroController extends Controller
     }
 
     /**
-     * Displays a single ConterGenero model.
-     * @param integer $id
+     * Displays a single Fav_Genero model.
+     * @param integer $id_utilizador
+     * @param integer $id_genero
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id_utilizador, $id_genero)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id_utilizador, $id_genero),
         ]);
     }
 
     /**
-     * Creates a new ConterGenero model.
+     * Creates a new Fav_Genero model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ConterGenero();
+        $model = new Fav_Genero();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_subgenero]);
+            return $this->redirect(['view', 'id_utilizador' => $model->id_utilizador, 'id_genero' => $model->id_genero]);
         }
 
         return $this->render('create', [
@@ -76,18 +77,19 @@ class ConterGeneroController extends Controller
     }
 
     /**
-     * Updates an existing ConterGenero model.
+     * Updates an existing Fav_Genero model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $id_utilizador
+     * @param integer $id_genero
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id_utilizador, $id_genero)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id_utilizador, $id_genero);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_subgenero]);
+            return $this->redirect(['view', 'id_utilizador' => $model->id_utilizador, 'id_genero' => $model->id_genero]);
         }
 
         return $this->render('update', [
@@ -96,29 +98,31 @@ class ConterGeneroController extends Controller
     }
 
     /**
-     * Deletes an existing ConterGenero model.
+     * Deletes an existing Fav_Genero model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $id_utilizador
+     * @param integer $id_genero
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id_utilizador, $id_genero)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id_utilizador, $id_genero)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the ConterGenero model based on its primary key value.
+     * Finds the Fav_Genero model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return ConterGenero the loaded model
+     * @param integer $id_utilizador
+     * @param integer $id_genero
+     * @return Fav_Genero the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id_utilizador, $id_genero)
     {
-        if (($model = ConterGenero::findOne($id)) !== null) {
+        if (($model = Fav_Genero::findOne(['id_utilizador' => $id_utilizador, 'id_genero' => $id_genero])) !== null) {
             return $model;
         }
 

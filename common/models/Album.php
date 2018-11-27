@@ -10,17 +10,21 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property string $data_lancamento
+<<<<<<< HEAD
  * @property string $preco
  * @property string $caminhoImagem
+=======
+ * @property double $preco
+>>>>>>> de05052e9037f180d62e58cf1e871a278b8ddcca
  * @property int $id_artista
  * @property int $id_genero
- * @property int $id_subgenero
+ * @property string $caminhoImagem
  *
  * @property Artista $artista
  * @property Genero $genero
- * @property ConterGenero $subgenero
  * @property Comment[] $comments
  * @property FavAlbum[] $favAlbums
+ * @property User[] $utilizadors
  * @property Musica[] $musicas
  */
 class Album extends \yii\db\ActiveRecord
@@ -39,15 +43,14 @@ class Album extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'preco', 'caminhoImagem', 'id_artista', 'id_genero'], 'required'],
+            [['nome', 'preco', 'id_artista', 'id_genero', 'caminhoImagem'], 'required'],
             [['data_lancamento'], 'safe'],
             [['preco'], 'number'],
-            [['id_artista', 'id_genero', 'id_subgenero'], 'integer'],
+            [['id_artista', 'id_genero'], 'integer'],
             [['nome'], 'string', 'max' => 50],
-            [['caminhoImagem'], 'string', 'max' => 250],
+            [['caminhoImagem'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [['id_artista'], 'exist', 'skipOnError' => true, 'targetClass' => Artista::className(), 'targetAttribute' => ['id_artista' => 'id']],
             [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['id_genero' => 'id']],
-            [['id_subgenero'], 'exist', 'skipOnError' => true, 'targetClass' => ConterGenero::className(), 'targetAttribute' => ['id_subgenero' => 'id_subgenero']],
         ];
     }
 
@@ -61,10 +64,9 @@ class Album extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'data_lancamento' => 'Data Lancamento',
             'preco' => 'Preco',
-            'caminhoImagem' => 'Caminho Imagem',
             'id_artista' => 'Id Artista',
             'id_genero' => 'Id Genero',
-            'id_subgenero' => 'Id Subgenero',
+            'caminhoImagem' => 'Caminho Imagem',
         ];
     }
 
@@ -82,14 +84,6 @@ class Album extends \yii\db\ActiveRecord
     public function getGenero()
     {
         return $this->hasOne(Genero::className(), ['id' => 'id_genero']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSubgenero()
-    {
-        return $this->hasOne(ConterGenero::className(), ['id_subgenero' => 'id_subgenero']);
     }
 
     /**

@@ -4,20 +4,22 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ConterGeneroSearch */
+/* @var $model common\models\Fav_GeneroSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="conter-genero-search">
+<div class="fav--genero-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id_subgenero') ?>
+    <?= $form->field($model, 'id_utilizador') ?>
 
     <?= $form->field($model, 'id_genero') ?>
+
+    <?= $form->field($model, 'id_subgenero') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

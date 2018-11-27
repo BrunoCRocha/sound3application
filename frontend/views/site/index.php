@@ -8,13 +8,28 @@ $this->title = 'My Yii Application';
 
     <div class="body-content">
 
-        <div class="row" style="background-color: white">
+        <div class="container">
+            <ul class="nav nav-pills" id="pills_nav">
+                <li class="active"><a data-toggle="pill" href="#menu_home">Home</a></li>
+                <li><a data-toggle="pill" href="#menu_albuns">Albuns</a></li>
+                <li><a data-toggle="pill" href="#menu_musicas">Músicas</a></li>
+                <li><a data-toggle="pill" href="#menu_artistas">Artistas</a></li>
+            </ul>
 
-            <h2 class="rowTitle">Fire</h2>
-
-
+            <div class="tab-content">
+                <div id="menu_home" class="tab-pane fade in active">
+                    <?php require_once('miniFiles/home_site.php')?>
+                </div>
+                <div id="menu_albuns" class="tab-pane fade">
+                    <?php require_once('miniFiles/albuns_site.php')?>
+                </div>
+                <div id="menu_musicas" class="tab-pane fade">
+                    <?php require_once('miniFiles/musicas_site.php')?>
+                </div>
+                <div id="menu_artistas" class="tab-pane fade">
+                    <?php require_once('miniFiles/artistas_site.php')?>
+                </div>
             </div>
         </div>
-
     </div>
 </div>

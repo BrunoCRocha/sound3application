@@ -135,6 +135,7 @@ class AlbumController extends Controller
     {
         $model = new Album();
 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -146,13 +147,11 @@ class AlbumController extends Controller
         $query_genero= Genero::find()->all();
         $listGenero=ArrayHelper::map($query_genero,'id','nome');
 
-        $query_subgenero = ConterGenero::find()->all();
-        $listSubGenero=ArrayHelper::map($query_subgenero,'id','nome');
+
 
         return $this->render('create', array(
             'listArtista' => $listArtista,
             'listGenero' =>$listGenero,
-            'listSubGenero' =>$listSubGenero,
             'model' => $model
         ));
     }
