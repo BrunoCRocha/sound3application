@@ -105,24 +105,20 @@ class AlbumController extends Controller
 
     public function actionImageupload()
     {
-        var_dump('album/imageupload');
-        die();
-
         $model = new UploadForm();
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if ($model->upload()) {
                 // file is uploaded successfully
-                $idalbum=$request->get('id');
+                $idalbum=Yii::$app->request->get('id');
                 $album= Album::findOne($idalbum);
                 if($album != null){
                     $album->caminhoImagem = $model->caminhoFinal;
+                    $album->save(false);
                 }
-                return;
             }
         }
-
         return $this->render('view', ['model' => $album]);
     }
 
@@ -146,13 +142,9 @@ class AlbumController extends Controller
         $query_genero= Genero::find()->all();
         $listGenero=ArrayHelper::map($query_genero,'id','nome');
 
-        $query_subgenero = ConterGenero::find()->all();
-        $listSubGenero=ArrayHelper::map($query_subgenero,'id','nome');
-
         return $this->render('create', array(
             'listArtista' => $listArtista,
             'listGenero' =>$listGenero,
-            'listSubGenero' =>$listSubGenero,
             'model' => $model
         ));
     }

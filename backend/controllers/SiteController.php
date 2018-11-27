@@ -87,7 +87,6 @@ class SiteController extends Controller
             ]);
         }
     }
-
     public function actionUpload()
     {
         $model = new UploadForm();
@@ -102,6 +101,7 @@ class SiteController extends Controller
 
         return $this->render('upload', ['model' => $model]);
     }
+
 
     public function actionDownload(){
         return \Yii::$app->response->sendFile('C:\wamp64\www\sound3application\backend\web\img\genero\Capa-Meteora.jpg');

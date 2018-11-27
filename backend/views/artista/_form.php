@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Artista */
@@ -16,7 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nacionalidade')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'data_ini_carreira')->textInput() ?>
+    <?= $form->field($model, 'data_ini_carreira')->widget(DatePicker::className(), [
+        'inline' => false,
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-m-dd',
+        ],
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
