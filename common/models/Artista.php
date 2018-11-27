@@ -40,7 +40,6 @@ class Artista extends \yii\db\ActiveRecord
             [['caminhoImagem'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
-
     /**
      * {@inheritdoc}
      */
@@ -50,7 +49,6 @@ class Artista extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'nacionalidade' => 'Nacionalidade',
-            'caminhoImagem' => 'Caminho Imagem',
             'data_ini_carreira' => 'Data Ini Carreira',
             'caminhoImagem' => 'Caminho Imagem',
         ];

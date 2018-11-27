@@ -48,56 +48,33 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
-         <?php /* FileUpload::widget([
-            'model' => $model,
-            'attribute' => 'caminhoImagem',
-            'url' => ['genero/imageupload', 'id' => $model->id], // your url, this is just for demo purposes,
-            'options' => ['accept' => 'image/*'],
-            'clientOptions' => [
-                'maxFileSize' => 2000000
-            ],
-            // Also, you can specify jQuery-File-Upload events
-            // see: https://github.com/blueimp/jQuery-File-Upload/wiki/Options#processing-callback-options
+        <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <?php
+                if($model->caminhoImagem != null)
+                {
+                    echo 'Alterar Imagem';
+                }else {
+                    echo 'Enviar Imagem';
+                }
+                ?>
+            </a>
 
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <?php
+                $modelUpload = new \common\models\UploadForm();
+                $form = ActiveForm::begin(['action' => ['genero/imageupload','id'=>$model->id],
+                    'options' => ['method' => 'post','enctype' => 'multipart/form-data'
 
-        ]);
-        <form >
-            <input id="fileupload" type="file" name="files[]" data-url="<?= Yii::getAlias('@genero')?>" multiple>
+                    ]]) ?>
 
-            <script>
-            $(function () {
-                $('#fileupload').fileupload({
-                    dataType: 'html',
-                    url: <?= Url::toRoute('genero/imageupload')?>,
-                    done: function (e, data) {
-                        $.each(data.result.files, function (index, file) {
-                            $('<p/>').text(file.name).appendTo(document.body);
-                        });
-                    }
-                });
-            });
+                <?= $form->field($modelUpload, 'imageFile')->fileInput() ?>
 
-            </script>
-            <button type="submit">Upload</button>
-        </form>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="../js/vendor/jquery.ui.widget.js"></script>
-        <script src="../js/jquery.iframe-transport.js"></script>
-        <script src="../js/jquery.fileupload.js"></script>*/?>
-        <?php
-            $modelUpload = new \common\models\UploadForm();
-            $form = ActiveForm::begin(['action' => [Url::toRoute('genero/imageupload')],
-                'options' => ['method' => 'post','enctype' => 'multipart/form-data'
-
-                ]]) ?>
-
-            <?= $form->field($modelUpload, 'imageFile')->fileInput() ?>
-
-            <button>Submit</button>
-
+                <button class="btn btn-success">Enviar Imagem </button>
+            </div>
+        </div>
         <?php ActiveForm::end() ?>
-
     </div>
-
-
 </div>

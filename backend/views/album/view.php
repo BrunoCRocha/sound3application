@@ -35,6 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 'id',
+                ['label'=>'Imagem',
+                    'attribute' =>'caminhoImagem',
+                    'value'=>
+                        (($model->caminhoImagem != null) ?
+                            $model->caminhoImagem :
+                            ("Sem Imagem"))
+                    ,
+
+                    (($model->caminhoImagem != null) ?
+                        '\'format\' =>[\'image\',[\'width\'=>\'100\',\'height\'=>\'100\']]':
+                        ("Sem imagem"))
+                ],
                 'nome',
                 ['label'=>'Data de Lançamento',
                     'attribute' =>'data_lancamento'],
@@ -48,25 +60,42 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['label'=>'Género',
                     'attribute' => 'id_genero',
                     'value' => $model->genero->nome, // or use 'usertable.name'
-                ],
-                ['label'=>'SubGénero',
-                    'attribute'=>'id_subgenero',
-                   // 'value' => $model->conter_genero->nome,
-                ],
-
+                ]
             ],
         ]) ?>
 
-        <?php
-        $modelUpload = new \common\models\UploadForm();
-        $form = ActiveForm::begin(['action' => [Url::toRoute('genero/imageupload')],
-            'options' => ['method' => 'post','enctype' => 'multipart/form-data'
 
-            ]]) ?>
 
-        <?= $form->field($modelUpload, 'imageFile')->fileInput() ?>
+        <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <?php
+                    if($model->caminhoImagem != null)
+                    {
+                        echo 'Alterar Imagem';
+                    }else {
+                        echo 'Enviar Imagem';
+                    }
+                ?>
+            </a>
 
-        <button>Submit</button>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <?php
+                $modelUpload = new \common\models\UploadForm();
+                $form = ActiveForm::begin(['action' => ['album/imageupload','id'=>$model->id],
+                    'options' => ['method' => 'post','enctype' => 'multipart/form-data'
+
+                    ]]) ?>
+
+                <?= $form->field($modelUpload, 'imageFile')->fileInput() ?>
+
+                <button class="btn btn-success">Enviar Imagem </button>
+            </div>
+        </div>
+
+
+
 
         <?php ActiveForm::end() ?>
     </div>

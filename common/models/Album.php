@@ -10,11 +10,8 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property string $data_lancamento
-<<<<<<< HEAD
  * @property string $preco
  * @property string $caminhoImagem
-=======
->>>>>>> de05052e9037f180d62e58cf1e871a278b8ddcca
  * @property int $id_artista
  * @property int $id_genero
  *
@@ -46,10 +43,10 @@ class Album extends \yii\db\ActiveRecord
             [['preco'], 'number'],
             [['id_artista', 'id_genero'], 'integer'],
             [['nome'], 'string', 'max' => 50],
-            [['caminhoImagem'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
             [['id_artista'], 'exist', 'skipOnError' => true, 'targetClass' => Artista::className(), 'targetAttribute' => ['id_artista' => 'id']],
             [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['id_genero' => 'id']],
-        ];
+            [['caminhoImagem'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            ];
     }
 
     /**

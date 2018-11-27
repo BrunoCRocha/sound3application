@@ -42,7 +42,6 @@ use dosamigos\datepicker\DatePicker;
     ) ?>
 
 
-
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>

@@ -35,22 +35,22 @@ class ArtistaController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['readArtista'],
+                            'roles' => ['admin', 'mod'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createArtista'],
+                            'roles' => ['admin', 'mod'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateArtista'],
+                            'roles' => ['admin', 'mod'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['deleteArtista'],
+                            'roles' => ['admin', 'mod'],
                         ],
                     ],
                 ],
@@ -74,24 +74,20 @@ class ArtistaController extends Controller
 
     public function actionImageupload()
     {
-        var_dump('artista/imageupload');
-        die();
-
         $model = new UploadForm();
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if ($model->upload()) {
                 // file is uploaded successfully
-                $idartista=$request->get('id');
-                $artista = Artista::findOne($idartista);
+                $idartista=Yii::$app->request->get('id');
+                $artista= Artista::findOne($idartista);
                 if($artista != null){
                     $artista->caminhoImagem = $model->caminhoFinal;
+                    $artista->save(false);
                 }
-                return;
             }
         }
-
         return $this->render('view', ['model' => $artista]);
     }
 
