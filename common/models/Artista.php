@@ -34,14 +34,14 @@ class Artista extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'caminhoImagem'], 'required'],
+            [['nome'], 'required'],
             [['data_ini_carreira'], 'safe'],
             [['nome'], 'string', 'max' => 50],
             [['nacionalidade'], 'string', 'max' => 25],
-            [['caminhoImagem'], 'string', 'max' => 300],
+            [['caminhoImagem'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+
         ];
     }
-
     /**
      * {@inheritdoc}
      */
@@ -51,7 +51,6 @@ class Artista extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'nacionalidade' => 'Nacionalidade',
-            'caminhoImagem' => 'Caminho Imagem',
             'data_ini_carreira' => 'Data Ini Carreira',
             'caminhoImagem' => 'Caminho Imagem',
         ];

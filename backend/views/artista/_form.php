@@ -27,8 +27,6 @@ use dosamigos\datepicker\DatePicker;
             ],
         ]) ?>
 
-        <?= $form->field($model, 'caminhoImagem')->label('Imagem')->fileInput() ?>
-
         <div class="form-group">
             <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
         </div>

@@ -31,21 +31,46 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 'id',
+                ['label'=>'Imagem',
+                    'attribute' =>'caminhoImagem',
+                    'value'=>
+                        (($model->caminhoImagem != null) ?
+                            $model->caminhoImagem :
+                            ("Sem Imagem"))
+
+                ],
                 'nome',
                 'nacionalidade',
                 'data_ini_carreira',
             ],
         ]) ?>
-        <?php
-        $modelUpload = new \common\models\UploadForm();
-        $form = ActiveForm::begin(['action' => [Url::toRoute('genero/imageupload')],
-            'options' => ['method' => 'post','enctype' => 'multipart/form-data'
+        <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <?php
+                if($model->caminhoImagem != null)
+                {
+                    echo 'Alterar Imagem';
+                }else {
+                    echo 'Enviar Imagem';
+                }
+                ?>
+            </a>
 
-            ]]) ?>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <?php
+                $modelUpload = new \common\models\UploadForm();
+                $form = ActiveForm::begin(['action' => ['artista/imageupload','id'=>$model->id],
+                    'options' => ['method' => 'post','enctype' => 'multipart/form-data'
 
-        <?= $form->field($modelUpload, 'imageFile')->fileInput() ?>
+                    ]]) ?>
 
-        <button>Submit</button>
+                <?= $form->field($modelUpload, 'imageFile')->label('')->fileInput() ?>
+
+                <button class="btn btn-success" >Enviar Imagem </button>
+            </div>
+        </div>
 
         <?php ActiveForm::end() ?>
     </div>

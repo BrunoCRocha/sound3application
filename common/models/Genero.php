@@ -35,7 +35,7 @@ class Genero extends \yii\db\ActiveRecord
             [['nome', 'caminhoImagem'], 'required'],
             [['nome'], 'string', 'max' => 50],
             [['descricao'], 'string', 'max' => 250],
-            [['caminhoImagem'], 'string', 'max' => 300],
+            [['caminhoImagem'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
 

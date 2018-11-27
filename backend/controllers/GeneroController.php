@@ -127,25 +127,21 @@ class GeneroController extends Controller
 
     public function actionImageupload()
     {
-        var_dump('genero/imageupload');
-        die();
-
         $model = new UploadForm();
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if ($model->upload()) {
                 // file is uploaded successfully
-                $idgenero=$request->get('id');
+                $idgenero=Yii::$app->request->get('id');
                 $genero= Genero::findOne($idgenero);
                 if($genero != null){
                     $genero->caminhoImagem = $model->caminhoFinal;
+                    $genero->save(false);
                 }
-                return;
             }
         }
-
-        return $this->render('upload', ['model' => $genero]);
+        return $this->render('view', ['model' => $genero]);
     }
 
 
