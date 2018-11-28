@@ -22,7 +22,7 @@ class UploadForm extends Model
     public function upload()
     {
         if ($this->validate()) {
-            $caminho = Yii::getAlias('@genero');
+            $caminho = Yii::getAlias('@capas');
             $caminho .= "\\";
 
             $this->caminhoFinal = $caminho . $this->imageFile->baseName . '.' . $this->imageFile->extension;

@@ -26,6 +26,7 @@ CREATE TABLE compra(
 	id int(10) PRIMARY KEY AUTO_INCREMENT,
 	data_compra DATE NOT NULL,
 	valor_total float(10) NOT NULL,
+	efetivada tinyint(1),
 	id_utilizador int(10) NOT NULL,
 	FOREIGN KEY (id_utilizador) REFERENCES user(id)
 	/*FK*/
