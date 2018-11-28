@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Album;
+use common\models\User;
 use Yii;
 use common\models\Musica;
 use common\models\MusicaSearch;

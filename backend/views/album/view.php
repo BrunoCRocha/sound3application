@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         </p>
         <div class="collapse" id="collapseExample">
-            <div class="card card-body">
+                    <div class="card card-body">
                 <?php
                 $modelUpload = new \common\models\UploadForm();
                 $form = ActiveForm::begin(['action' => ['album/imageupload','id'=>$model->id],

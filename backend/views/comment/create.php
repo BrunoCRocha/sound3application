@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Comment */
 
-$this->title = 'Create Comment';
-$this->params['breadcrumbs'][] = ['label' => 'Comments', 'url' => ['index']];
+$this->title = 'Criar Comentário';
+$this->params['breadcrumbs'][] = ['label' => 'Álbuns', 'url' => ['album/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comment-create">
@@ -15,7 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'listAlbum' => $listAlbum,
+        'listUtilizador'=>$listUtilizador,
+        'model' => $model
     ]) ?>
 
 </div>

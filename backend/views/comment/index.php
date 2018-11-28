@@ -8,6 +8,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Comentários';
+$this->params['breadcrumbs'][] = ['label' => 'Álbuns', 'url' => ['album/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comment-index">
