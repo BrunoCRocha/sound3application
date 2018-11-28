@@ -29,33 +29,7 @@ class GeneroController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-            ],
-            'access' =>
-                ['class' => \yii\filters\AccessControl::className(),
-                    'only' => ['view','create', 'update', 'delete'],
-                    'rules' => [
-                        [
-                            'allow' => true,
-                            'actions' => ['view'],
-                            'roles' => ['admin','mod'],
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['create'],
-                            'roles' => ['admin','mod'],
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['update'],
-                            'roles' => ['admin','mod'],
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['delete'],
-                            'roles' => ['admin','mod'],
-                        ],
-                    ],
-                ],
+            ]
         ];
     }
 

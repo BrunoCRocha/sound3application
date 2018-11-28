@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+
         <span class="botoes_extra">
             <?= Html::a('Ver Comentários', ['comment/index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
         </span>

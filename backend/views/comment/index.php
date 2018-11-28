@@ -44,6 +44,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     'headerOptions' => [
                         'style' => 'color:#3277b3'
                     ],
+                    'buttons' => [
+
+                        //view button
+                        'update' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                'title' => Yii::t('app', 'View'),
+                                'class'=>'btn btn-primary btn-xs',
+                            ]);
+                        },
+                    ],
                 ],
             ],
         ]); ?>
