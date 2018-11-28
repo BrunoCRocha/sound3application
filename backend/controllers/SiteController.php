@@ -72,18 +72,35 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest && Yii::$app->user->can('readUtilizador')) {
+        $mensagem ='';
+        if (!Yii::$app->user->isGuest) {
+            //goHome - volta à página principal (login)
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            //após receber os dados do form de login e fazer login com os dados
+            //verificar se o user possui permissoes para aceder ao backoffice
+            if(!(Yii::$app->user->can('readUtilizador'))){
+                //como não possui, fazemos logout e notificamos o utilizador da causa do erro
+                Yii::$app->user->logout();
+                $mensagem = "Não possui privilégios para aceder ao BackOffice!";
+                return $this->render('login', [
+                    'mensagem' => $mensagem,
+                    'model' => $model
+                ]);
+            } else{
+                return $this->goBack();
+            }
+
         } else {
+
             $model->password = '';
 
             return $this->render('login', [
-                'model' => $model,
+                'mensagem' => $mensagem,
+                'model' => $model
             ]);
         }
     }

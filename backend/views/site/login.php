@@ -4,11 +4,21 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
+use yii\bootstrap\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
+
+if($mensagem != ''){
+    echo Alert::widget([
+        'options' => [
+            'class' => 'alert-info',
+        ],
+        'body' => $mensagem,
+    ]);
+}
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>

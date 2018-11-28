@@ -13,11 +13,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="genero-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);
+    /*if(Yii::$app->user->can('createGenero')){
+        ?><p>
         <?= Html::a('Criar Género', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        </p>
+    <?php }*/?>
+
     <div class="fundo-form">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,

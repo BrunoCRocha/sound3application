@@ -87,15 +87,15 @@ class AlbumController extends Controller
      */
     public function actionView($id)
     {
-        $query = Comment::find()->where(['post_id' => $id]);
+        /*$query = Comment::find()->where(['id_album' => $id]);
 
         $provider = new ActiveDataProvider([
             'query' => $query
-        ]);
+        ]);*/
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'provider' => $provider
+            //'provider' => $provider
         ]);
 
         /*return $this->render('view', [

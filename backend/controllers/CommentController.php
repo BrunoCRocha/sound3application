@@ -75,12 +75,12 @@ class CommentController extends Controller
 
 
         $query = Comment::find()->where(['id_album' => $id]);
-
+        $searchModel = new CommentSearch();
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
         return $this->render('index', [
-            'searchModel' => $this->findModel($id),
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider
         ]);
 
