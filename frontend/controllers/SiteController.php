@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use common\models\Compra;
 use common\models\LinhaCompra;
+use common\models\Musica;
 use common\models\User;
 use Yii;
 use yii\base\InvalidParamException;
@@ -75,27 +76,31 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $ids = LinhaCompra::find()->select('id_musica')->distinct()->all();
+        $lcs = LinhaCompra::find()->select('id_musica')->distinct()->all();
 
-        foreach ($ids as $id){
-            /*array_push($numeroVendas,[$id =>LinhaCompra::find()
-                ->where(['id_musica' => $id])
-                ->count()]);*/
-
+        foreach ($lcs as $lc){
             $numeroVendas = LinhaCompra::find()
-                ->where(['id_musica' => $id])
+                ->where(['id_musica' => $lc->id_musica])
                 ->count();
 
-
-            $valores[$id->id_musica] = $numeroVendas;
-
+            $valores[$lc->id_musica] = $numeroVendas;
         }
 
-        var_dump($valores);
-        die();
+        arsort($valores);//Ordena pelo valor
+        //top5 musicas + compradas
+        $maisVendidos = array_slice($valores, 0, 5, true);
+
+        $arrayMusicas = array();
+
+        foreach ($maisVendidos as $idMusica => $nCompras){
+            $modelMusica = Musica::findOne($idMusica);
+            array_push($arrayMusicas, $modelMusica);
+        }
+        //var_dump($arrayMusicas);
 
         return $this->render('index',[
-            'numeroVendas' =>$numeroVendas
+            'maisVendidos' => $maisVendidos,
+            'arrayMusicas' => $arrayMusicas
         ]);
 
     }
