@@ -7,7 +7,8 @@ use yii\helpers\Html;
 
 <div id="album">
     <div id="imagem_album">
-        <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><img src="<?= $album->caminhoImagem?>"></a>
+        <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><?= Html::img(Yii::getAlias($album->caminhoImagem))?></a>
+        <img src="<?= $album->caminhoImagem?>">
     </div>
     <div id="album_body">
         <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><h3><?=$album->nome?> - <?= $album->artista->nome?></h3></a>

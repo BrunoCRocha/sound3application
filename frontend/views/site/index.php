@@ -8,27 +8,6 @@ $this->title = 'My Yii Application';
 <div class="site-index" id="display">
 
     <div class="body-content" >
-        <ul id="pills_nav" >
-            <li><a href="#menu_albums" onclick="return false">Album</a></li>
-        </ul>
-
-        <hr id="hr_pills" width="50%">
-
-            <div class="tab-content" >
-                <div id="menu_home" class="resume">
-                    
-                </div>
-                <div id="menu_albums" class="resume">
-                    <?php require_once('miniFiles/albuns_site.php')?>
-                </div>
-                <div id="menu_musicas" class="resume">
-
-                </div>
-                <div id="menu_artistas" class="resume">
-
-                </div>
-            </div>
-
 
             <div class="row" id="caixa_conteudo">
                 <div class="col-sm-9" id="fds">
