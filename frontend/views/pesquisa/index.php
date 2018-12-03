@@ -14,7 +14,8 @@ use yii\helpers\Html;
 
     <div class="col-sm-4" id="menu_opcoes">
         <div>
-            <?= Html::a('Músicas', ['index', 'search' => $search], ['class' => 'cool-link']) ?>
+            <?= Html::a('Ver Tudo', ['index', 'search' => $search], ['class' => 'cool-link']) ?>
+            <?= Html::a('Músicas', ['musica', 'search' => $search], ['class' => 'cool-link']) ?>
             <?= Html::a('Álbuns', ['albuns', 'search' => $search], ['class' => 'cool-link']) ?>
             <?= Html::a('Género', ['genero', 'search' => $search], ['class' => 'cool-link']) ?>
             <?= Html::a('Artista', ['artista', 'search' => $search], ['class' => 'cool-link']) ?>
@@ -32,6 +33,33 @@ use yii\helpers\Html;
 
         <ul>
             <?php
+                if($tipo == 'everything'){
+                    if($generoSearch != null){
+                        foreach ($generoSearch as $genero){
+                            require ('genero.php');
+                        }
+                    }
+
+
+                    if($artistaSearch != null){
+                        foreach ($artistaSearch as $artista){
+                            require ('artista.php');
+                        }
+
+                    }
+                    if($albumSearch != null){
+                        foreach ($albumSearch as $album){
+                            require ('albuns.php');
+                        }
+
+                    }
+                    if($musicaSearch != null){
+                        foreach ($musicaSearch as $musica){
+                            require ('musicas.php');
+                        }
+                    }
+                }
+
                 if($tipo == 'musica'){
                     foreach ($musicaSearch as $musica){
                         require ('musicas.php');

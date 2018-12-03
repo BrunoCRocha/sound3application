@@ -4,7 +4,7 @@
 <li>
     <div class="musica" id="objeto_musica">
         <div class="ole" id="imagem_musica">
-            <img src="<?= $musica->imagemCaminho ?>">
+            <img src="<?= $musica->album->caminhoImagem ?>">
         </div>
         <div id="media_body">
             <h4 class="media-heading"><?= $musica->nome ?> - <?= $musica->album->artista->nome ?></h4>

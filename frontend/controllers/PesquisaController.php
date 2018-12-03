@@ -13,6 +13,37 @@ class PesquisaController extends \yii\web\Controller
 
     public function actionIndex($search)
     {
+        $tipo = 'everything';
+
+        $generoSearch = Genero::find()
+            ->where(['like', 'nome', $search])
+            ->all();
+
+        $artistaSearch = Artista::find()
+            ->where(['like', 'nome', $search])
+            ->all();
+
+        $albumSearch = Album::find()
+            ->where(['like', 'nome', $search])
+            ->all();
+
+        $musicaSearch = Musica::find()
+            ->where(['like', 'nome', $search])
+            ->all();
+
+
+        return $this->render('index',[
+            'search' => $search,
+            'generoSearch' => $generoSearch,
+            'artistaSearch' => $artistaSearch,
+            'albumSearch' => $albumSearch,
+            'musicaSearch' => $musicaSearch,
+            'tipo' => $tipo
+        ]);
+    }
+
+    public function actionMusica($search)
+    {
         $musicaSearch = Musica::find()
             ->where(['like', 'nome', $search])
             ->all();
