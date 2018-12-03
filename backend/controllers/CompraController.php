@@ -2,11 +2,16 @@
 
 namespace backend\controllers;
 
+use common\models\Album;
+use common\models\Artista;
 use common\models\LinhaCompra;
+use common\models\User;
+use backend\models\DadosDD;
 use Yii;
 use common\models\Compra;
 use common\models\CompraSearch;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -78,14 +83,24 @@ class CompraController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Compra();
+        $modelCompra = new Compra();
+        $modelLinhacompra = new LinhaCompra();
+        $dadosSemValorMusica = new DadosDD();
+        $dadosSemValorMusica->artistas = ArrayHelper::map(Artista::find()->all(),'id','nome');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($modelCompra->load(Yii::$app->request->post()) && $modelLinhacompra->load(Yii::$app->request->post())
+            && $modelCompra->save() && $modelLinhacompra->save()) {
+            return $this->redirect(['view', 'id' => $modelCompra->id]);
         }
 
+        $query_user = User::find()->all();
+        $listUser=ArrayHelper::map($query_user, 'id', 'username');
+
         return $this->render('create', [
-            'model' => $model,
+            'modelCompra' => $modelCompra,
+            'modelLinhacompra' => $modelLinhacompra,
+            'dadosSemValorMusica' => $dadosSemValorMusica,
+            'listUser' => $listUser
         ]);
     }
 
@@ -118,9 +133,38 @@ class CompraController extends Controller
      */
     public function actionDelete($id)
     {
+
+        $linhas = LinhaCompra::find()->where(['id_compra' => $id])->all();
+
+        foreach($linhas as $linha){
+            $linha->delete();
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionCriarCompraLinhaCompra(){
+        $modelCompra = new Compra();
+        $modelLinhacompra = new LinhaCompra();
+
+        if ($modelCompra->load(Yii::$app->request->post()) && $modelCompra->validate() &&
+            $modelLinhacompra->load(Yii::$app->request->post()) && $modelLinhacompra->validate()){
+            $count = count(Yii::$app->request->post('musicas', []));
+
+            $musicas = [new Setting()];
+            for($i = 1; $i < $count; $i++) {
+                $settings[] = new Setting();
+            }
+
+            $modelLinhacompra->id_compra = $modelCompra->id;
+        }
+
+
+
+        var_dump('ACERTOU');
+        die();
     }
 
     /**
@@ -138,6 +182,8 @@ class CompraController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
 
 
 }
