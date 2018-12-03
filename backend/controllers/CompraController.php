@@ -2,11 +2,14 @@
 
 namespace backend\controllers;
 
+use common\models\Artista;
+use common\models\Album;
 use common\models\LinhaCompra;
 use Yii;
 use common\models\Compra;
 use common\models\CompraSearch;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -84,7 +87,16 @@ class CompraController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+
+        $query_artista = Artista::find()->all();
+        $listArtista=ArrayHelper::map($query_artista, 'id', 'nome');
+
+        $query_album = Album::find()->all();
+        $listAlbum=ArrayHelper::map($query_album, 'id', 'nome');
+
         return $this->render('create', [
+            'listArtista'=>$listArtista,
+            'listAlbum'=>$listAlbum,
             'model' => $model,
         ]);
     }
@@ -137,6 +149,12 @@ class CompraController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionForm_musica($id)
+    {
+       /* return $this->render('form_musica', [
+            'model' => $model,
+        ]);*/
     }
 
 
