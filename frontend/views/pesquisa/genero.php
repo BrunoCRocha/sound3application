@@ -2,6 +2,6 @@
 ?>
 
 <div class="genero_musicas">
-    <img src="../web/imagens/rap.jpg">
-    <span>Rap</span>
+    <img src="<?= $genero->caminhoImagem?>">
+    <span><?= $genero->nome?></span>
 </div>

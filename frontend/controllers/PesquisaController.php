@@ -13,49 +13,73 @@ class PesquisaController extends \yii\web\Controller
 
     public function actionIndex($search)
     {
-        $queryAlbum = Musica::find()
+        $musicaSearch = Musica::find()
             ->where(['like', 'nome', $search])
             ->all();
 
+        $tipo = 'musica';
         return $this->render('index',[
             'search' => $search,
-            'queryAlbum' => $queryAlbum
+            'musicaSearch' => $musicaSearch,
+            'tipo' => $tipo
         ]);
     }
 
     public function actionAlbuns($search){
 
-        $queryAlbum = Album::find()
+        $albumSearch = Album::find()
             ->where(['like', 'nome', $search])
             ->all();
 
+        /*foreach ($albumSearch as $album){
+            $numeroMusicas = Musica::find()
+                ->where(['id_album' => $album->id])
+                ->all();
+
+            $valores[$album->id] = sizeof($numeroMusicas);
+        }
+
+        array_push($albumSearch, $valores);
+
+
+
+        var_dump($albumSearch);
+        die();*/
+
+        $tipo = 'album';
         return $this->render('index',[
             'search' => $search,
-            'queryAlbum' => $queryAlbum
+            'albumSearch' => $albumSearch,
+            'tipo' => $tipo
         ]);
     }
 
     public function actionGenero($search){
 
-        $queryAlbum = Genero::find()
+        $generoSearch = Genero::find()
             ->where(['like', 'nome', $search])
             ->all();
 
+        $tipo = 'genero';
         return $this->render('index',[
             'search' => $search,
-            'queryAlbum' => $queryAlbum
+            'generoSearch' => $generoSearch,
+            'tipo' => $tipo
         ]);
     }
 
     public function actionArtista($search){
 
-        $queryAlbum = Artista::find()
+        $artistaSearch = Artista::find()
             ->where(['like', 'nome', $search])
             ->all();
 
+        $tipo = 'artista';
+
         return $this->render('index',[
             'search' => $search,
-            'queryAlbum' => $queryAlbum
+            'artistaSearch' => $artistaSearch,
+            'tipo' => $tipo
         ]);
     }
 

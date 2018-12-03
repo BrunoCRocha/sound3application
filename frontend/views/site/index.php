@@ -9,10 +9,7 @@ $this->title = 'My Yii Application';
 
     <div class="body-content" >
         <ul id="pills_nav" >
-            <li><a href="#menu_home" onclick="return false">Home</a></li>
             <li><a href="#menu_albums" onclick="return false">Album</a></li>
-            <li><a href="#menu_musicas" onclick="return false">Musicas</a></li>
-            <li><a href="#menu_artistas" onclick="return false">Artistas</a></li>
         </ul>
 
         <hr id="hr_pills" width="50%">

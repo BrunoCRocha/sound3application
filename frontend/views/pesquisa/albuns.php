@@ -1,18 +1,23 @@
 <?php
+
+use yii\helpers\Url;
+use yii\helpers\Html;
+
 ?>
 
 <div id="album">
     <div id="imagem_album">
-        <a href=""><img src="../web/imagens/kamikaze.jpg"></a>
+        <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><img src="<?= $album->caminhoImagem?>"></a>
     </div>
     <div id="album_body">
-        <a href=""><h3>Kamikaze - Eminem</h3></a>
-        <a href=""><h5>13 Tracks</h5></a>
-        <h5>5 Comentários</h5>
+        <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><h3><?=$album->nome?> - <?= $album->artista->nome?></h3></a>
+        <a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $album->id])?>"><h5><?= 'nada' ?></h5></a>
         <div id="buttons_album_seguir">
             <p>
-                <button class="butao_opcoes">Add Favoritos</button>
-                <button class="butao_opcoes">Add Carrinho</button>
+                <?= Html::a('Add Favoritos', ['index', 'id' => $album->id], ['class' => 'butao_opcoes']) ?>
+                <?= Html::a('Add Varrinho', ['index', 'id' => $album->id], ['class' => 'butao_opcoes']) ?>
+                <!--<button class="butao_opcoes">Add Favoritos</button>
+                <button class="butao_opcoes">Add Carrinho</button>-->
             </p>
         </div>
     </div>
