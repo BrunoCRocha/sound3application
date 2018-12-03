@@ -96,7 +96,6 @@ class SiteController extends Controller
             $modelMusica = Musica::findOne($idMusica);
             array_push($arrayMusicas, $modelMusica);
         }
-        //var_dump($arrayMusicas);
 
         return $this->render('index',[
             'maisVendidos' => $maisVendidos,
@@ -118,7 +117,6 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
             return $this->goBack();
         } else {
             $model->password = '';

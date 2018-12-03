@@ -2,8 +2,9 @@
 
 namespace backend\controllers;
 
-use common\models\Album;
+
 use common\models\Artista;
+use common\models\Album;
 use common\models\LinhaCompra;
 use common\models\User;
 use backend\models\DadosDD;
@@ -181,6 +182,12 @@ class CompraController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionForm_musica($id)
+    {
+       /* return $this->render('form_musica', [
+            'model' => $model,
+        ]);*/
     }
 
 

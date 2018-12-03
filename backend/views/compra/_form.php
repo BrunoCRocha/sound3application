@@ -11,6 +11,7 @@ use kartik\depdrop\DepDrop;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <div class="compra-form">
+    <div class="fundo-form">
 
     <?php
 
