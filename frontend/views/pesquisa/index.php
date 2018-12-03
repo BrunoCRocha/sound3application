@@ -13,13 +13,11 @@ use yii\helpers\Html;
     </span>
 
     <div class="col-sm-4" id="menu_opcoes">
-
         <div>
             <?= Html::a('Músicas', ['index', 'search' => $search], ['class' => 'cool-link']) ?>
             <?= Html::a('Álbuns', ['albuns', 'search' => $search], ['class' => 'cool-link']) ?>
             <?= Html::a('Género', ['genero', 'search' => $search], ['class' => 'cool-link']) ?>
             <?= Html::a('Artista', ['artista', 'search' => $search], ['class' => 'cool-link']) ?>
-
 
             <!--<button class="cool-link"><img src="../web/menu_icons/search_black.svg">Resultados</button>
             <button class="cool-link"><img src="../web/menu_icons/music-player_black.svg">Músicas</button>
@@ -33,9 +31,28 @@ use yii\helpers\Html;
     <div class="col-sm-8" id="lista">
 
         <ul>
-            <li>
-
-            </li>
+            <?php
+                if($tipo == 'musica'){
+                    foreach ($musicaSearch as $musica){
+                        require ('musicas.php');
+                    }
+                }
+                if($tipo == 'album'){
+                    foreach ($albumSearch as $album){
+                        require ('albuns.php');
+                    }
+                }
+                if($tipo == 'genero'){
+                    foreach ($generoSearch as $genero){
+                        require ('genero.php');
+                    }
+                }
+                if($tipo == 'artista'){
+                    foreach ($artistaSearch as $artista){
+                        require ('artista.php');
+                    }
+                }
+            ?>
         </ul>
     </div>
 

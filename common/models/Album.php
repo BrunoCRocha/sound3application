@@ -62,6 +62,7 @@ class Album extends \yii\db\ActiveRecord
             'id_artista' => 'Id Artista',
             'id_genero' => 'Id Genero',
             'caminhoImagem' => 'Caminho Imagem',
+            'nMusicas' => 'Numero Musicas'
         ];
     }
 
@@ -104,4 +105,5 @@ class Album extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Musica::className(), ['id_album' => 'id']);
     }
+
 }
