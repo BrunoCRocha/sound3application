@@ -185,10 +185,10 @@ class CompraController extends Controller
     }
     public function actionForm_musica($id)
     {
-       /* return $this->render('form_musica', [
-            'model' => $model,
-        ]);*/
+
     }
+
+
 
 
 
