@@ -31,7 +31,7 @@ class Compra extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['data_compra', 'valor_total', 'id_utilizador'], 'required'],
+            [['data_compra', 'id_utilizador'], 'required'],
             [['data_compra'], 'safe'],
             [['valor_total'], 'number'],
             [['id_utilizador'], 'integer'],
