@@ -25,7 +25,7 @@ class UploadForm extends Model
             $caminho = Yii::getAlias('@capas');
             $caminho .= "\\";
 
-            $this->caminhoFinal = $caminho . $this->imageFile->baseName . '.' . $this->imageFile->extension;
+            $this->caminhoFinal = $this->imageFile->baseName . '.' . $this->imageFile->extension;
 
             $this->imageFile->saveAs($caminho . $this->imageFile->baseName . '.' . $this->imageFile->extension);
             return true;
