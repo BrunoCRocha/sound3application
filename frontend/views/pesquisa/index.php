@@ -34,55 +34,76 @@ use yii\helpers\Html;
         <ul>
             <?php
                 if($tipo == 'everything'){
-                    if($generoSearch != null){
-                        foreach ($generoSearch as $genero){
-                            require ('genero.php');
-                        }
-                    }
+                    if(sizeof($generoSearch)== 0 && sizeof($artistaSearch)== 0 && sizeof($albumSearch)== 0 &&sizeof($musicaSearch)== 0){
+                        require ('nocontent.php');
 
-
-                    if($artistaSearch != null){
-                        foreach ($artistaSearch as $artista){
-                            require ('artista.php');
+                    }else{
+                        if($generoSearch != null){
+                            foreach ($generoSearch as $genero){
+                                require ('genero.php');
+                            }
                         }
 
-                    }
-                    if($albumSearch != null){
-                        foreach ($albumSearch as $album){
-                            require ('albuns.php');
+                        if($artistaSearch != null){
+                            foreach ($artistaSearch as $artista){
+                                require ('artista.php');
+                            }
                         }
-
-                    }
-                    if($musicaSearch != null){
-                        foreach ($musicaSearch as $musica){
-                            require ('musicas.php');
+                        if($albumSearch != null){
+                            foreach ($albumSearch as $album){
+                                require ('albuns.php');
+                            }
+                        }
+                        if($musicaSearch != null){
+                            foreach ($musicaSearch as $musica){
+                                require ('musicas.php');
+                            }
                         }
                     }
                 }
 
                 if($tipo == 'musica'){
-                    foreach ($musicaSearch as $musica){
-                        require ('musicas.php');
+                    if(sizeof($musicaSearch) == 0){
+                        require ('nocontent.php');
+                    }else{
+                        foreach ($musicaSearch as $musica){
+                            require ('musicas.php');
+                        }
                     }
+
                 }
                 if($tipo == 'album'){
-                    foreach ($albumSearch as $album){
-                        require ('albuns.php');
+                    if(sizeof($albumSearch) == 0){
+                        require ('nocontent.php');
+                    }else{
+                        foreach ($albumSearch as $album){
+                            require ('albuns.php');
+                        }
+                    }
+
+                }
+                if($tipo == 'genero') {
+                    if (sizeof($generoSearch) == 0) {
+                        require('nocontent.php');
+                    } else {
+                        foreach ($generoSearch as $genero) {
+                            require('genero.php');
+                        }
                     }
                 }
-                if($tipo == 'genero'){
-                    foreach ($generoSearch as $genero){
-                        require ('genero.php');
-                    }
-                }
-                if($tipo == 'artista'){
-                    foreach ($artistaSearch as $artista){
-                        require ('artista.php');
+
+
+                if($tipo == 'artista') {
+                    if (sizeof($artistaSearch) == 0) {
+                        require('nocontent.php');
+                    } else {
+                        foreach ($artistaSearch as $artista) {
+                            require('artista.php');
+                        }
                     }
                 }
             ?>
         </ul>
     </div>
-
 </div>
 

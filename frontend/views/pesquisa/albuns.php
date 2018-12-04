@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+
 ?>
 
 <div id="album">
@@ -15,6 +16,18 @@ use yii\helpers\Html;
         <a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $album->id])?>"><h5><?= 'nada' ?></h5></a>
         <div id="buttons_album_seguir">
             <p>
+                <?= Html::a('Adde Favoritos', ['favoritos/album','id' =>$album->id], ['onclick'=>"$.ajax({
+                                                                            type:'POST',
+                                                                            url:'favoritos/album',
+                                                                            success:function(response) {
+                                                                                $('#close').html(response);
+                                                                            }
+                                                                        });return false;",
+                    ]);
+
+                //www.yiiframework.com/wiki/388/ajax-form-submiting-in-yii
+                ?>
+
                 <?= Html::a('Add Favoritos', ['index', 'id' => $album->id], ['class' => 'butao_opcoes']) ?>
                 <?= Html::a('Add Varrinho', ['index', 'id' => $album->id], ['class' => 'butao_opcoes']) ?>
                 <!--<button class="butao_opcoes">Add Favoritos</button>
