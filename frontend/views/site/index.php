@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 
+use yii\bootstrap\Carousel;
 use yii\helpers\Html;
 
 
@@ -15,15 +16,20 @@ use yii\helpers\Html;
                 <div class="col-sm-9" id="fds">
                     <h2 class="rowTitle">Fire</h2>
                     <div class="row">
-                        <?php foreach ($arrayMusicas as $musica) {?>
-                            <div class="col-4 col-sm-2">
-                                <div id="caixa_conteudo">
-                                    <img src="<?= $musica->album->caminhoImagem ?>" class="rounded imagem mx-auto d-block">
-                                    <h2><?= $musica->nome?></h2>
-                                    <h3><?= $musica->album->artista->nome?></h3>
-                                </div>
-                            </div>
-                        <?php } ?>
+                        <?php echo Carousel::widget([
+                            'items' => [
+                                    foreach ($arrayMusicas as $musica) {?>
+                                    <?php 'content'?> => '<img src="<?= "..\\..\\common\\img\\capas".'\\'.$musica->album->caminhoImagem ?>" class="rounded imagem mx-auto d-block">';
+                                    <?php 'caption'?> => '<h4><?= $musica->album->nome?></h4><p><?= $musica->album->artista->nome?></p>'
+
+
+
+                                    }
+
+
+
+                            ])?>
+
                     </div>
                 </div>
             </div>
