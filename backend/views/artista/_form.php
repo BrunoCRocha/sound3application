@@ -19,13 +19,7 @@ use dosamigos\datepicker\DatePicker;
 
         <?= $form->field($model, 'nacionalidade')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'data_ini_carreira')->widget(DatePicker::className(), [
-            'inline' => false,
-            'clientOptions' => [
-                'autoclose' => true,
-                'format' => 'yyyy-m-dd',
-            ],
-        ]) ?>
+        <?= $form->field($model, 'ano')->textInput(['maxlenght'=>true])?>
 
         <div class="form-group">
             <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

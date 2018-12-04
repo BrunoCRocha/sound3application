@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $nome
- * @property string $data_lancamento
+ * @property string $ano
  * @property string $preco
  * @property string $caminhoImagem
  * @property int $id_artista
@@ -39,7 +39,7 @@ class Album extends \yii\db\ActiveRecord
     {
         return [
             [['nome', 'preco', 'id_artista', 'id_genero'], 'required'],
-            [['data_lancamento'], 'safe'],
+            [['ano'], 'safe'],
             [['preco'], 'number'],
             [['id_artista', 'id_genero'], 'integer'],
             [['nome'], 'string', 'max' => 50],
@@ -57,7 +57,7 @@ class Album extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'data_lancamento' => 'Data Lancamento',
+            'anos' => 'Ano Lancamento',
             'preco' => 'Preco',
             'id_artista' => 'Id Artista',
             'id_genero' => 'Id Genero',

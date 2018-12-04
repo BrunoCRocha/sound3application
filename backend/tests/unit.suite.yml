@@ -1,2 +1,14 @@
 suite_namespace: backend\tests\unit
 actor: UnitTester
+modules:
+    enabled:
+        - Yii2:
+            part: [orm, email, fixtures]
+
+        - Db:
+
+            dsn: 'mysql:host=localhost; dbname=sound3_test'
+            user: 'root'
+            password: ''
+
+        - Asserts

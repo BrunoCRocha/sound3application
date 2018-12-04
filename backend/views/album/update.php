@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\Album */
 
 $this->title = 'Atualizar Álbum: ' . $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Álbums', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Álbuns', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->nome, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Atualização';
 ?>
@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = 'Atualização';
     <div class="fundo-form">
         <?= $this->render('_form', [
             'model' => $model,
+            'listArtista' =>$listArtista,
+            'listGenero' => $listGenero
         ]) ?>
     </div>
 

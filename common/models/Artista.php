@@ -11,7 +11,7 @@ use Yii;
  * @property string $nome
  * @property string $nacionalidade
  * @property string $caminhoImagem
- * @property string $data_ini_carreira
+ * @property string $ano
  *
  * @property Album[] $albums
  * @property FavArtista[] $favArtistas
@@ -34,7 +34,7 @@ class Artista extends \yii\db\ActiveRecord
     {
         return [
             [['nome'], 'required'],
-            [['data_ini_carreira'], 'safe'],
+            [['ano'], 'safe'],
             [['nome'], 'string', 'max' => 50],
             [['nacionalidade'], 'string', 'max' => 25],
             [['caminhoImagem'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
@@ -49,7 +49,7 @@ class Artista extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'nacionalidade' => 'Nacionalidade',
-            'data_ini_carreira' => 'Data Ini Carreira',
+            'ano' => 'Ano',
             'caminhoImagem' => 'Caminho Imagem',
         ];
     }

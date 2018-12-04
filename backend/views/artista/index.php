@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'nacionalidade',
 
                 ['label' => 'Data de Início de Carreira',
-                    'attribute' => 'data_ini_carreira',
+                    'attribute' => 'ano',
                 ],
                 ['class' => 'yii\grid\ActionColumn',
 

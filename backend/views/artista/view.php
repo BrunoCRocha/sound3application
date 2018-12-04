@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'nome',
                 'nacionalidade',
-                'data_ini_carreira',
+                'ano',
             ],
         ]) ?>
         <p>

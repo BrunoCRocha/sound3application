@@ -19,7 +19,7 @@ class AlbumSearch extends Album
     {
         return [
             [['id', 'id_artista', 'id_genero'], 'integer'],
-            [['nome', 'data_lancamento'], 'safe'],
+            [['nome', 'ano'], 'safe'],
             [['preco'], 'number'],
         ];
     }
@@ -65,7 +65,7 @@ class AlbumSearch extends Album
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'data_lancamento' => $this->data_lancamento,
+            'ano' => $this->ano,
             'preco' => $this->preco,
             'id_artista' => $this->id_artista,
             'id_genero' => $this->id_genero,

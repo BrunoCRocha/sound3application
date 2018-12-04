@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = 'Atualização';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
+        'listAlbum' => $listAlbum,
+        'listUtilizador'=>$listUtilizador,
         'model' => $model,
     ]) ?>
 

@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nacionalidade') ?>
 
-    <?= $form->field($model, 'data_ini_carreira') ?>
+    <?= $form->field($model, 'ano') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

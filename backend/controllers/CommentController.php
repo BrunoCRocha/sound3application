@@ -142,7 +142,15 @@ class CommentController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $query_album = Album::find()->all();
+        $listAlbum=ArrayHelper::map($query_album, 'id', 'nome');
+
+        $query_utilizador = User::find()->all();
+        $listUtilizador=ArrayHelper::map($query_utilizador, 'id','username');
+
         return $this->render('update', [
+            'listAlbum' => $listAlbum,
+            'listUtilizador' => $listUtilizador,
             'model' => $model,
         ]);
     }

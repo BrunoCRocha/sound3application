@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'nome',
                 ['label'=>'Data de Lançamento',
-                    'attribute' =>'data_lancamento'],
+                    'attribute' =>'ano'],
                 ['label'=>'Preço',
                     'attribute'=>'preco'],
                 //'id_artista',

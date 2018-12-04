@@ -164,7 +164,15 @@ class AlbumController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $query_artista = Artista::find()->all();
+        $listArtista=ArrayHelper::map($query_artista, 'id', 'nome');
+
+        $query_genero= Genero::find()->all();
+        $listGenero=ArrayHelper::map($query_genero,'id','nome');
+
         return $this->render('update', [
+            'listArtista' => $listArtista,
+            'listGenero' =>$listGenero,
             'model' => $model,
         ]);
     }
