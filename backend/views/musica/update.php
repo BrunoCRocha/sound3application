@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = 'Atualização';
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="fundo-form">
         <?= $this->render('_form', [
+            'listAlbum' => $listAlbum,
             'model' => $model,
         ]) ?>
     </div>

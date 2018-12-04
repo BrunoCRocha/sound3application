@@ -12,22 +12,13 @@ use dosamigos\datepicker\DatePicker;
 /* @var $model common\models\Album */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
-
-
 <div class="album-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'data_lancamento')->widget(DatePicker::className(), [
-        'inline' => false,
-        'clientOptions' => [
-            'autoclose' => true,
-            'format' => 'yyyy-m-dd',
-        ],
-    ]) ?>
+    <?= $form->field($model, 'ano')->textInput(['maxlenght'=>true]) ?>
 
     <?= $form->field($model, 'preco')->textInput(['maxlength' => true]) ?>
 

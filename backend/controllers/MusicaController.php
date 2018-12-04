@@ -126,7 +126,11 @@ class MusicaController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $query_album = Album::find()->all();
+        $listAlbum=ArrayHelper::map($query_album, 'id', 'nome');
+
         return $this->render('update', [
+            'listAlbum' => $listAlbum,
             'model' => $model,
         ]);
     }

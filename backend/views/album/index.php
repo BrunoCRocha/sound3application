@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id',
                 'nome',
                 ['label' => 'Data de Lançamento',
-                    'attribute' => 'data_lancamento'],
+                    'attribute' => 'ano'],
 
                 ['label' => 'Preço (€)',
                     'attribute' => 'preco'],

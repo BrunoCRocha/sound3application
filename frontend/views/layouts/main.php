@@ -81,15 +81,12 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Home', 'url' => ['/site/home']];
         $menuItems[] = ['label' => 'Favoritos', 'url' => ['/comment/favoritos']];
         $menuItems[] = ['label' => 'Carrinho', 'url' => ['/compra/index']];
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-
+        $menuItems[] = ['label' => Yii::$app->user->identity->username,
+            'items' => [
+                ['label' => 'Logout', 'url' => ['/site/home']],
+                ['label' => 'Perfil', 'url' => ['/perfil/index', 'id' =>Yii::$app->user->identity->getId()]],
+            ],
+        ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
