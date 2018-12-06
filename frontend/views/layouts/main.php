@@ -17,12 +17,14 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <link rel="stylesheet" href="../web/ficheiros_css/musicas.css">
     <link rel="stylesheet" href="../web/ficheiros_css/home.css">
     <link rel="stylesheet" href="../web/ficheiros_css/album.css">
+    <link rel="stylesheet" href="../web/ficheiros_css/pesquisa.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../web/ficheiros/pesquisa_menu.js"></script>
+    <script type="text/javascript" src="../web/ficheiros_js/pesquisa.js"></script>
+
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
