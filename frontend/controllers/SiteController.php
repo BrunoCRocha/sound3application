@@ -99,6 +99,8 @@ class SiteController extends Controller
             array_push($arrayMusicas, $modelMusica);
         }
 
+        /*var_dump($maisVendidos, $arrayMusicas);
+        die();*/
 
         return $this->render('index',[
             'maisVendidos' => $maisVendidos,
