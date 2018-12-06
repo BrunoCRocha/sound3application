@@ -6,33 +6,34 @@ use yii\helpers\Html;
 
 ?>
 
-<div id="album">
-    <div id="imagem_album">
-        <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><?= Html::img(Yii::getAlias($album->caminhoImagem))?></a>
-        <img src="<?= $album->caminhoImagem?>">
-    </div>
-    <div id="album_body">
-        <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><h3><?=$album->nome?> - <?= $album->artista->nome?></h3></a>
-        <a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $album->id])?>"><h5><?= 'nada' ?></h5></a>
-        <div id="buttons_album_seguir">
-            <p>
-                <?= Html::a('Adde Favoritos', ['favoritos/album','id' =>$album->id], ['onclick'=>"$.ajax({
-                                                                            type:'POST',
-                                                                            url:'favoritos/album',
-                                                                            success:function(response) {
-                                                                                $('#close').html(response);
-                                                                            }
-                                                                        });return false;",
-                    ]);
-
-                //www.yiiframework.com/wiki/388/ajax-form-submiting-in-yii
-                ?>
-
-                <?= Html::a('Add Favoritos', ['index', 'id' => $album->id], ['class' => 'butao_opcoes']) ?>
-                <?= Html::a('Add Varrinho', ['index', 'id' => $album->id], ['class' => 'butao_opcoes']) ?>
-                <!--<button class="butao_opcoes">Add Favoritos</button>
-                <button class="butao_opcoes">Add Carrinho</button>-->
-            </p>
+<li>
+    <div id="objeto">
+        <div class="imagem_album-musica">
+            <img src="<?= '..\\..\\common\\img\\capas'.'\\'.$album->caminhoImagem?>">
         </div>
+        <div class="info_body">
+            <h4 class="media-heading">
+                <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><?=$album->nome?></a>
+            </h4>
+            <h5>
+                <a href="<?= Url::toRoute(['pesquisa/detalhesArtista', 'id' => $album->id])?>"><?= $album->artista->nome?></a> -
+                <a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $album->id])?>"><?= '10 músicas' ?></a>
+            </h5>
+        </div>
+
+        <div class="preco">
+            <h5><?=$album->preco?>€</h5>
+        </div>
+
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn"></button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#home">Adicionar Carrinho</a>
+                <a href="#about">Adicionar Favoritos</a>
+            </div>
+        </div>
+
     </div>
-</div>
+    <hr class="separador">
+</li>
+

@@ -1,28 +1,37 @@
 <?php
+use yii\helpers\Url;
+
 ?>
 
 <li>
-    <div class="musica" id="objeto_musica">
-        <div class="ole" id="imagem_musica">
-            <img src="<?= $musica->album->caminhoImagem ?>">
+
+    <div class="musica" id="objeto">
+        <div class="imagem_album-musica">
+            <img src="<?= '..\\..\\common\\img\\capas'.'\\'.$musica->album->caminhoImagem?>">
         </div>
-        <div id="media_body">
-            <h4 class="media-heading"><?= $musica->nome ?> - <?= $musica->album->artista->nome ?></h4>
-            <p><h5><?=$musica->album->nome?></h5></p>
-            <div id="butoes_menu">
-                <p>
-                    <button class="butao_opcoes">Add Favoritos</button>
-                    <button class="butao_opcoes">Add Carrinho</button>
-                </p>
-            </div>
+        <div class="info_body">
+            <h4 class="media-heading"><?= $musica->nome ?></h4>
+            <h5>
+                <a href="<?= Url::toRoute(['detalhes/detalhesArtista', 'id' => $musica->id])?>"><?= $musica->album->artista->nome ?></a> -
+                <a href="<?= Url::toRoute(['detalhes/detalhesAlbum', 'id' => $musica->id])?>"><?= $musica->album->nome ?></a> -
+                <?= $musica->duracao ?>
+            </h5>
         </div>
-        <div id="musica_tempo">
-            <h5><?= $musica->duracao ?></h5>
+
+
+        <div class="preco">
+            <h5><?=$musica->preco?>€</h5>
         </div>
-        <div id="media_buttons">
-            <div>
-                <button class="media_button" id="butao_play"></button>
+
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn"></button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#home">Adicionar Carrinho</a>
+                <a href="#about">Adicionar Favoritos</a>
             </div>
         </div>
     </div>
+    <hr class="separador">
 </li>
+
+

@@ -3,18 +3,19 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 ?>
 
-<div id="artista">
-    <div id="artista_imagem">
-        <a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $artista->id])?>"><?= Html::img(Yii::getAlias($artista->caminhoImagem))?></a>
-
-    </div>
-    <div id="artista_body">
-        <a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $artista->id])?>"><h3><?=$artista->nome?></h3></a>
-        <a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $artista->id])?>"><h5><?= 'numero albuns '?></h5></a>
+<li>
+    <div class="objeto_genero-musica" >
+        <div id="imagem_artista-genero">
+            <img src="<?= '..\\..\\common\\img\\capas'.'\\'.$artista->caminhoImagem?>">
+        </div>
+        <div class="info_body-artista">
+            <h4 class="media-heading"><a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $artista->id])?>"><?=$artista->nome?></a></h4>
+            <h5><a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $artista->id])?>"><?= '5 albuns '?></h5></a>
+        </div>
         <div id="imagem_favoritos">
-            <?= Html::a('Seguir', ['index'/*, 'id' => $album->id*/], ['class' => 'tooltiptext']) ?>
-            <!--<button></button>
-            <span class="tooltiptext">Seguir</span>-->
+            <?= Html::a('Seguir', ['index', 'id' => $artista->id]) ?>
         </div>
     </div>
-</div>
+    <hr class="separador">
+
+</li>

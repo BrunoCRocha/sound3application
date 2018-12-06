@@ -21,7 +21,6 @@
     margin-top: 0;
 }
 
-
 .musica_album{
     width: 600px;
     border-radius: 5px;
@@ -57,12 +56,6 @@
     border-radius: 50px;
     border: none;
 }
-
-#album_play:hover{
-
-
-}
-
 
 #album_favoritos{
     width: 40px;
