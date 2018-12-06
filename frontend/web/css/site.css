@@ -3,7 +3,8 @@ body {
     height: 100%;
     width: 100%;
 
-    background-image: url("../imagens/city_full.jpg");
+   background-image: linear-gradient(to right top, #3f3f3f, #494949, #535353, #5d5d5d, #676767);
+
     background-repeat: no-repeat;
     background-attachment: fixed;
     /*background: #D3CCE3;
