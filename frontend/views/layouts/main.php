@@ -28,11 +28,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <style>
-        .navbar-default{
-            background-color: #ffffff;
-        }
-    </style>
+
 
     <script>
         jQuery(document).ready(function($) {
@@ -75,9 +71,12 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Carrinho', 'url' => ['/compra/index']];
         $menuItems[] = ['label' => Yii::$app->user->identity->username,
             'items' => [
-                ['label' => 'Logout', 'url' => ['/site/home']],
                 ['label' => 'Perfil', 'url' => ['/perfil/index', 'id' =>Yii::$app->user->identity->getId()]],
-            ],
+                '<li class="divider"></li>',
+                ['label'=>'Logout','url'=>['/site/logout'],
+                    'linkOptions' =>['data-method' => 'post']
+                ]
+            ]
         ];
     }
     echo Nav::widget([

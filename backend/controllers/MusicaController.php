@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Album;
+use common\models\DownloadMusica;
 use common\models\User;
 use Yii;
 use common\models\Musica;
@@ -11,6 +12,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * MusicaController implements the CRUD actions for Musica model.
@@ -156,6 +158,30 @@ class MusicaController extends Controller
      * @return Musica the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    public function actionMusicupload(){
+
+        $model = new DownloadMusica();
+
+        if(Yii::$app->request->isPost)
+        {
+            $model->musicFile = UploadedFile::getInstance($model,'musicFile');
+            if($model->upload())
+            {
+                $idmusica=Yii::$app->request->get('id');
+                $musica=Musica::findOne($idmusica);
+
+                if($musica != null)
+                {
+                    $musica->caminhoMP3=$model->caminhoFinal;
+                    $musica->save(false);
+                }
+            }
+        }
+        return $this->render('view',['model'=>$musica]);
+    }
+
+
     protected function findModel($id)
     {
         if (($model = Musica::findOne($id)) !== null) {

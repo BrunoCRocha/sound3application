@@ -1,7 +1,6 @@
 <?php namespace backend\tests;
 
-use common\models\Artista;
-use common\models\Musica;
+
 use common\models\User;
 
 class UserTest extends \Codeception\Test\Unit

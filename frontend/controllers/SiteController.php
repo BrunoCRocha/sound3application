@@ -78,6 +78,8 @@ class SiteController extends Controller
     {
         $lcs = LinhaCompra::find()->select('id_musica')->distinct()->all();
 
+
+
         foreach ($lcs as $lc){
             $numeroVendas = LinhaCompra::find()
                 ->where(['id_musica' => $lc->id_musica])

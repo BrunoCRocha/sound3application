@@ -105,14 +105,7 @@ class UserController extends Controller
                 'model' => $model,
             ]);
         }
-        $role = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->id);
-
-        var_dump($role);?>
-
-
-        <script type="text/javascript">
-            alert(<?php// $role?>);
-        </script>
+        ?>
         <?php
     }
 
@@ -125,15 +118,32 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if ($model->load(Yii::$app->request->post())) {
+            $update = Yii::$app->request->post('User');
+
+
+            $model->setPassword(Yii::$app->request->post('password'));
+
+            $model->username = $update['username'];
+
+            $model->save(false);
+
+            //$model->update();
+            //$model->updateAttributes();
+
+           return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+
+        /*var_dump(Yii::$app->request->post('password'));
+        die;*/
     }
 
     /**
