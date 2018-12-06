@@ -25,6 +25,9 @@ body {
 .texto-botao{
     color:black;
 }
+.textPassword{
+    font-weight: bold;
+}
 /*FIM HOME BackOffice*/
 /*INICIO Artita*/
 .fundo-form{
