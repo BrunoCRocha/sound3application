@@ -23,6 +23,7 @@ AppAsset::register($this);
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <script type="text/javascript" src="../web/ficheiros_js/pesquisa.js"></script>
 
     <meta charset="<?= Yii::$app->charset ?>">
@@ -31,11 +32,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <style>
-        .navbar-default{
-            background-color: #ffffff;
-        }
-    </style>
+
 
     <script>
         jQuery(document).ready(function($) {
@@ -78,9 +75,12 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Carrinho', 'url' => ['/compra/index']];
         $menuItems[] = ['label' => Yii::$app->user->identity->username,
             'items' => [
-                ['label' => 'Logout', 'url' => ['/site/home']],
                 ['label' => 'Perfil', 'url' => ['/perfil/index', 'id' =>Yii::$app->user->identity->getId()]],
-            ],
+                '<li class="divider"></li>',
+                ['label'=>'Logout','url'=>['/site/logout'],
+                    'linkOptions' =>['data-method' => 'post']
+                ]
+            ]
         ];
     }
     echo Nav::widget([

@@ -8,12 +8,12 @@ use yii\helpers\Html;
 
 $this->title = 'Perfil de '.$model->username;
 ?>
-<div class="album-update">
-
-    <h1>Perfil Pessoal</h1>
+<div class="perfil-update">
 
     <div class="fundo-form">
-        <?= $this->render('_form', [
+
+        <h1>Perfil Pessoal</h1>
+        <?= $this->render('index', [
             'model' => $model,
         ]) ?>
     </div>

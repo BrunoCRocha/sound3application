@@ -67,21 +67,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
+
         <p>
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <?php
-                    if($model->caminhoImagem != null)
-                    {
-                        echo 'Alterar Imagem';
-                    }else {
-                        echo 'Enviar Imagem';
-                    }
+                if($model->caminhoImagem != null)
+                {
+                    echo 'Alterar Imagem';
+                }else {
+                    echo 'Enviar Imagem';
+                }
                 ?>
             </a>
 
         </p>
         <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
+            <div class="card card-body">
                 <?php
                 $modelUpload = new \common\models\UploadForm();
                 $form = ActiveForm::begin(['action' => ['album/imageupload','id'=>$model->id],
@@ -94,7 +95,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <button class="btn btn-success">Enviar Imagem </button>
             </div>
         </div>
-
 
 
 

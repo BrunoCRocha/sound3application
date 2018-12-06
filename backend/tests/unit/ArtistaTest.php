@@ -20,7 +20,15 @@ class ArtistaTest extends \Codeception\Test\Unit
     // tests
     public function testUpdateArtista()
     {
-        $id=$this->tester->grabRecord('common\models\Artista',['nome'=>'Manel Das gajas']);
+        $artista = new Artista();
+
+        $artista->nome = 'Teste';
+        $artista->nacionalidade = 'Teste';
+        $artista->ano = '2014';
+        $artista->save();
+        $this->tester->seeInDatabase('artista',['nome'=>'Teste','ano'=>'2014']);
+
+        $id=$this->tester->grabRecord('common\models\Artista',['nome'=>'Teste']);
 
         $artista = Artista::findOne($id);
         $artista-> nome ='Slow J';

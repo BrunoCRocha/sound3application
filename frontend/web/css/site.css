@@ -3,7 +3,8 @@ body {
     height: 100%;
     width: 100%;
 
-    background-image: url("../imagens/city_full.jpg");
+   background-image: linear-gradient(to right top, #3f3f3f, #494949, #535353, #5d5d5d, #676767);
+
     background-repeat: no-repeat;
     background-attachment: fixed;
     /*background: #D3CCE3;
@@ -20,6 +21,14 @@ body {
     background-color: white;
     border-radius: 20px;
 }
+.textPassword{
+    font-weight: bold;
+}
+#download{
+    color: green;
+    alignment: center;
+}
+
 /*FIM NOVO CSS*/
 
 .wrap {

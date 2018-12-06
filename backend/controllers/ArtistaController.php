@@ -133,7 +133,10 @@ class ArtistaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())
+            && $model->save()) {
+            var_dump(Yii::$app->request->post());
+            var_dump($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

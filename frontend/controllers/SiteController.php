@@ -78,6 +78,8 @@ class SiteController extends Controller
     {
         $lcs = LinhaCompra::find()->select('id_musica')->distinct()->all();
 
+
+
         foreach ($lcs as $lc){
             $numeroVendas = LinhaCompra::find()
                 ->where(['id_musica' => $lc->id_musica])
@@ -96,6 +98,9 @@ class SiteController extends Controller
             $modelMusica = Musica::findOne($idMusica);
             array_push($arrayMusicas, $modelMusica);
         }
+
+        /*var_dump($maisVendidos, $arrayMusicas);
+        die();*/
 
         return $this->render('index',[
             'maisVendidos' => $maisVendidos,
