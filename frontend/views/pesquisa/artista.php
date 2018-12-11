@@ -1,6 +1,15 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
+
+foreach($favoritosPesquisados as $favoritoPesquisado) {
+    if ($artista->id == $favoritoPesquisado->id) {
+        $textbtn = 'Unfollow';
+    } else {
+        $textbtn = 'Follow';
+    }
+}
+
 ?>
 
 <li>
@@ -13,7 +22,7 @@ use yii\helpers\Html;
             <h5><a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $artista->id])?>"><?= '5 albuns '?></h5></a>
         </div>
         <div id="imagem_favoritos">
-            <?= Html::a('Seguir', ['index', 'id' => $artista->id]) ?>
+            <?= Html::a($textbtn, ['favoritos/artista', 'id' => $artista->id], ['class'=>'btn btn-success']) ?>
         </div>
     </div>
     <hr class="separador">

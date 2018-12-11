@@ -3,6 +3,8 @@
 namespace frontend\controllers;
 
 use common\models\Fav_Album;
+use common\models\Fav_Artista;
+use Yii;
 
 class FavoritosController extends \yii\web\Controller
 {
@@ -11,30 +13,58 @@ class FavoritosController extends \yii\web\Controller
         return $this->render('index');
     }
 
-    public function actionAlbum()
-    {
 
-        var_dump('ole');
+    public function actionArtista($id){
+
+        $userLogado = Yii::$app->user->identity;
+
+        $addFavorito = new Fav_Artista();
+
+        $addFavorito->id_utilizador = $userLogado->id;
+        $addFavorito->id_artista = $id;
+
+        $query = Fav_Artista::find()->where('and',['id_utilizador' => $addFavorito->id_utilizador
+            ,'id_artista' => $addFavorito->id_artista]);
+
+        //var_dump($query);
+        //die();
+
+        if(!$query==null){
+            return;
+        }
+
+        $addFavorito->save();
+
+        $artistasFavoritos = Fav_Artista::find()->where(['id_utilizador' => $id])->all();
+        var_dump($artistasFavoritos);
         die();
 
-        $favoritos = new Fav_Album;
+        return $this->render('index', [
+            'id' => $id,
+            'artistasFavoritos' => $artistasFavoritos
+        ]);
+    }
 
+    public function actionGenero($id){
 
-        if(isset($_POST['Favorito']))
-        {
-            $favoritos->attributes=$_POST['Favorito'];
-            if($favoritos->validate())
-            {
-                // form inputs are valid, do something here
-                print_r($_REQUEST);
-                return;
-            }
-        }
-        $this->render('person_form',array('model'=>$model));
+        return $this->render('index', [
+            'id' => $id
+        ]);
+    }
 
+    public function actionMusica($id){
 
+        return $this->render('index', [
+            'id' => $id
+        ]);
+    }
 
-        return $this->render('favoritos_album');
+    public function actionAlbum($id)
+    {
+
+        return $this->render('index', [
+            'id' => $id
+        ]);
     }
 
 }
