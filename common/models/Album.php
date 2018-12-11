@@ -57,7 +57,7 @@ class Album extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'anos' => 'Ano Lancamento',
+            'ano' => 'Ano Lancamento',
             'preco' => 'Preco',
             'id_artista' => 'Id Artista',
             'id_genero' => 'Id Genero',

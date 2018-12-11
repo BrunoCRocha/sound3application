@@ -11,24 +11,24 @@ use yii\widgets\DetailView;
 $this->title = 'Perfil de '.$model->username;
 
 ?>
-<div class="container  " >
-    <div class="row ">
-        <h3>Perfil Pessoal</h3>
-        <div>
-            <?php $form = ActiveForm::begin(['class' => 'form-horizontal', 'options' => ['method' => 'post', 'action' => [Url::toRoute('perfil/update')]]]); ?>
+<div class="container " >
+    <div class="row conteudo-perfil">
+         <h3> <span class="glyphicon glyphicon-user"></span> Perfil Pessoal</h3>
+        <div id=" textoForm">
+            <?php $form = ActiveForm::begin([ 'options' => ['class' => 'form-horizontal formPerfil','method' => 'post', 'action' => 'perfil/update']]);?>
 
-            <?= $form->field($model, 'username')->textInput(['id'=>'textUsername','readonly'=> true],['maxlength' => true]) ?>
+            <?= $form->field($model, 'username' ,['labelOptions'=>['style'=>'color:white']])->textInput(['id'=>'textUsername','readonly'=> true],['maxlength' => true]) ?>
 
-            <p class="textPassword"> Password</p>
+            <p class="textPassword">Password</p>
 
             <?= Html::passwordInput('password','password',['class' => 'form-control','id'=>'textPassword','readonly'=> true])?>
-            <p>  </p>
+            <p> </p>
 
-            <?= $form->field($model, 'email')->textInput(['id'=>'textEmail','readonly'=> true],['maxlength' => true]) ?>
+            <?= $form->field($model, 'email',['labelOptions'=>['style'=>'color:white']])->textInput(['id'=>'textEmail','readonly'=> true],['maxlength' => true]) ?>
 
             <div class="form-group">
-                <?= Html::submitButton('Guardar', ['class' => 'btn btn-primary', 'disabled' => 'disabled','id'=>'botaoGuardar'])  ?>
-                <button id="botaoEditar" class="btn btn-primary">Editar</button>
+                    <?= Html::submitButton('<i class="glyphicon glyphicon-check"></i> Guardar', ['class' => 'btn btn-primary', 'disabled' => 'disabled','id'=>'botaoGuardar'])  ?>
+                    <button id="botaoEditar" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Editar</button>
             </div>
 
             <?php ActiveForm::end(); ?>
@@ -36,10 +36,12 @@ $this->title = 'Perfil de '.$model->username;
         </div>
     </div>
 
-    <div class="row ">
-        <h3>Músicas Compradas</h3>
+    <div class="row conteudo-perfil" >
+        <h3 > <span class="glyphicon glyphicon-music" ></span> Músicas Compradas</h3>
         <div>
-            <table class="table table-hover">
+            <a href="<?= Url::toRoute(['perfil/downloadtodas'])?>" class="button btn btn-primary" id="botaoDownloadAll">
+                <span class="glyphicon glyphicon-edit"></span> Download Todas</a>
+            <table id="tabelaMusicas" class="table table-hover ">
                 <thead>
                 <tr>
                     <th>Nome</th>
@@ -48,7 +50,7 @@ $this->title = 'Perfil de '.$model->username;
                     <th>Download</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="item-compra">
                     <?php
                     foreach($arrayMusicas as $chave => $valor){
                         foreach($valor as $chave => $musica) {
@@ -81,6 +83,7 @@ $this->title = 'Perfil de '.$model->username;
         document.getElementById('textPassword').removeAttribute('readonly');
         document.getElementById('botaoGuardar').removeAttribute('disabled');
         document.getElementById('botaoEditar').setAttribute("disabled", "disabled");
+        document.getElementsByClassName('formPerfil')[0].setAttribute('action',' <?=Url::toRoute(['perfil/update','id' => $model->id])?>');
     }
 </script>
 
