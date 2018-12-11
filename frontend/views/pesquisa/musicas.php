@@ -23,10 +23,10 @@ use yii\helpers\Url;
             <h5><?=$musica->preco?>€</h5>
         </div>
 
-        <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn"></button>
+        <div class="dropdown opc">
+            <button onclick="myFunction()" class="dropbtn opc-btn"></button>
             <div id="myDropdown" class="dropdown-content">
-                <a href="#home">Adicionar Carrinho</a>
+                <a href="<?= Url::toRoute(['carrinho/adicionar', 'id' => $musica->id])?>">Adicionar Carrinho</a>
                 <a href="#about">Adicionar Favoritos</a>
             </div>
         </div>

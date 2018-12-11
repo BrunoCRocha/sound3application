@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Artista;
 use common\models\Compra;
 use common\models\LinhaCompra;
 use common\models\Musica;
@@ -76,22 +77,33 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $lcs = LinhaCompra::find()->select('id_musica')->distinct()->all();
+        $compras = Compra::find()->select('id')
+            ->where(['efetivada' => 1])
+            ->with('linhaCompras')
+            ->distinct()->all();
+        //var_dump($compras);
+        //die();
 
+        foreach ($compras as $compra){
+            foreach ($compra->relatedRecords as $lcArray){
+                foreach($lcArray as $lc){
+                    $numeroVendas = LinhaCompra::find()
+                        ->where(['id_compra' => $compra->id])
+                        ->count();
 
-
-        foreach ($lcs as $lc){
-            $numeroVendas = LinhaCompra::find()
-                ->where(['id_musica' => $lc->id_musica])
-                ->count();
-
-            $valores[$lc->id_musica] = $numeroVendas;
+                    $valores[$lc->id_musica] = $numeroVendas;
+                }
+            }
         }
 
         arsort($valores);//Ordena pelo valor
-        //top5 musicas + compradas
+
         $maisVendidos = array_slice($valores, 0, 5, true);
 
+        //para utilizar em querys diferentes;
+        $artistasPopulares = array();
+
+        //top5 musicas + compradas
         $arrayMusicas = array();
 
         foreach ($maisVendidos as $idMusica => $nCompras){
@@ -103,7 +115,6 @@ class SiteController extends Controller
         die();*/
 
         return $this->render('index',[
-            'maisVendidos' => $maisVendidos,
             'arrayMusicas' => $arrayMusicas
         ]);
 
@@ -122,6 +133,20 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+            $userLogado = Yii::$app->user->identity;
+
+            $query = Compra::find()
+                ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])->all();
+
+            if($query == null){
+                $compra = new Compra();
+                //$compra->data_compra = date("Y-m-d");
+                $compra->valor_total = 0;
+                $compra->id_utilizador = $userLogado;
+                $compra->efetivada = 0;
+            }
+
             return $this->goBack();
         } else {
             $model->password = '';

@@ -20,6 +20,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="../web/ficheiros_css/home.css">
     <link rel="stylesheet" href="../web/ficheiros_css/album.css">
     <link rel="stylesheet" href="../web/ficheiros_css/pesquisa.css">
+    <link rel="stylesheet" href="../web/ficheiros_css/carrinho.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -59,20 +60,15 @@ AppAsset::register($this);
         ],
     ]);
 
-    $menuItems[] = '<li>'
-        .Html::beginForm(['pesquisa/index'], 'get')
-        .Html::textInput('search')
-        . Html::endForm()
-        . '</li>';
+
 
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Home', 'url' => ['/site/home']];
         $menuItems[] = ['label' => 'Favoritos', 'url' => ['/comment/favoritos']];
-        $menuItems[] = ['label' => 'Carrinho', 'url' => ['/compra/index']];
+        $menuItems[] = ['label' => 'Carrinho', 'url' => ['/carrinho/index']];
         $menuItems[] = ['label' => Yii::$app->user->identity->username,
             'items' => [
                 ['label' => 'Perfil', 'url' => ['/perfil/index', 'id' =>Yii::$app->user->identity->getId()]],
@@ -87,6 +83,23 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
+
+
+
+    echo '<form action="pesquisa/index">
+
+        <div class="input-group">
+            <input type="text" class="form-control" name="search" placeholder="Search">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+        </div>';
+
+
+
+
     NavBar::end();
 
     ?>
