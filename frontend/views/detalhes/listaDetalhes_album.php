@@ -4,22 +4,18 @@ use yii\helpers\Html;
 
 ?>
 
-<li>
-    <div id="album">
-        <div id="imagem_album">
-            <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><img src="<?= $album->caminhoImagem?>"></a>
-        </div>
-        <div id="album_body">
-            <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><h3><?=$album->nome?> - <?= $album->artista->nome?></h3></a>
-            <a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $album->id])?>"><h5><?= 'nada' ?></h5></a>
-            <div id="buttons_album_seguir">
-                <p>
-                    <?= Html::a('Add Favoritos', ['index', 'id' => $album->id], ['class' => 'butao_opcoes']) ?>
-                    <?= Html::a('Add Varrinho', ['index', 'id' => $album->id], ['class' => 'butao_opcoes']) ?>
-                    <!--<button class="butao_opcoes">Add Favoritos</button>
-                    <button class="butao_opcoes">Add Carrinho</button>-->
-                </p>
-            </div>
-        </div>
+
+<div class="row">
+    <div id="albunsArtista" >
+
+
+               <img class="image-responsive" src="<?='..\\..\\common\\img\\capas\\'. $album->caminhoImagem?>">
+            <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><h3><?=$album->nome?></h3></a>
+            <?= Html::a( 'nn',['detalhes/artista', 'id' => $album->id], ['class' => 'butao_opcoes glyphicon glyphicon-heart']) ?>
+                    <?= Html::a( 'nn',['detalhes/artista', 'id' => $album->id], ['class' => 'butao_opcoes glyphicon glyphicon-shopping-cart']) ?>
+
+
     </div>
-</li>
+
+
+</div>

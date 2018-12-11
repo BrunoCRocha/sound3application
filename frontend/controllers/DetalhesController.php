@@ -39,9 +39,7 @@ class DetalhesController extends \yii\web\Controller
 
     public function actionArtista($id)
     {
-        $artista = Artista::find()
-            ->where(['id' => $id])
-            ->one();
+        $artista = Artista::findOne($id);
 
         $albunsArtista = Album::find()
             ->where(['id_artista' => $id])

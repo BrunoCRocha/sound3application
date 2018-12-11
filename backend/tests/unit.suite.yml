@@ -10,5 +10,7 @@ modules:
             dsn: 'mysql:host=localhost; dbname=sound3_test'
             user: 'root'
             password: ''
+            cleanup: false
+            repopulate: false
 
         - Asserts

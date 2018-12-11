@@ -16,7 +16,7 @@ use yii\helpers\Html;
                 <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><?=$album->nome?></a>
             </h4>
             <h5>
-                <a href="<?= Url::toRoute(['pesquisa/detalhesArtista', 'id' => $album->id])?>"><?= $album->artista->nome?></a> -
+                <a href="<?= Url::toRoute(['pesquisa/detalhesArtista', 'id' => $album->id])?>"><?= $album->artista->nome?></a>
                 <a href="<?= Url::toRoute(['pesquisa/detalhesAlbum', 'id' => $album->id])?>"><?= '10 músicas' ?></a>
             </h5>
         </div>
