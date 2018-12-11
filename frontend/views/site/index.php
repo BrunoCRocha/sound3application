@@ -5,6 +5,7 @@
 
 use yii\bootstrap\Carousel;
 use yii\helpers\Html;
+use common\models\Album;
 $count=0;
 $this->registerJsFile(
     '@web/js/textlimit.js',

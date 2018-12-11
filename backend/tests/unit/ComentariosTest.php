@@ -15,6 +15,7 @@ class ComentariosTest extends \Codeception\Test\Unit
 
     protected function _after()
     {
+
     }
 
     // tests

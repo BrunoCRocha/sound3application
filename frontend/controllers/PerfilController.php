@@ -8,19 +8,19 @@ use common\models\User;
 use common\models\UserSearch;
 use Yii;
 use common\models\Compra;
+use yii\console\Exception;
+use ZipArchive;
 
 class PerfilController extends \yii\web\Controller
 {
     public function actionIndex($id)
     {
-
-
         $model = User::findOne($id);
 
         $model->setPassword(Yii::$app->request->post('password'));
 
         $query_Compra=Compra::find()
-            ->where(['id_utilizador'=> Yii::$app->user->identity->getId()])->all();
+            ->where(['and',['id_utilizador'=> Yii::$app->user->identity->getId(),'efetivada'=>1]])->all();
 
         foreach ($query_Compra as $compra){
 
@@ -42,6 +42,7 @@ class PerfilController extends \yii\web\Controller
     }
 
     public function actionUpdate($id){
+
 
         $model = User::findOne($id);
 
@@ -67,16 +68,48 @@ class PerfilController extends \yii\web\Controller
 
         $file = $model->caminhoMP3;
         $path = '..\\..\\common\\musicas\\'.$file;
-
-
-        /*var_dump($path);
-        die();*/
         if (file_exists($path)) {
 
             return \Yii::$app->response->sendFile($path);
+        }
+    }
+
+    public function actionDownloadtodas(){
+
+        $query_Compra=Compra::find()
+            ->where(['and',['id_utilizador'=> Yii::$app->user->identity->getId(),'efetivada'=>1]])->all();
+
+        foreach ($query_Compra as $compra){
+
+            $arrayLC[$compra->id] = LinhaCompra::find()
+                ->where(['id_compra'=> $compra->id])->all();
 
         }
 
+        foreach ($arrayLC as $chave => $valor){
+            foreach ($valor as $chave =>$lc){
+                $arrayMusicas[$lc->id_musica] = Musica::find()
+                    ->where(['id'=> $lc->id_musica])->all();
+            }
+        }
+        $fileMusica = 'Sound3.zip';
+
+            $zip = new ZipArchive();
+            if ($zip->open($fileMusica, ZipArchive::CREATE) !== TRUE) {
+                throw new Exception('Impossivel criar zip');
+            }
+
+        foreach($arrayMusicas as $chave => $valor){
+            foreach($valor as $chave => $musica) {
+
+                $zip->addFile($musica->caminhoMP3);
+            }
+        }
+        $zip->close();
+        if (file_exists($fileMusica)) {
+
+            return \Yii::$app->response->sendFile($fileMusica);
+        }
 
     }
 
