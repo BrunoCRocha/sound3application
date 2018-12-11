@@ -123,27 +123,29 @@ CREATE TABLE fav_genero(
 ) ENGINE=InnoDB;
 
 
-INSERT INTO `genero` (`id`, `nome`, `descricao`, `caminhoImagem`)
-      VALUES(1,'Pop','Pop é um género da música popular que se originou durante a década de 1950 nos Estados Unidos e Reino Unido.' ||
-       'Geralmente é visto como sinônimo de "música popular"','C:\\wamp64\\www\\sound3application\\frontend\\web\\img\\capas\\edSheeran.jpg'),
-       (2,'Rock','Rock é um termo abrangente que define um gênero musical de música popular que se desenvolveu durante e após a década de 1950. Suas raízes se encontram ' ||
+INSERT INTO `genero` (`id`,`nome`, `descricao`, `caminhoImagem`)
+      VALUES(1,'Pop','Pop é um género da música popular que se originou durante a década de 1950 nos Estados Unidos e Reino Unido.'
+       'Geralmente é visto como sinônimo de "música popular"','edSheeran.jpg'),
+       (2,'Rock','Rock é um termo abrangente que define um gênero musical de música popular que se desenvolveu durante e após a década de 1950. Suas raízes se encontram '
         'no rock and roll e no rockabilly que emergiram e se definiram nos Estados Unidos.',
-        'C:\\wamp64\\www\\sound3apllication\\frontend\\web\\img\\capas\\rock.jpg');
+        'rock.jpg');
 
-INSERT INTO `artista` (`id`, `nome`, `nacionalidade`, `ano`, `caminhoImagem`)
-      VALUES(1,'Ed Sheeran', 'Britânica', '2005','C:\\wamp64\\www\\sound3application\\frontend\\web\\img\\capas\\edSheeran.jpg'),
-      (2,'Taylor Switf', 'Norte-Americana', '2006','C:\\wamp64\\www\\sound3application\\frontend\\web\\img\\capas\\taylorSwitf.jpg'),
-      (3,'Linkin Park', 'Americana', '1996', 'C:\\wamp64\\www\\sound3application\\frontend\\web\\img\\capas\\linkinPark.jpg');
+INSERT INTO `artista` (`id`,`nome`, `nacionalidade`, `ano`, `caminhoImagem`)
+      VALUES(1,'Ed Sheeran', 'Britânica', '2005','edSheeran.jpg'),
+      (2,'Taylor Switf', 'Norte-Americana', '2006','taylorSwitf.jpg'),
+      (3,'Linkin Park', 'Americana', '1996', 'linkinPark.jpg');
+      (4,'30 Seconds to Mars', 'Americana', '1998', 'thirtySecondsToMars.jpg');
 
-INSERT INTO `album` (`id`, `nome`, `ano`, `preco`, `id_artista`, `id_genero`, `caminhoImagem`)
-      VALUES(1,'Divide', '2017', 12, 1, 1, 'C:\\wamp64\\www\\sound3application\\frontend\\web\\img\\capas\\divide.jpeg'),
-      (2,'X','2014',12,1,1,'C:\\wamp64\\www\sound3application\\frontend\\web\\img\\capas\\x.jpg'),
-      (3,'1989','2017',12,2,1,'C:\\wamp64\\www\\sound3application\\frontend\\web\\img\\capas\\1989.jpg'),
-      (4,'Reputation','2017',12,2,1,'C:\\wamp64\\www\sound3application\\frontend\\web\\img\\capas\\reputation.jpg'),
-      (5,'Meteora','2003',12,3,2,'C:\\wamp64\\www\\sound3application\\frontend\\web\\img\\capas\\meteora.jpg'),
-      (6,'Hybrid Theory','1999',12,3,2,'C:\\wamp64\\www\\sound3apllication\\frontend\\web\\img\\capas\\hybridTheory.jpg');
+INSERT INTO `album` (`id`,`nome`, `ano`, `preco`, `id_artista`, `id_genero`, `caminhoImagem`)
+      VALUES(1,'Divide', '2017', 12, 1, 1, 'divide.jpeg'),
+      (2,'X','2014',12,1,1,'x.jpg'),
+      (3,'1989','2017',12,2,1,'1989.jpg'),
+      (4,'Reputation','2017',12,2,1,'reputation.jpg'),
+      (5,'Meteora','2003',12,3,2,'meteora.jpg'),
+      (6,'Hybrid Theory','1999',12,3,2,'hybridTheory.jpg');
+      (7,'A Beautiful Lie','2005',12,3,2,'hybridTheory.jpg');
 
-INSERT INTO `musica` (`id`, `nome`, `duracao`, `preco`, `id_album`, `posicao`, `caminhoMP3`)
+INSERT INTO `musica` (`id`,`nome`, `duracao`, `preco`, `id_album`, `posicao`, `caminhoMP3`)
       VALUES(1,'Shape of You',3.53,2,1,4,NULL),
       (2,'Eraser',3.47,2,1,1,NULL),
       (3,'Photograph',4.17,2,2,6,NULL),
@@ -158,7 +160,7 @@ INSERT INTO `musica` (`id`, `nome`, `duracao`, `preco`, `id_album`, `posicao`, `
       (12,'Forgotten',3.14,2,6,10,NULL);
 
 
-INSERT INTO `compra` (`id`, `data_compra`, `valor_total`, `efetivada`, `id_utilizador`)
+INSERT INTO `compra` (`id`,`data_compra`, `valor_total`, `efetivada`, `id_utilizador`)
       VALUES(1,'2018-12-03',12,0,2),
       (2,'2018-02-12',14,1,2),
       (3,'2018-06-23',13,0,3),
@@ -171,7 +173,7 @@ INSERT INTO `linha_compra` (`id_compra`, `id_musica`)
       (2,8),
       (3,2);
 
-INSERT INTO `comment` (`id`, `conteudo`, `data_criacao`, `id_utilizador`, `id_album`)
+INSERT INTO `comment` (`id`,`conteudo`, `data_criacao`, `id_utilizador`, `id_album`)
       VALUES(1,'Gosto imenso deste álbum. Excelente trabalho','2018-12-03',2,2);
 
 

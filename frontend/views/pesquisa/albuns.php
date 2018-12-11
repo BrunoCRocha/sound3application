@@ -26,9 +26,9 @@ use yii\helpers\Html;
         </div>
 
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn"></button>
+            <button onclick="myFunction()" class="dropbtn opc-btn"></button>
             <div id="myDropdown" class="dropdown-content">
-                <a href="#home">Adicionar Carrinho</a>
+                <a href="<?= Url::toRoute(['carrinho/adicionar-album', 'id' => $album->id])?>">Adicionar Carrinho</a>
                 <a href="#about">Adicionar Favoritos</a>
             </div>
         </div>

@@ -12,6 +12,14 @@
     color: #f40;
 }
 
+.rounded{
+    border-radius: 50%;
+    transition: all .2s ease-in-out;
+}
+
+.rounded:hover {
+    transform: scale(1.1);
+}
 
 .caixa_conteudo img{
     -webkit-filter: drop-shadow(2px 2px 2px #222);
@@ -33,9 +41,8 @@
 
 .caixa_conteudo{
     text-align: center;
-    margin-left: 40px;
+    margin-left: 30px;
     margin-top: 40px;
-
 }
 
 .caixa_conteudo h2{
@@ -46,7 +53,7 @@
 .caixa_conteudo h3{
     margin-top: 6px;
     font-size: 17px;
-    color: white;
+    color: #cccccc;
 }
 
 #pills_nav{
@@ -57,7 +64,6 @@
 #container_pagina{
     height: 100%;
     width: 90%;
-
 }
 
 #id_footer{
