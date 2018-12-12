@@ -18,7 +18,7 @@ class Fav_GeneroSearch extends Fav_Genero
     public function rules()
     {
         return [
-            [['id', 'id_utilizador', 'id_genero', 'id_subgenero'], 'integer'],
+            [['id', 'id_utilizador', 'id_genero'], 'integer'],
         ];
     }
 
@@ -61,7 +61,6 @@ class Fav_GeneroSearch extends Fav_Genero
             'id' => $this->id,
             'id_utilizador' => $this->id_utilizador,
             'id_genero' => $this->id_genero,
-            'id_subgenero' => $this->id_subgenero,
         ]);
 
         return $dataProvider;

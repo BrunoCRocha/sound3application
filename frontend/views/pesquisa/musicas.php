@@ -1,6 +1,21 @@
 <?php
 use yii\helpers\Url;
 
+if($favMusPesquisadas != null){
+    if(in_array($musica->id, $favMusPesquisadas)){
+        $textbtnfav = 'heart_white';
+        //$textbtncart = 'sub-cart';
+        $rota = 'rem-fav-musica';
+    } else {
+        $textbtnfav = 'heart';
+        //$textbtncart = 'add-cart';
+        $rota = 'add-fav-musica';
+    }
+}else{
+    $textbtnfav = 'heart';
+    //$textbtncart = 'add-cart';
+    $rota = 'add-fav-musica';
+}
 ?>
 
 <li>
@@ -23,12 +38,15 @@ use yii\helpers\Url;
             <h5><?=$musica->preco?>€</h5>
         </div>
 
-        <div class="dropdown opc">
-            <button onclick="myFunction()" class="dropbtn opc-btn"></button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="<?= Url::toRoute(['carrinho/adicionar', 'id' => $musica->id])?>">Adicionar Carrinho</a>
-                <a href="#about">Adicionar Favoritos</a>
-            </div>
+        <div id="imagem_favoritos">
+            <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $musica->id])?>">
+                <img src="../web/menu_icons/<?=$textbtnfav?>.svg">
+            </a>
+        </div>
+        <div id="imagem_favoritos">
+            <a href="<?= Url::toRoute(['carrinho/'.$rota, 'id' => $musica->id])?>">
+                <img src="../web/menu_icons/<?php/*$textbtncart*/?>.svg">
+            </a>
         </div>
     </div>
     <hr class="separador">

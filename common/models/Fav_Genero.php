@@ -31,7 +31,7 @@ class Fav_Genero extends \yii\db\ActiveRecord
     {
         return [
             [['id_utilizador', 'id_genero'], 'required'],
-            [['id_utilizador', 'id_genero', 'id_subgenero'], 'integer'],
+            [['id_utilizador', 'id_genero'], 'integer'],
             [['id_utilizador'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_utilizador' => 'id']],
             [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['id_genero' => 'id']],
         ];

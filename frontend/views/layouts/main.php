@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
@@ -62,9 +63,6 @@ AppAsset::register($this);
         ],
     ]);
 
-
-
-
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -86,11 +84,12 @@ AppAsset::register($this);
         'items' => $menuItems,
     ]);
 
+    $rota= 'pesquisa/index';
 
+    $form = ActiveForm::begin(['method' => 'get',
+    'action' => ['pesquisa/index']]);
 
-    echo '<form action="pesquisa/index">
-
-        <div class="input-group">
+    echo '<div class="input-group">
             <input type="text" class="form-control" name="search" placeholder="Search">
             <div class="input-group-btn">
               <button class="btn btn-default" type="submit">
@@ -98,9 +97,7 @@ AppAsset::register($this);
               </button>
             </div>
         </div>';
-
-
-
+    ActiveForm::end();
 
     NavBar::end();
 
