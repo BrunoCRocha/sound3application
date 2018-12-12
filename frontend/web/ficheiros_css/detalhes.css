@@ -1,31 +1,3 @@
-.caixa_conteudo img{
-    -webkit-filter: drop-shadow(2px 2px 2px #222);
-    filter: drop-shadow(2px 2px 2px #222);
-    width: 100%;
-    height: 100%;
-    display: block;
-    margin: 0 auto;
-}
-
-
-#albunsArtista{
-
-}
-
-#pills_nav li>a{
-    display: inline-block;
-    padding: 20px;
-    color: #0f0f0f;
-    font-size: 25px;
-    text-decoration: none;
-}
-
-#pills_nav li>a:hover,
-#pills_nav li>a:active
-{
-    color: #f40;
-}
-
 
 .caixa img{
     -webkit-filter: drop-shadow(2px 2px 2px #222);
@@ -36,8 +8,13 @@
     margin: 0 auto;
 }
 
-#espaço{
-    margin-top: 80px;
+.caixa-nome-album img {
+    -webkit-filter: drop-shadow(2px 2px 2px #222);
+    filter: drop-shadow(2px 2px 2px #222);
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
 }
 
 .box{
@@ -47,9 +24,20 @@
 
 .caixa{
     text-align: center;
-    margin-left: 40px;
-    margin-top: 40px;
+    margin-top: 6%;
+    margin-left: 0px;
+}
 
+.caixa-nome-album{
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 0px;
+}
+.caixaTexto{
+    text-align: left;
+    margin-top: 40px;
+    margin-left: 40px;
+    vertical-align: middle;
 }
 
 .caixa h2{
@@ -57,27 +45,48 @@
     font-size: 25px;
     color: white;
 }
-.caixa h3{
+
+.caixa-nome-album h3{
+     margin-top: 6px;
+     font-size: 17px;
+     color: white;
+ }
+
+.caixa h4 {
     margin-top: 6px;
     font-size: 17px;
     color: white;
+
+    font-family: Bahnschrift;
 }
 
-#pills_nav{
-    display: flex;
-    justify-content: center;
+.detalhes-img-artista{
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+    -webkit-filter: drop-shadow(2px 2px 2px #222);
+    filter: drop-shadow(2px 2px 2px #222);
 }
 
-#container_pagina{
-    height: 100%;
-    width: 90%;
-
-}
-
-#id_footer{
+.detalhes-img-album{
     margin-top: 30px;
-    height: 70px;
+    width: 100%;
+    height: auto;
+    -webkit-filter: drop-shadow(2px 2px 2px #222);
+    filter: drop-shadow(2px 2px 2px #222);
 }
+.detalhes-descricao-album{
+    color: white;
+    text-align: center;
+    font-family: Bahnschrift;
+    font-size: 20px;
+}
+.detalhes-descricao-album h2{
+    font-size: 75px;
+}
+
+
+
 
 
 

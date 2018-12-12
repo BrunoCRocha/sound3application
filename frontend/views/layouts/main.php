@@ -19,10 +19,10 @@ AppAsset::register($this);
 <head>
     <link rel="stylesheet" href="../web/ficheiros_css/home.css">
     <link rel="stylesheet" href="../web/ficheiros_css/album.css">
-    <link rel="stylesheet" href="../web/ficheiros_css/pesquisa.css">«
-    <link rel="stylesheet" href="../web/ficheiros_css/carrinho.css">«
+    <link rel="stylesheet" href="../web/ficheiros_css/pesquisa.css">
+    <link rel="stylesheet" href="../web/ficheiros_css/carrinho.css">
     <link rel="stylesheet" href="../web/ficheiros_css/perfil.css">
-    <link rel="stylesheet" href="../web/ficheiros_css/detalhes.css">«
+    <link rel="stylesheet" href="../web/ficheiros_css/detalhes.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

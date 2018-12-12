@@ -15,6 +15,7 @@ class PerfilController extends \yii\web\Controller
 {
     public function actionIndex($id)
     {
+
         $model = User::findOne($id);
 
         $model->setPassword(Yii::$app->request->post('password'));
@@ -27,6 +28,7 @@ class PerfilController extends \yii\web\Controller
             $arrayLC[$compra->id] = LinhaCompra::find()
                 ->where(['id_compra'=> $compra->id])->all();
         }
+
 
         foreach ($arrayLC as $chave => $valor){
             foreach ($valor as $chave =>$lc){
