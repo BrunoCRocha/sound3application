@@ -1,6 +1,8 @@
 <?php namespace backend\tests;
 
-use common\models\Musica;
+use common\models\Fav_Album;
+use common\models\Fav_Musica;
+use common\models\LinhaCompra;;
 
 class MusicaTest extends \Codeception\Test\Unit
 {
@@ -21,21 +23,16 @@ class MusicaTest extends \Codeception\Test\Unit
 
     public function testDeleteMusica()
     {
-      $musica = new Musica();
+      $fav_album = new Fav_Album();
 
-        $musica->nome = 'a2';
-        $musica->duracao = '2.2';
-        $musica->preco = 2;
-        $musica->id_album = 1;
-        $musica->posicao = 45;
-        $musica->caminhoMP3 ='bj';
-        $musica->save();
-        $this->tester->seeInDatabase('musica',['nome'=>'a2']);
+        $fav_album->id_album= 2;
+        $fav_album->id_utilizador=1;
+        $fav_album->save();
+        $this->tester->seeInDatabase('fav_album',['id_album'=>2]);
 
-
-        $id=$this->tester->grabRecord('common\models\Musica',['nome'=>'a2']);
-        $musica= Musica::findOne($id);
-        $musica=delete();
+        $id=$this->tester->grabRecord('common\models\Fav_Album',['id_album'=>2]);
+        $fav_album= Fav_Album::findOne($id);
+        $fav_album->delete();
     }
 }
 
