@@ -4,7 +4,10 @@ namespace frontend\controllers;
 
 use common\models\Album;
 use common\models\Artista;
+use common\models\Fav_Album;
 use common\models\Fav_Artista;
+use common\models\Fav_Genero;
+use common\models\Fav_Musica;
 use common\models\Genero;
 use common\models\Musica;
 use Yii;
@@ -34,6 +37,13 @@ class PesquisaController extends \yii\web\Controller
             ->where(['like', 'nome', $search])
             ->all();
 
+        $favGenPesquisados=$this->getFavGenPesquisados($generoSearch);
+        $favArtPesquisados=$this->getFavArtPesquisados($artistaSearch);
+        $favAlbPesquisados=$this->getFavAlbPesquisados($albumSearch);
+        $favMusPesquisadas=$this->getFavMusPesquisados($musicaSearch);
+
+        //var_dump($favArtPesquisados);
+        //die();
 
         return $this->render('index',[
             'search' => $search,
@@ -41,6 +51,10 @@ class PesquisaController extends \yii\web\Controller
             'artistaSearch' => $artistaSearch,
             'albumSearch' => $albumSearch,
             'musicaSearch' => $musicaSearch,
+            'favArtPesquisados' => $favArtPesquisados,
+            'favGenPesquisados' => $favGenPesquisados,
+            'favAlbPesquisados' => $favAlbPesquisados,
+            'favMusPesquisadas' => $favMusPesquisadas,
             'tipo' => $tipo
         ]);
     }
@@ -51,10 +65,13 @@ class PesquisaController extends \yii\web\Controller
             ->where(['like', 'nome', $search])
             ->all();
 
+        $favMusPesquisadas=$this->getFavMusPesquisados($musicaSearch);
+
         $tipo = 'musica';
         return $this->render('index',[
             'search' => $search,
             'musicaSearch' => $musicaSearch,
+            'favMusPesquisadas' => $favMusPesquisadas,
             'tipo' => $tipo
         ]);
     }
@@ -65,25 +82,13 @@ class PesquisaController extends \yii\web\Controller
             ->where(['like', 'nome', $search])
             ->all();
 
-        /*foreach ($albumSearch as $album){
-            $numeroMusicas = Musica::find()
-                ->where(['id_album' => $album->id])
-                ->all();
-
-            $valores[$album->id] = sizeof($numeroMusicas);
-        }
-
-        array_push($albumSearch, $valores);
-
-
-
-        var_dump($albumSearch);
-        die();*/
+        $favAlbPesquisados=$this->getFavAlbPesquisados($albumSearch);
 
         $tipo = 'album';
         return $this->render('index',[
             'search' => $search,
             'albumSearch' => $albumSearch,
+            'favAlbPesquisados' => $favAlbPesquisados,
             'tipo' => $tipo
         ]);
     }
@@ -94,10 +99,13 @@ class PesquisaController extends \yii\web\Controller
             ->where(['like', 'nome', $search])
             ->all();
 
+        $favGenPesquisados=$this->getFavGenPesquisados($generoSearch);
+
         $tipo = 'genero';
         return $this->render('index',[
             'search' => $search,
             'generoSearch' => $generoSearch,
+            'favGenPesquisados' => $favGenPesquisados,
             'tipo' => $tipo
         ]);
     }
@@ -108,9 +116,53 @@ class PesquisaController extends \yii\web\Controller
             ->where(['like', 'nome', $search])
             ->all();
 
+        $favArtPesquisados=$this->getFavArtPesquisados($artistaSearch);
+
+        /*var_dump($favoritosPesquisados);
+        die();*/
+
+        $tipo = 'artista';
+
+        return $this->render('index',[
+            'search' => $search,
+            'artistaSearch' => $artistaSearch,
+            'favArtPesquisados' => $favArtPesquisados,
+            'tipo' => $tipo
+        ]);
+    }
+
+    public function getFavGenPesquisados($generoSearch){
+        //get id's dos resultados de pesquisa
+        $idsGeneroSearch = ArrayHelper::getColumn($generoSearch,'id');
+
+        //get o user logado
+        $userLogado = Yii::$app->user->identity;
+
+        //get fav_generos do user logado
+        $favoritos = Fav_Genero::find()
+            ->where(['id_utilizador' => $userLogado->getId()])
+            ->all();
+
+        //get modelos dos generos dentro dos fav_generos do user logado
+        $generosFavoritos = array();
+
+        foreach($favoritos as $favorito){
+            array_push($generosFavoritos, Genero::findOne($favorito->id_genero));
+        }
+
+        //get ids dos modelos de generos favoritos
+        $idsGeneroFavoritos = ArrayHelper::getColumn($generosFavoritos,'id');
+
+        //comparação os ids dos modelos de generos resultantes da pesquisa e os favoritos do user
+        $comum = array_intersect($idsGeneroFavoritos,$idsGeneroSearch);
+
+        return $comum;
+    }
+
+    public function getFavArtPesquisados($artistaSearch){
+
         //get id's dos resultados de pesquisa
         $idsArtistaSearch = ArrayHelper::getColumn($artistaSearch,'id');
-
 
         //get o user logado
         $userLogado = Yii::$app->user->identity;
@@ -127,29 +179,70 @@ class PesquisaController extends \yii\web\Controller
             array_push($artistasFavoritos, Artista::findOne($favorito->id_artista));
         }
 
+
         //get ids dos modelos de artistas favoritos
         $idsArtistaFavoritos = ArrayHelper::getColumn($artistasFavoritos,'id');
 
         //comparação os ids dos modelos de artistas resultantes da pesquisa e os favoritos do user
         $comum = array_intersect($idsArtistaFavoritos,$idsArtistaSearch);
 
-        $favoritosPesquisados = array();
+        return $comum;
+    }
 
-        foreach ($comum as $id){
-            array_push($favoritosPesquisados,Artista::findOne($id));
+    public function getFavAlbPesquisados($albumSearch){
+        //get id's dos resultados de pesquisa
+        $idsAlbumSearch = ArrayHelper::getColumn($albumSearch,'id');
+
+        //get o user logado
+        $userLogado = Yii::$app->user->identity;
+
+        //get fav_generos do user logado
+        $favoritos = Fav_Album::find()
+            ->where(['id_utilizador' => $userLogado->getId()])
+            ->all();
+
+        //get modelos dos generos dentro dos fav_generos do user logado
+        $albunsFavoritos = array();
+
+        foreach($favoritos as $favorito){
+            array_push($albunsFavoritos, Album::findOne($favorito->id_album));
         }
 
-        /*var_dump($favoritosPesquisados);
-        die();*/
+        //get ids dos modelos de generos favoritos
+        $idsAlbumFavoritos = ArrayHelper::getColumn($albunsFavoritos,'id');
 
-        $tipo = 'artista';
+        //comparação os ids dos modelos de generos resultantes da pesquisa e os favoritos do user
+        $comum = array_intersect($idsAlbumFavoritos,$idsAlbumSearch);
 
-        return $this->render('index',[
-            'search' => $search,
-            'artistaSearch' => $artistaSearch,
-            'favoritosPesquisados' => $favoritosPesquisados,
-            'tipo' => $tipo
-        ]);
+        return $comum;
+    }
+
+    public function getFavMusPesquisados($musicaSearch){
+        //get id's dos resultados de pesquisa
+        $idsMusicaSearch = ArrayHelper::getColumn($musicaSearch,'id');
+
+        //get o user logado
+        $userLogado = Yii::$app->user->identity;
+
+        //get fav_generos do user logado
+        $favoritos = Fav_Musica::find()
+            ->where(['id_utilizador' => $userLogado->getId()])
+            ->all();
+
+        //get modelos dos generos dentro dos fav_generos do user logado
+        $musicasFavoritas = array();
+
+        foreach($favoritos as $favorito){
+            array_push($musicasFavoritas, Musica::findOne($favorito->id_musica));
+        }
+
+        //get ids dos modelos de generos favoritos
+        $idsMusicasFavoritas = ArrayHelper::getColumn($musicasFavoritas,'id');
+
+        //comparação os ids dos modelos de generos resultantes da pesquisa e os favoritos do user
+        $comum = array_intersect($idsMusicasFavoritas,$idsMusicaSearch);
+
+        return $comum;
     }
 
 }

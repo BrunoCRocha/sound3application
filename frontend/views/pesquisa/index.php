@@ -2,9 +2,12 @@
 
 use yii\helpers\Html;
 
+$this->registerJsFile(
+    '@web/js/menu_pesquisa.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
+
 ?>
-
-
 
 <div class="row">
 
@@ -13,11 +16,11 @@ use yii\helpers\Html;
     </div>
 
     <div class="col-sm-4" id="menu_opcoes">
-            <?= Html::a('Ver Tudo', ['index', 'search' => $search], ['class' => 'menu_pesquisa']) ?>
-            <?= Html::a('Músicas', ['musica', 'search' => $search], ['class' => 'menu_pesquisa']) ?>
-            <?= Html::a('Álbuns', ['albuns', 'search' => $search], ['class' => 'menu_pesquisa']) ?>
-            <?= Html::a('Género', ['genero', 'search' => $search], ['class' => 'menu_pesquisa']) ?>
-            <?= Html::a('Artista', ['artista', 'search' => $search], ['class' => 'menu_pesquisa']) ?>
+            <?= Html::a('Ver Tudo', ['index', 'search' => $search], ['class' => 'menu_pesquisa', 'id' => 'opc1']) ?>
+            <?= Html::a('Músicas', ['musica', 'search' => $search], ['class' => 'menu_pesquisa', 'id' => 'opc2']) ?>
+            <?= Html::a('Álbuns', ['albuns', 'search' => $search], ['class' => 'menu_pesquisa', 'id' => 'opc3']) ?>
+            <?= Html::a('Género', ['genero', 'search' => $search], ['class' => 'menu_pesquisa', 'id' => 'opc4']) ?>
+            <?= Html::a('Artista', ['artista', 'search' => $search], ['class' => 'menu_pesquisa', 'id' => 'opc5']) ?>
     </div>
 
     <div class="col-sm-8" id="lista">

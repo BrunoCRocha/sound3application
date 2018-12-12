@@ -161,19 +161,14 @@
 
 /*    Artista    */
 
-
-
 #artista_body{
     margin-left: 20px;
 }
-
 
 #artista a{
     color: inherit;
     text-decoration: inherit;
 }
-
-
 
 li{
     list-style-type: none;
@@ -181,10 +176,7 @@ li{
 
 #menu_musicas{
     padding-left: 10px;
-
 }
-
-
 
 .objeto_genero-musica{
     display: flex;
@@ -219,8 +211,6 @@ li{
     margin-top: 30px;
 }
 
-
-
 .info_body-genero{
     margin-top: 30px;
     width: 30%;
@@ -233,6 +223,11 @@ li{
 
 .info_body-genero a:hover{
     color: black;
+}
+
+#imagem_favoritos a img{
+    height: 20px;
+    width: auto;
 }
 
 

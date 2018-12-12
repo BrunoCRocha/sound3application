@@ -58,10 +58,6 @@ use yii\helpers\Url;
                                     </div>
                                 </td>
 
-
-
-
-
                                 <hr class="separador">
                             </tr><?php
                         }
