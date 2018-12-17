@@ -32,7 +32,7 @@ class Genero extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'caminhoImagem'], 'required'],
+            [['nome'], 'required'],
             [['nome'], 'string', 'max' => 50],
             [['descricao'], 'string', 'max' => 250],
             [['caminhoImagem'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],

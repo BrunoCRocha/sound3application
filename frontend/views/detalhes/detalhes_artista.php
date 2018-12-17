@@ -17,7 +17,7 @@ use yii\helpers\Html;
         </div>
 
         <div class="col-md-4">
-            <img class="detalhes-img-artista" src="<?='..\\..\\common\\img\\capas\\'. $artista->caminhoImagem?>">
+            <img class="detalhes-img-artista" src="<?='..\\..\\common\\img\\artistas\\'. $artista->caminhoImagem?>">
         </div>
 
     </div>

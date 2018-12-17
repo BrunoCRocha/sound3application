@@ -108,9 +108,11 @@ class GeneroController extends Controller
     {
         $model = new UploadForm();
 
+        $tipo = 'genero';
+
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
+            if ($model->upload($tipo)) {
                 // file is uploaded successfully
                 $idgenero=Yii::$app->request->get('id');
                 $genero= Genero::findOne($idgenero);
