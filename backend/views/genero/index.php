@@ -20,6 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
     <?php }?>
 
+    <?= Html::a('Criar Género', ['create'], ['class' => 'btn btn-success']) ?>
+     <p></p>
     <div class="fundo-form">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,

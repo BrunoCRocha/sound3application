@@ -76,9 +76,11 @@ class ArtistaController extends Controller
     {
         $model = new UploadForm();
 
+        $tipo = 'artista';
+
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
+            if ($model->upload($tipo)) {
                 // file is uploaded successfully
                 $idartista=Yii::$app->request->get('id');
                 $artista= Artista::findOne($idartista);
@@ -135,8 +137,6 @@ class ArtistaController extends Controller
 
         if ($model->load(Yii::$app->request->post())
             && $model->save()) {
-            var_dump(Yii::$app->request->post());
-            var_dump($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

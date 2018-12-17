@@ -37,7 +37,7 @@ class Musica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'duracao', 'preco', 'id_album', 'posicao', 'caminhoMP3'], 'required'],
+            [['nome', 'duracao', 'preco', 'id_album', 'posicao'], 'required'],
             [['preco'], 'number'],
             [['id_album', 'posicao'], 'integer'],
             [['nome'], 'string', 'max' => 50],

@@ -17,6 +17,7 @@
     margin: 0 auto;
 }
 
+
 .box{
     align-items: center;
     display: inline-block;
@@ -105,6 +106,7 @@
 .ul-tabs-detalhes li a:hover{
     color: black;
 }
+
 
 
 

@@ -19,10 +19,20 @@ class UploadForm extends Model
         ];
     }
 
-    public function upload()
+    public function upload($tipo)
     {
         if ($this->validate()) {
-            $caminho = Yii::getAlias('@capas');
+
+            if($tipo == 'artista'){
+                $caminho = Yii::getAlias('@artistas');
+            }
+            if($tipo == 'album'){
+                $caminho = Yii::getAlias('@albuns');
+            }
+            if($tipo == 'genero'){
+                $caminho = Yii::getAlias('@generos');
+            }
+
             $caminho .= "\\";
 
             $this->caminhoFinal = $this->imageFile->baseName . '.' . $this->imageFile->extension;
