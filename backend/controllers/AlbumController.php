@@ -107,9 +107,11 @@ class AlbumController extends Controller
     {
         $model = new UploadForm();
 
+        $tipo = 'artista';
+
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
+            if ($model->upload($tipo)) {
                 // file is uploaded successfully
                 $idalbum=Yii::$app->request->get('id');
                 $album= Album::findOne($idalbum);
