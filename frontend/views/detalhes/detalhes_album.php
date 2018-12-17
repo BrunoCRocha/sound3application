@@ -2,8 +2,18 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+if($estadoFav == null){
+    $textbtn = 'Adicionar aos Favoritos';
+    $rotaFav = 'add-fav-album';
+} else{
+    $textbtn = 'Remover dos Favoritos';
+    $rotaFav = 'rem-fav-album';
+}
 
 ?>
+
 <div class="body-content" >
     <div class="row" style="" >
         <div class="col-md-2 ">
@@ -15,40 +25,68 @@ use yii\helpers\Html;
             <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $album->artista->id])?>"><h4 style="color: white"><?= $album->artista->nome ?></h4></a>
             <h5>Ano: <?= $album->ano ?></h5>
             <h5>Preço: <?= $album->preco ?> €</h5>
-            <a href="<?= Url::toRoute(['comment/index','album'=>$album])?>" class="button btn btn-success"> Criar Comentário</a>
+            <a data-toggle="modal" data-target="#modalComment" class="button btn btn-success"> Criar Comentário</a>
+            <a href="<?= Url::toRoute(['favoritos/'.$rotaFav,'id'=>$album->id])?>" class="button btn btn-success"><?=$textbtn?></a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalComment" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header modal-comment-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h3>Adicionar comentário a <?=$album->nome?></h3>
+                        </div>
+                        <?php $form=ActiveForm::begin(['action' => ['comment/create', 'album' => $album->id]])?>
+                            <div class="modal-body modal-comment-body">
+                                <div class="form-group">
+                                    <?= $form->field($modelComment, 'conteudo')->textarea(['rows' => '5', 'options' =>['resize' => 'vertical']]); ?>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        <?php ActiveForm::end()?>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
     </div>
     <hr>
     <div class="row">
-        <h2 style="color: white"> <span class="glyphicon glyphicon-music" style="color:#cc0000;margin-left: 20px; padding-right: 20px"></span>Músicas</h2>
-        <div class="box">
-            <?php
-            foreach ($musicasAlbum as $musica){
-                require ('listaDetalhes_musica.php');
-            }
-            ?>
-        </div>
-    </div>
-    <div class="row">
-        <h2 style="color: white"> <span class="glyphicon glyphicon-music" style="color:#cc0000;margin-left: 20px; padding-right: 20px"></span>Comentários</h2>
-        <div   class="box">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>Conteúdo</th>
-                    <th>Data do Comentário</th>
-                </tr>
-                </thead>
-                <tbody >
-                    <?php
+
+        <ul class="nav nav-tabs ul-tabs-detalhes" id="myTab">
+            <li class="active"><a data-toggle="tab" href="#tab_musicas">Músicas (<?= count($musicasAlbum)?>)</a></li>
+            <li><a data-toggle="tab" href="#tab_comentarios">Comentários (<?= count($commentAlbum)?>)</a></li>
+        </ul>
+
+        <div class="tab-content tab-content-favoritos">
+            <div id="tab_musicas" class="tab-pane fade in active">
+                <?php
+
+                    foreach ($musicasAlbum as $musica){
+
+                        require ('listaDetalhes_musica.php');
+                    }
+                ?>
+            </div>
+            <div id="tab_comentarios" class="tab-pane fade in">
+                <?php
                     foreach ($commentAlbum as $comment){
                         require ('listaDetalhes_comment.php');
                     }
-                    ?>
-                </tbody>
-            </table>
+                ?>
+            </div>
         </div>
+
+
+    </div>
+    <div class="row">
+
     </div>
 </div>
 

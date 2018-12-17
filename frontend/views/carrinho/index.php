@@ -13,11 +13,12 @@ use yii\helpers\Url;
                     <thead>
                     <tr>
                         <th >Capa do Álbum</th>
-                        <th >Nome</th>
+                        <th style="">Nome</th>
                         <th >Nome do Artista</th>
                         <th >Nome do Álbum </th>
                         <th >Preço</th>
-                        <th ></th>
+                        <th> </th>
+                        <th> </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,13 +49,35 @@ use yii\helpers\Url;
                                 <td>
                                     <h4><?=$musica->preco?>€</h4>
                                 </td>
+
+                                <?php
+                                if($musicasFavoritas!=null){
+                                    //var_dump($musicasFavoritas);
+                                    // die();
+                                    if(in_array($musica->id,$musicasFavoritas)){
+                                        $rota = 'rem-fav-musica';
+                                        $textbtnfav = 'heart_white';
+                                    } else{
+                                        $rota = 'add-fav-musica';
+                                        $textbtnfav = 'heart';
+                                    }
+                                }else{
+                                    $rota = 'add-fav-musica';
+                                    $textbtnfav = 'heart';
+                                }
+                                ?>
                                 <td>
-                                    <div class="dropdown opc" style="margin: 0 auto">
-                                        <button onclick="myFunction()" class="dropbtn opc-btn" style="margin: 0 auto"></button>
-                                        <div id="myDropdown" class="dropdown-content">
-                                            <a href="<?= Url::toRoute(['remover', 'id' => $musica->id])?>">Remover Carrinho</a>
-                                            <a href="<?= Url::toRoute(['favoritos/adicionarMusica', 'id' => $musica->id])?>">Adicionar Favoritos</a>
-                                        </div>
+                                    <div id="imagem_favoritos" style="margin-top: 5px">
+                                        <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $musica->id])?>">
+                                            <img src="../web/menu_icons/<?=$textbtnfav?>.svg">
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="imagem_carrinho" style="margin-top: 5px">
+                                        <a href="<?= Url::toRoute(['carrinho/remover', 'id' => $musica->id])?>">
+                                            <img src="../web/menu_icons/sub-cart.svg">
+                                        </a>
                                     </div>
                                 </td>
 
@@ -65,6 +88,11 @@ use yii\helpers\Url;
                 </ul>
                     </tbody>
                 </table>
+
+                <span style=" float: right">
+                    <h4 style="color: white;">Valor total a pagar: <?= $valorTotal ?>€</h4>
+                    <a href="<?= Url::toRoute(['pagamento/checkout','items'=> $musicas])?>" class="button btn btn-info">Proceder ao Pagamento</a>
+                </span>
             </div>
 
         </div>

@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Album;
 use common\models\Artista;
+use common\models\Compra;
 use common\models\Fav_Album;
 use common\models\Fav_Artista;
 use common\models\Fav_Genero;
@@ -42,6 +43,12 @@ class PesquisaController extends \yii\web\Controller
         $favAlbPesquisados=$this->getFavAlbPesquisados($albumSearch);
         $favMusPesquisadas=$this->getFavMusPesquisados($musicaSearch);
 
+        /*CARRINHO*/
+
+        $userLogado = Yii::$app->user->identity;
+
+        $itemsCarrinho = $this->getItemsCarrinho($userLogado);
+
         //var_dump($favArtPesquisados);
         //die();
 
@@ -55,6 +62,7 @@ class PesquisaController extends \yii\web\Controller
             'favGenPesquisados' => $favGenPesquisados,
             'favAlbPesquisados' => $favAlbPesquisados,
             'favMusPesquisadas' => $favMusPesquisadas,
+            'itemsCarrinho' => $itemsCarrinho,
             'tipo' => $tipo
         ]);
     }
@@ -243,6 +251,28 @@ class PesquisaController extends \yii\web\Controller
         $comum = array_intersect($idsMusicasFavoritas,$idsMusicaSearch);
 
         return $comum;
+    }
+
+    public function getItemsCarrinho($userLogado){
+
+        $carrinho = Compra::find()
+            ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
+            ->with('linhaCompras')
+            ->distinct()
+            ->all();
+
+        $musicas = array();
+
+        foreach ($carrinho[0]->relatedRecords as $lcArray){
+
+            if(count($lcArray) > 0){
+                foreach ($lcArray as $lc){
+                    array_push($musicas, Musica::findOne($lc->id_musica));
+                }
+            }
+        }
+
+        return ArrayHelper::getColumn($musicas,'id');
     }
 
 }

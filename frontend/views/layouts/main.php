@@ -24,6 +24,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="../web/ficheiros_css/carrinho.css">
     <link rel="stylesheet" href="../web/ficheiros_css/perfil.css">
     <link rel="stylesheet" href="../web/ficheiros_css/detalhes.css">
+    <link rel="stylesheet" href="../web/ficheiros_css/favoritos.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -36,8 +37,6 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-
-
     <script>
         jQuery(document).ready(function($) {
             $('.resume') .hide()
@@ -47,6 +46,15 @@ AppAsset::register($this);
                 $('.resume'+target).toggle();
             });
         });
+    </script>
+    <!-- searchbar autocompleter-->
+    <script>
+        $(document).ready(function() {
+            $('input.search').typeahead({
+                name: 'search',
+                remote: 'autocompleter.php?query=%QUERY'
+            });
+        })
     </script>
 
 </head>
@@ -67,7 +75,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Favoritos', 'url' => ['/comment/favoritos']];
+        $menuItems[] = ['label' => 'Favoritos', 'url' => ['/favoritos/index']];
         $menuItems[] = ['label' => 'Carrinho', 'url' => ['/carrinho/index']];
         $menuItems[] = ['label' => Yii::$app->user->identity->username,
             'items' => [
@@ -84,13 +92,13 @@ AppAsset::register($this);
         'items' => $menuItems,
     ]);
 
-    $rota= 'pesquisa/index';
 
-    $form = ActiveForm::begin(['method' => 'get',
+    echo'<div class="searchbar-parent">';
+    ActiveForm::begin(['method' => 'get',
     'action' => ['pesquisa/index']]);
 
-    echo '<div class="input-group">
-            <input type="text" class="form-control" name="search" placeholder="Search">
+    echo '<div class="input-group searchbar">
+            <input type="text" class="form-control" name="search" placeholder="Procure músicas, álbuns, artistas ou géneros">
             <div class="input-group-btn">
               <button class="btn btn-default" type="submit">
                 <i class="glyphicon glyphicon-search"></i>
@@ -98,7 +106,7 @@ AppAsset::register($this);
             </div>
         </div>';
     ActiveForm::end();
-
+    echo '</div>';
     NavBar::end();
 
     ?>

@@ -6,11 +6,7 @@
     text-decoration: none;
 }
 
-#pills_nav li>a:hover,
-#pills_nav li>a:active
-{
-    color: #f40;
-}
+
 
 .rounded{
     border-radius: 50%;
@@ -69,6 +65,17 @@
 #id_footer{
     margin-top: 30px;
     height: 70px;
+}
+
+.searchbar{
+    width: 70%;
+    display: inline-block;
+    padding: 7px 0 7px 0;
+}
+
+.icon-title{
+    padding-right: 20px;
+
 }
 
 

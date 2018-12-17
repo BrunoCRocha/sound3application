@@ -1,9 +1,16 @@
 <?php
 
 use yii\helpers\Html;
+
+if($estadoFav == null){
+    $textbtn = 'Adicionar aos Favoritos';
+    $rota = 'add-fav-artista';
+} else{
+    $textbtn = 'Remover dos Favoritos';
+    $rota = 'rem-fav-artista';
+}
+
 ?>
-
-
 
 
 <div class="body-content" >
@@ -13,7 +20,7 @@ use yii\helpers\Html;
             <h1 style="color:white; font-size: 75px"><?=$artista->nome?></h1>
             <h4><?= $artista->nacionalidade?></h4>
             <h4><?= 'Início de Carreira: '.$artista->ano?></h4>
-            <?= Html::a('Adicionar aos Favoritos', ['favoritos/add-art-favorito', 'id' => $artista->id], ['class'=>'btn btn-success']) ?>
+            <?= Html::a($textbtn, ['favoritos/'.$rota, 'id' => $artista->id], ['class'=>'btn btn-success']) ?>
         </div>
 
         <div class="col-md-4">

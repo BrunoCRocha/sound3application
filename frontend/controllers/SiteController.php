@@ -215,6 +215,14 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
+                $compra = new Compra();
+
+                $compra->id_utilizador = $user->getId();
+                $compra->efetivada = 0;
+                $compra->valor_total = 0;
+
+                $compra->save(false);
+
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }

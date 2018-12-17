@@ -1,19 +1,6 @@
 <?php
 use yii\helpers\Url;
 
-if($favMusPesquisadas != null){
-    if(in_array($musica->id, $favMusPesquisadas)){
-        $textbtnfav = 'heart_white';
-        $rota = 'rem-fav-musica';
-    } else {
-        $textbtnfav = 'heart';
-        $rota = 'add-fav-musica';
-    }
-}else{
-    $textbtnfav = 'heart';
-    $rota = 'add-fav-musica';
-}
-
 if($itemsCarrinho != null){
     if(in_array($musica->id, $itemsCarrinho)){
         $rotaCart = 'remover';
@@ -27,6 +14,8 @@ else{
     $rotaCart = 'adicionar';
     $imgCart = 'sub';
 }
+
+
 ?>
 
 <li>
@@ -48,18 +37,16 @@ else{
             <h5><?=$musica->preco?> €</h5>
         </div>
 
-        <div id="imagem_favoritos">
-            <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $musica->id])?>">
-                <img src="../web/menu_icons/<?=$textbtnfav?>.svg">
-            </a>
-        </div>
         <div id="imagem_carrinho">
             <a href="<?= Url::toRoute(['carrinho/'.$rotaCart, 'id' => $musica->id])?>">
                 <img src="../web/menu_icons/<?=$imgCart?>-cart.svg">
             </a>
         </div>
+
+        <div id="imagem_favoritos">
+            <a href="<?= Url::toRoute(['favoritos/rem-fav-musica', 'id' => $musica->id])?>">
+                <img src="../web/menu_icons/rem-fav.svg">
+            </a>
+        </div>
     </div>
-    <hr class="separador">
 </li>
-
-

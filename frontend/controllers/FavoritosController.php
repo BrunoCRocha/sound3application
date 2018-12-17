@@ -2,17 +2,74 @@
 
 namespace frontend\controllers;
 
+use common\models\Album;
+use common\models\Artista;
+use common\models\Compra;
 use common\models\Fav_Album;
 use common\models\Fav_Artista;
 use common\models\Fav_Genero;
 use common\models\Fav_Musica;
+use common\models\Genero;
+use common\models\Musica;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 class FavoritosController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        $userLogado = Yii::$app->user->identity;
+
+        $fav_Generos = Fav_Genero::find()
+            ->where(['id_utilizador' => $userLogado->getId()])
+            ->all();
+
+        $fav_Artistas = Fav_Artista::find()
+            ->where(['id_utilizador' => $userLogado->getId()])
+            ->all();
+
+        $fav_Albuns = Fav_Album::find()
+            ->where(['id_utilizador' => $userLogado->getId()])
+            ->all();
+
+        $fav_Musicas = Fav_Musica::find()
+            ->where(['id_utilizador' => $userLogado->getId()])
+            ->all();
+
+        $favGeneros = array();
+        $favArtistas = array();
+        $favAlbuns = array();
+        $favMusicas = array();
+
+        foreach ($fav_Generos as $favgen){
+            $fav = Genero::findOne($favgen->id_genero);
+            array_push($favGeneros,$fav);
+        }
+
+        foreach ($fav_Albuns as $favalb){
+            $fav = Album::findOne($favalb->id_album);
+            array_push($favAlbuns,$fav);
+        }
+
+        foreach ($fav_Artistas as $favart){
+            $fav = Artista::findOne($favart->id_artista);
+            array_push($favArtistas,$fav);
+        }
+
+        foreach ($fav_Musicas as $favmus){
+            $fav = Musica::findOne($favmus->id_musica);
+            array_push($favMusicas,$fav);
+        }
+
+        $itemsCarrinho = $this->getItemsCarrinho($userLogado);
+
+        return $this->render('index',[
+            'favGeneros' => $favGeneros,
+            'favArtistas' => $favArtistas,
+            'favAlbuns' => $favAlbuns,
+            'favMusicas' => $favMusicas,
+            'itemsCarrinho'=> $itemsCarrinho
+        ]);
     }
 
     public function actionAddFavArtista($id){
@@ -121,6 +178,28 @@ class FavoritosController extends \yii\web\Controller
         $remFavorito[0]->delete();
 
         return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
+    }
+
+    public function getItemsCarrinho($userLogado){
+
+        $carrinho = Compra::find()
+            ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
+            ->with('linhaCompras')
+            ->distinct()
+            ->all();
+
+        $musicas = array();
+
+        foreach ($carrinho[0]->relatedRecords as $lcArray){
+
+            if(count($lcArray) > 0){
+                foreach ($lcArray as $lc){
+                    array_push($musicas, Musica::findOne($lc->id_musica));
+                }
+            }
+        }
+
+        return ArrayHelper::getColumn($musicas,'id');
     }
 
 }

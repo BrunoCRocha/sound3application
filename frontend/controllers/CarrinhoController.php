@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Album;
 use common\models\Compra;
+use common\models\Fav_Musica;
 use common\models\LinhaCompra;
 use common\models\Musica;
 use Yii;
@@ -36,16 +37,20 @@ class CarrinhoController extends \yii\web\Controller
 
             }
         }
-        //var_dump($compra[0]->valor_total);
+
+        $valorTotal = $compra[0]->getValorTotal();
+
+        $musicasFavoritas = $this->getFavoritos($musicas);
+
+        //var_dump($musicasFavoritas);
         //die();
 
-
-        //var_dump($musicas);
-        //die();
 
         return $this->render('index', [
             'musicas' => $musicas,
-            'message' => $message
+            'message' => $message,
+            'musicasFavoritas' => $musicasFavoritas,
+            'valorTotal' => $valorTotal
         ]);
     }
 
@@ -126,8 +131,26 @@ class CarrinhoController extends \yii\web\Controller
             }
         }
 
-        return $this->redirect(['carrinho/index']);
+        return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
     }
 
+    public function getFavoritos($musicas){
 
+        $userLogado = Yii::$app->user->identity;
+
+        //get fav_generos do user logado
+        $favoritos = Fav_Musica::find()
+            ->where(['id_utilizador' => $userLogado->getId()])
+            ->all();
+
+        $itemsFavoritos = array();
+
+        foreach ($favoritos as $item){
+            if(in_array($item->id_musica, ArrayHelper::getColumn($musicas,'id'))){
+                array_push($itemsFavoritos, $item->id_musica);
+            }
+        }
+
+        return $itemsFavoritos;
+    }
 }
