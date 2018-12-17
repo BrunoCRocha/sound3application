@@ -67,4 +67,25 @@ class Compra extends \yii\db\ActiveRecord
     {
         return $this->hasMany(LinhaCompra::className(), ['id_compra' => 'id']);
     }
+
+    public function getValorTotal(){
+        $lcArray = $this->linhaCompras;
+        $vt = 0;
+
+        if(count($lcArray)>0){
+            foreach ($lcArray as $lc){
+                    $musica = Musica::findOne($lc->id_musica);
+                    $vt = $vt + $musica->preco;
+
+
+            }
+
+            $this->valor_total =$vt;
+
+            return $vt;
+        }else{
+            return 0;
+        }
+
+    }
 }

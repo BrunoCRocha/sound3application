@@ -1,22 +1,4 @@
-<?php
-
-use yii\helpers\Url;
-use yii\helpers\Html;
-
-if($favAlbPesquisados != null){
-    if(in_array($album->id, $favAlbPesquisados)){
-        $textbtnfav = 'heart_white';
-        $rota = 'rem-fav-album';
-    } else {
-        $textbtnfav = 'heart';
-        $rota = 'add-fav-album';
-    }
-}else{
-    $textbtnfav = 'heart';
-    $rota = 'add-fav-album';
-}
-?>
-
+<?php use yii\helpers\Url;?>
 <li>
     <div id="objeto">
         <div class="imagem_album-musica">
@@ -36,19 +18,18 @@ if($favAlbPesquisados != null){
         <div class="preco">
             <h5><?=$album->preco?> €</h5>
         </div>
-        <div id="imagem_favoritos">
-            <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $album->id])?>">
-                <img src="../web/menu_icons/<?=$textbtnfav?>.svg">
-            </a>
-        </div>
+
         <div id="imagem_carrinho">
             <a href="<?= Url::toRoute(['carrinho/adicionar-album', 'id' => $album->id])?>">
                 <img src="../web/menu_icons/add-cart.svg">
             </a>
         </div>
+        <div id="imagem_favoritos">
+            <a href="<?= Url::toRoute(['favoritos/rem-fav-album', 'id' => $album->id])?>">
+                <img src="../web/menu_icons/rem-fav.svg">
+            </a>
+        </div>
 
 
     </div>
-    <hr class="separador">
 </li>
-

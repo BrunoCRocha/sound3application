@@ -1,0 +1,32 @@
+.ul-tabs-favs{
+    border-bottom: 1px solid #DF2E28 !important;
+    padding-right: 40px;
+}
+
+.ul-tabs-favs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: transparent !important;
+    border: 1px solid #DF2E28 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.ul-tabs-favs li a{
+   color: white;
+}
+
+.ul-tabs-favs li a:hover{
+    color: black;
+}
+
+.favs_msg_vazio{
+    text-align: center;
+    color: #ddd;
+    display: table;
+    margin: 0 auto;
+}
+.favs_msg_vazio img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 25%;
+}
+

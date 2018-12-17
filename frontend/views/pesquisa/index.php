@@ -12,7 +12,7 @@ $this->registerJsFile(
 <div class="row">
 
     <div id="resultado_pesquisa">
-        <span><h2>Resultado da pesquisa "<?= $search?>"</h2></span>
+        <h2><span class="glyphicon glyphicon-search icon-title"></span>Resultados de pesquisa para: "<?= $search?>"</h2>
     </div>
 
     <div class="col-sm-4" id="menu_opcoes">
@@ -33,26 +33,34 @@ $this->registerJsFile(
 
                     }else{
                         if($generoSearch != null){ ?>
-                            <div class="genero_listagem">Género</div>
+                            <div class="pesquisa_title">
+                                <h3><span class="glyphicon glyphicon-list icon-title"></span>Género</h3>
+                            </div>
                             <?php foreach ($generoSearch as $genero){
                                 require ('genero.php');
                             }
                         }
 
                         if($artistaSearch != null){ ?>
-                            <div class="genero_listagem">Artista</div>
+                            <div class="pesquisa_title">
+                                <h3><span class="glyphicon glyphicon-user icon-title"></span>Artista</h3>
+                            </div>
                             <?php foreach ($artistaSearch as $artista){
                                 require ('artista.php');
                             }
                         }
                         if($albumSearch != null){ ?>
-                            <div class="genero_listagem">Album</div>
+                            <div class="pesquisa_title">
+                                <h3><span class="glyphicon glyphicon-cd icon-title"></span>Album</h3>
+                            </div>
                             <?php foreach ($albumSearch as $album){
                                 require ('albuns.php');
                             }
                         }
                         if($musicaSearch != null){?>
-                            <div class="genero_listagem">Música</div>
+                            <div class="pesquisa_title">
+                                <h3><span class="glyphicon glyphicon-music icon-title"></span>Música</h3>
+                            </div>
                             <?php foreach ($musicaSearch as $musica){
                                 require ('musicas.php');
                             }

@@ -3,13 +3,21 @@ body {
     height: 100%;
     width: 100%;
 
-   background-image: linear-gradient(to right top, #3f3f3f, #494949, #535353, #5d5d5d, #676767);
+   //background-image: linear-gradient(to right top, #3f3f3f, #494949, #535353, #5d5d5d, #676767);
+
+    background: -moz-linear-gradient(270deg, #1F1F1F 0%, #404040 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1F1F1F), color-stop(100%, #404040));
+    background: -webkit-linear-gradient(270deg, #1F1F1F 0%, #404040 100%);
+    background: -o-linear-gradient(270deg, #1F1F1F 0%, #404040 100%);
+    background: -ms-linear-gradient(270deg, #1F1F1F 0%, #404040 100%);
+    background: linear-gradient(180deg, #1F1F1F 0%, #404040 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1F1F1F', endColorstr='#404040',GradientType=0 );
+
+
 
     background-repeat: no-repeat;
     background-attachment: fixed;
-    /*background: #D3CCE3;
-    background: -webkit-linear-gradient(to bottom, #E9E4F0, #D3CCE3);
-    background: linear-gradient(to bottom, #E9E4F0, #D3CCE3);*/
+
 }
 /*INICIO NOVO CSS*/
 .fundo-form{
@@ -141,3 +149,14 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.modal-comment-header{
+    color: rgba(97,94,94,0.84);
+}
+
+.modal-comment-body{
+    text-align: left;
+    color: rgba(97,94,94,0.84);
+}
+
+

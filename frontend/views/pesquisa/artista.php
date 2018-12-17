@@ -30,7 +30,7 @@ if($favArtPesquisados != null){
             <h4 class="media-heading"><a href="<?= Url::toRoute(['detalhes/artista', 'id' => $artista->id])?>"><?=$artista->nome?></a></h4>
             <h5><?= 'Nº Albuns:'.count($artista->getAlbums())?></h5>
         </div>
-        <div id="imagem_favoritos">
+        <div id="imagem_favoritos_sozinha">
             <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $artista->id])?>">
                 <img src="../web/menu_icons/<?=$textbtnfav?>.svg">
             </a>

@@ -6,6 +6,8 @@
 use yii\bootstrap\Carousel;
 use yii\helpers\Html;
 use common\models\Album;
+use yii\helpers\Url;
+
 $count=0;
 $this->registerJsFile(
     '@web/js/textlimit.js',
@@ -24,10 +26,10 @@ $this->registerJsFile(
                     foreach ($arrayMusicas as $musica) {
                         if($count<5){
                             $count++;
-                            echo '<div class="col-md-2 caixa_conteudo"><a href="#">';
+                            echo '<div class="col-md-2 caixa_conteudo"><a href="'. Url::toRoute(['detalhes/album', 'id' => $musica->album->id]).'">';
                             echo '<img class="image-responsive"
                                          src="..\\..\\common\\img\\capas\\'.$musica->album->caminhoImagem .'"/>
-                                         <h2>'.$musica->nome.'</h2></a><a href="#"><h3>'.$musica->album->artista->nome.'</h3></a>
+                                         <h2>'.$musica->nome.'</h2></a><a href="'. Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id]).'"><h3>'.$musica->album->artista->nome.'</h3></a>
                                       </div>';
                         }
                     }$count=0?>
@@ -43,7 +45,7 @@ $this->registerJsFile(
                 foreach ($arrayMusicas as $musica) {
                     if($count<5){
                         $count++;
-                        echo '<div class="col-md-2 caixa_conteudo conteudo_artista"><a href="#">';
+                        echo '<div class="col-md-2 caixa_conteudo conteudo_artista"><a href="'. Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id]).'">';
                         echo '<img class="rounded"
                                          src="..\\..\\common\\img\\capas\\'.$musica->album->artista->caminhoImagem .'"/>
                                          <div class="overlay">
@@ -63,11 +65,17 @@ $this->registerJsFile(
                 foreach ($arrayMusicas as $musica) {
                     if($count<5){
                         $count++;
-                        echo '<div class="col-md-2 caixa_conteudo"><a href="#">';
-                        echo '<img class="image-responsive"
-                                         src="..\\..\\common\\img\\capas\\'.$musica->album->caminhoImagem .'"/>
-                                         <h2>'.$musica->album->nome.'</h2></a><a href="#"><h3>'.$musica->album->artista->nome.'</h3></a>
-                                      </div>';
+                        echo '<div class="col-md-2 caixa_conteudo">';
+                        echo '<a href="'. Url::toRoute(['detalhes/album', 'id' => $musica->album->id]).'">
+                                        <img class="image-responsive" src="..\\..\\common\\img\\capas\\'.$musica->album->caminhoImagem .'"/>
+                                    </a>
+                                    <a href="'. Url::toRoute(['detalhes/album', 'id' => $musica->album->id]).'">
+                                        <h2>'.$musica->album->nome.'</h2>
+                                    </a>
+                                    <a href="'. Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id]).'">
+                                        <h3>'.$musica->album->artista->nome.'</h3>
+                                    </a>
+                                  </div>';
                     }
                 }$count=0?>
             </div>
