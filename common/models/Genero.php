@@ -65,7 +65,7 @@ class Genero extends \yii\db\ActiveRecord
      */
     public function getFavGeneros()
     {
-        return $this->hasMany(FavGenero::className(), ['id_genero' => 'id']);
+        return $this->hasMany(Fav_Genero::className(), ['id_genero' => 'id']);
     }
 
     /**
@@ -75,4 +75,54 @@ class Genero extends \yii\db\ActiveRecord
     {
         return $this->hasMany(User::className(), ['id' => 'id_utilizador'])->viaTable('fav_genero', ['id_genero' => 'id']);
     }
+
+    /*Alterações para a API*/
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        $id=$this->id;
+        $nome=$this->nome;
+        $descricao=$this->descricao;
+        $caminhoImagem=$this->caminhoImagem;
+        $myObj=new \stdClass();
+        $myObj->id=$id;
+        $myObj->nome=$nome;
+        $myObj->descricao=$descricao;
+        $myObj->caminhoImagem=$caminhoImagem;
+        $myJSON = json_encode($myObj);
+
+        if($insert)
+            $this->fazPublish("INSERT",$myJSON);
+        else
+            $this->fazPublish("UPDATE",$myJSON);
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $genero_id= $this->id;
+        $nome=$this->nome;
+        $myObj=new \stdClass();
+        $myObj->id=$genero_id;
+        $myObj->nome=$nome;
+        $myJSON = json_encode($myObj);
+        $this->fazPublish("DELETE",$myJSON);
+    }
+
+    public function fazPublish($canal,$msg)
+    {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = "asasas"; // set your username
+        $password = "asasas"; // set your password
+        $client_id = "phpMQTT-publisher"; // unique!
+        $mqtt = new \frontend\mosquitto\phpMQTT($server, $port, $client_id);
+        if ($mqtt->connect(true, NULL, $username, $password))
+        {
+            $mqtt->publish($canal, $msg, 0);
+            $mqtt->close();
+        }
+        else { file_put_contents('debug.output',"Time out!"); }
+}
 }

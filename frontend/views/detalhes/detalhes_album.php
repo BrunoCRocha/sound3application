@@ -17,7 +17,7 @@ if($estadoFav == null){
 <div class="body-content" >
     <div class="row" style="" >
         <div class="col-md-2 ">
-            <img class="detalhes-img-album" src="<?='..\\..\\common\\img\\capas\\'. $album->caminhoImagem?>">
+            <img class="detalhes-img-album" src="<?=Yii::getAlias('@albunsF').'/'. $album->caminhoImagem?>">
 
         </div>
         <div  class="col-md-6 detalhes-descricao-album">

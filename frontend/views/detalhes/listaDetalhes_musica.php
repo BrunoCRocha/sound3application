@@ -12,7 +12,7 @@ if($itemsCarrinho != null){
 }
 else{
     $rotaCart = 'adicionar';
-    $imgCart = 'sub';
+    $imgCart = 'add';
 }
 
 if($musicasFav != null){
@@ -36,10 +36,10 @@ if($musicasFav != null){
         <h4><?= $musica->nome ?></h4>
         <h5><?= $musica->preco?> €</h5>
         <a class="button_album" href="<?= Url::toRoute(['favoritos/'.$rotaFavMus, 'id' => $musica->id])?>">
-            <img src="../web/menu_icons/<?=$textBtnMus?>.svg">
+            <img src="<?=Yii::getAlias('@menuiconsF').'/'.$textBtnMus?>.svg">
         </a>
         <a class="button_album" href="<?= Url::toRoute(['carrinho/'.$rotaCart, 'id' => $musica->id])?>">
-            <img src="../web/menu_icons/<?=$imgCart?>-cart.svg">
+            <img src="<?=Yii::getAlias('@menuiconsF').'/'.$imgCart?>-cart.svg">
         </a>
     </div>
 </li>

@@ -86,25 +86,17 @@ class SiteController extends Controller
         $valores = array();
 
         foreach ($compras as $compra){
-
             foreach ($compra->linhaCompras as $lc){
-
                     $numeroVendas = LinhaCompra::find()
                         ->where(['id_compra' => $compra->id])
                         ->count();
                     $valores[$lc->id_musica] = $numeroVendas;
-
-
             }
         }
-
-
+      
         if (isset($valores)){
             arsort($valores );//Ordena pelo valor
         }
-
-
-
 
         $maisVendidos = array_slice($valores, 0, 5, true);
 

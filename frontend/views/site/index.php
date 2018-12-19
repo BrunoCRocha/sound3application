@@ -26,12 +26,13 @@ $this->registerJsFile(
                     foreach ($arrayMusicas as $musica) {
                         if($count<5){
                             $count++;
-                            echo '<div class="col-md-2 caixa_conteudo"><a href="'. Url::toRoute(['detalhes/album', 'id' => $musica->album->id]).'">';
-                            echo '<img class="image-responsive"
-                                         src="..\\..\\common\\img\\capas\\'.$musica->album->caminhoImagem .'"/>
-                                         <h2 name="nomeMusica-text">'.$musica->nome.'</h2></a><a href="'. Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id]).'"><h3>'.$musica->album->artista->nome.'</h3></a>
-                                      </div>';
-                        }
+
+                            ?> <div class="col-md-2 caixa_conteudo"><a href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
+                            <img class="image-responsive"
+                                         src="<?=Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem ?>"/>
+                                         <h2 name="nomeMusica-text"><?=$musica->nome?></h2></a><a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>"><h3><?=$musica->album->artista->nome?></h3></a>
+                                      </div>
+                       <?php }
                     }$count=0?>
 
 
@@ -45,15 +46,15 @@ $this->registerJsFile(
                 foreach ($arrayMusicas as $musica) {
                     if($count<5){
                         $count++;
-                        echo '<div class="col-md-2 caixa_conteudo conteudo_artista"><a href="'. Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id]).'">';
-                        echo '<img class="rounded"
-                                         src="..\\..\\common\\img\\artistas\\'.$musica->album->artista->caminhoImagem .'"/>
+                        ?><div class="col-md-2 caixa_conteudo conteudo_artista"><a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>">
+                        <img class="rounded"
+                                         src="<?=Yii::getAlias('@artistasF').'/'.$musica->album->artista->caminhoImagem ?>"/>
                                          <div class="overlay">
-                                            <div class="text" ><h2>'.$musica->album->artista->nome.'</h2></a></div>
+                                            <div class="text"><h2><?=$musica->album->artista->nome?></h2></a></div>
                                          </div>
                                          
-                                      </div>';
-                    }$count=0;
+                                      </div>
+                    <?php } $count=0;
                 }?>
             </div>
         </div>
@@ -65,18 +66,19 @@ $this->registerJsFile(
                 foreach ($arrayMusicas as $musica) {
                     if($count<5){
                         $count++;
-                        echo '<div class="col-md-2 caixa_conteudo">';
-                        echo '<a href="'. Url::toRoute(['detalhes/album', 'id' => $musica->album->id]).'">
-                                        <img class="image-responsive" src="..\\..\\common\\img\\capas\\'.$musica->album->caminhoImagem .'"/>
+                        ?><div class="col-md-2 caixa_conteudo">
+                        <a href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
+                                        <img class="image-responsive" src="<?=Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem ?>"/>
                                     </a>
-                                    <a href="'. Url::toRoute(['detalhes/album', 'id' => $musica->album->id]).'">
-                                        <h2>'.$musica->album->nome.'</h2>
+                                    <a href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
+                                        <h2><?=$musica->album->nome?></h2>
                                     </a>
-                                    <a href="'. Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id]).'">
-                                        <h3 name="nomeArtista-text">'.$musica->album->artista->nome.'</h3>
+
+                                    <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>">
+                                        <h3 name="nomeArtista-text"><?=$musica->album->artista->nome?></h3>
                                     </a>
-                                  </div>';
-                    }
+                                  </div>
+                    <?php }
                 }$count=0?>
             </div>
         </div>

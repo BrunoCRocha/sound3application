@@ -24,7 +24,7 @@ if($estadoFav == null){
         </div>
 
         <div class="col-md-4">
-            <img class="detalhes-img-artista" src="<?='..\\..\\common\\img\\artistas\\'. $artista->caminhoImagem?>">
+            <img class="detalhes-img-artista" src="<?= Yii::getAlias('@artistasF').'/'.$artista->caminhoImagem?>">
         </div>
 
     </div>

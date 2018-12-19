@@ -11,9 +11,18 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'api' => [
+            'class' => 'frontend\modules\api\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' =>
+                [
+                    'application/json' => 'yii\web\JsonParser',
+                ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -36,15 +45,58 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-
-        /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'class' => 'yii\web\UrlManager',
+            // Disable index.php
             'showScriptName' => false,
+            // Disable r= routes
+            'enablePrettyUrl' => true,
             'rules' => [
-            ],
-        ],*/
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/album',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/artista',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/genero',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/musica',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/linha-compra',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/compra',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/comment',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favoritos',
+                    'pluralize' => false,
+                ],
+            ]
+        ],
 
     ],
+
+
     'params' => $params,
 ];

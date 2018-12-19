@@ -13,23 +13,24 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <link rel="stylesheet" href="../web/ficheiros_css/home.css">
-    <link rel="stylesheet" href="../web/ficheiros_css/album.css">
-    <link rel="stylesheet" href="../web/ficheiros_css/pesquisa.css">
-    <link rel="stylesheet" href="../web/ficheiros_css/carrinho.css">
-    <link rel="stylesheet" href="../web/ficheiros_css/perfil.css">
-    <link rel="stylesheet" href="../web/ficheiros_css/detalhes.css">
-    <link rel="stylesheet" href="../web/ficheiros_css/favoritos.css">
+    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/home.css">
+    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/album.css">
+    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/pesquisa.css">
+    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/carrinho.css">
+    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/perfil.css">
+    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/detalhes.css">
+    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/favoritos.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script type="text/javascript" src="../web/ficheiros_js/pesquisa.js"></script>
+    <script type="text/javascript" src="/sound3application/frontend/web/ficheiros_js/pesquisa.js"></script>
 
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
