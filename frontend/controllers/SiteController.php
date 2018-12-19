@@ -79,24 +79,32 @@ class SiteController extends Controller
     {
         $compras = Compra::find()->select('id')
             ->where(['efetivada' => 1])
-            ->with('linhaCompras')
             ->distinct()->all();
         //var_dump($compras);
         //die();
 
+        $valores = array();
+
         foreach ($compras as $compra){
-            foreach ($compra->relatedRecords as $lcArray){
-                foreach($lcArray as $lc){
+
+            foreach ($compra->linhaCompras as $lc){
+
                     $numeroVendas = LinhaCompra::find()
                         ->where(['id_compra' => $compra->id])
                         ->count();
-
                     $valores[$lc->id_musica] = $numeroVendas;
-                }
+
+
             }
         }
 
-        arsort($valores);//Ordena pelo valor
+
+        if (isset($valores)){
+            arsort($valores );//Ordena pelo valor
+        }
+
+
+
 
         $maisVendidos = array_slice($valores, 0, 5, true);
 
