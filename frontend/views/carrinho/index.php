@@ -28,7 +28,7 @@ use yii\helpers\Url;
                             <tr>
                                 <td id="td-img-album-cart">
                                     <div class="div-img-album-cart img-fluid">
-                                        <img src="<?= '..\\..\\common\\img\\capas'.'\\'.$musica->album->caminhoImagem?>">
+                                        <img src="<?= Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem?>">
                                     </div>
 
                                 </td>
@@ -69,14 +69,14 @@ use yii\helpers\Url;
                                 <td>
                                     <div id="imagem_favoritos" style="margin-top: 5px">
                                         <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $musica->id])?>">
-                                            <img src="../web/menu_icons/<?=$textbtnfav?>.svg">
+                                            <img src="<?=Yii::getAlias('@menuiconsF').'/'.$textbtnfav?>.svg">
                                         </a>
                                     </div>
                                 </td>
                                 <td>
                                     <div id="imagem_carrinho" style="margin-top: 5px">
                                         <a href="<?= Url::toRoute(['carrinho/remover', 'id' => $musica->id])?>">
-                                            <img src="../web/menu_icons/sub-cart.svg">
+                                            <img src="<?=Yii::getAlias('@menuiconsF').'/'?>sub-cart.svg">
                                         </a>
                                     </div>
                                 </td>

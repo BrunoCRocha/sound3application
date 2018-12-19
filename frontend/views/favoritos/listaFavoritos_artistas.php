@@ -1,10 +1,11 @@
-<?php use yii\helpers\Url;?>
+<?php use yii\helpers\Url;
+?>
 
 <li>
     <div class="objeto_genero-musica" >
         <div id="imagem_artista-genero">
-            <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $artista->id])?>">
-                <img src="<?= '..\\..\\common\\img\\capas'.'\\'.$artista->caminhoImagem?>">
+            <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $artista->id]) ?>">
+                <img src="<?=Yii::getAlias('@artistasF').'/'.$artista->caminhoImagem?>">
             </a>
         </div>
         <div class="info_body-artista">
@@ -13,7 +14,7 @@
         </div>
         <div id="imagem_favoritos_sozinha">
             <a href="<?= Url::toRoute(['favoritos/rem-fav-artista', 'id' => $artista->id])?>">
-                <img src="../web/menu_icons/rem-fav.svg">
+                <img src="<?=Yii::getAlias('@menuiconsF').'/'?>rem-fav.svg">
             </a>
         </div>
 

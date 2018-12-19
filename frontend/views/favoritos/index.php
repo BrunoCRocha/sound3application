@@ -30,7 +30,7 @@ use yii\helpers\Url;
                     }else{ ?>
                         <div class="favs_msg_vazio">
                             <h3>Sem Géneros Favoritos...</h3>
-                            <img src="../web/menu_icons/empty-fav.svg">
+                            <img src="<?=Yii::getAlias('@menuiconsF').'/'?>empty-fav.svg">
                             <h4>Procure por algo que goste e adicione-o à sua lista pessoal de favoritos</h4>
 
                         </div>
@@ -50,7 +50,7 @@ use yii\helpers\Url;
                     <?php }else{ ?>
                         <div class="favs_msg_vazio">
                             <h3>Sem Artistas Favoritos...</h3>
-                            <img src="../web/menu_icons/empty-fav.svg">
+                            <img src="<?=Yii::getAlias('@menuiconsF').'/'?>empty-fav.svg">
                             <h4>Procure por algo que goste e adicione-o à sua lista pessoal de favoritos</h4>
                         </div>
                     <?php } ?>
@@ -66,7 +66,7 @@ use yii\helpers\Url;
                    <?php }else{?>
                         <div class="favs_msg_vazio">
                             <h3>Sem Álbuns Favoritos...</h3>
-                            <img src="../web/menu_icons/empty-fav.svg">
+                            <img src="<?=Yii::getAlias('@menuiconsF').'/'?>empty-fav.svg">
                             <h4>Procure por algo que goste e adicione-o à sua lista pessoal de favoritos</h4>
                         </div>
                     <?php } ?>
@@ -82,7 +82,7 @@ use yii\helpers\Url;
                     <?php }else{ ?>
                         <div class="favs_msg_vazio">
                             <h3>Sem Músicas Favoritas...</h3>
-                            <img src="../web/menu_icons/empty-fav.svg">
+                            <img src="<?=Yii::getAlias('@menuiconsF').'/'?>empty-fav.svg">
                             <h4>Procure por algo que goste e adicione-o à sua lista pessoal de favoritos</h4>
                         </div>
                     <?php } ?>

@@ -3,7 +3,7 @@ body {
     height: 100%;
     width: 100%;
 
-   //background-image: linear-gradient(to right top, #3f3f3f, #494949, #535353, #5d5d5d, #676767);
+   /*background-image: linear-gradient(to right top, #3f3f3f, #494949, #535353, #5d5d5d, #676767);*/
 
     background: -moz-linear-gradient(270deg, #1F1F1F 0%, #404040 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1F1F1F), color-stop(100%, #404040));

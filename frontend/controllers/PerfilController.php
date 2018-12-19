@@ -69,11 +69,16 @@ class PerfilController extends \yii\web\Controller
         $model = Musica::findOne($id);
 
         $file = $model->caminhoMP3;
-        $path = '..\\..\\common\\musicas\\'.$file;
+        $path = Yii::getAlias('@musicasF').'/'.$file;
+
+        var_dump($model);
+        die;
+
         if (file_exists($path)) {
 
             return \Yii::$app->response->sendFile($path);
         }
+        return $this->redirect(['perfil/index','id' => Yii::$app->user->identity->getId()]);
     }
 
     public function actionDownloadtodas(){

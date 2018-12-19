@@ -21,7 +21,7 @@ if($favAlbPesquisados != null){
     <div id="objeto">
         <div class="imagem_album-musica">
             <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>">
-                <img src="<?= '..\\..\\common\\img\\capas'.'\\'.$album->caminhoImagem?>">
+                <img src="<?=Yii::getAlias('@albunsF').'/'.$album->caminhoImagem?>">
             </a>
         </div>
         <div class="info_body">
@@ -38,12 +38,12 @@ if($favAlbPesquisados != null){
         </div>
         <div id="imagem_favoritos">
             <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $album->id])?>">
-                <img src="../web/menu_icons/<?=$textbtnfav?>.svg">
+                <img src="<?=Yii::getAlias('@menuiconsF').'/'.$textbtnfav?>.svg">
             </a>
         </div>
         <div id="imagem_carrinho">
             <a href="<?= Url::toRoute(['carrinho/adicionar-album', 'id' => $album->id])?>">
-                <img src="../web/menu_icons/add-cart.svg">
+                <img src="<?=Yii::getAlias('@menuiconsF').'/'?>add-cart.svg">
             </a>
         </div>
 

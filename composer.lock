@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a48a871105956ac6bf7300e69ab4160",
+    "content-hash": "3ac4d97a9a70af7aa3f7d1a3d6a79d6b",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -66,6 +66,42 @@
                 "yii2"
             ],
             "time": "2017-07-05T05:52:03+00:00"
+        },
+        {
+            "name": "bluerhinos/phpmqtt",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bluerhinos/phpMQTT.git",
+                "reference": "6c15cef0b1b2cb4c438e526c78d805b69a733f9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bluerhinos/phpMQTT/zipball/6c15cef0b1b2cb4c438e526c78d805b69a733f9d",
+                "reference": "6c15cef0b1b2cb4c438e526c78d805b69a733f9d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bluerhinos\\": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Milsted",
+                    "email": "andrew@bluerhinos.co.uk"
+                }
+            ],
+            "description": "Simple MQTT Class",
+            "time": "2017-10-16T21:14:36+00:00"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -3741,7 +3777,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-widget-depdrop": 20
+        "kartik-v/yii2-widget-depdrop": 20,
+        "bluerhinos/phpmqtt": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

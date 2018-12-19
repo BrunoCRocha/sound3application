@@ -3,12 +3,12 @@
     <div id="objeto">
         <div class="imagem_album-musica">
             <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>">
-                <img src="<?= '..\\..\\common\\img\\capas'.'\\'.$album->caminhoImagem?>">
+                <img src="<?=Yii::getAlias('@albunsF').'/'.$album->caminhoImagem?>">
             </a>
         </div>
         <div class="info_body">
             <h4 class="media-heading">
-                <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><?=$album->nome.' ('.count($album->getMusicas()).')'?></a>
+                <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><?=$album->nome.' ('.count($album->musicas).')'?></a>
             </h4>
             <h5>
                 <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $album->id])?>"><?= $album->artista->nome?></a>
@@ -21,12 +21,12 @@
 
         <div id="imagem_carrinho">
             <a href="<?= Url::toRoute(['carrinho/adicionar-album', 'id' => $album->id])?>">
-                <img src="../web/menu_icons/add-cart.svg">
+                <img src="<?=Yii::getAlias('@menuiconsF').'/'?>add-cart.svg">
             </a>
         </div>
         <div id="imagem_favoritos">
             <a href="<?= Url::toRoute(['favoritos/rem-fav-album', 'id' => $album->id])?>">
-                <img src="../web/menu_icons/rem-fav.svg">
+                <img src="<?=Yii::getAlias('@menuiconsF').'/'?>rem-fav.svg">
             </a>
         </div>
 

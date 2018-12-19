@@ -33,7 +33,7 @@ else{
 
     <div class="musica" id="objeto">
         <div class="imagem_album-musica">
-            <img src="<?= '..\\..\\common\\img\\capas'.'\\'.$musica->album->caminhoImagem?>">
+            <img src="<?=Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem?>">
         </div>
         <div class="info_body">
             <h4 class="media-heading"><?= $musica->nome ?></h4>
@@ -50,12 +50,12 @@ else{
 
         <div id="imagem_favoritos">
             <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $musica->id])?>">
-                <img src="../web/menu_icons/<?=$textbtnfav?>.svg">
+                <img src="<?=Yii::getAlias('@menuiconsF').'/'.$textbtnfav?>.svg">
             </a>
         </div>
         <div id="imagem_carrinho">
             <a href="<?= Url::toRoute(['carrinho/'.$rotaCart, 'id' => $musica->id])?>">
-                <img src="../web/menu_icons/<?=$imgCart?>-cart.svg">
+                <img src="<?=Yii::getAlias('@menuiconsF').'/'.$imgCart?>-cart.svg">
             </a>
         </div>
     </div>
