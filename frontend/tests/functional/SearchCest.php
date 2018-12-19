@@ -1,14 +1,18 @@
 <?php namespace frontend\tests\functional;
 use frontend\tests\FunctionalTester;
 
-class PerfilCest
+class SearchCest
 {
     public function _before(FunctionalTester $I)
     {
     }
 
     // tests
-    public function tryToTest(FunctionalTester $I)
+    public function Search(FunctionalTester $I)
     {
+        $I->amOnPage('/index');
+        $I->click('search','#nav');
+        $I->fillField();
+
     }
 }

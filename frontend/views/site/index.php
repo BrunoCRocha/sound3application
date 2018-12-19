@@ -26,10 +26,11 @@ $this->registerJsFile(
                     foreach ($arrayMusicas as $musica) {
                         if($count<5){
                             $count++;
+
                             ?> <div class="col-md-2 caixa_conteudo"><a href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
                             <img class="image-responsive"
                                          src="<?=Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem ?>"/>
-                                         <h2><?=$musica->nome?></h2></a><a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>"><h3><?=$musica->album->artista->nome?></h3></a>
+                                         <h2 name="nomeMusica-text"><?=$musica->nome?></h2></a><a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>"><h3><?=$musica->album->artista->nome?></h3></a>
                                       </div>
                        <?php }
                     }$count=0?>
@@ -72,8 +73,9 @@ $this->registerJsFile(
                                     <a href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
                                         <h2><?=$musica->album->nome?></h2>
                                     </a>
+
                                     <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>">
-                                        <h3><?=$musica->album->artista->nome?></h3>
+                                        <h3 name="nomeArtista-text"><?=$musica->album->artista->nome?></h3>
                                     </a>
                                   </div>
                     <?php }
