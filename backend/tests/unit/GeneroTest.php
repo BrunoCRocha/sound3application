@@ -43,7 +43,7 @@ class GeneroTest extends \Codeception\Test\Unit
         $genero->caminhoImagem='testeGenero.png';
         $genero->save();
 
-        $this->tester->seeInDatabase('genero',['nome'=>'TesteGenero']);
+        $this->tester->seeInDatabase('genero',['nome'=>'Teste']);
     }
 
     public function testUpdateGenero(){
@@ -54,11 +54,12 @@ class GeneroTest extends \Codeception\Test\Unit
         $genero->update();
         $this->tester->seeInDatabase('genero',['nome'=>'TestGe']);
     }
-/*
+
     public function testDeleteGenero(){
 
-        $id=$this->tester->grabRecord('common\models\Genero',['nome'=>'TesteGe']);
+        $id=$this->tester->grabRecord('common\models\Genero',['nome'=>'TestGe']);
         $genero=Genero::findOne($id);
         $genero->delete();
-    }*/
+        $this->tester->dontSeeInDatabase('genero',['nome'=>'TestGe']);
+    }
 }

@@ -71,25 +71,15 @@ class MusicaTest extends \Codeception\Test\Unit
         $this->tester->seeInDatabase('musica',['nome'=> 'MusUpdate']);
 
     }
-   /*public function testDeleteMusica()
+   public function testDeleteMusica()
     {
-
-        $linhaCompra= new LinhaCompra();
-
-        $linhaCompra->id_compra= 25;
-        $linhaCompra->id_musica = 24;
-        $linhaCompra->save();
-        $this->tester->seeInDatabase('linha_compra',['id_compra'=>25,'id_musica'=>24]);
-
-        $idLC=$this->tester->grabRecord('common\models\LinhaCompra',['id_compra'=>25, 'id_musica'=>'24']);
-        $lC=LinhaCompra::findOne($idLC);
-        $lC->delete();
 
          $id=$this->tester->grabRecord('common\models\Musica',['nome'=>'MusUpdate']);
          $musica=Musica::findOne($id);
          $musica->delete();
+         $this->tester->dontSeeInDatabase('musica',['nome'=>'MusUpdate']);
 
-    }*/
+    }
 }
 
 

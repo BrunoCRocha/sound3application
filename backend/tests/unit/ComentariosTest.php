@@ -64,5 +64,7 @@ class ComentariosTest extends \Codeception\Test\Unit
         $id=$this->tester->grabRecord('common\models\Comment',['conteudo'=>'ddddaa']);
         $comment=Comment::findOne($id);
         $comment->delete();
+        $this->tester->dontSeeInDatabase('comment',['conteudo'=>'ddddaa']);
+
     }
 }

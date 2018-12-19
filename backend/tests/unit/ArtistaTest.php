@@ -67,8 +67,9 @@ class ArtistaTest extends \Codeception\Test\Unit
 
     public function testDeleteArtista(){
 
-        $id=$this->tester->grabRecord('common\models\Artista',['nome'=>'Teste']);
+        $id=$this->tester->grabRecord('common\models\Artista',['nome'=>'Slow J']);
         $artista =Artista::findOne($id);
         $artista->delete();
+        $this->tester->dontSeeInDatabase('artista',['nome'=>'Slow J']);
     }
 }
