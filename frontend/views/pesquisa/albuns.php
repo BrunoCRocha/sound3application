@@ -26,7 +26,7 @@ if($favAlbPesquisados != null){
         </div>
         <div class="info_body">
             <h4 class="media-heading">
-                <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><?=$album->nome.' ('.count($album->getMusicas()).')'?></a>
+                <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><?=$album->nome.' ('.count($album->musicas).')'?></a>
             </h4>
             <h5>
                 <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $album->id])?>"><?= $album->artista->nome?></a>

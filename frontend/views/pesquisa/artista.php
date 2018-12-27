@@ -28,7 +28,7 @@ if($favArtPesquisados != null){
         </div>
         <div class="info_body-artista">
             <h4 class="media-heading"><a href="<?= Url::toRoute(['detalhes/artista', 'id' => $artista->id])?>"><?=$artista->nome?></a></h4>
-            <h5><?= 'Nº Albuns:'.count($artista->getAlbums())?></h5>
+            <h5><?= 'Nº Albuns:'.count($artista->albums)?></h5>
         </div>
         <div id="imagem_favoritos_sozinha">
             <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $artista->id])?>">
