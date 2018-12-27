@@ -17,7 +17,7 @@ class ComentariosCest
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
 
-        $I->click('Dress');
+        $I->click('.nomeMusica-text');
         $I->amOnRoute('/detalhes/album/', ['id' => '4']);
         $I->click('criarComment-button');
         /*$I->click('Comment[conteudo]');
