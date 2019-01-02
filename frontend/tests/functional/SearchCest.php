@@ -10,9 +10,20 @@ class SearchCest
     // tests
     public function Search(FunctionalTester $I)
     {
-        $I->amOnPage('/index');
-        $I->click('search','#nav');
-        $I->fillField();
+        $I->amOnPage('/site/index');
+        $I->click('Login');
+        $I->see('Altere-a');
+        $I->fillField('Username', 'Teste');
+        $I->fillField('Password', 'teste123');
+        $I->click('login-button');
+        $I->see('Carrinho');
+        $I->dontSeeLink('Login');
+        $I->dontSeeLink('Signup');
+
+
+        $I->fillField('search', 'taylor');
+        $I->click('buttonSearch');
+        $I->see('Resultados de pesquisa para: "taylor"');
 
     }
 }
