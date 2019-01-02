@@ -24,7 +24,7 @@ if($favGenPesquisados != null){
             <img src="<?=Yii::getAlias('@generosF').'/'.$genero->caminhoImagem?>">
         </div>
         <div class="info_body-genero">
-            <h4 class="media-heading"><a href="<?= Url::toRoute(['detalhes/detalhesArtista', 'id' => $genero->id])?>"><?= $genero->nome?></a></h4>
+            <h4 class="media-heading"><a href="<?= Url::toRoute(['detalhes/genero', 'id' => $genero->id])?>"><?= $genero->nome?></a></h4>
         </div>
         <div id="imagem_favoritos_sozinha">
             <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $genero->id])?>">

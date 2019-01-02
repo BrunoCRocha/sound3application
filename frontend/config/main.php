@@ -54,6 +54,12 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/user',
+                    'pluralize' => false,
+                    'except' =>['delete'],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/album',
                     'pluralize' => false,
                 ],
@@ -66,11 +72,17 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/genero',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET totalalbuns' => 'totalalbuns',
+                    ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/musica',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET top5musicas' => 'top5musicas',
+                    ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -91,7 +103,7 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/favoritos',
                     'pluralize' => false,
-                ],
+                ]
             ]
         ],
 
