@@ -18,7 +18,7 @@ class ComentariosCest
         $I->dontSeeLink('Signup');
 
         $I->click('.nomeMusica-text');
-        $I->amOnRoute('/detalhes/album/', ['id' => '4']);
+        $I->amOnRoute('/detalhes/album/', ['id' => '6']);
         $I->click('criarComment-button');
         /*$I->click('Comment[conteudo]');
         $I->fillField(['conteudo'],'Bom dia');

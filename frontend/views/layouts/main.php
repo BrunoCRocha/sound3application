@@ -101,7 +101,7 @@ AppAsset::register($this);
     echo '<div class="input-group searchbar">
             <input type="text" class="form-control" name="search" placeholder="Procure músicas, álbuns, artistas ou géneros">
             <div class="input-group-btn">
-              <button class="btn btn-default" type="submit">
+              <button class="btn btn-default" type="submit" name="buttonSearch">
                 <i class="glyphicon glyphicon-search"></i>
               </button>
             </div>
