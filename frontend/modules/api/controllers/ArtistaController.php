@@ -2,11 +2,27 @@
 
 namespace frontend\modules\api\controllers;
 
-class ArtistaController extends \yii\web\Controller
-{
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+use yii\filters\auth\HttpBasicAuth;
 
+class ArtistaController extends \yii\rest\ActiveController
+{
+    public $modelClass = 'common\models\Artista';
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => HttpBasicAuth::className(),'auth' => function ($username, $password)
+            {
+                $user = \common\models\User::findByUsername($username);
+
+                if($user && \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash))
+                {
+                    return $user;
+                }
+            }
+        ];
+
+        return $behaviors;
+    }
 }

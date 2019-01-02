@@ -1,6 +1,8 @@
 <?php
 
 namespace frontend\modules\api\controllers;
+use common\models\Album;
+use common\models\Genero;
 use yii\filters\auth\HttpBasicAuth;
 
 class GeneroController extends \yii\rest\ActiveController
@@ -26,8 +28,16 @@ class GeneroController extends \yii\rest\ActiveController
         return $behaviors;
     }
 
+    public function actionTotalalbuns($id){
 
+        if(!Genero::findOne($id)){
+            return ;
+        }
 
+        $albuns = Album::find()->where(['id_genero' =>$id])->all();
+
+        return ['totalalbuns' => count($albuns)];
+    }
 
 }
 
