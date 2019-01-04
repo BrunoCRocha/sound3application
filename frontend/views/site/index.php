@@ -27,7 +27,7 @@ $this->registerJsFile(
                         if($count<5){
                             $count++;
 
-                            ?> <div class="col-md-2 caixa_conteudo"><a name="nomeMusica-text" href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
+                            ?> <div class="col-md-2 caixa_conteudo"><a name="nomeMusica" href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
                             <img class="image-responsive"
                                          src="<?=Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem ?>"/>
                                          <h2 ><?=$musica->nome?></h2></a><a  href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>"><h3><?=$musica->album->artista->nome?></h3></a>

@@ -23,6 +23,8 @@ class PerfilController extends \yii\web\Controller
         $query_Compra=Compra::find()
             ->where(['and',['id_utilizador'=> Yii::$app->user->identity->getId(),'efetivada'=>1]])->all();
 
+        $arrayMusicas=array();
+
         foreach ($query_Compra as $compra){
 
             $arrayLC[$compra->id] = LinhaCompra::find()
@@ -39,7 +41,6 @@ class PerfilController extends \yii\web\Controller
         return $this->render('index', [
             'model'=>$model,
             'arrayMusicas'=>$arrayMusicas
-
         ]);
     }
 

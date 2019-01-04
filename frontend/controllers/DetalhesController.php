@@ -72,8 +72,6 @@ class DetalhesController extends \yii\web\Controller
         $artista = Artista::find()->where(['id' => $id])
         ->one();
 
-
-
         $albunsArtista = Album::find()
             ->where(['id_artista' => $id])
             ->all();

@@ -13,7 +13,7 @@
             <h5><?= 'Nº Albuns:'.count($artista->getAlbums())?></h5>
         </div>
         <div id="imagem_favoritos_sozinha">
-            <a href="<?= Url::toRoute(['favoritos/rem-fav-artista', 'id' => $artista->id])?>">
+            <a  href="<?= Url::toRoute(['favoritos/rem-fav-artista', 'id' => $artista->id])?>">
                 <img src="<?=Yii::getAlias('@menuiconsF').'/'?>rem-fav.svg">
             </a>
         </div>

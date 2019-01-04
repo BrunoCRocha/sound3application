@@ -1,11 +1,14 @@
 <?php namespace frontend\tests\functional;
 use frontend\tests\FunctionalTester;
 
-class ComentariosCest
+class FavoritoCest
 {
+    public function _before(FunctionalTester $I)
+    {
+    }
 
     // tests
-    public function testCriarComment(FunctionalTester $I)
+    public function Favorito(FunctionalTester $I)
     {
         $I->amOnPage('/site/index');
         $I->click('Login');
@@ -16,19 +19,6 @@ class ComentariosCest
         $I->see('Carrinho');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
-
-
-        $I->click('nomeMusica');
-        $I->amOnRoute('/detalhes/album/', ['id' => '6']);
-        $I->click('criarComment-button');
-        /*$I->click('Comment[conteudo]');
-        $I->fillField(['conteudo'],'Bom dia');
-        $I->click('guardar-button');*/
-
-
-        //\Codeception\Util\Debug::debug($I->see("Carrinho"));die();
-
-
 
 
     }
