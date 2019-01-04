@@ -102,4 +102,60 @@ class Musica extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Album::className(), ['id' => 'id_album']);
     }
+    /*Alterações para a API*/
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        $id=$this->id;
+        $nome=$this->nome;
+        $duracao=$this->duracao;
+        $preco=$this->preco;
+        $posicao=$this->posicao;
+        $id_album=$this->id_album;
+        $caminhoMP3=$this->caminhoMP3;
+        $myObj=new \stdClass();
+        $myObj->id=$id;
+        $myObj->nome=$nome;
+        $myObj->duracao=$duracao;
+        $myObj->preco=$preco;
+        $myObj->posicao=$posicao;
+        $myObj->id_album=$id_album;
+        $myObj->caminhoMP3=$caminhoMP3;
+        $myJSON = json_encode($myObj);
+
+        if($insert)
+            $this->fazPublish("INSERT",$myJSON);
+        else
+            $this->fazPublish("UPDATE",$myJSON);
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $musica_id= $this->id;
+        $nome=$this->nome;
+        $myObj=new \stdClass();
+        $myObj->id=$musica_id;
+        $myObj->nome=$nome;
+        $myJSON = json_encode($myObj);
+        $this->fazPublish("DELETE",$myJSON);
+    }
+
+    public function fazPublish($canal,$msg)
+    {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = "asasas"; // set your username
+        $password = "asasas"; // set your password
+        $client_id = "phpMQTT-publisher"; // unique!
+        $mqtt = new \frontend\mosquitto\phpMQTT($server, $port, $client_id);
+        if ($mqtt->connect(true, NULL, $username, $password))
+        {
+            $mqtt->publish($canal, $msg, 0);
+            $mqtt->close();
+        }
+        else { file_put_contents('debug.output',"Time out!");}
+
+    }
 }
