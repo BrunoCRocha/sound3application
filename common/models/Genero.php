@@ -92,6 +92,7 @@ class Genero extends \yii\db\ActiveRecord
         $myObj->caminhoImagem=$caminhoImagem;
         $myJSON = json_encode($myObj);
 
+
         if($insert)
             $this->fazPublish("INSERT",$myJSON);
         else
@@ -114,12 +115,14 @@ class Genero extends \yii\db\ActiveRecord
     {
         $server = "127.0.0.1";
         $port = 1883;
-        $username = "asasas"; // set your username
-        $password = "asasas"; // set your password
+        $username = "admin"; // set your username
+        $password = "adminadmin"; // set your password
         $client_id = "phpMQTT-publisher"; // unique!
         $mqtt = new \frontend\mosquitto\phpMQTT($server, $port, $client_id);
         if ($mqtt->connect(true, NULL, $username, $password))
         {
+            //var_dump($mqtt->publish($canal, $msg, 0));
+            //die();
             $mqtt->publish($canal, $msg, 0);
             $mqtt->close();
         }
