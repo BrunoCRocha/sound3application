@@ -30,6 +30,9 @@ class GeneroController extends \yii\rest\ActiveController
 
     public function actionTotalalbuns($id){
 
+        //solicitar autenticação
+        $this->getBehavior('authenticator');
+
         if(!Genero::findOne($id)){
             return ;
         }
