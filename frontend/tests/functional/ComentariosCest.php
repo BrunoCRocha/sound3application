@@ -18,12 +18,18 @@ class ComentariosCest
         $I->dontSeeLink('Signup');
 
 
-        $I->click('nomeMusica');
-        $I->amOnRoute('/detalhes/album/', ['id' => '6']);
-        $I->click('criarComment-button');
+        $I->amOnPage('/site/index');
+       // $I->see('Dress','h2');
+        $I->click('.image-responsive');
+        //$I->click(  'Link','Dress');
+        //$I->amOnRoute('/detalhes/album/', ['id' => '6']);
+        //$I->click('criarComment-button');
         /*$I->click('Comment[conteudo]');
         $I->fillField(['conteudo'],'Bom dia');
         $I->click('guardar-button');*/
+
+
+
 
 
         //\Codeception\Util\Debug::debug($I->see("Carrinho"));die();
