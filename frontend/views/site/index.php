@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 
+use yii\bootstrap\Button;
 use yii\bootstrap\Carousel;
 use yii\helpers\Html;
 use common\models\Album;
@@ -23,15 +24,27 @@ $this->registerJsFile(
             <h2 style="color: white"> <span class="glyphicon glyphicon-fire" style="color:#cc0000;margin-left: 20px; padding-right: 20px"></span>Fire</h2>
             <div class="box">
                 <?php
+                    $i = 1;
                     foreach ($arrayMusicas as $musica) {
                         if($count<5){
                             $count++;
+                            ?>
+                            <div class="col-md-2 caixa_conteudo"><a  id=img href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
+                                    <img class="image-responsive"
+                                         src="<?=Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem ?>"/></a>
+                                    <a class="nomeMusica<?=$i++?>" href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
+                                        <h2><?=$musica->nome?></h2></a>
 
-                            ?> <div class="col-md-2 caixa_conteudo"><a name="nomeMusica" href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>">
-                            <img class="image-responsive"
-                                         src="<?=Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem ?>"/>
-                                         <h2 ><?=$musica->nome?></h2></a><a  href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>"><h3><?=$musica->album->artista->nome?></h3></a>
-                                      </div>
+                                    <a  id=nomeArtista href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>">
+                                        <h3><?=$musica->album->artista->nome?></h3></a>
+                            </div>
+                            <?php
+                              /* echo Button::Widget([
+                                    'label'=>'label',
+                                    'options'=>['style' => 'background: url('.Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem.')'],
+                                    'url' => Url::toRoute(['detalhes/album', 'id' => $musica->album->id])
+                                ]);*/
+                            ?>
                        <?php }
                     }$count=0?>
 
