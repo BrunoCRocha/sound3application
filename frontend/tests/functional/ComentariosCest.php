@@ -20,7 +20,7 @@ class ComentariosCest
 
         $I->amOnPage('/site/index');
        // $I->see('Dress','h2');
-        $I->click('.image-responsive');
+        $I->click('.nomeMusica2');
         //$I->click(  'Link','Dress');
         //$I->amOnRoute('/detalhes/album/', ['id' => '6']);
         //$I->click('criarComment-button');
