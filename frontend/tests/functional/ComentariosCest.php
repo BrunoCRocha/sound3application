@@ -18,13 +18,18 @@ class ComentariosCest
         $I->dontSeeLink('Signup');
 
 
+
         $I->see('Dress');
         $I->amOnRoute('/detalhes/album/', ['id' => '5']);
         $I->click('#criarFavorito');
 
+
         $I->click('Favoritos');
         $I->click('Álbuns');
         $I->see('Meteora (2)');
+
+
+
 
         //\Codeception\Util\Debug::debug($I->see("Carrinho"));die();
 
