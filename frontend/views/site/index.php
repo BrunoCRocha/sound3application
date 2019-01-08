@@ -34,8 +34,6 @@ $this->registerJsFile(
                                       </div>
                        <?php }
                     }$count=0?>
-
-
             </div>
         </div>
         <hr>

@@ -10,21 +10,21 @@ class ComentariosCest
         $I->amOnPage('/site/index');
         $I->click('Login');
         $I->see('Altere-a');
-        $I->fillField('Username', 'Teste');
-        $I->fillField('Password', 'teste123');
+        $I->fillField('Username', 'admin');
+        $I->fillField('Password', 'adminadmin');
         $I->click('login-button');
         $I->see('Carrinho');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
 
 
-        $I->click('nomeMusica');
-        $I->amOnRoute('/detalhes/album/', ['id' => '6']);
-        $I->click('criarComment-button');
-        /*$I->click('Comment[conteudo]');
-        $I->fillField(['conteudo'],'Bom dia');
-        $I->click('guardar-button');*/
+        $I->see('Dress');
+        $I->amOnRoute('/detalhes/album/', ['id' => '5']);
+        $I->click('#criarFavorito');
 
+        $I->click('Favoritos');
+        $I->click('Álbuns');
+        $I->see('Meteora (2)');
 
         //\Codeception\Util\Debug::debug($I->see("Carrinho"));die();
 

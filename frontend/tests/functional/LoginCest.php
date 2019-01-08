@@ -32,8 +32,8 @@ class LoginCest
     public function checkLogin (FunctionalTester $I)
     {
 
-        $I->fillField('Username', 'Teste');
-        $I->fillField('Password', 'teste123');
+        $I->fillField('Username', 'admin');
+        $I->fillField('Password', 'adminadmin');
         $I->click('login-button');
 
         $I->see('Carrinho');
