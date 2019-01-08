@@ -85,6 +85,7 @@ class SiteController extends Controller
 
         $valores = array();
 
+        var_dump($compras[0]->linhaCompras);die();
         foreach ($compras as $compra){
             foreach ($compra->linhaCompras as $lc){
                     $numeroVendas = LinhaCompra::find()
