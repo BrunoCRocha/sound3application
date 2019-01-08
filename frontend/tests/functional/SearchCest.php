@@ -13,8 +13,8 @@ class SearchCest
         $I->amOnPage('/site/index');
         $I->click('Login');
         $I->see('Altere-a');
-        $I->fillField('Username', 'Teste');
-        $I->fillField('Password', 'teste123');
+        $I->fillField('Username', 'admin');
+        $I->fillField('Password', 'adminadmin');
         $I->click('login-button');
         $I->see('Carrinho');
         $I->dontSeeLink('Login');

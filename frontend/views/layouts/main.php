@@ -121,13 +121,19 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer" id="id_footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+<!-- Footer -->
+<footer class="footer font-small blue" style="background-color: grey;color:white">
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+    <!-- Copyright -->
+    <div class="footer-copyright py-3" style="text-align: center;">
+        <span style="display: inline-block;float:left;padding-left: 5%">2ºAno TeSP Programação de Sistemas de Informação</span>
+        <span style="display: inline-block;">Bruno Rocha, Diogo Cruz e Márcia Ferreira</span>
+        <span style="display: inline-block;float:right;padding-right: 5%">sound3online@gmail.com</span>
     </div>
+    <!-- Copyright -->
+
 </footer>
+<!-- Footer -->
 
 <?php $this->endBody() ?>
 </body>

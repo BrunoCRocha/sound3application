@@ -31,13 +31,17 @@ class PerfilController extends \yii\web\Controller
                 ->where(['id_compra'=> $compra->id])->all();
         }
 
-
-        foreach ($arrayLC as $chave => $valor){
-            foreach ($valor as $chave =>$lc){
-                $arrayMusicas[$lc->id_musica] = Musica::find()
-                    ->where(['id'=> $lc->id_musica])->all();
+        if(isset($arrayLC)){
+            foreach ($arrayLC as $chave => $valor){
+                foreach ($valor as $chave =>$lc){
+                    $arrayMusicas[$lc->id_musica] = Musica::find()
+                        ->where(['id'=> $lc->id_musica])->all();
+                }
             }
+        } else{
+            $arrayMusicas = null;
         }
+
         return $this->render('index', [
             'model'=>$model,
             'arrayMusicas'=>$arrayMusicas

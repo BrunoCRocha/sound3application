@@ -52,25 +52,35 @@ $this->title = 'Perfil de '.$model->username;
                 </thead>
                 <tbody id="item-compra">
                     <?php
-                    foreach($arrayMusicas as $chave => $valor){
-                        foreach($valor as $chave => $musica) {
-                            ?>
-                            <tr>
+                    if($arrayMusicas != null) {
+                        foreach ($arrayMusicas as $chave => $valor) {
+                            foreach ($valor as $chave => $musica) {
+                                ?>
+                                <tr>
 
-                            <?php
-                            echo '<td>' . $musica->nome . '</td>';
-                            echo '<td>' . $musica->album->artista->nome . '</td>';
-                            echo '<td>' . $musica->album->nome . '</td>';
-                            echo '<td><a href="'.Url::toRoute(['perfil/download','id'=>$musica->id]).'" <span class="glyphicon glyphicon-download" id="download"></span></td>';
-                        }?>
+                                <?php
+                                echo '<td>' . $musica->nome . '</td>';
+                                echo '<td>' . $musica->album->artista->nome . '</td>';
+                                echo '<td>' . $musica->album->nome . '</td>';
+                                echo '<td><a href="' . Url::toRoute(['perfil/download', 'id' => $musica->id]) . '" <span class="glyphicon glyphicon-download" id="download"></span></td>';
+                            } ?>
+                            </tr>
+                        <?php }
+                    } else{
+                        $msg = 'Ainda não adquiriu nenhuma música :(';
+                    }?>
 
-                        </tr>
-                    <?php }
-                    ?>
+
+
+
                 </tbody>
                 </tbody>
 
             </table>
+
+            <?php if(isset($msg)){
+                echo $msg;
+            }?>
         </div>
     </div>
 </div>
