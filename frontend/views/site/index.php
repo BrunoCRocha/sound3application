@@ -38,13 +38,6 @@ $this->registerJsFile(
                                     <a  id=nomeArtista href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>">
                                         <h3><?=$musica->album->artista->nome?></h3></a>
                             </div>
-                            <?php
-                              /* echo Button::Widget([
-                                    'label'=>'label',
-                                    'options'=>['style' => 'background: url('.Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem.')'],
-                                    'url' => Url::toRoute(['detalhes/album', 'id' => $musica->album->id])
-                                ]);*/
-                            ?>
                        <?php }
                     }$count=0?>
 
