@@ -7,6 +7,7 @@ use common\models\Compra;
 use common\models\Fav_Musica;
 use common\models\LinhaCompra;
 use common\models\Musica;
+use common\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Request;
@@ -18,6 +19,8 @@ class CarrinhoController extends \yii\web\Controller
         $message = '';
 
         $userLogado = Yii::$app->user->identity;
+
+
 
         $compra = Compra::find()
             ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
