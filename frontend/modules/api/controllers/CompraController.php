@@ -4,6 +4,7 @@ namespace frontend\modules\api\controllers;
 
 use common\models\Compra;
 use common\models\LinhaCompra;
+use common\models\Musica;
 use common\models\User;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -36,23 +37,31 @@ class CompraController extends \yii\rest\ActiveController
 
         return $behaviors;
     }*/
-    public function actionMusicascompradas($id)
+    public function actionMusicascompradas($idcompra)
     {
-        $compras=$this->actionComprasuser($id);
-        foreach ($compras as $compra){
-            foreach ($compra->linhaCompras as $lc) {
+        $compra=Compra::findOne($idcompra);
 
-            }
+        $musicas=array();
+
+        foreach ($compra->linhaCompras as $lc) {
+            $musica=Musica::findOne($lc->id_musica);
+            array_push($musicas,$musica);
         }
+        return $musicas;
     }
-    public function actionComprasuser($id)
+    public function actionComprasuser($idutilizador)
     {
         //solicitar autenticação
         //$this->getBehavior('authenticator');
 
-        $comprasEfetivadas=Compra::find()->select('id')->where(['and',['id_utilizador'=> $id,'efetivada'=>1]])->all();
+        $comprasEfetivadas=$this->getCompras($idutilizador);
         return $comprasEfetivadas;
 
 
+    }
+
+    public function getCompras($id){
+        $comprasEfetivadas=Compra::find()->select('id')->where(['and',['id_utilizador'=> $id,'efetivada'=>1]])->all();
+        return $comprasEfetivadas;
     }
 }
