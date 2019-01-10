@@ -15,11 +15,11 @@ class LoginCest
     public function testloginUser(FunctionalTester $I)
     {
         $I->amOnPage('/');
-        $I->fillField('Username', 'Teste');
-        $I->fillField('Password', 'teste123');
+        $I->fillField('Username', 'admin');
+        $I->fillField('Password', 'adminadmin');
         $I->click('login-button');
 
-        $I->see('Logout(Teste)');
+        $I->see('Logout(admin)');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
 

@@ -6,10 +6,11 @@ class UserController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\User';
 
-    public function actionVerificarlogin($username, $password){
-        $user = \common\models\User::findByUsername($username);
+    public function actionVerificarlogin(){
+        $headers = getallheaders ();
+        $user = \common\models\User::findByUsername($headers["username"]);
 
-        if($user && \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash))
+        if($user && \Yii::$app->getSecurity()->validatePassword($headers["password"], $user->password_hash))
         {
             return $user->getId();
         }

@@ -57,6 +57,9 @@ return [
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'except' =>['delete'],
+                    'extraPatterns' => [
+                        'GET verificarlogin' => 'verificarlogin',
+                    ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
