@@ -19,7 +19,7 @@ class ComentariosCest
 
 
 
-        $I->see('Dress');
+        $I->see('Easier To Run');
         $I->amOnRoute('/detalhes/album/', ['id' => '5']);
         $I->click('#criarFavorito');
 
