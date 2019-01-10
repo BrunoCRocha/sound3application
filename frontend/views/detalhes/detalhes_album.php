@@ -25,7 +25,7 @@ if($estadoFav == null){
             <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $album->artista->id])?>"><h4 style="color: white"><?= $album->artista->nome ?></h4></a>
             <h5>Ano: <?= $album->ano ?></h5>
             <h5>Preço: <?= $album->preco ?> €</h5>
-            <a data-toggle="modal" data-target="#modalComment" class="button btn btn-success"> Criar Comentário</a>
+            <a data-toggle="modal" data-target="#modalComment" class="button btn btn-success" id="criarComment-button"> Criar Comentário</a>
             <a href="<?= Url::toRoute(['favoritos/'.$rotaFav,'id'=>$album->id])?>" class="button btn btn-success" id="criarFavorito"><?=$textbtn?></a>
 
             <!-- Modal -->

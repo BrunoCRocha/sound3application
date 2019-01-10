@@ -76,8 +76,7 @@ class PerfilController extends \yii\web\Controller
         $file = $model->caminhoMP3;
         $path = Yii::getAlias('@musicasF').'/'.$file;
 
-        var_dump($model);
-        die;
+
 
         if (file_exists($path)) {
 
@@ -122,7 +121,7 @@ class PerfilController extends \yii\web\Controller
 
             return \Yii::$app->response->sendFile($fileMusica);
         }
-
+        return $this->redirect(['perfil/index','id' => Yii::$app->user->identity->getId()]);
     }
 
 }
