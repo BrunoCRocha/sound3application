@@ -1,11 +1,11 @@
 <?php namespace frontend\tests\functional;
 use frontend\tests\FunctionalTester;
 
-class ComentariosCest
+class FavoritosCest
 {
 
     // tests
-    public function testCriarComment(FunctionalTester $I)
+    public function testCriarFav(FunctionalTester $I)
     {
         $I->amOnPage('/site/index');
         $I->click('Login');
