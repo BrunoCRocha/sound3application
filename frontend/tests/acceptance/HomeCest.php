@@ -10,21 +10,24 @@ class HomeCest
         $I->amOnPage('/site/index');
         $I->click('Login');
         $I->see('Altere-a');
-        $I->fillField('Username', 'Teste');
-        $I->fillField('Password', 'teste123');
+        $I->fillField('Username', 'admin');
+        $I->fillField('Password', 'adminadmin');
         $I->click('login-button');
+        $I->amOnPage('/site/index');
         $I->see('Carrinho');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
 
 
+
         $I->amOnPage('/site/index');
-        $I->see('Fire');
-
-        $I->seeLink('Favoritos');
-        $I->click('Favoritos');
-        $I->wait(2); // wait for page to be opened
-
-        $I->see('Sem Géneros Favoritos...');
+        $I->click(  'AClara');
+        $I->see ('Piruka');
+        $I->click('#criarComment-button');
+        $I->wait(3);
+        $I->click('#comment-conteudo');
+        $I->wait(3);
+        $I->fillField('Conteudo','Bom dia');
+        $I->click('guardar-button');
     }
 }

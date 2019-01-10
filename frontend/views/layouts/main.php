@@ -19,13 +19,13 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/home.css">
-    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/album.css">
-    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/pesquisa.css">
-    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/carrinho.css">
-    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/perfil.css">
-    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/detalhes.css">
-    <link rel="stylesheet" href="/sound3application/frontend/web/ficheiros_css/favoritos.css">
+
+    <link rel="stylesheet" href="<?=Yii::getAlias('@csshome')?>">
+    <link rel="stylesheet" href="<?=Yii::getAlias('@csspesquisa')?>">
+    <link rel="stylesheet" href="<?=Yii::getAlias('@csscarrinho')?>">
+    <link rel="stylesheet" href="<?=Yii::getAlias('@cssperfil')?>">
+    <link rel="stylesheet" href="<?=Yii::getAlias('@cssdetalhes')?>">
+    <link rel="stylesheet" href="<?=Yii::getAlias('@cssfavoritos')?>">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
