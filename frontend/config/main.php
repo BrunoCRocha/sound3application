@@ -65,11 +65,17 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/album',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET findalbumbyid' => 'findalbumbyid',
+                    ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/artista',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET findartistabyid' => 'findartistabyid',
+                    ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -77,6 +83,7 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET totalalbuns' => 'totalalbuns',
+                        'GET findgenerobyid' => 'findgenerobyid',
                     ],
                 ],
                 [
@@ -84,8 +91,9 @@ return [
                     'controller' => 'api/musica',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET top5musicas' => 'top5musicas',
+                        'GET findmusicabyid' => 'findmusicabyid',
                     ],
+
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',

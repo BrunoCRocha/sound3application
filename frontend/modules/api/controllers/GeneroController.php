@@ -9,7 +9,7 @@ class GeneroController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Genero';
 
-
+    /*
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -26,20 +26,29 @@ class GeneroController extends \yii\rest\ActiveController
         ];
 
         return $behaviors;
-    }
+    }*/
 
     public function actionTotalalbuns($id){
 
         //solicitar autenticação
-        $this->getBehavior('authenticator');
+        /*$this->getBehavior('authenticator');
 
         if(!Genero::findOne($id)){
             return ;
-        }
+        }*/
 
         $albuns = Album::find()->where(['id_genero' =>$id])->all();
 
         return ['totalalbuns' => count($albuns)];
+    }
+
+    public function actionFindgenerobyid($id){
+        $genero = Genero::findOne($id);
+
+        var_dump($genero);
+        die();
+
+        return $genero;
     }
 
 }
