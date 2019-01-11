@@ -9,8 +9,10 @@ class GeneroController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Genero';
 
-    /*
-    public function behaviors()
+
+
+    /*public function behaviors()
+
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
@@ -31,7 +33,9 @@ class GeneroController extends \yii\rest\ActiveController
     public function actionTotalalbuns($id){
 
         //solicitar autenticação
+
         /*$this->getBehavior('authenticator');
+
 
         if(!Genero::findOne($id)){
             return ;

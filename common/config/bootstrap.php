@@ -12,4 +12,10 @@ Yii::setAlias('@albunsF', 'http://localhost/sound3application/common/img/capas')
 Yii::setAlias('@generosF', 'http://localhost/sound3application/common/img/generos');
 Yii::setAlias('@menuiconsF','http://localhost/sound3application/frontend/web/menu_icons');
 Yii::setAlias('@musicasF','http://localhost/sound3application/common/musicas');
+Yii::setAlias('@csshome','http://localhost/sound3application/frontend/web/ficheiros_css/home.css');
+Yii::setAlias('@csspesquisa','http://localhost/sound3application/frontend/web/ficheiros_css/pesquisa.css');
+Yii::setAlias('@cssdetalhes','http://localhost/sound3application/frontend/web/ficheiros_css/detalhes.css');
+Yii::setAlias('@csscarrinho','http://localhost/sound3application/frontend/web/ficheiros_css/carrinho.css');
+Yii::setAlias('@cssperfil','http://localhost/sound3application/frontend/web/ficheiros_css/perfil.css');
+Yii::setAlias('@cssfavoritos','http://localhost/sound3application/frontend/web/ficheiros_css/favoritos.css');
 

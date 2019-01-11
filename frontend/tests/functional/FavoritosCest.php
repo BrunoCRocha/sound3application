@@ -17,24 +17,12 @@ class FavoritosCest
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
 
-
-
         $I->see('Easier To Run');
         $I->amOnRoute('/detalhes/album/', ['id' => '5']);
         $I->click('#criarFavorito');
 
-
         $I->click('Favoritos');
         $I->click('Álbuns');
         $I->see('Meteora (2)');
-
-
-
-
-        //\Codeception\Util\Debug::debug($I->see("Carrinho"));die();
-
-
-
-
     }
 }
