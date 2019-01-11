@@ -61,4 +61,13 @@ class MusicaController extends \yii\rest\ActiveController
         return ['top5musicas' => $top5musicas];
     }
 
+    public function actionFindgenerobyid($id){
+        $genero = Genero::findOne($id);
+
+        var_dump($genero);
+        die();
+
+        return $genero;
+    }
+
 }
