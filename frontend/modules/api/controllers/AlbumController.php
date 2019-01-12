@@ -30,6 +30,7 @@ class AlbumController extends \yii\rest\ActiveController
         return $behaviors;
     }*/
 
+
     public function actionTopalbuns(){
 
         $compras = Compra::find()->select('id')
@@ -83,6 +84,26 @@ class AlbumController extends \yii\rest\ActiveController
         $albunsMaisRecentes = array_slice($inverter, 0 , 5, true);
 
         return $albunsMaisRecentes;
+    }
+  
+    public function actionFindalbumbyid($id){
+        $album = Album::findOne($id);
+
+        return $album;
+    }
+
+    public function actionFindmusicas($id){
+        $album = Album::findOne($id);
+
+        return $album->musicas;
+    }
+
+    public function actionFindalbumbysearch($search){
+        $albumSearch = Album::find()
+            ->where(['like', 'nome', $search])
+            ->all();
+
+        return $albumSearch;
     }
 
 }

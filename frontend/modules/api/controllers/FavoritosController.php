@@ -2,8 +2,11 @@
 
 namespace frontend\modules\api\controllers;
 
+use common\models\Fav_Album;
+use common\models\Fav_Artista;
+use common\models\Fav_Genero;
 use Yii;
-use app\models\FavMusica;
+use common\models\Fav_Musica;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -14,118 +17,47 @@ use yii\filters\VerbFilter;
  */
 class FavoritosController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+    public function actionFindfavgenero($iduser,$idgenero){
+        $favorito = Fav_Genero::find()->where(['and',['id_utilizador' => $iduser, 'id_genero' => $idgenero]])->one();
 
-    /**
-     * Lists all FavMusica models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => FavMusica::find(),
-        ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single FavMusica model.
-     * @param integer $id_utilizador
-     * @param integer $id_musica
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id_utilizador, $id_musica)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id_utilizador, $id_musica),
-        ]);
-    }
-
-    /**
-     * Creates a new FavMusica model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new FavMusica();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_utilizador' => $model->id_utilizador, 'id_musica' => $model->id_musica]);
+        if($favorito != null){
+            return "true";
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return "false";
     }
 
-    /**
-     * Updates an existing FavMusica model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id_utilizador
-     * @param integer $id_musica
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id_utilizador, $id_musica)
-    {
-        $model = $this->findModel($id_utilizador, $id_musica);
+    public function actionFindfavartista($iduser,$idartista){
+        $favorito = Fav_Artista::find()->where(['and',['id_utilizador' => $iduser, 'id_artista' => $idartista]])->one();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_utilizador' => $model->id_utilizador, 'id_musica' => $model->id_musica]);
+
+        if($favorito != null){
+            return "true";
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return "false";
     }
 
-    /**
-     * Deletes an existing FavMusica model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id_utilizador
-     * @param integer $id_musica
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id_utilizador, $id_musica)
-    {
-        $this->findModel($id_utilizador, $id_musica)->delete();
+    public function actionFindfavalbum($iduser,$idalbum){
+        $favorito = Fav_Album::find()->where(['and',['id_utilizador' => $iduser, 'id_album' => $idalbum]])->one();
 
-        return $this->redirect(['index']);
-    }
 
-    /**
-     * Finds the FavMusica model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id_utilizador
-     * @param integer $id_musica
-     * @return FavMusica the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id_utilizador, $id_musica)
-    {
-        if (($model = FavMusica::findOne(['id_utilizador' => $id_utilizador, 'id_musica' => $id_musica])) !== null) {
-            return $model;
+        if($favorito != null){
+            return "true";
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        return "false";
+    }
+
+    public function actionFindfavmusica($iduser,$idmusica){
+        $favorito = Fav_Musica::find()->where(['and',['id_utilizador' => $iduser, 'id_musica' => $idmusica]])->one();
+
+
+        if($favorito != null){
+            return "true";
+        }
+
+        return "false";
     }
 }

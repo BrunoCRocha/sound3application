@@ -29,29 +29,30 @@ class ArtistaController extends \yii\rest\ActiveController
         return $behaviors;
     }*/
 
+
     public function actionDetalhes($id, $userLogado){
         $artista = Artista::find()->where(['id' => $id])
             ->one();
+    }
+  
+    public function actionAlbunsartista($id)
+    {
+        $artista = Artista::findOne($id);
 
-        $albunsArtista = Album::find()
-            ->where(['id_artista' => $id])
+        return $artista->albums;
+    }
+    public function actionFindartistabyid($id){
+        $artista = Artista::findOne($id);
+
+        return $artista;
+    }
+
+    public function actionFindartistabysearch($search){
+        $artistaSearch = Artista::find()
+            ->where(['like', 'nome', $search])
             ->all();
 
-        $estadoFav = Fav_Artista::find()
-            ->where(['and',['id_utilizador'=>$userLogado->id,'id_artista'=> $id]])
-            ->distinct()
-            ->all();
-
-
-        foreach ($albunsArtista as $album ){
-            array_push($arrayJSONAlbuns, json_encode($album));
-        }
-        foreach ($estadoFav as $estado){
-            array_push($arrayJSONFavorito, json_encode($estado));
-        }
-
-        return ;
-
+        return $artistaSearch;
     }
 
     public function actionArtistasrandom(){
@@ -60,7 +61,6 @@ class ArtistaController extends \yii\rest\ActiveController
         $artistasRand = array_rand($artistas, 5);
 
         $artistasObjeto = Artista::find()->where(['id' => $artistasRand])->all();
-
 
         return $artistasObjeto;
     }

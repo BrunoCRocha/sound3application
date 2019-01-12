@@ -2,17 +2,54 @@
 
 namespace frontend\modules\api\controllers;
 
+use common\models\Compra;
+use common\models\User;
+use frontend\models\SignupForm;
+use Yii;
+
 class UserController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\User';
 
-    public function actionVerificarlogin($username, $password){
-        $user = \common\models\User::findByUsername($username);
+    public function actions()
+    {
+        $actions = parent::actions();
+        unset($actions['create']);
+        return $actions;
+    }
 
-        if($user && \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash))
+    public function actionCreate(){
+        $request = Yii::$app->request->post();
+        $model = new SignupForm();
+        $model->username=$request["username"];
+        $model->email=$request["email"];
+        $model->password=$request["password"];
+        if ($user = $model->signup()) {
+            //ENVIAR EMAIL DE INFORMAÇÃO
+            $compra = new Compra();
+
+            $compra->id_utilizador = $user->getId();
+            $compra->efetivada = 0;
+            $compra->valor_total = 0;
+
+            $compra->save(false);
+
+            return "true";
+        }
+
+        return "false";
+    }
+
+    public function actionVerificarlogin(){
+        $headers = getallheaders ();
+        $user = \common\models\User::findByUsername($headers["username"]);
+
+        if($user && \Yii::$app->getSecurity()->validatePassword($headers["password"], $user->password_hash))
         {
             return $user->getId();
         }
         return -1;
     }
+
+
 }

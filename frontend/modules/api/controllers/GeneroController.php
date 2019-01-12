@@ -10,8 +10,8 @@ class GeneroController extends \yii\rest\ActiveController{
 
     public $modelClass = 'common\models\Genero';
 
-
     /*public function behaviors()
+
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
@@ -32,15 +32,37 @@ class GeneroController extends \yii\rest\ActiveController{
     public function actionTotalalbuns($id){
 
         //solicitar autenticação
-        //$this->getBehavior('authenticator');
+
+        /*$this->getBehavior('authenticator');
+
 
         if(!Genero::findOne($id)){
             return ;
-        }
+        }*/
 
         $albuns = Album::find()->where(['id_genero' =>$id])->all();
 
         return ['totalalbuns' => count($albuns)];
+    }
+
+    public function actionFindgenerobyid($id){
+        $genero = Genero::findOne($id);
+
+        return $genero;
+    }
+
+    public function actionFindalbuns($id){
+        $genero = Genero::findOne($id);
+
+        return $genero->albums;
+    }
+
+    public function actionFindgenerobysearch($search){
+        $generoSearch = Genero::find()
+            ->where(['like', 'nome', $search])
+            ->all();
+
+        return $generoSearch;
     }
 
 }

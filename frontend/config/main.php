@@ -57,6 +57,9 @@ return [
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'except' =>['delete'],
+                    'extraPatterns' => [
+                        'GET verificarlogin' => 'verificarlogin',
+                    ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -64,8 +67,10 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET topalbuns' => 'topalbuns',
-                        'GET albunsrecentes' => 'albunsrecentes',
-                    ]
+                        'GET albunsrecentes' => 'albunsrecentes',                    
+                        'GET findalbumbyid' => 'findalbumbyid',
+                        'GET findmusicas' => 'findmusicas',
+                    ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -73,7 +78,9 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET artistasrandom' => 'artistasrandom',
-                    ]
+                        'GET findartistabyid' => 'findartistabyid',
+                        'GET albunsartista' => 'albunsartista',
+                    ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -81,6 +88,8 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET totalalbuns' => 'totalalbuns',
+                        'GET findgenerobyid' => 'findgenerobyid',
+                        'GET findalbuns' => 'findalbuns',
                     ],
                 ],
                 [
@@ -88,8 +97,29 @@ return [
                     'controller' => 'api/musica',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET top5musicas' => 'top5musicas',
+                        'GET findmusicabyid' => 'findmusicabyid',
                     ],
+
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favgenero',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favartista',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favalbum',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favmusica',
+                    'pluralize' => false,
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -106,11 +136,6 @@ return [
                     'controller' => 'api/comment',
                     'pluralize' => false,
                 ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/favoritos',
-                    'pluralize' => false,
-                ]
             ]
         ],
 
