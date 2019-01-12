@@ -11,7 +11,7 @@ class ArtistaController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Artista';
 
-    public function behaviors()
+    /*public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
@@ -27,7 +27,7 @@ class ArtistaController extends \yii\rest\ActiveController
         ];
 
         return $behaviors;
-    }
+    }*/
 
     public function actionDetalhes($id, $userLogado){
         $artista = Artista::find()->where(['id' => $id])
@@ -52,5 +52,16 @@ class ArtistaController extends \yii\rest\ActiveController
 
         return ;
 
+    }
+
+    public function actionArtistasrandom(){
+        $artistas = Artista::find()->all();
+
+        $artistasRand = array_rand($artistas, 5);
+
+        $artistasObjeto = Artista::find()->where(['id' => $artistasRand])->all();
+
+
+        return $artistasObjeto;
     }
 }

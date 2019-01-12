@@ -128,6 +128,5 @@ class Artista extends \yii\db\ActiveRecord
             $mqtt->close();
         }
         else { file_put_contents('debug.output',"Time out!");}
-
     }
 }

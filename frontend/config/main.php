@@ -62,11 +62,18 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/album',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET topalbuns' => 'topalbuns',
+                        'GET albunsrecentes' => 'albunsrecentes',
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/artista',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET artistasrandom' => 'artistasrandom',
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',

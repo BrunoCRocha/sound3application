@@ -1,11 +1,11 @@
 <?php
 namespace frontend\controllers;
 
-use common\models\Artista;
+
+use common\models\Album;
 use common\models\Compra;
 use common\models\LinhaCompra;
 use common\models\Musica;
-use common\models\User;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -85,7 +85,7 @@ class SiteController extends Controller
 
         $valores = array();
 
-        var_dump($compras[0]->linhaCompras);die();
+
         foreach ($compras as $compra){
             foreach ($compra->linhaCompras as $lc){
                     $numeroVendas = LinhaCompra::find()
@@ -111,6 +111,8 @@ class SiteController extends Controller
             $modelMusica = Musica::findOne($idMusica);
             array_push($arrayMusicas, $modelMusica);
         }
+
+
 
         /*var_dump($maisVendidos, $arrayMusicas);
         die();*/
