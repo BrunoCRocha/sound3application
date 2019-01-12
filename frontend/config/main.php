@@ -67,6 +67,7 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET findalbumbyid' => 'findalbumbyid',
+                        'GET findmusicas' => 'findmusicas',
                     ],
                 ],
                 [
@@ -75,6 +76,7 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET findartistabyid' => 'findartistabyid',
+                        'GET albunsartista' => 'albunsartista',
                     ],
                 ],
                 [
@@ -84,6 +86,7 @@ return [
                     'extraPatterns' => [
                         'GET totalalbuns' => 'totalalbuns',
                         'GET findgenerobyid' => 'findgenerobyid',
+                        'GET findalbuns' => 'findalbuns',
                     ],
                 ],
                 [
@@ -94,6 +97,26 @@ return [
                         'GET findmusicabyid' => 'findmusicabyid',
                     ],
 
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favgenero',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favartista',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favalbum',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favmusica',
+                    'pluralize' => false,
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -110,11 +133,6 @@ return [
                     'controller' => 'api/comment',
                     'pluralize' => false,
                 ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/favoritos',
-                    'pluralize' => false,
-                ]
             ]
         ],
 

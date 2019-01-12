@@ -11,7 +11,7 @@ class ArtistaController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Artista';
 
-    public function behaviors()
+    /*public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
@@ -27,30 +27,26 @@ class ArtistaController extends \yii\rest\ActiveController
         ];
 
         return $behaviors;
+    }*/
+
+    public function actionAlbunsartista($id)
+    {
+        $artista = Artista::findOne($id);
+
+        return $artista->albums;
+    }
+    public function actionFindartistabyid($id){
+        $artista = Artista::findOne($id);
+
+        return $artista;
     }
 
-    public function actionDetalhes($id, $userLogado){
-        $artista = Artista::find()->where(['id' => $id])
-            ->one();
-
-        $albunsArtista = Album::find()
-            ->where(['id_artista' => $id])
+    public function actionFindartistabysearch($search){
+        $artistaSearch = Artista::find()
+            ->where(['like', 'nome', $search])
             ->all();
 
-        $estadoFav = Fav_Artista::find()
-            ->where(['and',['id_utilizador'=>$userLogado->id,'id_artista'=> $id]])
-            ->distinct()
-            ->all();
-
-
-        foreach ($albunsArtista as $album ){
-            array_push($arrayJSONAlbuns, json_encode($album));
-        }
-        foreach ($estadoFav as $estado){
-            array_push($arrayJSONFavorito, json_encode($estado));
-        }
-
-        return ;
-
+        return $artistaSearch;
     }
+
 }
