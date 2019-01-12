@@ -10,7 +10,7 @@ use yii\filters\auth\HttpBasicAuth;
 class MusicaController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Musica';
-
+    /*
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -27,7 +27,7 @@ class MusicaController extends \yii\rest\ActiveController
         ];
 
         return $behaviors;
-    }
+    }*/
 
     public function actionTop5musicas(){
         $compras = Compra::find()->select('id')
@@ -61,13 +61,18 @@ class MusicaController extends \yii\rest\ActiveController
         return ['top5musicas' => $top5musicas];
     }
 
-    public function actionFindgenerobyid($id){
-        $genero = Genero::findOne($id);
+    public function actionFindmusicabyid($id){
+        $musica = Musica::findOne($id);
 
-        var_dump($genero);
-        die();
+        return $musica;
+    }
 
-        return $genero;
+    public function actionFindmusicabysearch($search){
+        $musicaSearch = Musica::find()
+            ->where(['like', 'nome', $search])
+            ->all();
+
+        return $musicaSearch;
     }
 
 }

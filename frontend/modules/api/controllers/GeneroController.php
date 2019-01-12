@@ -9,8 +9,6 @@ class GeneroController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Genero';
 
-
-
     /*public function behaviors()
 
     {
@@ -49,10 +47,21 @@ class GeneroController extends \yii\rest\ActiveController
     public function actionFindgenerobyid($id){
         $genero = Genero::findOne($id);
 
-        var_dump($genero);
-        die();
-
         return $genero;
+    }
+
+    public function actionFindalbuns($id){
+        $genero = Genero::findOne($id);
+
+        return $genero->albums;
+    }
+
+    public function actionFindgenerobysearch($search){
+        $generoSearch = Genero::find()
+            ->where(['like', 'nome', $search])
+            ->all();
+
+        return $generoSearch;
     }
 
 }
