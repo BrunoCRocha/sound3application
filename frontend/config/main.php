@@ -66,6 +66,8 @@ return [
                     'controller' => 'api/album',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'GET topalbuns' => 'topalbuns',
+                        'GET albunsrecentes' => 'albunsrecentes',                    
                         'GET findalbumbyid' => 'findalbumbyid',
                         'GET findmusicas' => 'findmusicas',
                     ],
@@ -75,6 +77,7 @@ return [
                     'controller' => 'api/artista',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'GET artistasrandom' => 'artistasrandom',
                         'GET findartistabyid' => 'findartistabyid',
                         'GET albunsartista' => 'albunsartista',
                     ],

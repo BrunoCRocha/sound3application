@@ -29,6 +29,12 @@ class ArtistaController extends \yii\rest\ActiveController
         return $behaviors;
     }*/
 
+
+    public function actionDetalhes($id, $userLogado){
+        $artista = Artista::find()->where(['id' => $id])
+            ->one();
+    }
+  
     public function actionAlbunsartista($id)
     {
         $artista = Artista::findOne($id);
@@ -49,4 +55,13 @@ class ArtistaController extends \yii\rest\ActiveController
         return $artistaSearch;
     }
 
+    public function actionArtistasrandom(){
+        $artistas = Artista::find()->all();
+
+        $artistasRand = array_rand($artistas, 5);
+
+        $artistasObjeto = Artista::find()->where(['id' => $artistasRand])->all();
+
+        return $artistasObjeto;
+    }
 }

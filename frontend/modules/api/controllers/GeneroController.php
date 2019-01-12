@@ -5,8 +5,9 @@ use common\models\Album;
 use common\models\Genero;
 use yii\filters\auth\HttpBasicAuth;
 
-class GeneroController extends \yii\rest\ActiveController
-{
+class GeneroController extends \yii\rest\ActiveController{
+
+
     public $modelClass = 'common\models\Genero';
 
     /*public function behaviors()
