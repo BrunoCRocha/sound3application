@@ -46,7 +46,7 @@ class UserController extends \yii\rest\ActiveController
 
         if($user && \Yii::$app->getSecurity()->validatePassword($headers["password"], $user->password_hash))
         {
-            return $user->getId();
+            return ["user" => $user];
         }
         return -1;
     }
