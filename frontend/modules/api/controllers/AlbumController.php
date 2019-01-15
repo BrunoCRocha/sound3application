@@ -3,6 +3,7 @@
 namespace frontend\modules\api\controllers;
 
 use common\models\Album;
+use common\models\Artista;
 use common\models\Compra;
 use common\models\LinhaCompra;
 use common\models\Musica;
@@ -85,11 +86,20 @@ class AlbumController extends \yii\rest\ActiveController
 
         return $albunsMaisRecentes;
     }
-  
+
     public function actionFindalbumbyid($id){
+
         $album = Album::findOne($id);
 
-        return $album;
+        $artista = Artista::findOne($album->id_artista);
+
+        //var_dump($album->artista->nome);
+        //die();
+
+
+        $artista->nome;
+
+        return ["album" => $album, "artista" => $artista->nome];
     }
 
     public function actionFindmusicas($id){
