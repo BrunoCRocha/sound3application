@@ -31,7 +31,7 @@ if($musicasFav != null){
 ?>
 
 <li>
-    <div class="musica_album">
+    <div class="musica_album" >
         <h5><?= $musica->duracao ?></h5>
         <h4><?= $musica->nome ?></h4>
         <h5><?= $musica->preco?> €</h5>

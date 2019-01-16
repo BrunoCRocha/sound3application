@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 
+$this->title = 'Pesquisa de '. $search;
+
 $this->registerJsFile(
     '@web/js/menu_pesquisa.js',
     ['depends' => [\yii\web\JqueryAsset::className()]]

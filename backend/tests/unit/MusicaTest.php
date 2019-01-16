@@ -65,7 +65,7 @@ class MusicaTest extends \Codeception\Test\Unit
 
         $id=$this->tester->grabRecord('common\models\Musica', ['nome'=>'NovaMusica']);
         $musica=Musica::findOne($id);
-        $musica->nome='MusUpdate';
+        $musica-> nome ='MusUpdate';
         $musica->update();
 
         $this->tester->seeInDatabase('musica',['nome'=> 'MusUpdate']);

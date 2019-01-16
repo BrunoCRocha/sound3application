@@ -76,8 +76,6 @@ class PerfilController extends \yii\web\Controller
         $file = $model->caminhoMP3;
         $path = Yii::getAlias('@musicasF').'/'.$file;
 
-
-
         if (file_exists($path)) {
 
             return \Yii::$app->response->sendFile($path);
@@ -105,6 +103,7 @@ class PerfilController extends \yii\web\Controller
         }
         $fileMusica = 'Sound3.zip';
 
+
             $zip = new ZipArchive();
             if ($zip->open($fileMusica, ZipArchive::CREATE) !== TRUE) {
                 throw new Exception('Impossivel criar zip');
@@ -112,7 +111,6 @@ class PerfilController extends \yii\web\Controller
 
         foreach($arrayMusicas as $chave => $valor){
             foreach($valor as $chave => $musica) {
-
                 $zip->addFile($musica->caminhoMP3);
             }
         }

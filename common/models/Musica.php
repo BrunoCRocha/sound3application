@@ -103,7 +103,7 @@ class Musica extends \yii\db\ActiveRecord
         return $this->hasOne(Album::className(), ['id' => 'id_album']);
     }
     /*Alterações para a API*/
-    public function afterSave($insert, $changedAttributes)
+    /*public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
 
@@ -140,7 +140,7 @@ class Musica extends \yii\db\ActiveRecord
         $myObj->nome=$nome;
         $myJSON = json_encode($myObj);
         $this->fazPublish("DELETE",$myJSON);
-    }
+    }*/
 
     public function fazPublish($canal,$msg)
     {
