@@ -74,14 +74,14 @@ class PerfilController extends \yii\web\Controller
         $model = Musica::findOne($id);
 
         $file = $model->caminhoMP3;
-        $path = Yii::getAlias('@musicasF').'/'.$file;
+        $path = Yii::getAlias('@musicas').'\\'.$file;
 
 
 
-        if (file_exists($path)) {
-
+        if(file_exists($path)){
             return \Yii::$app->response->sendFile($path);
         }
+
         return $this->redirect(['perfil/index','id' => Yii::$app->user->identity->getId()]);
     }
 
@@ -112,8 +112,10 @@ class PerfilController extends \yii\web\Controller
 
         foreach($arrayMusicas as $chave => $valor){
             foreach($valor as $chave => $musica) {
+                $file = $musica->caminhoMP3;
+                $path = Yii::getAlias('@musicas').'\\'.$file;
 
-                $zip->addFile($musica->caminhoMP3);
+                $zip->addFile($path);
             }
         }
         $zip->close();
