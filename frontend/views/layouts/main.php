@@ -26,6 +26,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="<?=Yii::getAlias('@cssperfil')?>">
     <link rel="stylesheet" href="<?=Yii::getAlias('@cssdetalhes')?>">
     <link rel="stylesheet" href="<?=Yii::getAlias('@cssfavoritos')?>">
+    <link rel="stylesheet" href="<?=Yii::getAlias('@cssalbum')?>">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

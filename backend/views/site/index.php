@@ -4,7 +4,7 @@
 
 use yii\helpers\Url;
 
-$this->title = 'My Yii Application';
+$this->title = 'Sound3';
 ?>
 <div class="jumbotron">
     <?php echo '<h2> Bem-Vindo, ' . Yii::$app->user->identity->username .'</h2>'  ?>

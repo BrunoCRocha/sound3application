@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
    <p class="textPassword"> Password</p>
 
-    <?= Html::passwordInput('password','password',['class' => 'form-control'])?>
+    <?= Html::passwordInput('password','',['class' => 'form-control'])?>
 
     <?php // $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
 

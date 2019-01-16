@@ -1,6 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 use yii\helpers\Url;
+
+$this->title = 'Favoritos';
 ?>
 <div class="site-index">
     <div class="body-content" >

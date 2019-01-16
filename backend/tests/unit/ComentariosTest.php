@@ -42,7 +42,7 @@ class ComentariosTest extends \Codeception\Test\Unit
 
         $comment->conteudo='TstComment';
         $comment->data_criacao='2015-03-21';
-        $comment->id_utilizador=1;
+        $comment->id_utilizador=7;
         $comment->id_album=2;
         $comment->save();
 
@@ -50,7 +50,7 @@ class ComentariosTest extends \Codeception\Test\Unit
     }
     public function testUpdateComentarios()
     {
-        $id=$this->tester->grabRecord('common\models\Comment', ['conteudo'=>'dddd']);
+        $id=$this->tester->grabRecord('common\models\Comment', ['conteudo'=>'TstComment']);
 
         $comment = Comment::findOne($id);
         $comment->conteudo = 'ddddaa';
@@ -67,4 +67,5 @@ class ComentariosTest extends \Codeception\Test\Unit
         $this->tester->dontSeeInDatabase('comment',['conteudo'=>'ddddaa']);
 
     }
+
 }

@@ -77,7 +77,7 @@ class Genero extends \yii\db\ActiveRecord
     }
 
     /*Alterações para a API*/
-    public function afterSave($insert, $changedAttributes)
+   /*public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
 
@@ -91,7 +91,6 @@ class Genero extends \yii\db\ActiveRecord
         $myObj->descricao=$descricao;
         $myObj->caminhoImagem=$caminhoImagem;
         $myJSON = json_encode($myObj);
-
 
         if($insert)
             $this->fazPublish("INSERT",$myJSON);
@@ -109,7 +108,7 @@ class Genero extends \yii\db\ActiveRecord
         $myObj->nome=$nome;
         $myJSON = json_encode($myObj);
         $this->fazPublish("DELETE",$myJSON);
-    }
+    }*/
 
     public function fazPublish($canal,$msg)
     {

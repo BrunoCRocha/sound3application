@@ -19,6 +19,7 @@ class LoginCest
         $I->fillField('Password', 'adminadmin');
         $I->click('login-button');
 
+        $I->amOnPage('/site/index/');
         $I->see('Logout(admin)');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
