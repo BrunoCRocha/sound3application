@@ -39,10 +39,10 @@ class UserTest extends \Codeception\Test\Unit
         $user-> username = 'TesteUp';
         $user-> email = 'teste@testeq.pt';
         $user->generateAuthKey();
-        $user->setPassword('teste12q3');
+        $user->setPassword('teste1234');
         $user->generatePasswordResetToken();
         $user->save();
-        $this->tester->seeInDatabase('user',['username'=>'Testeqss']);
+        $this->tester->seeInDatabase('user',['username'=>'TesteUp']);
 
     }
 

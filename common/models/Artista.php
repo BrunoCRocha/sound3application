@@ -79,7 +79,7 @@ class Artista extends \yii\db\ActiveRecord
     }
 
     /*Alterações para a API*/
-    public function afterSave($insert, $changedAttributes)
+    /*public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
 
@@ -112,14 +112,14 @@ class Artista extends \yii\db\ActiveRecord
         $myObj->nome=$nome;
         $myJSON = json_encode($myObj);
         $this->fazPublish("DELETE",$myJSON);
-    }
+    }*/
 
     public function fazPublish($canal,$msg)
     {
         $server = "127.0.0.1";
         $port = 1883;
-        $username = "asasas"; // set your username
-        $password = "asasas"; // set your password
+        $username = "admin"; // set your username
+        $password = "adminadmin"; // set your password
         $client_id = "phpMQTT-publisher"; // unique!
         $mqtt = new \frontend\mosquitto\phpMQTT($server, $port, $client_id);
         if ($mqtt->connect(true, NULL, $username, $password))

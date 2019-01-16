@@ -21,13 +21,13 @@ class ArtistaTest extends \Codeception\Test\Unit
     public function testValidacaoArtista(){
         $artista = new Artista();
 
-        $artista->nome='O Artista Teste';
-        $this->assertTrue($artista->validate('nome'));
+        $artista->nome='O Artista Testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
+        $this->assertFalse($artista->validate('nome'));
 
-        $artista->nacionalidade='Pais Teste do Artista';
-        $this->assertTrue($artista->validate('nacionalidade'));
+        $artista->nacionalidade='Pais Teste do Artistaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+        $this->assertFalse($artista->validate('nacionalidade'));
 
-        $artista->ano=201542;
+        $artista->ano=2015422345678;
         $this->assertTrue($artista->validate('ano'));
 
         $artista->caminhoImagem='ghjm';
@@ -47,17 +47,10 @@ class ArtistaTest extends \Codeception\Test\Unit
         $this->tester->seeInDatabase('artista',['nome'=>'TestArtista']);
 
     }
+
     public function testUpdateArtista()
     {
-      $artista = new Artista();
-
-        $artista->nome = 'Teste';
-        $artista->nacionalidade = 'Teste';
-        $artista->ano = '2014';
-        $artista->save();
-        $this->tester->seeInDatabase('artista',['nome'=>'Teste','ano'=>'2014','nacionalidade'=>'Teste']);
-
-        $id=$this->tester->grabRecord('common\models\Artista',['nome'=>'Teste']);
+        $id=$this->tester->grabRecord('common\models\Artista',['nome'=>'TestArtista']);
 
         $artista = Artista::findOne($id);
         $artista-> nome ='Slow J';

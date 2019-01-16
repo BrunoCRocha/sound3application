@@ -21,7 +21,7 @@ $this->title = 'Perfil de '.$model->username;
 
             <p class="textPassword">Password</p>
 
-            <?= Html::passwordInput('password','password',['class' => 'form-control','id'=>'textPassword','readonly'=> true])?>
+            <?= Html::passwordInput('password','password',['class' => 'form-control','id'=>'textPassword','readonly'=> true, 'maxlength'=> true])?>
             <p> </p>
 
             <?= $form->field($model, 'email',['labelOptions'=>['style'=>'color:white']])->textInput(['id'=>'textEmail','readonly'=> true],['maxlength' => true]) ?>

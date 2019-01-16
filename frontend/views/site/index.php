@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use common\models\Album;
 use yii\helpers\Url;
 
+$this->title = 'Sound3';
 $count=0;
 $this->registerJsFile(
     '@web/js/textlimit.js',

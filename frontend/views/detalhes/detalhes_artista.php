@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+$this->title = $artista->nome;
 
 if($estadoFav == null){
     $textbtn = 'Adicionar aos Favoritos';

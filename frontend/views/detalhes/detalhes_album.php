@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+$this->title = $album->nome;
 
 if($estadoFav == null){
     $textbtn = 'Adicionar aos Favoritos';
