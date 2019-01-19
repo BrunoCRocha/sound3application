@@ -15,7 +15,6 @@ class PerfilController extends \yii\web\Controller
 {
     public function actionIndex($id)
     {
-
         $model = User::findOne($id);
 
         $model->setPassword(Yii::$app->request->post('password'));
@@ -49,7 +48,6 @@ class PerfilController extends \yii\web\Controller
     }
 
     public function actionUpdate($id){
-
 
         $model = User::findOne($id);
 
