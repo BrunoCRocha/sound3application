@@ -20,8 +20,6 @@ class CarrinhoController extends \yii\web\Controller
 
         $userLogado = Yii::$app->user->identity;
 
-
-
         $compra = Compra::find()
             ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
             ->with('linhaCompras')
