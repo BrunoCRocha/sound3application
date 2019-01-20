@@ -2,9 +2,13 @@
 
 namespace backend\controllers;
 
+use common\models\Compra;
+use common\models\CompraSearch;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
+use yii\bootstrap\Alert;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,6 +28,32 @@ class UserController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ]
+            ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                'only' => ['view','create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['readUtilizador'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['createUtilizador'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => ['updateUtilizador'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['deleteUtilizador'],
+                    ],
                 ],
             ],
         ];
@@ -66,13 +96,17 @@ class UserController extends Controller
     {
         $model = new User();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+
+        ?>
+        <?php
     }
 
     /**
@@ -84,15 +118,32 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if ($model->load(Yii::$app->request->post())) {
+            $update = Yii::$app->request->post('User');
+
+
+            $model->setPassword(Yii::$app->request->post('password'));
+
+            $model->username = $update['username'];
+
+            $model->save(false);
+
+            //$model->update();
+            //$model->updateAttributes();
+
+           return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+
+        /*var_dump(Yii::$app->request->post('password'));
+        die;*/
     }
 
     /**

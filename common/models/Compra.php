@@ -31,7 +31,7 @@ class Compra extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['data_compra', 'valor_total', 'id_utilizador'], 'required'],
+            [['data_compra', 'id_utilizador'], 'required'],
             [['data_compra'], 'safe'],
             [['valor_total'], 'number'],
             [['id_utilizador'], 'integer'],
@@ -66,5 +66,24 @@ class Compra extends \yii\db\ActiveRecord
     public function getLinhaCompras()
     {
         return $this->hasMany(LinhaCompra::className(), ['id_compra' => 'id']);
+    }
+
+    public function getValorTotal(){
+        $lcArray = $this->linhaCompras;
+        $vt = 0;
+
+        if(count($lcArray)>0){
+            foreach ($lcArray as $lc){
+                $musica = Musica::findOne($lc->id_musica);
+                $vt = $vt + $musica->preco;
+            }
+
+            $this->valor_total =$vt;
+
+            return $vt;
+        }else{
+            return 0;
+        }
+
     }
 }

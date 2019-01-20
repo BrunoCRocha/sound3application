@@ -2,9 +2,13 @@
 
 namespace backend\controllers;
 
+use common\models\Album;
+use common\models\User;
 use Yii;
 use common\models\Comment;
 use common\models\CommentSearch;
+use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +30,32 @@ class CommentController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['view','create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['admin','mod'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['admin','mod'],
+                        ],
+                        [
+                            'allow' => false,
+                            'actions' => ['update'],
+                            'roles' => ['admin','mod'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['admin','mod'],
+                        ],
+                    ],
+                ],
         ];
     }
 
@@ -33,15 +63,27 @@ class CommentController extends Controller
      * Lists all Comment models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
-        $searchModel = new CommentSearch();
+        /*$searchModel = new CommentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);*/
+
+
+        $query = Comment::find()->where(['id_album' => $id]);
+        $searchModel = new CommentSearch();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
         ]);
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
+        ]);
+
     }
 
     /**
@@ -70,7 +112,17 @@ class CommentController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $query_album = Album::find()->all();
+        $listAlbum=ArrayHelper::map($query_album, 'id', 'nome');
+
+        $query_utilizador = User::find()->all();
+        $listUtilizador=ArrayHelper::map($query_utilizador, 'id','username');
+
+
+
         return $this->render('create', [
+            'listAlbum' => $listAlbum,
+            'listUtilizador' => $listUtilizador,
             'model' => $model,
         ]);
     }
@@ -90,7 +142,15 @@ class CommentController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $query_album = Album::find()->all();
+        $listAlbum=ArrayHelper::map($query_album, 'id', 'nome');
+
+        $query_utilizador = User::find()->all();
+        $listUtilizador=ArrayHelper::map($query_utilizador, 'id','username');
+
         return $this->render('update', [
+            'listAlbum' => $listAlbum,
+            'listUtilizador' => $listUtilizador,
             'model' => $model,
         ]);
     }
@@ -124,4 +184,5 @@ class CommentController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

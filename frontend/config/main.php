@@ -11,9 +11,18 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'api' => [
+            'class' => 'frontend\modules\api\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' =>
+                [
+                    'application/json' => 'yii\web\JsonParser',
+                ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -36,14 +45,131 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'class' => 'yii\web\UrlManager',
+            // Disable index.php
             'showScriptName' => false,
+            // Disable r= routes
+            'enablePrettyUrl' => true,
             'rules' => [
-            ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/user',
+                    'pluralize' => false,
+                    'except' =>['delete'],
+                    'extraPatterns' => [
+                        'GET verificarlogin' => 'verificarlogin',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/album',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET topalbuns' => 'topalbuns',
+                        'GET albunsrecentes' => 'albunsrecentes',                    
+                        'GET findalbumbyid' => 'findalbumbyid',
+                        'GET findmusicas' => 'findmusicas',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/artista',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET artistasrandom' => 'artistasrandom',
+                        'GET findartistabyid' => 'findartistabyid',
+                        'GET albunsartista' => 'albunsartista',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/genero',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET totalalbuns' => 'totalalbuns',
+                        'GET findgenerobyid' => 'findgenerobyid',
+                        'GET findalbuns' => 'findalbuns',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/musica',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET findmusicabyid' => 'findmusicabyid',
+                    ],
+
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favgenero',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getallgenerosfavoritos' => 'getallgenerosfavoritos',
+                        'GET getgenerosfavoritos' => 'getgenerosfavoritos',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favartista',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getallartistasfavoritos' => 'getallartistasfavoritos',
+                        'GET getartistasfavoritos' => 'getartistasfavoritos',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favalbum',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET findfavalbum' => 'findfavalbum',
+                        'GET findfavmusica' => 'findfavmusica',
+                        'POST criarfavoritoalbum' => 'criarfavoritoalbum',
+                        'GET getallalbunsfavoritos' => 'getallalbunsfavoritos',
+                        'GET getalbunsfavoritos' => 'getalbunsfavoritos',
+                    ],
+
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/favmusica',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getallmusicasfavoritos' => 'getallmusicasfavoritos',
+                        'GET getmusicasfavoritos' => 'getmusicasfavoritos',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/linha-compra',
+                    'pluralize' => false,
+
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/compra',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/comment',
+                    'pluralize' => false,
+                ],
+            ]
         ],
-        */
+        'urlManagerBackEnd' => [
+            'class' => 'yii\web\UrlManager',
+            'hostInfo' => 'http://localhost/sound3application/backend',
+            'baseUrl' => 'http://localhost/sound3application/backend',
+            'enablePrettyUrl' => false,
+            'showScriptName' => false,
+        ]
+
+
     ],
+
+
     'params' => $params,
 ];

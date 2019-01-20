@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Comment */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Comments', 'url' => ['index']];
+$this->title = "Comentário ID: ".$model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Comentários', 'url' => ['index'], 'id'=>[$model->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comment-view">
@@ -15,25 +15,31 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Remover', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem a certeza que pretende eliminar?',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'conteudo',
-            'data_criacao',
-            'id_utilizador',
-            'id_album',
-        ],
-    ]) ?>
-
+    <div class="fundo-form">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                'id',
+                'conteudo',
+                'data_criacao',
+                ['label'=>'Utilizador',
+                    'attribute' => 'id_utilizador',
+                    'value'=>$model->utilizador->username,
+                ],
+                ['label'=>'Álbum',
+                    'attribute' => 'id_album',
+                    'value' => $model->album->nome,
+                ],
+            ],
+        ]) ?>
+    </div>
 </div>

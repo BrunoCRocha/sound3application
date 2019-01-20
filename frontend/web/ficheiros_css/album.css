@@ -1,0 +1,153 @@
+#info_album img{
+    width: 300px;
+    height: 300px;
+}
+
+#info_album {
+    text-align: center;
+}
+.musica_album{
+    margin-top: 10px;
+    height: 60px;
+    display: flex;
+    color: white;
+    width: 600px;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+#buttons_album{
+    margin-bottom: 30px;
+}
+
+#info_album h4{
+    margin-top: 0;
+}
+
+.musica_album h4{
+    margin-left: 20px;
+    width: 400px;
+}
+
+.musica_album:hover{
+    background:#D0D0D0;
+}
+
+#album_favoritos{
+    width: 40px;
+    height: 40px;
+    padding: 3px;
+    cursor: pointer;
+    border-radius: 50px;
+    border: none;
+}
+
+#album_carrinho{
+    width: 40px;
+    height: 40px;
+    padding: 3px;
+    cursor: pointer;
+    border-radius: 50px;
+    border: none;
+}
+
+
+#album_play:focus,
+#album_favoritos:focus,
+#album_carrinho:focus,
+#b_album_carrinho:focus,
+#b_album_favoritos:focus,
+#buttons_album button:focus
+{
+    outline: none;
+}
+
+
+#b_album_carrinho{
+    margin-right: 30px;
+    width: 110px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 10px;
+    background: none;
+    border: 1.5px solid #f44336;
+}
+
+#b_album_carrinho:focus{
+    background: #f44336;
+    color: white;
+}
+
+#b_album_carrinho img{
+    padding-right: 10px;
+    width: 30px;
+    height: 30px;
+    background: none;
+}
+
+#b_album_favoritos:focus{
+    background: #f44336;
+    color: white;
+}
+
+#b_album_favoritos{
+    width: 110px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 10px;
+    background: none;
+    border: 1.5px solid #f44336;
+}
+
+#b_album_favoritos img{
+    padding-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+#buttons_album button{
+    margin-right: 10px;
+    width: 100px;
+    height: 30px;
+    background: none;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 1.5px solid #f44336;
+}
+
+#buttons_album button:focus{
+    background: #f44336;
+    color: white;
+}
+
+.button_album{
+    margin-left: 3%;
+    margin-top: 3px;
+}
+
+.button_album img{
+    width: auto;
+    transition: all .2s ease-in-out;
+    height: 30px;
+    padding: 3px;
+}
+
+.button_album img:hover{
+    transform: scale(1.1);
+}
+
+.com_texto{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#com_data{
+    float: right;
+}
+
+.box-comment{
+    margin-top: 10px;
+    width: 50%
+}
+

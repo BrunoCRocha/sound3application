@@ -18,8 +18,8 @@ class AlbumSearch extends Album
     public function rules()
     {
         return [
-            [['id', 'id_artista', 'id_genero', 'id_subgenero'], 'integer'],
-            [['nome', 'data_lancamento'], 'safe'],
+            [['id', 'id_artista', 'id_genero'], 'integer'],
+            [['nome', 'ano'], 'safe'],
             [['preco'], 'number'],
         ];
     }
@@ -42,13 +42,17 @@ class AlbumSearch extends Album
      */
     public function search($params)
     {
-        $query = Album::find();
+        $query = Album::find()->joinWith(['artista', 'genero']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
 
         $this->load($params);
 
@@ -61,11 +65,12 @@ class AlbumSearch extends Album
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'data_lancamento' => $this->data_lancamento,
+            'ano' => $this->ano,
             'preco' => $this->preco,
             'id_artista' => $this->id_artista,
             'id_genero' => $this->id_genero,
-            'id_subgenero' => $this->id_subgenero,
+            'artista' => $this->nome,
+            'genero' => $this->genero,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome]);

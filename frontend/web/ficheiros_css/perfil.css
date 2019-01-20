@@ -1,0 +1,31 @@
+#tabelaMusicas{
+    color: white;
+}
+
+#download{
+    color: #DF2E28;
+    alignment: center;
+    size: 82px;
+}
+
+#item-compra tr:hover{
+    color: black;
+}
+.textPassword{
+    font-weight: bold;
+    color:white;
+}
+.conteudo-perfil{
+    color:white;
+}
+#botaoDownloadAll{
+    float:right;
+}
+.fundo{
+    color:#A9A9A9;
+}
+
+.form-group{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}

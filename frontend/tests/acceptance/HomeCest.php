@@ -2,19 +2,32 @@
 namespace frontend\tests\acceptance;
 
 use frontend\tests\AcceptanceTester;
-use yii\helpers\Url;
 
 class HomeCest
 {
     public function checkHome(AcceptanceTester $I)
     {
-        $I->amOnPage(Url::toRoute('/site/index'));
-        $I->see('My Application');
+        $I->amOnPage('/site/index');
+        $I->click('Login');
+        $I->see('Altere-a');
+        $I->fillField('Username', 'admin');
+        $I->fillField('Password', 'adminadmin');
+        $I->click('login-button');
+        $I->amOnPage('/site/index');
+        $I->see('Carrinho');
+        $I->dontSeeLink('Login');
+        $I->dontSeeLink('Signup');
 
-        $I->seeLink('About');
-        $I->click('About');
-        $I->wait(2); // wait for page to be opened
 
-        $I->see('This is the About page.');
+
+        $I->amOnPage('/site/index');
+        $I->click(  'AClara');
+        $I->see ('Piruka');
+        $I->click('#criarComment-button');
+        $I->wait(3);
+        $I->click('#comment-conteudo');
+        $I->wait(3);
+        $I->fillField('Conteudo','Bom dia');
+        $I->click('guardar-button');
     }
 }

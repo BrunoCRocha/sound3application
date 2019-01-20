@@ -5,16 +5,14 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "fav_genero".
+ * This is the model class for table "favgenero".
  *
  * @property int $id
  * @property int $id_utilizador
  * @property int $id_genero
- * @property int $id_subgenero
  *
  * @property User $utilizador
  * @property Genero $genero
- * @property ConterGenero $subgenero
  */
 class Fav_Genero extends \yii\db\ActiveRecord
 {
@@ -33,10 +31,9 @@ class Fav_Genero extends \yii\db\ActiveRecord
     {
         return [
             [['id_utilizador', 'id_genero'], 'required'],
-            [['id_utilizador', 'id_genero', 'id_subgenero'], 'integer'],
+            [['id_utilizador', 'id_genero'], 'integer'],
             [['id_utilizador'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_utilizador' => 'id']],
             [['id_genero'], 'exist', 'skipOnError' => true, 'targetClass' => Genero::className(), 'targetAttribute' => ['id_genero' => 'id']],
-            [['id_subgenero'], 'exist', 'skipOnError' => true, 'targetClass' => ConterGenero::className(), 'targetAttribute' => ['id_subgenero' => 'id_subgenero']],
         ];
     }
 
@@ -48,8 +45,7 @@ class Fav_Genero extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_utilizador' => 'Id Utilizador',
-            'id_genero' => 'Id Genero',
-            'id_subgenero' => 'Id Subgenero',
+            'id_genero' => 'Id Genero'
         ];
     }
 
@@ -72,8 +68,5 @@ class Fav_Genero extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubgenero()
-    {
-        return $this->hasOne(ConterGenero::className(), ['id_subgenero' => 'id_subgenero']);
-    }
+
 }

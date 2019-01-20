@@ -1,0 +1,304 @@
+
+/*    Side Menu e Home    */
+
+#resultado_pesquisa{
+    margin-left: 80px;
+    width: 100%;
+    height: 80px;
+}
+
+#resultado_pesquisa h2{
+    font-family: 'Noto Sans TC', sans-serif;
+    color: 	#A9A9A9;
+}
+
+#menu_opcoes{
+    margin-left: 50px;
+    width: 250px;
+}
+
+.menu_pesquisa{
+    color: black;
+    padding: 8px;
+    cursor: pointer;
+    width: 70%;
+    display: block;
+    text-align: left;
+    margin-right: 0px;
+    font-size: 16px;
+}
+
+.menu_pesquisa:hover{
+    color: white;
+    text-decoration: none;
+    background-color: #DF2E28;
+}
+
+#lista{
+    margin-left: 30px;
+}
+#lista li{
+    margin-top: 0px;
+}
+
+
+/*Musica  Album*/
+
+#objeto:hover{
+    background: #C0C0C0;
+}
+
+#objeto{
+    display: flex;
+    width: 100%;
+    height: 80px;
+}
+
+.preco h5{
+    margin-top: 30px;
+    font-size: 20px;
+    color: white;
+}
+
+.imagem_album-musica img{
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 60px;
+    height: auto;
+}
+
+.info_body{
+    margin-top: 20px;
+    width: 65%;
+    padding-left: 12px;
+}
+
+.info_body h4{
+    color:black;
+}
+
+.info_body h4 a{
+    color: black;
+}
+
+.info_body h5 a:hover{
+    color: white;
+}
+
+.info_body h5, h5 a{
+    color: white;
+}
+
+.separador{
+    margin: 0;
+    padding: 0;
+}
+
+.dropbtn {
+    background: url("../menu_icons/menu_dots.svg") no-repeat top;
+    width: 40px;
+    height: 30px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.opc-btn {
+    margin-left: 80px;
+    margin-top: 25px;
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+    text-decoration: none;
+    color: black;
+}
+
+.pesquisa_title{
+    margin-left: 10px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.pesquisa_title h3{
+    font-size: 25px;
+    color: #d4c9ce;
+    font-weight: bold;
+    font-family: Bahnschrift;
+}
+
+.pesquisa_title h3 span{
+    color: #DF2E28;
+}
+
+hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #DF2E28;
+    margin: 1em 0;
+    padding: 0;
+    background-color: #DF2E28;
+    color: #DF2E28;
+}
+
+/*    Genero    */
+.genero_musicas{
+    margin-bottom: 30px;
+}
+.genero_musicas img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.genero_musicas a{
+    margin-left: 20px;
+    font-size: 30px;
+    color: black;
+}
+
+.genero_musicas a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+
+/*    Artista    */
+
+#artista_body{
+    margin-left: 20px;
+}
+
+#artista a{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+li{
+    list-style-type: none;
+}
+
+#menu_musicas{
+    padding-left: 10px;
+}
+
+.objeto_genero-musica{
+    display: flex;
+    width: 100%;
+    height: 80px;
+}
+
+#imagem_artista-genero img{
+    margin-top: 10px;
+    margin-left: 10px;
+    object-fit: cover;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.info_body-artista{
+    margin-top: 20px;
+    width: 30%;
+    padding-left: 12px;
+}
+
+.info_body-artista a{
+    color: black;
+}
+
+.info_body-artista a:hover{
+    color: black;
+}
+
+.info_body-artista h5{
+    color: #D4C9CE;
+}
+
+
+.info_body-genero{
+    margin-top: 30px;
+    width: 30%;
+    padding-left: 12px;
+}
+
+.info_body-genero a{
+    color: black;
+}
+
+.info_body-genero a:hover{
+    color: black;
+}
+
+/*ALBUM + MUSICA*/
+
+#imagem_favoritos{
+    margin-top: 30px;
+    margin-left: 4%;
+}
+
+#imagem_favoritos a img{
+    height: 27px;
+    width: auto;
+    transition: all .2s ease-in-out;
+}
+
+#imagem_favoritos a img:hover{
+    transform: scale(1.1);
+}
+
+#imagem_favoritos_sozinha{
+    margin-top: 30px;
+    margin-left: 44%;
+}
+
+#imagem_favoritos_sozinha a img{
+    height: 27px;
+    width: auto;
+    transition: all .2s ease-in-out;
+}
+
+#imagem_favoritos_sozinha a img:hover{
+    transform: scale(1.3);
+}
+
+#imagem_carrinho{
+    margin-top: 30px;
+    margin-left: 4%;
+}
+
+#imagem_carrinho a img{
+    height: 30px;
+    width: auto;
+    transition: all .2s ease-in-out;
+}
+
+#imagem_carrinho a img:hover{
+    transform: scale(1.2);
+}
+
+
+
+
+
+

@@ -2,12 +2,16 @@
 
 namespace backend\controllers;
 
+use common\models\UploadForm;
 use Yii;
 use common\models\Genero;
 use common\models\GeneroSearch;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Request;
+use yii\web\UploadedFile;
 
 /**
  * GeneroController implements the CRUD actions for Genero model.
@@ -25,7 +29,7 @@ class GeneroController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-            ],
+            ]
         ];
     }
 
@@ -70,9 +74,14 @@ class GeneroController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+
+
         return $this->render('create', [
             'model' => $model,
         ]);
+
+
+
     }
 
     /**
@@ -94,6 +103,28 @@ class GeneroController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionImageupload()
+    {
+        $model = new UploadForm();
+
+        $tipo = 'genero';
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload($tipo)) {
+                // file is uploaded successfully
+                $idgenero=Yii::$app->request->get('id');
+                $genero= Genero::findOne($idgenero);
+                if($genero != null){
+                    $genero->caminhoImagem = $model->caminhoFinal;
+                    $genero->save(false);
+                }
+            }
+        }
+        return $this->render('view', ['model' => $genero]);
+    }
+
 
     /**
      * Deletes an existing Genero model.

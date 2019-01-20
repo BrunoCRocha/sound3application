@@ -2,12 +2,19 @@
 
 namespace backend\controllers;
 
+use common\models\Album;
+use common\models\DownloadMusica;
+use common\models\Fav_Musica;
+use common\models\LinhaCompra;
+use common\models\User;
 use Yii;
 use common\models\Musica;
 use common\models\MusicaSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * MusicaController implements the CRUD actions for Musica model.
@@ -26,6 +33,32 @@ class MusicaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['view','create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['readMusica'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createMusica'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['updateMusica'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['deleteMusica'],
+                        ],
+                    ],
+                ],
         ];
     }
 
@@ -70,10 +103,17 @@ class MusicaController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        $query_album = Album::find()->all();
+        $listAlbum=ArrayHelper::map($query_album, 'id', 'nome');
+
+
+        return $this->render('create', array(
+            'listAlbum' => $listAlbum,
+            'model' => $model
+        ));
+
     }
+
 
     /**
      * Updates an existing Musica model.
@@ -90,7 +130,11 @@ class MusicaController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $query_album = Album::find()->all();
+        $listAlbum=ArrayHelper::map($query_album, 'id', 'nome');
+
         return $this->render('update', [
+            'listAlbum' => $listAlbum,
             'model' => $model,
         ]);
     }
@@ -102,10 +146,12 @@ class MusicaController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    //Serve para eliminar tudo o que esteja associado a Musica em causa
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $musica=$this->findModel($id);
+        $musica->delete();
         return $this->redirect(['index']);
     }
 
@@ -116,6 +162,30 @@ class MusicaController extends Controller
      * @return Musica the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    public function actionMusicupload(){
+
+        $model = new DownloadMusica();
+
+        if(Yii::$app->request->isPost)
+        {
+            $model->musicFile = UploadedFile::getInstance($model,'musicFile');
+            if($model->upload())
+            {
+                $idmusica=Yii::$app->request->get('id');
+                $musica=Musica::findOne($idmusica);
+
+                if($musica != null)
+                {
+                    $musica->caminhoMP3=$model->caminhoFinal;
+                    $musica->save(false);
+                }
+            }
+        }
+        return $this->render('view',['model'=>$musica]);
+    }
+
+
     protected function findModel($id)
     {
         if (($model = Musica::findOne($id)) !== null) {

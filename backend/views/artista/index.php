@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="artista-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Criar Artista', ['create'], ['class' => 'btn btn-success']) ?>
@@ -30,9 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'nacionalidade',
 
                 ['label' => 'Data de Início de Carreira',
-                    'attribute' => 'data_ini_carreira',
+                    'attribute' => 'ano',
                 ],
-                ['class' => 'yii\grid\ActionColumn'],
+                ['class' => 'yii\grid\ActionColumn',
+
+                    'header'=>"Ações",
+                    'headerOptions' => [
+                        'style' => 'color:#3277b3',
+                    ],
+                ],
             ],
         ]); ?>
     </div>

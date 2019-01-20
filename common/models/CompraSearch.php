@@ -42,13 +42,18 @@ class CompraSearch extends Compra
      */
     public function search($params)
     {
-        $query = Compra::find();
+        $query = Compra::find(['user']);
+        //$query = Compra::find()->joinWith(['user']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
 
         $this->load($params);
 
@@ -58,6 +63,7 @@ class CompraSearch extends Compra
             return $dataProvider;
         }
 
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -65,6 +71,7 @@ class CompraSearch extends Compra
             'valor_total' => $this->valor_total,
             'id_utilizador' => $this->id_utilizador,
         ]);
+
 
         return $dataProvider;
     }

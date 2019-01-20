@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Artista */
@@ -10,18 +11,23 @@ use yii\widgets\ActiveForm;
 
 <div class="artista-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="fundo-form">
 
-    <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
+        <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nacionalidade')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'data_ini_carreira')->textInput() ?>
+        <?= $form->field($model, 'nacionalidade')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= $form->field($model, 'ano')->textInput(['maxlenght'=>true])?>
+
+        <div class="form-group">
+            <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        </div>
+        <?php ActiveForm::end(); ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+
+
 
 </div>

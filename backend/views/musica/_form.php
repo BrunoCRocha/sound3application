@@ -2,11 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\Album;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Musica */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+
+
 
 <div class="musica-form">
 
@@ -18,10 +22,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'preco')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_album')->textInput() ?>
+    <?= $form->field($model, 'id_album')->label('Album') ->dropDownList(
+            $listAlbum,
+            array('prompt' => 'Selecione o Álbum')
+    )?>
+    <?= $form->field($model, 'posicao')->label('Posição no Álbum')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

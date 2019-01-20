@@ -1,0 +1,115 @@
+
+.caixa img{
+    -webkit-filter: drop-shadow(2px 2px 2px #222);
+    filter: drop-shadow(2px 2px 2px #222);
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.caixa-nome-album img {
+    -webkit-filter: drop-shadow(2px 2px 2px #222);
+    filter: drop-shadow(2px 2px 2px #222);
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.box{
+    align-items: center;
+    display: inline-block;
+}
+
+.caixa{
+    text-align: center;
+    margin-top: 6%;
+    margin-left: 0px;
+}
+
+.caixa-nome-album{
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 0px;
+}
+.caixaTexto{
+    text-align: left;
+    margin-top: 40px;
+    margin-left: 40px;
+    vertical-align: middle;
+}
+
+.caixa h2{
+    margin-top: 10px;
+    font-size: 25px;
+    color: white;
+}
+
+.caixa-nome-album h3{
+     margin-top: 6px;
+     font-size: 17px;
+     color: white;
+ }
+
+.caixa h4 {
+    margin-top: 6px;
+    font-size: 17px;
+    color: white;
+
+    font-family: Bahnschrift;
+}
+
+.detalhes-img-artista{
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+    -webkit-filter: drop-shadow(2px 2px 2px #222);
+    filter: drop-shadow(2px 2px 2px #222);
+}
+
+.detalhes-img-album{
+    margin-top: 30px;
+    width: 100%;
+    height: auto;
+    -webkit-filter: drop-shadow(2px 2px 2px #222);
+    filter: drop-shadow(2px 2px 2px #222);
+}
+.detalhes-descricao-album{
+    color: white;
+    text-align: center;
+    font-family: Bahnschrift;
+    font-size: 20px;
+}
+.detalhes-descricao-album h2{
+    font-size: 75px;
+}
+
+.ul-tabs-detalhes{
+    border-bottom: 1px solid #DF2E28 !important;
+}
+
+.ul-tabs-detalhes > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: transparent !important;
+    border: 1px solid #DF2E28 !important;
+    color: white !important;
+    font-weight: bold;
+
+}
+
+.ul-tabs-detalhes li a{
+    color: white;
+    border-bottom: none !important;
+}
+
+.ul-tabs-detalhes li a:hover{
+    color: black;
+}
+
+
+
+
+
+
+

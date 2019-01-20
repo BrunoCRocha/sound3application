@@ -2,7 +2,9 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+use yii\helpers\Url;
+
+$this->title = 'Sound3';
 ?>
 <div class="jumbotron">
     <?php echo '<h2> Bem-Vindo, ' . Yii::$app->user->identity->username .'</h2>'  ?>
@@ -14,7 +16,7 @@ $this->title = 'My Yii Application';
         <h3>Selecione a tabela a gerir:</h3>
         <div class="row">
             <div class="col-md-4">
-                <a href="./index.php?r=user%2Findex">
+                <a href="<?= Url::toRoute('user/index', true)?>">
                     <div class="bo-botao">
                         <h2 class="texto-botao">Users</h2>
                     </div>
@@ -22,7 +24,7 @@ $this->title = 'My Yii Application';
             </div>
 
             <div class="col-md-4">
-                <a href="./index.php?r=artista%2Findex">
+                <a href="<?= Url::toRoute('artista/index', true)?>">
                     <div class="bo-botao" >
                         <h2 class="texto-botao">Artista</h2>
                     </div>
@@ -30,7 +32,7 @@ $this->title = 'My Yii Application';
             </div>
 
             <div class="col-md-4">
-                <a href="./index.php?r=album%2Findex">
+                <a href="<?= Url::toRoute('album/index', true)?>">
                     <div class="bo-botao">
                         <h2 class="texto-botao">Álbum</h2>
                     </div>
@@ -40,7 +42,7 @@ $this->title = 'My Yii Application';
 
         <div class="row">
             <div class="col-md-4">
-                <a href="./index.php?r=musica%2Findex">
+                <a href="<?= Url::toRoute('musica/index', true)?>">
                     <div class="bo-botao">
                         <h2 class="texto-botao">Música</h2>
                     </div>
@@ -48,7 +50,7 @@ $this->title = 'My Yii Application';
             </div>
 
             <div class="col-md-4">
-                <a href="./index.php?r=genero%2Findex">
+                <a href="<?= Url::toRoute('genero/index', true)?>">
                     <div class="bo-botao">
                         <h2 class="texto-botao">Género</h2>
                     </div>
@@ -56,7 +58,7 @@ $this->title = 'My Yii Application';
             </div>
 
             <div class="col-md-4">
-                <a href="../../frontend/web/index.php?r=site%2Findex">
+                <a href="./../../frontend/web/"">
                     <div class="bo-botao">
                         <h2 class="texto-botao">FrontOffice</h2>
                     </div>

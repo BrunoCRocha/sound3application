@@ -19,7 +19,7 @@ class ArtistaSearch extends Artista
     {
         return [
             [['id'], 'integer'],
-            [['nome', 'nacionalidade', 'data_ini_carreira'], 'safe'],
+            [['nome', 'nacionalidade', 'ano'], 'safe'],
         ];
     }
 
@@ -60,7 +60,7 @@ class ArtistaSearch extends Artista
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'data_ini_carreira' => $this->data_ini_carreira,
+            'ano' => $this->ano,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])

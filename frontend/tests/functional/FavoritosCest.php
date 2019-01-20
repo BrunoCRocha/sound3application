@@ -1,0 +1,28 @@
+<?php namespace frontend\tests\functional;
+use frontend\tests\FunctionalTester;
+
+class FavoritosCest
+{
+
+    // tests
+    public function testCriarFav(FunctionalTester $I)
+    {
+        $I->amOnPage('/site/index');
+        $I->click('Login');
+        $I->see('Altere-a');
+        $I->fillField('Username', 'admin');
+        $I->fillField('Password', 'adminadmin');
+        $I->click('login-button');
+        $I->see('Carrinho');
+        $I->dontSeeLink('Login');
+        $I->dontSeeLink('Signup');
+
+        $I->see('Easier To Run');
+        $I->amOnRoute('/detalhes/album/', ['id' => '5']);
+        $I->click('#criarFavorito');
+
+        $I->click('Favoritos');
+        $I->click('Álbuns');
+        $I->see('Meteora (2)');
+    }
+}

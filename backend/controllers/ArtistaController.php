@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+use common\models\UploadForm;
 use Yii;
 use common\models\Artista;
 use common\models\ArtistaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ArtistaController implements the CRUD actions for Artista model.
@@ -26,6 +28,32 @@ class ArtistaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['view','create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['admin', 'mod'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['admin', 'mod'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['admin', 'mod'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['admin', 'mod'],
+                        ],
+                    ],
+                ],
         ];
     }
 
@@ -42,6 +70,27 @@ class ArtistaController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionImageupload()
+    {
+        $model = new UploadForm();
+
+        $tipo = 'artista';
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload($tipo)) {
+                // file is uploaded successfully
+                $idartista=Yii::$app->request->get('id');
+                $artista= Artista::findOne($idartista);
+                if($artista != null){
+                    $artista->caminhoImagem = $model->caminhoFinal;
+                    $artista->save(false);
+                }
+            }
+        }
+        return $this->render('view', ['model' => $artista]);
     }
 
     /**
@@ -86,7 +135,8 @@ class ArtistaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())
+            && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

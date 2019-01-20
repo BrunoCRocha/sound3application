@@ -16,21 +16,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Compra', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Compra', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="fundo-form">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                'id',
+                'data_compra',
+                'valor_total',
+                //'id_utilizador',
+                ['label' => 'Utilizador',
+                    'attribute' => 'id_utilizador',
+                    'value' => 'utilizador.username',
+                ],
 
-            'id',
-            'data_compra',
-            'valor_total',
-            'id_utilizador',
+                ['class' => 'yii\grid\ActionColumn',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                    'header'=>"Ações",
+                    'headerOptions' => [
+                        'style' => 'color:#3277b3',
+                    ],
+                ],
+            ],
+        ]); ?>
+    </div>
+
 </div>

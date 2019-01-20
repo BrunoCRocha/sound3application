@@ -1,0 +1,25 @@
+.table-carrinho th,td{
+    color: white;
+}
+
+#td-img-album-cart{
+    width: 15%;
+    height: auto;
+    overflow: hidden;
+}
+
+.table-carrinho h4 a{
+    color:white;
+}
+
+.div-img-album-cart{
+    overflow: hidden;
+}
+
+.div-img-album-cart img{
+    width: 25%;
+    height: auto;
+}
+
+
+
