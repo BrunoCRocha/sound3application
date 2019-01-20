@@ -13,10 +13,41 @@ use common\models\Genero;
 use common\models\Musica;
 use Yii;
 use yii\db\conditions\LikeCondition;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 
 class PesquisaController extends \yii\web\Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout','musica','albuns','genero', 'artista'],
+                'rules' => [
+                    [
+                        'actions' => ['musica','albuns','genero', 'artista'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout','musica','albuns','genero','artista'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
 
     public function actionIndex($search)
     {

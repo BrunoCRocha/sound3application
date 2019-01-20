@@ -40,12 +40,12 @@ $this->title = 'Carrinho';
 
                                 <td>
                                     <h4>
-                                        <a href="<?= Url::toRoute(['detalhes/detalhesArtista', 'id' => $musica->id])?>"><?= $musica->album->artista->nome ?></a>
+                                        <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->id])?>"><?= $musica->album->artista->nome ?></a>
                                     </h4>
                                 </td>
                                 <td>
                                     <h4>
-                                        <a href="<?= Url::toRoute(['detalhes/detalhesAlbum', 'id' => $musica->id])?>"><?= $musica->album->nome ?></a>
+                                        <a href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->id])?>"><?= $musica->album->nome ?></a>
                                     </h4>
                                 </td>
                                 <td>

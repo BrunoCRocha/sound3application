@@ -110,6 +110,24 @@ class Genero extends \yii\db\ActiveRecord
         $this->fazPublish("DELETE",$myJSON);
     }*/
 
+    public function beforeDelete()
+    {
+        $albuns=Album::find()->where(['id_genero' => $this->id])->all();
+
+        foreach ($albuns as $album){
+            $album->delete();
+        }
+
+        $favGeneros=Fav_Genero::find()->where(['id_genero'=>$this->id])->all();
+        if(count($favGeneros)>0){
+            foreach ($favGeneros as $favGenero){
+                $favGenero->delete();
+            }
+        }
+
+        return parent::beforeDelete();
+    }
+
     public function fazPublish($canal,$msg)
     {
         $server = "127.0.0.1";

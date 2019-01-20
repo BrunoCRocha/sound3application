@@ -36,11 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['label' => 'Preço (€)',
                     'attribute' => 'preco'],
 
+                ['label'=> 'Posição',
+                    'attribute'=> 'posicao'],
 
                 ['class' => 'yii\grid\ActionColumn',
                     'header'=>"Ações",
                         'headerOptions' => [
                             'style' => 'color:#3277b3'
+
                         ],
                      ],
             ],

@@ -4,8 +4,19 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
+use yii\bootstrap\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+if(isset($messagem)){
+    if($messagem != ''){
+        echo Alert::widget([
+            'options' => [
+                'class' => 'alert-info',
+            ],
+            'body' => $messagem,
+        ]);
+    }
+}
 
 $this->title = 'Login';
 ?>

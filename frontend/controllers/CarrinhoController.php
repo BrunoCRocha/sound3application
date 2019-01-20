@@ -9,11 +9,41 @@ use common\models\LinhaCompra;
 use common\models\Musica;
 use common\models\User;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Request;
 
 class CarrinhoController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout','index', 'adicionar','adicionar-album','remover'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'adicionar','adicionar-album','remover'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout','index', 'adicionar','adicionar-album','remover'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
     public function actionIndex()
     {
         $message = '';

@@ -28,6 +28,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="<?=Yii::getAlias('@cssfavoritos')?>">
     <link rel="stylesheet" href="<?=Yii::getAlias('@cssalbum')?>">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+    <link rel="shortcut icon" href="<?= Yii::getAlias('@icone') ?>/logoicone.png" type="image/x-icon" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -50,14 +51,14 @@ AppAsset::register($this);
         });
     </script>
     <!-- searchbar autocompleter-->
-    <script>
-        $(document).ready(function() {
-            $('input.search').typeahead({
-                name: 'search',
-                remote: 'autocompleter.php?query=%QUERY'
-            });
-        })
-    </script>
+<!--    <script>-->
+<!--        $(document).ready(function() {-->
+<!--            $('input.search').typeahead({-->
+<!--                name: 'search',-->
+<!--                remote: 'autocompleter.php?query=%QUERY'-->
+<!--            });-->
+<!--        })-->
+<!--    </script>-->
 
 </head>
 <body>
@@ -82,6 +83,8 @@ AppAsset::register($this);
         $menuItems[] = ['label' => Yii::$app->user->identity->username,
             'items' => [
                 ['label' => 'Perfil', 'url' => ['/perfil/index', 'id' =>Yii::$app->user->identity->getId()]],
+                '<li class="divider"></li>',
+                ['label'=>'BackOffice','url'=>['./../../backend/web/']],
                 '<li class="divider"></li>',
                 ['label'=>'Logout','url'=>['/site/logout'],
                     'linkOptions' =>['data-method' => 'post']
