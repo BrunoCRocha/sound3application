@@ -23,7 +23,7 @@ if($favArtPesquisados != null){
     <div class="objeto_genero-musica" >
         <div id="imagem_artista-genero">
             <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $artista->id])?>">
-                <img src=" $artista->caminhoImagem?>">
+                <img src=" <?=Yii::getAlias('@artistasF').'/'.$artista->caminhoImagem?>">
             </a>
         </div>
         <div class="info_body-artista">

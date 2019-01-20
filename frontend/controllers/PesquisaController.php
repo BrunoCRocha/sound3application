@@ -25,15 +25,15 @@ class PesquisaController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','musica','albuns','genero', 'artista'],
+                'only' => ['logout','musica','albuns','genero', 'artista', 'index'],
                 'rules' => [
                     [
-                        'actions' => ['musica','albuns','genero', 'artista'],
+                        'actions' => ['musica','albuns','genero','artista','index'],
                         'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout','musica','albuns','genero','artista'],
+                        'actions' => ['logout','musica','albuns','genero','artista','index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -106,11 +106,16 @@ class PesquisaController extends \yii\web\Controller
 
         $favMusPesquisadas=$this->getFavMusPesquisados($musicaSearch);
 
+
+        $userLogado = Yii::$app->user->identity;
+        $itemsCarrinho = $this->getItemsCarrinho($userLogado);
+
         $tipo = 'musica';
         return $this->render('index',[
             'search' => $search,
             'musicaSearch' => $musicaSearch,
             'favMusPesquisadas' => $favMusPesquisadas,
+            'itemsCarrinho' => $itemsCarrinho,
             'tipo' => $tipo
         ]);
     }
