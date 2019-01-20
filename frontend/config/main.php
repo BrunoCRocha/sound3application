@@ -105,26 +105,47 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/favgenero',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getallgenerosfavoritos' => 'getallgenerosfavoritos',
+                        'GET getgenerosfavoritos' => 'getgenerosfavoritos',
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/favartista',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getallartistasfavoritos' => 'getallartistasfavoritos',
+                        'GET getartistasfavoritos' => 'getartistasfavoritos',
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/favalbum',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET findfavalbum' => 'findfavalbum',
+                        'GET findfavmusica' => 'findfavmusica',
+                        'POST criarfavoritoalbum' => 'criarfavoritoalbum',
+                        'GET getallalbunsfavoritos' => 'getallalbunsfavoritos',
+                        'GET getalbunsfavoritos' => 'getalbunsfavoritos',
+                    ],
+
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/favmusica',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getallmusicasfavoritos' => 'getallmusicasfavoritos',
+                        'GET getmusicasfavoritos' => 'getmusicasfavoritos',
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/linha-compra',
                     'pluralize' => false,
+
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',

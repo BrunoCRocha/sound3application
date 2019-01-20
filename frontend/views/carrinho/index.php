@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 $this->title = 'Carrinho';
 ?>
@@ -92,8 +93,15 @@ $this->title = 'Carrinho';
                 </table>
 
                 <span style=" float: right">
-                    <h4 style="color: white;">Valor total a pagar: <?= $valorTotal ?>€</h4>
-                    <a href="<?= Url::toRoute(['pagamento/checkout','items'=> $musicas])?>" class="button btn btn-info">Proceder ao Pagamento</a>
+                    <h4 style="color: white;" >Valor total a pagar: <?= $valorTotal ?>€</h4>
+                    <?php
+                        if(count($musicas)==0){?>
+                            <?= Html::Button('Proceder ao Pagamento', ['class' => 'btn btn-info', 'disabled' => true]) ?>
+                        <?php }else{?>
+                            <?= Html::a('Proceder ao Pagamento', ['pagamento/checkout'], ['class' => 'btn btn-primary']) ?>
+                       <?php }
+                    ?>
+
                 </span>
             </div>
 

@@ -74,10 +74,8 @@ class Compra extends \yii\db\ActiveRecord
 
         if(count($lcArray)>0){
             foreach ($lcArray as $lc){
-                    $musica = Musica::findOne($lc->id_musica);
-                    $vt = $vt + $musica->preco;
-
-
+                $musica = Musica::findOne($lc->id_musica);
+                $vt = $vt + $musica->preco;
             }
 
             $this->valor_total =$vt;
