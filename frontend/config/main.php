@@ -159,6 +159,14 @@ return [
                 ],
             ]
         ],
+        'urlManagerBackEnd' => [
+            'class' => 'yii\web\UrlManager',
+            'hostInfo' => 'http://localhost/sound3application/backend',
+            'baseUrl' => 'http://localhost/sound3application/backend',
+            'enablePrettyUrl' => false,
+            'showScriptName' => false,
+        ]
+
 
     ],
 
