@@ -143,7 +143,6 @@ class CompraController extends \yii\rest\ActiveController
             $musicas_para_adicionar = array_diff($musicasAlbum, $musicasCarrinho);
 
             foreach ($musicas_para_adicionar as $musica){
-                $contador++;
                 $linhaCompra = new LinhaCompra();
                 $linhaCompra->id_compra = $compra[0]->id;
                 $linhaCompra->id_musica = $musica;
