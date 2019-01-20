@@ -12,6 +12,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Request;
 
+
 class CarrinhoController extends \yii\web\Controller
 {
     public function actionIndex()
@@ -23,14 +24,14 @@ class CarrinhoController extends \yii\web\Controller
         $compra = Compra::find()
             ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
             ->with('linhaCompras')
-            ->distinct()
-            ->all();
+            ->one();
 
         $musicas = array();
 
-        foreach ($compra[0]->relatedRecords as $lcArray){
+        foreach ($compra->relatedRecords as $lcArray){
 
             if(count($lcArray) == 0){
+
                 $message = 'Não possui items no seu carrinho...';
             }
             foreach ($lcArray as $lc){
@@ -39,12 +40,9 @@ class CarrinhoController extends \yii\web\Controller
             }
         }
 
-        $valorTotal = $compra[0]->getValorTotal();
+        $valorTotal = $compra->getValorTotal();
 
         $musicasFavoritas = $this->getFavoritos($musicas);
-
-        //var_dump($musicasFavoritas);
-        //die();
 
 
         return $this->render('index', [
@@ -63,10 +61,10 @@ class CarrinhoController extends \yii\web\Controller
             $compra = Compra::find()
                 ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
                 ->distinct()
-                ->all();
+                ->one();
 
             $linhaCompra = new LinhaCompra();
-            $linhaCompra->id_compra = $compra[0]->id;
+            $linhaCompra->id_compra = $compra->id;
             $linhaCompra->id_musica = $musica->id;
             $linhaCompra->save();
         }
@@ -82,8 +80,7 @@ class CarrinhoController extends \yii\web\Controller
             $compra = Compra::find()
                 ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
                 ->with('linhaCompras')
-                ->distinct()
-                ->all();
+                ->one();
 
             $musicasCarrinho = array();
 
@@ -92,7 +89,7 @@ class CarrinhoController extends \yii\web\Controller
                 ->where(['id_album' => $album->id])
                 ->all();
 
-            foreach ($compra[0]->relatedRecords as $lcArray){
+            foreach ($compra->relatedRecords as $lcArray){
                 foreach ($lcArray as $lc){
                     array_push($musicasCarrinho, Musica::findOne($lc->id_musica)->id);
                 }
@@ -104,7 +101,7 @@ class CarrinhoController extends \yii\web\Controller
 
             foreach ($musicas_para_adicionar as $musica){
                 $linhaCompra = new LinhaCompra();
-                $linhaCompra->id_compra = $compra[0]->id;
+                $linhaCompra->id_compra = $compra->id;
                 $linhaCompra->id_musica = $musica;
                 $linhaCompra->save();
             }
@@ -120,10 +117,9 @@ class CarrinhoController extends \yii\web\Controller
             $compra = Compra::find()
                 ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
                 ->with('linhaCompras')
-                ->distinct()
-                ->all();
+                ->one();
 
-            foreach ($compra[0]->relatedRecords as $lcArray){
+            foreach ($compra->relatedRecords as $lcArray){
                 foreach ($lcArray as $lc){
                     if($lc->id_musica == $musica->id){
                         $lc->delete();
