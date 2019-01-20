@@ -4,9 +4,39 @@ namespace frontend\controllers;
 
 use common\models\Comment;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
 class CommentController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'index','create','update','delete'],
+                'rules' => [
+                    [
+                        'actions' => [ 'index','create','update','delete'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index','create','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
 
     public function actionIndex($album){
         var_dump('index');

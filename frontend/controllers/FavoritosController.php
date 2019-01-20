@@ -12,10 +12,43 @@ use common\models\Fav_Musica;
 use common\models\Genero;
 use common\models\Musica;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 
 class FavoritosController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
+                    'add-fav-musica','rem-fav-musica'],
+                'rules' => [
+                    [
+                        'actions' => [ 'index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
+                            'add-fav-musica','rem-fav-musica'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
+                            'add-fav-musica','rem-fav-musica'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
     public function actionIndex()
     {
         $userLogado = Yii::$app->user->identity;
