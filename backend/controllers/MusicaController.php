@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use common\models\Album;
 use common\models\DownloadMusica;
+use common\models\Fav_Musica;
+use common\models\LinhaCompra;
 use common\models\User;
 use Yii;
 use common\models\Musica;
@@ -144,10 +146,12 @@ class MusicaController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    //Serve para eliminar tudo o que esteja associado a Musica em causa
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $musica=$this->findModel($id);
+        $musica->delete();
         return $this->redirect(['index']);
     }
 

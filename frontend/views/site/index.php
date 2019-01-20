@@ -11,12 +11,10 @@ use yii\helpers\Url;
 
 $this->title = 'Sound3';
 $count=0;
-$this->registerJsFile(
+/*$this->registerJsFile(
     '@web/js/textlimit.js',
     ['depends' => [\yii\web\JqueryAsset::className()]]
-);
-
-
+);*/
 
 ?>
 <div class="site-index">

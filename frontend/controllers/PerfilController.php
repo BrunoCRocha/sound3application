@@ -9,10 +9,40 @@ use common\models\UserSearch;
 use Yii;
 use common\models\Compra;
 use yii\console\Exception;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use ZipArchive;
 
 class PerfilController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'index','create','update','download','downloadtodas'],
+                'rules' => [
+                    [
+                        'actions' => [ 'index','create','update','download','downloadtodas'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index','create','update','download','downloadtodas'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
     public function actionIndex($id)
     {
         $model = User::findOne($id);

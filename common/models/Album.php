@@ -107,7 +107,7 @@ class Album extends \yii\db\ActiveRecord
     }
 
     /*Alterações para a API*/
-    public function afterSave($insert, $changedAttributes)
+    /*public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
 
@@ -134,9 +134,9 @@ class Album extends \yii\db\ActiveRecord
             $this->fazPublish("INSERT",$myJSON);
         else
             $this->fazPublish("UPDATE",$myJSON);
-    }
+    }*/
 
-    public function afterDelete()
+    /*public function afterDelete()
     {
         parent::afterDelete();
         $album_id= $this->id;
@@ -146,6 +146,34 @@ class Album extends \yii\db\ActiveRecord
         $myObj->nome=$nome;
         $myJSON = json_encode($myObj);
         $this->fazPublish("DELETE",$myJSON);
+    }*/
+
+    public function beforeDelete()
+    {
+
+        $musicas=Musica::find()->where(['id_album' => $this->id])->all();
+        //var_dump($musicas);die();
+        if(count($musicas)>0){
+            foreach ($musicas as $musica){
+                $musica->delete();
+            }
+        }
+
+        $favAlbuns=Fav_Album::find()->where(['id_album'=>$this->id])->all();
+        if(count($favAlbuns)>0){
+            foreach ($favAlbuns as $favAlbum){
+                $favAlbum->delete();
+            }
+        }
+
+        $comments=Comment::find()->where(['id_album'=>$this->id])->all();
+        if(count($comments)>0){
+            foreach ($comments as $comment){
+                $comment->delete();
+            }
+        }
+
+        return parent::beforeDelete();
     }
 
     public function fazPublish($canal,$msg)
