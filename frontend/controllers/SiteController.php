@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 
 use common\models\Album;
+use common\models\Artista;
 use common\models\Compra;
 use common\models\LinhaCompra;
 use common\models\Musica;
@@ -77,14 +78,29 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $compras = Compra::find()->select('id')
+        /*Query de dados random*/
+
+        $randletra = substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyz", 5)), 0, 1);
+        $randmus = rand(0,2);
+        $arrayArtistas = Artista::find()
+            ->where(['like', 'nome', $randletra])
+            ->limit(5)
+            ->all();
+
+
+        $arrayMusicas = array();
+        foreach($arrayArtistas as $artista){
+            array_push($arrayMusicas, $artista->albums[0]->musicas[$randmus]);
+        }
+
+
+        /* Query de Mais Vendidos
+
+          $compras = Compra::find()->select('id')
             ->where(['efetivada' => 1])
             ->distinct()->all();
-        //var_dump($compras);
-        //die();
 
         $valores = array();
-
 
         foreach ($compras as $compra){
             foreach ($compra->linhaCompras as $lc){
@@ -97,20 +113,20 @@ class SiteController extends Controller
       
         if (isset($valores)){
             arsort($valores );//Ordena pelo valor
-        }
+        }*/
 
-        $maisVendidos = array_slice($valores, 0, 5, true);
-
-        //para utilizar em querys diferentes;
-        $artistasPopulares = array();
-
-        //top5 musicas + compradas
-        $arrayMusicas = array();
-
-        foreach ($maisVendidos as $idMusica => $nCompras){
-            $modelMusica = Musica::findOne($idMusica);
-            array_push($arrayMusicas, $modelMusica);
-        }
+//        $maisVendidos = array_slice($valores, 0, 5, true);
+//
+//        //para utilizar em querys diferentes;
+//        $artistasPopulares = array();
+//
+//        //top5 musicas + compradas
+//        $arrayMusicas = array();
+//
+//        foreach ($maisVendidos as $idMusica => $nCompras){
+//            $modelMusica = Musica::findOne($idMusica);
+//            array_push($arrayMusicas, $modelMusica);
+//        }
 
 
 

@@ -65,6 +65,7 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+
     NavBar::begin([
         'brandLabel' => "Sound3",
         'brandUrl' => Yii::$app->homeUrl,
@@ -79,15 +80,28 @@ AppAsset::register($this);
     } else {
         $menuItems[] = ['label' => 'Favoritos', 'url' => ['/favoritos/index']];
         $menuItems[] = ['label' => 'Carrinho', 'url' => ['/carrinho/index']];
-        $menuItems[] = ['label' => Yii::$app->user->identity->username,
-            'items' => [
-                ['label' => 'Perfil', 'url' => ['/perfil/index', 'id' =>Yii::$app->user->identity->getId()]],
-                '<li class="divider"></li>',
-                ['label'=>'Logout','url'=>['/site/logout'],
-                    'linkOptions' =>['data-method' => 'post']
+        if(Yii::$app->user->can('createUtilizador')){
+            $menuItems[] = ['label' => Yii::$app->user->identity->username,
+                'items' => [
+                    ['label' => 'Perfil', 'url' => ['/perfil/index', 'id' =>Yii::$app->user->identity->getId()]],
+                    ['label' => 'BackOffice', 'url' => Url::to('http://localhost/sound3application/backend/web/index.php')],
+                    '<li class="divider"></li>',
+                    ['label'=>'Logout','url'=>['/site/logout'],
+                        'linkOptions' =>['data-method' => 'post']
+                    ]
                 ]
-            ]
-        ];
+            ];
+        } else{
+            $menuItems[] = ['label' => Yii::$app->user->identity->username,
+                'items' => [
+                    ['label' => 'Perfil', 'url' => ['/perfil/index', 'id' =>Yii::$app->user->identity->getId()]],
+                    '<li class="divider"></li>',
+                    ['label'=>'Logout','url'=>['/site/logout'],
+                        'linkOptions' =>['data-method' => 'post']
+                    ]
+                ]
+            ];
+        }
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
