@@ -37,7 +37,7 @@ class DepDemoController extends \yii\web\Controller
                 $cat_id = $parents[0];
                 $albuns = Album::find()
                     ->select(['id', 'nome'])
-                    ->where(['id_genero' => $cat_id])
+                    ->where(['id_artista' => $cat_id])
                     ->all();
 
                 $v = array();
