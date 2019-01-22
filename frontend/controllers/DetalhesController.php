@@ -117,8 +117,7 @@ class DetalhesController extends \yii\web\Controller
 
     public function actionArtista($id)
     {
-        $artista = Artista::find()->where(['id' => $id])
-        ->one();
+        $artista = Artista::findOne($id);
 
         $albunsArtista = Album::find()
             ->where(['id_artista' => $id])
@@ -144,12 +143,11 @@ class DetalhesController extends \yii\web\Controller
         $carrinho = Compra::find()
             ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
             ->with('linhaCompras')
-            ->distinct()
-            ->all();
+            ->one();
 
         $musicas = array();
 
-        foreach ($carrinho[0]->relatedRecords as $lcArray){
+        foreach ($carrinho->relatedRecords as $lcArray){
 
             if(count($lcArray) > 0){
                 foreach ($lcArray as $lc){
