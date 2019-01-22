@@ -56,31 +56,36 @@ class CarrinhoController extends \yii\web\Controller
             ->with('linhaCompras')
             ->one();
 
-        $musicas = array();
+        if($compra!=null){
+            $musicas = array();
 
-        foreach ($compra->relatedRecords as $lcArray){
+            foreach ($compra->relatedRecords as $lcArray){
 
-            if(count($lcArray) == 0){
+                if(count($lcArray) == 0){
 
-                $message = 'Não possui items no seu carrinho...';
+                    $message = 'Não possui items no seu carrinho...';
+                }
+                foreach ($lcArray as $lc){
+                    array_push($musicas, Musica::findOne($lc->id_musica));
+
+                }
             }
-            foreach ($lcArray as $lc){
-                array_push($musicas, Musica::findOne($lc->id_musica));
 
-            }
+            $valorTotal = $compra->getValorTotal();
+
+            $musicasFavoritas = $this->getFavoritos($musicas);
+
+
+            return $this->render('index', [
+                'musicas' => $musicas,
+                'message' => $message,
+                'musicasFavoritas' => $musicasFavoritas,
+                'valorTotal' => $valorTotal
+            ]);
+        }else{
+            return $this->redirect(['site/index']);
         }
 
-        $valorTotal = $compra->getValorTotal();
-
-        $musicasFavoritas = $this->getFavoritos($musicas);
-
-
-        return $this->render('index', [
-            'musicas' => $musicas,
-            'message' => $message,
-            'musicasFavoritas' => $musicasFavoritas,
-            'valorTotal' => $valorTotal
-        ]);
     }
 
     public function actionAdicionar($id){

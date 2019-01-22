@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'nome',
                 ['label' => 'Duração',
                     'attribute' => 'duracao'],
-                ['label' => 'Álbum',
+                ['label' => 'Álbum (ID)',
                     'attribute' => 'id_album',
                     'value' => 'album.nome'
                 ],

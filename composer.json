@@ -25,7 +25,8 @@
         "ext-mysql": "*",
         "ext-json": "*",
         "paypal/rest-api-sdk-php": "*",
-        "bluerhinos/phpmqtt": "dev-master"
+        "bluerhinos/phpmqtt": "dev-master",
+        "swiftmailer/swiftmailer": "^5.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
