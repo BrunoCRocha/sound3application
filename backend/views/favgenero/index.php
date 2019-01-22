@@ -31,14 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-
-                ['header' => 'ID do Género Favorito',
-                    'attribute' => 'id',
-                    'headerOptions' => [
-                        'style' => 'color:#3277b3'
-                    ],
-                ],
-
                 ['header' => 'Género',
                     'attribute' => 'genero.nome',
                     'headerOptions' => [

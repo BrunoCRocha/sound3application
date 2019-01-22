@@ -28,13 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
-                ['header' => 'ID do Álbum Favorito',
-                    'attribute' => 'id',
-                    'headerOptions' => [
-                        'style' => 'color:#3277b3'
-                    ],
-                ],
                 ['header' => 'Álbum',
                     'attribute' => 'album.nome',
                     'headerOptions' => [

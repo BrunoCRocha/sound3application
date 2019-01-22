@@ -69,7 +69,7 @@ class FavoritosController extends \yii\web\Controller
             ->where(['id_utilizador' => $userLogado->getId()])
             ->all();
 
-        if ($fav_Generos && $fav_Artistas && $fav_Albuns && $fav_Musicas != null){
+
             $favGeneros = array();
             $favArtistas = array();
             $favAlbuns = array();
@@ -104,9 +104,6 @@ class FavoritosController extends \yii\web\Controller
                 'favMusicas' => $favMusicas,
                 'itemsCarrinho'=> $itemsCarrinho
             ]);
-        }else{
-            return $this->redirect(['site/index']);
-        }
 
     }
 

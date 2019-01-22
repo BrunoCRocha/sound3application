@@ -132,9 +132,9 @@ class FavmusicaController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id_utilizador,$id_musica)
     {
-        $model = $this->findModel($id);
+        $model = Fav_Musica::find()->where(['and',['id_utilizador'=>$id_utilizador,'id_musica'=>$id_musica]])->one();
         $model->delete();
 
         return $this->redirect(['index', 'idUtilizador' => $model->id_utilizador]);
