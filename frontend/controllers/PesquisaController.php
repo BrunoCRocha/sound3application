@@ -25,7 +25,7 @@ class PesquisaController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','musica','albuns','genero', 'artista', 'index'],
+                'only' => ['musica','albuns','genero', 'artista', 'index'],
                 'rules' => [
                     [
                         'actions' => ['musica','albuns','genero','artista','index'],
@@ -33,7 +33,7 @@ class PesquisaController extends \yii\web\Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout','musica','albuns','genero','artista','index'],
+                        'actions' => ['musica','albuns','genero','artista','index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

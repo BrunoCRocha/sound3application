@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Compra */
 
-$this->title = 'Update Compra: ' . $model->id;
+$this->title = 'Update Compra: ' . $modelCompra->id;
 $this->params['breadcrumbs'][] = ['label' => 'Compras', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $modelCompra->id, 'url' => ['view', 'id' => $modelCompra->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="compra-update">

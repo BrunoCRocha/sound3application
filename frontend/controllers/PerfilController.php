@@ -20,7 +20,7 @@ class PerfilController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'index','create','update','download','downloadtodas'],
+                'only' => ['index','create','update','download','downloadtodas'],
                 'rules' => [
                     [
                         'actions' => [ 'index','create','update','download','downloadtodas'],
@@ -28,7 +28,7 @@ class PerfilController extends \yii\web\Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index','create','update','download','downloadtodas'],
+                        'actions' => ['index','create','update','download','downloadtodas'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

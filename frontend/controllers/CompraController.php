@@ -23,15 +23,15 @@ class CompraController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'index','view','create','update','delete'],
+                'only' => ['index','view','create','update','delete'],
                 'rules' => [
                     [
-                        'actions' => [ 'index','view','create','update','delete'],
+                        'actions' => ['index','view','create','update','delete'],
                         'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index','view','create','update','delete'],
+                        'actions' => ['index','view','create','update','delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

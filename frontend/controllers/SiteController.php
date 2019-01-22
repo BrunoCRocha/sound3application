@@ -95,7 +95,7 @@ class SiteController extends Controller
     {
         /*Query de dados random*/
 
-        $randletra = substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyz", 5)), 0, 1);
+        $randletra = substr(str_shuffle(str_repeat("abcdefghijklmnoprstuvz", 5)), 0, 1);
         $randmus = rand(0,2);
         $arrayArtistas = Artista::find()
             ->where(['like', 'nome', $randletra])

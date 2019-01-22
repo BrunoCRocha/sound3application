@@ -17,9 +17,25 @@ class DepDemoController extends \yii\web\Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'subcat' => ['POST'],
+                    'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['subcat','prod'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['subcat'],
+                            'roles' => ['admin', 'Moderador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['prod'],
+                            'roles' => ['admin', 'Moderador'],
+                        ],
+                    ],
+                ],
         ];
     }
 

@@ -23,17 +23,17 @@ class FavoritosController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
+                'only' => ['index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
                     'add-fav-musica','rem-fav-musica'],
                 'rules' => [
                     [
-                        'actions' => [ 'index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
+                        'actions' => ['index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
                             'add-fav-musica','rem-fav-musica'],
                         'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
+                        'actions' => ['index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
                             'add-fav-musica','rem-fav-musica'],
                         'allow' => true,
                         'roles' => ['@'],

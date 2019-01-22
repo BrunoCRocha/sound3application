@@ -22,7 +22,7 @@ class CarrinhoController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','index', 'adicionar','adicionar-album','remover'],
+                'only' => ['index', 'adicionar','adicionar-album','remover'],
                 'rules' => [
                     [
                         'actions' => ['index', 'adicionar','adicionar-album','remover'],
@@ -30,7 +30,7 @@ class CarrinhoController extends \yii\web\Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout','index', 'adicionar','adicionar-album','remover'],
+                        'actions' => ['index', 'adicionar','adicionar-album','remover'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
