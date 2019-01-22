@@ -9,8 +9,8 @@ use yii\helpers\Url;
                 <strong><?= $comment->utilizador->username ?></strong>
                 <span class="text-muted">comentou no dia <?= $comment->data_criacao ?></span>
                 <?php
-                    if(Yii::$app->user->identity->getId() == $comment->id_utilizador){?>
-                        <span style="float: right"><a href="<?= Url::toRoute(['comment/update', 'id' => $comment->id])?>">Editar </a> | <a href="<?= Url::toRoute(['comment/delete', 'id' => $comment->id])?>">Remover</a></span>
+                    if(Yii::$app->user->identity->getId() == $comment->id_utilizador || Yii::$app->user->can('createUtilizador')){?>
+                        <span style="float: right"><a href="<?= Url::toRoute(['comment/delete', 'id' => $comment->id])?>">Remover</a></span>
                    <?php }
                 ?>
 

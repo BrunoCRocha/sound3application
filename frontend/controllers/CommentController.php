@@ -14,15 +14,15 @@ class CommentController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'index','create','update','delete'],
+                'only' => ['index','create','update','delete'],
                 'rules' => [
                     [
-                        'actions' => [ 'index','create','update','delete'],
+                        'actions' => ['index','create','update','delete'],
                         'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index','create','update','delete'],
+                        'actions' => ['index','create','update','delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -39,8 +39,6 @@ class CommentController extends \yii\web\Controller
     }
 
     public function actionIndex($album){
-        var_dump('index');
-        die();
         return $this->render('_form',[
             'album'=>$album
         ]);
@@ -54,9 +52,6 @@ class CommentController extends \yii\web\Controller
             $modelComment->id_album = $album;
             $modelComment->data_criacao = date('Y-m-d');
             $modelComment->id_utilizador = Yii::$app->user->identity->getId();
-
-            //var_dump($modelComment);
-            //die();
 
             if($modelComment->save()) {
                 return $this->redirect(['detalhes/album', 'id' => $album]);

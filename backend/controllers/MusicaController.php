@@ -40,22 +40,27 @@ class MusicaController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['readMusica'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createMusica'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateMusica'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['deleteMusica'],
+                            'roles' => ['admin'],
+                        ],
+                        [
+                            'allow' => false,
+                            'actions' => ['delete'],
+                            'roles' => ['Moderador'],
                         ],
                     ],
                 ],

@@ -43,7 +43,6 @@ class Fav_Artista extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
             'id_utilizador' => 'Id Utilizador',
             'id_artista' => 'Id Artista',
         ];

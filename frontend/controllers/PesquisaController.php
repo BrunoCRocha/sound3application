@@ -25,7 +25,7 @@ class PesquisaController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','musica','albuns','genero', 'artista', 'index'],
+                'only' => ['musica','albuns','genero', 'artista', 'index'],
                 'rules' => [
                     [
                         'actions' => ['musica','albuns','genero','artista','index'],
@@ -33,7 +33,7 @@ class PesquisaController extends \yii\web\Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout','musica','albuns','genero','artista','index'],
+                        'actions' => ['musica','albuns','genero','artista','index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -294,12 +294,11 @@ class PesquisaController extends \yii\web\Controller
         $carrinho = Compra::find()
             ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
             ->with('linhaCompras')
-            ->distinct()
-            ->all();
+            ->one();
 
         $musicas = array();
 
-        foreach ($carrinho[0]->relatedRecords as $lcArray){
+        foreach ($carrinho->relatedRecords as $lcArray){
 
             if(count($lcArray) > 0){
                 foreach ($lcArray as $lc){

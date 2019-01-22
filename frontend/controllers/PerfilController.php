@@ -20,7 +20,7 @@ class PerfilController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'index','create','update','download','downloadtodas'],
+                'only' => ['index','create','update','download','downloadtodas'],
                 'rules' => [
                     [
                         'actions' => [ 'index','create','update','download','downloadtodas'],
@@ -28,7 +28,7 @@ class PerfilController extends \yii\web\Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index','create','update','download','downloadtodas'],
+                        'actions' => ['index','create','update','download','downloadtodas'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -51,6 +51,7 @@ class PerfilController extends \yii\web\Controller
 
         $query_Compra=Compra::find()
             ->where(['and',['id_utilizador'=> Yii::$app->user->identity->getId(),'efetivada'=>1]])->all();
+
 
         $arrayMusicas=array();
 

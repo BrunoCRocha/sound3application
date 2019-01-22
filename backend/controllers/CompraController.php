@@ -34,6 +34,47 @@ class CompraController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['view','create', 'update', 'delete', 'vercompra', 'criar-compra-linha-compra'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['admin','Moderador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['admin','Moderador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['admin','Moderador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['admin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['vercompra'],
+                            'roles' => ['admin','Moderador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['criar-compra-linha-compra'],
+                            'roles' => ['admin','Moderador'],
+                        ],
+                        [
+                            'allow' => false,
+                            'actions' => ['delete'],
+                            'roles' => ['Moderador'],
+                        ],
+                    ],
+                ],
         ];
     }
 
@@ -43,11 +84,13 @@ class CompraController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CompraSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //Apenas compras efetivadas
+        $query = Compra::find()->where(['efetivada' => 1]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query]);
+
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -70,8 +113,6 @@ class CompraController extends Controller
      */
     public function actionView($id)
     {
-
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -120,8 +161,22 @@ class CompraController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+
+        $dadosSemValorMusica = new DadosDD();
+        $dadosSemValorMusica->artistas = ArrayHelper::map(Artista::find()->all(),'id','nome');
+
+        $query_user = User::find()->all();
+        $listUser=ArrayHelper::map($query_user, 'id', 'username');
+
+        $dadosSemValorMusica->_album = $model->linhaCompras[0]->musica->album->nome;
+        $dadosSemValorMusica->_musica = $model->linhaCompras[0]->musica->nome;
+        $dadosSemValorMusica->_artista = $model->linhaCompras[0]->musica->album->artista->nome;
+
         return $this->render('update', [
-            'model' => $model,
+            'modelCompra' => $model,
+            'modelLinhacompra' => $model->linhaCompras[0],
+            'dadosSemValorMusica' => $dadosSemValorMusica,
+            'listUser' => $listUser
         ]);
     }
 
@@ -150,22 +205,24 @@ class CompraController extends Controller
         $modelCompra = new Compra();
         $modelLinhacompra = new LinhaCompra();
 
-        if ($modelCompra->load(Yii::$app->request->post()) && $modelCompra->validate() &&
-            $modelLinhacompra->load(Yii::$app->request->post()) && $modelLinhacompra->validate()){
-            $count = count(Yii::$app->request->post('musicas', []));
+        if ($modelCompra->load(Yii::$app->request->post()) && $modelCompra->validate()){
+            $modelLinhacompra->load(Yii::$app->request->post());
 
-            $musicas = [new Setting()];
-            for($i = 1; $i < $count; $i++) {
-                $settings[] = new Setting();
-            }
+            $modelCompra->efetivada=1;
+            $modelCompra->valor_total=$modelLinhacompra->musica->preco;
+            $modelCompra->save();
 
             $modelLinhacompra->id_compra = $modelCompra->id;
+            $modelLinhacompra->save();
+
+            return $this->render('view', [
+                'model' => $modelCompra,
+            ]);
         }
 
+        return $this->redirect(['index']);
 
 
-        var_dump('ACERTOU');
-        die();
     }
 
     /**

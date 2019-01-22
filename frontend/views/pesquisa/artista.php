@@ -31,7 +31,7 @@ if($favArtPesquisados != null){
             <h5><?= 'Nº Albuns:'.count($artista->albums)?></h5>
         </div>
         <div id="imagem_favoritos_sozinha">
-            <a name="heart" href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $artista->id])?>">
+            <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $artista->id])?>">
                 <img src="<?=Yii::getAlias('@menuiconsF').'/'.$textbtnfav?>.svg">
             </a>
         </div>

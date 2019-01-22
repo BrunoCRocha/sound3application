@@ -14,10 +14,40 @@ use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\Url;
 
 class PagamentoController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['checkout', 'finish'],
+                'rules' => [
+                    [
+                        'actions' => ['checkout', 'finish'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['checkout', 'finish'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
 
     public function actionCheckout()
     {
@@ -33,12 +63,11 @@ class PagamentoController extends \yii\web\Controller
         $compra = Compra::find()
             ->where(['and', ['id_utilizador' => $userLogado, 'efetivada' => 0]])
             ->with('linhaCompras')
-            ->distinct()
-            ->all();
+            ->one();
 
         $musicas = array();
 
-        foreach ($compra[0]->relatedRecords as $lcArray) {
+        foreach ($compra->relatedRecords as $lcArray) {
             foreach ($lcArray as $lc) {
                 array_push($musicas, Musica::findOne($lc->id_musica));
 

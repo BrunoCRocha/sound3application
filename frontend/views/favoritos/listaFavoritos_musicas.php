@@ -12,7 +12,7 @@ if($itemsCarrinho != null){
 }
 else{
     $rotaCart = 'adicionar';
-    $imgCart = 'sub';
+    $imgCart = 'add';
 }
 
 

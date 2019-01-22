@@ -23,17 +23,17 @@ class FavoritosController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
+                'only' => ['index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
                     'add-fav-musica','rem-fav-musica'],
                 'rules' => [
                     [
-                        'actions' => [ 'index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
+                        'actions' => ['index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
                             'add-fav-musica','rem-fav-musica'],
                         'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
+                        'actions' => ['index','add-fav-artista','rem-fav-artista','add-fav-album','rem-fav-album','add-fav-genero','rem-fav-genero',
                             'add-fav-musica','rem-fav-musica'],
                         'allow' => true,
                         'roles' => ['@'],
@@ -69,40 +69,42 @@ class FavoritosController extends \yii\web\Controller
             ->where(['id_utilizador' => $userLogado->getId()])
             ->all();
 
-        $favGeneros = array();
-        $favArtistas = array();
-        $favAlbuns = array();
-        $favMusicas = array();
 
-        foreach ($fav_Generos as $favgen){
-            $fav = Genero::findOne($favgen->id_genero);
-            array_push($favGeneros,$fav);
-        }
+            $favGeneros = array();
+            $favArtistas = array();
+            $favAlbuns = array();
+            $favMusicas = array();
 
-        foreach ($fav_Albuns as $favalb){
-            $fav = Album::findOne($favalb->id_album);
-            array_push($favAlbuns,$fav);
-        }
+            foreach ($fav_Generos as $favgen){
+                $fav = Genero::findOne($favgen->id_genero);
+                array_push($favGeneros,$fav);
+            }
 
-        foreach ($fav_Artistas as $favart){
-            $fav = Artista::findOne($favart->id_artista);
-            array_push($favArtistas,$fav);
-        }
+            foreach ($fav_Albuns as $favalb){
+                $fav = Album::findOne($favalb->id_album);
+                array_push($favAlbuns,$fav);
+            }
 
-        foreach ($fav_Musicas as $favmus){
-            $fav = Musica::findOne($favmus->id_musica);
-            array_push($favMusicas,$fav);
-        }
+            foreach ($fav_Artistas as $favart){
+                $fav = Artista::findOne($favart->id_artista);
+                array_push($favArtistas,$fav);
+            }
 
-        $itemsCarrinho = $this->getItemsCarrinho($userLogado);
+            foreach ($fav_Musicas as $favmus){
+                $fav = Musica::findOne($favmus->id_musica);
+                array_push($favMusicas,$fav);
+            }
 
-        return $this->render('index',[
-            'favGeneros' => $favGeneros,
-            'favArtistas' => $favArtistas,
-            'favAlbuns' => $favAlbuns,
-            'favMusicas' => $favMusicas,
-            'itemsCarrinho'=> $itemsCarrinho
-        ]);
+            $itemsCarrinho = $this->getItemsCarrinho($userLogado);
+
+            return $this->render('index',[
+                'favGeneros' => $favGeneros,
+                'favArtistas' => $favArtistas,
+                'favAlbuns' => $favAlbuns,
+                'favMusicas' => $favMusicas,
+                'itemsCarrinho'=> $itemsCarrinho
+            ]);
+
     }
 
     public function actionAddFavArtista($id){
