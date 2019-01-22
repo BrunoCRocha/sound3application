@@ -36,7 +36,7 @@ else{
             <img src="<?=Yii::getAlias('@albunsF').'/'.$musica->album->caminhoImagem?>">
         </div>
         <div class="info_body">
-            <h4 class="media-heading"><?= $musica->nome ?></h4>
+            <h4 name="heart" class="media-heading"><?= $musica->nome ?></h4>
             <h5>
                 <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>"><?= $musica->album->artista->nome ?></a> -
                 <a href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>"><?= $musica->album->nome ?></a> -
@@ -49,8 +49,8 @@ else{
         </div>
 
         <div id="imagem_favoritos">
-            <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $musica->id])?>">
-                <img src="<?=Yii::getAlias('@menuiconsF').'/'.$textbtnfav?>.svg">
+            <a  href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $musica->id])?>">
+                <img class="heart" src="<?=Yii::getAlias('@menuiconsF').'/'.$textbtnfav?>.svg">
             </a>
         </div>
         <div id="imagem_carrinho">

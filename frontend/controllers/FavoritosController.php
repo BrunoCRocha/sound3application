@@ -69,40 +69,45 @@ class FavoritosController extends \yii\web\Controller
             ->where(['id_utilizador' => $userLogado->getId()])
             ->all();
 
-        $favGeneros = array();
-        $favArtistas = array();
-        $favAlbuns = array();
-        $favMusicas = array();
+        if ($fav_Generos && $fav_Artistas && $fav_Albuns && $fav_Musicas != null){
+            $favGeneros = array();
+            $favArtistas = array();
+            $favAlbuns = array();
+            $favMusicas = array();
 
-        foreach ($fav_Generos as $favgen){
-            $fav = Genero::findOne($favgen->id_genero);
-            array_push($favGeneros,$fav);
+            foreach ($fav_Generos as $favgen){
+                $fav = Genero::findOne($favgen->id_genero);
+                array_push($favGeneros,$fav);
+            }
+
+            foreach ($fav_Albuns as $favalb){
+                $fav = Album::findOne($favalb->id_album);
+                array_push($favAlbuns,$fav);
+            }
+
+            foreach ($fav_Artistas as $favart){
+                $fav = Artista::findOne($favart->id_artista);
+                array_push($favArtistas,$fav);
+            }
+
+            foreach ($fav_Musicas as $favmus){
+                $fav = Musica::findOne($favmus->id_musica);
+                array_push($favMusicas,$fav);
+            }
+
+            $itemsCarrinho = $this->getItemsCarrinho($userLogado);
+
+            return $this->render('index',[
+                'favGeneros' => $favGeneros,
+                'favArtistas' => $favArtistas,
+                'favAlbuns' => $favAlbuns,
+                'favMusicas' => $favMusicas,
+                'itemsCarrinho'=> $itemsCarrinho
+            ]);
+        }else{
+            return $this->redirect(['site/index']);
         }
 
-        foreach ($fav_Albuns as $favalb){
-            $fav = Album::findOne($favalb->id_album);
-            array_push($favAlbuns,$fav);
-        }
-
-        foreach ($fav_Artistas as $favart){
-            $fav = Artista::findOne($favart->id_artista);
-            array_push($favArtistas,$fav);
-        }
-
-        foreach ($fav_Musicas as $favmus){
-            $fav = Musica::findOne($favmus->id_musica);
-            array_push($favMusicas,$fav);
-        }
-
-        $itemsCarrinho = $this->getItemsCarrinho($userLogado);
-
-        return $this->render('index',[
-            'favGeneros' => $favGeneros,
-            'favArtistas' => $favArtistas,
-            'favAlbuns' => $favAlbuns,
-            'favMusicas' => $favMusicas,
-            'itemsCarrinho'=> $itemsCarrinho
-        ]);
     }
 
     public function actionAddFavArtista($id){

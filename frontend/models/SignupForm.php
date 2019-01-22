@@ -1,6 +1,7 @@
 <?php
 namespace frontend\models;
 
+use Yii;
 use yii\base\Model;
 use common\models\User;
 
@@ -62,5 +63,14 @@ class SignupForm extends Model
         }
 
         return null;
+    }
+    public function sendEmail(){
+       return Yii::$app->mailer->compose()
+            ->setTo($this->email)
+            ->setFrom('sound3online@gmail.com')
+            ->setSubject('Teste')
+            ->setTextBody('Esta registado no nosso site')
+            ->send();
+
     }
 }

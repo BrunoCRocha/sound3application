@@ -33,12 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['label' => 'Preço (€)',
                     'attribute' => 'preco'],
 
-                ['label' => 'Artista',
+                ['label' => 'Artista (ID)',
                     'attribute' => 'id_artista',
                     'value' => 'artista.nome',
                 ],
 
-                ['label' => 'Género',
+                ['label' => 'Género(ID)',
                     'attribute' => 'id_genero',
                     'value' => 'genero.nome',
                 ],

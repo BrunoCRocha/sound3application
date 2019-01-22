@@ -6,6 +6,7 @@ use common\models\Album;
 use common\models\Compra;
 use common\models\LinhaCompra;
 use common\models\Musica;
+use common\models\User;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -202,7 +203,7 @@ class SiteController extends Controller
                 $compra->valor_total = 0;
 
                 $compra->save(false);
-
+                $model->sendEmail();
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }
@@ -231,6 +232,8 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
             }
         }
+
+
 
         return $this->render('requestPasswordResetToken', [
             'model' => $model,
@@ -262,4 +265,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+
+
 }

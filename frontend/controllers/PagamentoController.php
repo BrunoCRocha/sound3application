@@ -33,12 +33,11 @@ class PagamentoController extends \yii\web\Controller
         $compra = Compra::find()
             ->where(['and', ['id_utilizador' => $userLogado, 'efetivada' => 0]])
             ->with('linhaCompras')
-            ->distinct()
-            ->all();
+            ->one();
 
         $musicas = array();
 
-        foreach ($compra[0]->relatedRecords as $lcArray) {
+        foreach ($compra->relatedRecords as $lcArray) {
             foreach ($lcArray as $lc) {
                 array_push($musicas, Musica::findOne($lc->id_musica));
 
