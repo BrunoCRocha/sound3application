@@ -89,6 +89,8 @@ class CompraController extends Controller
         $dadosSemValorMusica = new DadosDD();
         $dadosSemValorMusica->artistas = ArrayHelper::map(Artista::find()->all(),'id','nome');
 
+        //var_dump(Yii::$app->request->post());die();
+
         if ($modelCompra->load(Yii::$app->request->post()) && $modelLinhacompra->load(Yii::$app->request->post())
             && $modelCompra->save() && $modelLinhacompra->save()) {
             return $this->redirect(['view', 'id' => $modelCompra->id]);
@@ -150,22 +152,20 @@ class CompraController extends Controller
         $modelCompra = new Compra();
         $modelLinhacompra = new LinhaCompra();
 
-        if ($modelCompra->load(Yii::$app->request->post()) && $modelCompra->validate() &&
-            $modelLinhacompra->load(Yii::$app->request->post()) && $modelLinhacompra->validate()){
-            $count = count(Yii::$app->request->post('musicas', []));
-
-            $musicas = [new Setting()];
-            for($i = 1; $i < $count; $i++) {
-                $settings[] = new Setting();
-            }
-
+        if ($modelCompra->load(Yii::$app->request->post()) && $modelCompra->validate()){
+            $modelCompra->save();
+            $modelLinhacompra->load(Yii::$app->request->post());
             $modelLinhacompra->id_compra = $modelCompra->id;
+            $modelLinhacompra->save();
+
+            return $this->render('view', [
+                'model' => $modelCompra,
+            ]);
         }
 
+        return $this->redirect(['index']);
 
 
-        var_dump('ACERTOU');
-        die();
     }
 
     /**
