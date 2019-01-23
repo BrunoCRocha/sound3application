@@ -70,6 +70,8 @@ return [
                         'GET albunsrecentes' => 'albunsrecentes',                    
                         'GET findalbumbyid' => 'findalbumbyid',
                         'GET findmusicas' => 'findmusicas',
+                        'GET albunsartista' => 'albunsartista',
+                        'GET artistaalbum' => 'artistaalbum'
                     ],
                 ],
                 [
@@ -90,6 +92,7 @@ return [
                         'GET totalalbuns' => 'totalalbuns',
                         'GET findgenerobyid' => 'findgenerobyid',
                         'GET findalbuns' => 'findalbuns',
+                        'GET findalbunsgenero' => 'findalbunsgenero',
                     ],
                 ],
                 [
@@ -99,15 +102,17 @@ return [
                     'extraPatterns' => [
                         'GET findmusicabyid' => 'findmusicabyid',
                     ],
-
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/favgenero',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'POST criarfavoritogenero' => 'criarfavoritogenero',
+                        'GET findfavgenero' => 'findfavgenero',
                         'GET getallgenerosfavoritos' => 'getallgenerosfavoritos',
                         'GET getgenerosfavoritos' => 'getgenerosfavoritos',
+                        'DELETE apagarfavgenero' => 'apagarfavgenero',
                     ]
                 ],
                 [
@@ -117,6 +122,10 @@ return [
                     'extraPatterns' => [
                         'GET getallartistasfavoritos' => 'getallartistasfavoritos',
                         'GET getartistasfavoritos' => 'getartistasfavoritos',
+                        'GET findfavartista' => 'findfavartista',
+                        'GET findfavartista' => 'findfavartista',
+                        'POST criarfavoritoartista' => 'criarfavoritoartista',
+                        'DELETE apagarfavartista' => 'apagarfavartista'
                     ]
                 ],
                 [
@@ -129,6 +138,7 @@ return [
                         'POST criarfavoritoalbum' => 'criarfavoritoalbum',
                         'GET getallalbunsfavoritos' => 'getallalbunsfavoritos',
                         'GET getalbunsfavoritos' => 'getalbunsfavoritos',
+                        'DELETE apagarfavalbum' => 'apagarfavalbum',
                     ],
 
                 ],
@@ -151,11 +161,37 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/compra',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET musicascompradas' => 'musicascompradas',
+                        'GET comprauser' => 'comprauser',
+                        'GET getcarrinho' => 'getcarrinho',
+                        'POST adicionar' => 'adicionar',
+                        'POST adicionaralbum' => 'adicionaralbum',
+                        'DELETE remover' => 'remover',
+                        'GET checkalbumcarrinho' => 'checkalbumcarrinho',
+                        'DELETE removealbumcarrinho' => 'removealbumcarrinho',
+                    ]
+
+
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/comment',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getallcomments' => 'getallcomments',
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/pesquisa',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET pesquisaalbuns' => 'pesquisaalbuns',
+                        'GET pesquisageneros' => 'pesquisageneros',
+                        'GET pesquisaartistas' => 'pesquisaartistas',
+                        'GET pesquisamusicas' => 'pesquisamusicas',
+                    ]
                 ],
             ]
         ],

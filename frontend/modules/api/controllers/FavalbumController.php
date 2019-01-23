@@ -88,4 +88,17 @@ class FavalbumController extends \yii\rest\ActiveController
     }
 
 
+    public function actionApagarfavalbum($userId, $albumId){
+        $favAlbum = Fav_Album::find()
+            ->where(['and',['id_utilizador' => $userId, 'id_album' => $albumId]])
+            ->one();
+
+        $ret = $favAlbum->delete();
+            if ($ret == true){
+                return false;
+            }
+        return true;
+    }
+
+
 }

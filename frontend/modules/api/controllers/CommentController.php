@@ -2,8 +2,9 @@
 
 namespace frontend\modules\api\controllers;
 
+use common\models\Album;
 use Yii;
-use app\models\Comment;
+use common\models\Comment;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -12,116 +13,51 @@ use yii\filters\VerbFilter;
 /**
  * CommentController implements the CRUD actions for Comment model.
  */
-class CommentController extends Controller
+class CommentController extends \yii\rest\ActiveController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+    public $modelClass = 'common\models\Comment';
+
+    public function actionGetallcomments($albumId){
+        $comments = Comment::find()
+            ->where(['id_album'=>$albumId])
+            ->all();
+
+        $arrayFinal = array();
+
+        /*foreach ($comments as $comment){
+            $comment->id_utilizador=$comment->utilizador->username;
+        }*/
+
+        return $comments;
     }
 
-    /**
-     * Lists all Comment models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Comment::find(),
-        ]);
+    public function actionCreatecomment(){
+        $userId = \Yii::$app->request->post('userId');
+        $albumId = \Yii::$app->request->post('albumId');
+        $conteudo = \Yii::$app->request->post('conteudo');
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        $comment= new Comment();
+        $comment->id_album=$albumId;
+        $comment->id_utilizador=$userId;
+        $comment->conteudo=$conteudo;
+        $comment->data_criacao=date('Y-m-d');
+        $check=$comment->save();
+
+        return $check;
     }
 
-    /**
-     * Displays a single Comment model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+    public function actionRemovecomment($commentId){
+        $comment = Comment::findOne($commentId);
 
-    /**
-     * Creates a new Comment model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Comment();
+        $check=$comment->delete();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($check == 1){
+            $check = true;
+        } else{
+            $check = false;
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $check;
     }
 
-    /**
-     * Updates an existing Comment model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Comment model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Comment model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Comment the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Comment::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
 }

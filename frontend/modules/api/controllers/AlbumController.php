@@ -88,14 +88,8 @@ class AlbumController extends \yii\rest\ActiveController
     }
 
     public function actionFindalbumbyid($id){
-
         $album = Album::findOne($id);
-
         $artista = Artista::findOne($album->id_artista);
-
-        //var_dump($album->artista->nome);
-        //die();
-
 
         $artista->nome;
 
@@ -114,6 +108,30 @@ class AlbumController extends \yii\rest\ActiveController
             ->all();
 
         return $albumSearch;
+    }
+
+
+    public function actionAlbunsartista($artistaId){
+        $albuns = array();
+
+        $albuns = Album::find()
+            ->where(['id_artista' => $artistaId])
+            ->all();
+
+        return $albuns;
+    }
+
+
+    public function actionArtistaalbum($albumId){
+        $album = Album::find()
+            ->where(['id' => $albumId])
+            ->one();
+
+        $artista = Artista::find()
+            ->where(['id' => $album->id_artista])
+            ->one();
+
+        return ["artista" => $artista];
     }
 
 }
