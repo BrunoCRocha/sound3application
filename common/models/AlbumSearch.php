@@ -42,7 +42,7 @@ class AlbumSearch extends Album
      */
     public function search($params)
     {
-        $query = Album::find()->joinWith(['artista', 'genero']);
+        $query = Album::find();
 
         // add conditions that should always apply here
 
@@ -69,8 +69,6 @@ class AlbumSearch extends Album
             'preco' => $this->preco,
             'id_artista' => $this->id_artista,
             'id_genero' => $this->id_genero,
-            'artista' => $this->nome,
-            'genero' => $this->genero,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome]);

@@ -34,7 +34,7 @@ if($musicasFav != null){
     <div class="musica_album" >
         <h5><?= $musica->duracao ?></h5>
         <h4><?= $musica->nome ?></h4>
-        <h5><?= $musica->preco?> €</h5>
+        <h5 style="font-size: 16px"><?= $musica->preco?>€</h5>
         <a class="button_album" href="<?= Url::toRoute(['favoritos/'.$rotaFavMus, 'id' => $musica->id])?>">
             <img src="<?=Yii::getAlias('@menuiconsF').'/'.$textBtnMus?>.svg">
         </a>

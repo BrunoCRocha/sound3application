@@ -5,7 +5,9 @@ namespace backend\controllers;
 use common\models\Artista;
 use common\models\Comment;
 use common\models\ConterGenero;
+use common\models\Fav_Album;
 use common\models\Genero;
+use common\models\Musica;
 use common\models\UploadForm;
 use common\models\User;
 use Yii;
@@ -42,22 +44,22 @@ class AlbumController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['admin','mod'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['admin','mod'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['admin','mod'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['admin','mod'],
+                            'roles' => ['admin'],
                         ],
                     ],
                 ],
@@ -186,9 +188,16 @@ class AlbumController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+
+    //Serve para eliminar tudo o que esteja associado ao Album em causa
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $album=$this->findModel($id);
+
+        if($album!=null){
+            $album->delete();
+        }
 
         return $this->redirect(['index']);
     }

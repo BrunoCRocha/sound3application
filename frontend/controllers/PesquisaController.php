@@ -13,10 +13,41 @@ use common\models\Genero;
 use common\models\Musica;
 use Yii;
 use yii\db\conditions\LikeCondition;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 
 class PesquisaController extends \yii\web\Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['musica','albuns','genero', 'artista', 'index'],
+                'rules' => [
+                    [
+                        'actions' => ['musica','albuns','genero','artista','index'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['musica','albuns','genero','artista','index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
 
     public function actionIndex($search)
     {
@@ -75,11 +106,16 @@ class PesquisaController extends \yii\web\Controller
 
         $favMusPesquisadas=$this->getFavMusPesquisados($musicaSearch);
 
+
+        $userLogado = Yii::$app->user->identity;
+        $itemsCarrinho = $this->getItemsCarrinho($userLogado);
+
         $tipo = 'musica';
         return $this->render('index',[
             'search' => $search,
             'musicaSearch' => $musicaSearch,
             'favMusPesquisadas' => $favMusPesquisadas,
+            'itemsCarrinho' => $itemsCarrinho,
             'tipo' => $tipo
         ]);
     }
@@ -258,12 +294,11 @@ class PesquisaController extends \yii\web\Controller
         $carrinho = Compra::find()
             ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
             ->with('linhaCompras')
-            ->distinct()
-            ->all();
+            ->one();
 
         $musicas = array();
 
-        foreach ($carrinho[0]->relatedRecords as $lcArray){
+        foreach ($carrinho->relatedRecords as $lcArray){
 
             if(count($lcArray) > 0){
                 foreach ($lcArray as $lc){

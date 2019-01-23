@@ -19,4 +19,5 @@ Yii::setAlias('@csscarrinho','http://localhost/sound3application/frontend/web/fi
 Yii::setAlias('@cssperfil','http://localhost/sound3application/frontend/web/ficheiros_css/perfil.css');
 Yii::setAlias('@cssfavoritos','http://localhost/sound3application/frontend/web/ficheiros_css/favoritos.css');
 Yii::setAlias('@cssalbum','http://localhost/sound3application/frontend/web/ficheiros_css/album.css');
+Yii::setAlias('@icone','http://localhost/sound3application/common/img');
 

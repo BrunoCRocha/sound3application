@@ -14,15 +14,18 @@ $this->title = 'Perfil de '.$model->username;
 <div class="container " >
     <div class="row conteudo-perfil">
          <h3> <span class="glyphicon glyphicon-user"></span> Perfil Pessoal</h3>
+        <br>
         <div id=" textoForm">
             <?php $form = ActiveForm::begin([ 'options' => ['class' => 'form-horizontal formPerfil','method' => 'post', 'action' => 'perfil/update']]);?>
 
-            <?= $form->field($model, 'username' ,['labelOptions'=>['style'=>'color:white']])->textInput(['id'=>'textUsername','readonly'=> true],['maxlength' => true]) ?>
+            <?= $form->field($model, 'username' ,['labelOptions'=>['style'=>'color:white,margin-right: 0px;margin-left: 0px;']])->textInput(['id'=>'textUsername','readonly'=> true],['maxlength' => true]) ?>
+            <div>
+                <p class="textPassword">Password</p>
 
-            <p class="textPassword">Password</p>
+                <?= Html::passwordInput('password','password',['class' => 'form-control','id'=>'textPassword','readonly'=> true])?>
+            </div>
 
-            <?= Html::passwordInput('password','password',['class' => 'form-control','id'=>'textPassword','readonly'=> true, 'maxlength'=> true])?>
-            <p> </p>
+            <br>
 
             <?= $form->field($model, 'email',['labelOptions'=>['style'=>'color:white']])->textInput(['id'=>'textEmail','readonly'=> true],['maxlength' => true]) ?>
 

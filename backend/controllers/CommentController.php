@@ -37,22 +37,22 @@ class CommentController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['admin','mod'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['admin','mod'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => false,
                             'actions' => ['update'],
-                            'roles' => ['admin','mod'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['admin','mod'],
+                            'roles' => ['admin','Moderador'],
                         ],
                     ],
                 ],

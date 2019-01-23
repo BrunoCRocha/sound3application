@@ -23,7 +23,7 @@ if($favArtPesquisados != null){
     <div class="objeto_genero-musica" >
         <div id="imagem_artista-genero">
             <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $artista->id])?>">
-                <img src=" $artista->caminhoImagem?>">
+                <img src=" <?=Yii::getAlias('@artistasF').'/'.$artista->caminhoImagem?>">
             </a>
         </div>
         <div class="info_body-artista">
@@ -31,7 +31,7 @@ if($favArtPesquisados != null){
             <h5><?= 'Nº Albuns:'.count($artista->albums)?></h5>
         </div>
         <div id="imagem_favoritos_sozinha">
-            <a name="heart" href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $artista->id])?>">
+            <a href="<?= Url::toRoute(['favoritos/'.$rota, 'id' => $artista->id])?>">
                 <img src="<?=Yii::getAlias('@menuiconsF').'/'.$textbtnfav?>.svg">
             </a>
         </div>

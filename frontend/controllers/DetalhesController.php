@@ -11,10 +11,58 @@ use common\models\Fav_Artista;
 use common\models\Fav_Musica;
 use common\models\Musica;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 
 class DetalhesController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'signup', 'album', 'artista', 'special-callback'],
+                'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['album', 'artista'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout','album', 'artista'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['special-callback'],
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action){}
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
+    public function actionSpecialCallback()
+    {
+        $message= 'Entre na sua conta para poder realizar esta ação!';
+        return $this->render('login',['message'=>$message]);
+    }
+
+
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -69,8 +117,7 @@ class DetalhesController extends \yii\web\Controller
 
     public function actionArtista($id)
     {
-        $artista = Artista::find()->where(['id' => $id])
-        ->one();
+        $artista = Artista::findOne($id);
 
         $albunsArtista = Album::find()
             ->where(['id_artista' => $id])
@@ -96,12 +143,11 @@ class DetalhesController extends \yii\web\Controller
         $carrinho = Compra::find()
             ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
             ->with('linhaCompras')
-            ->distinct()
-            ->all();
+            ->one();
 
         $musicas = array();
 
-        foreach ($carrinho[0]->relatedRecords as $lcArray){
+        foreach ($carrinho->relatedRecords as $lcArray){
 
             if(count($lcArray) > 0){
                 foreach ($lcArray as $lc){

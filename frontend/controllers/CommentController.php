@@ -4,13 +4,41 @@ namespace frontend\controllers;
 
 use common\models\Comment;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
 class CommentController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','update','delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','update','delete'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['index','create','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
 
     public function actionIndex($album){
-        var_dump('index');
-        die();
         return $this->render('_form',[
             'album'=>$album
         ]);
@@ -24,9 +52,6 @@ class CommentController extends \yii\web\Controller
             $modelComment->id_album = $album;
             $modelComment->data_criacao = date('Y-m-d');
             $modelComment->id_utilizador = Yii::$app->user->identity->getId();
-
-            //var_dump($modelComment);
-            //die();
 
             if($modelComment->save()) {
                 return $this->redirect(['detalhes/album', 'id' => $album]);

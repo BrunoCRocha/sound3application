@@ -24,3 +24,8 @@
 .fundo{
     color:#A9A9A9;
 }
+
+.form-group{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}

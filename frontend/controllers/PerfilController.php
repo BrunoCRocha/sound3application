@@ -9,10 +9,40 @@ use common\models\UserSearch;
 use Yii;
 use common\models\Compra;
 use yii\console\Exception;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use ZipArchive;
 
 class PerfilController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','update','download','downloadtodas'],
+                'rules' => [
+                    [
+                        'actions' => [ 'index','create','update','download','downloadtodas'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['index','create','update','download','downloadtodas'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+
+        ];
+    }
     public function actionIndex($id)
     {
         $model = User::findOne($id);
@@ -21,6 +51,7 @@ class PerfilController extends \yii\web\Controller
 
         $query_Compra=Compra::find()
             ->where(['and',['id_utilizador'=> Yii::$app->user->identity->getId(),'efetivada'=>1]])->all();
+
 
         $arrayMusicas=array();
 

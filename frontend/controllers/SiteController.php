@@ -3,9 +3,11 @@ namespace frontend\controllers;
 
 
 use common\models\Album;
+use common\models\Artista;
 use common\models\Compra;
 use common\models\LinhaCompra;
 use common\models\Musica;
+use common\models\User;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -31,16 +33,21 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup', 'login'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup', 'login'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
                         'actions' => ['logout'],
                         'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['login'],
+                        'allow' => false,
                         'roles' => ['@'],
                     ],
                 ],
@@ -70,6 +77,15 @@ class SiteController extends Controller
         ];
     }
 
+
+    public function actionError()
+    {
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            return $this->render('login', ['exception' => $exception]);
+        }
+    }
+
     /**
      * Displays homepage.
      *
@@ -77,14 +93,31 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $compras = Compra::find()->select('id')
+        /*Query de dados random*/
+
+
+        $randletra = substr(str_shuffle(str_repeat("abcdefghijklmnoprstuvz", 5)), 0, 1);
+
+        $randmus = rand(0,2);
+        $arrayArtistas = Artista::find()
+            ->where(['like', 'nome', $randletra])
+            ->limit(5)
+            ->all();
+
+
+        $arrayMusicas = array();
+        foreach($arrayArtistas as $artista){
+            array_push($arrayMusicas, $artista->albums[0]->musicas[$randmus]);
+        }
+
+
+        /* Query de Mais Vendidos
+
+          $compras = Compra::find()->select('id')
             ->where(['efetivada' => 1])
             ->distinct()->all();
-        //var_dump($compras);
-        //die();
 
         $valores = array();
-
 
         foreach ($compras as $compra){
             foreach ($compra->linhaCompras as $lc){
@@ -97,20 +130,20 @@ class SiteController extends Controller
       
         if (isset($valores)){
             arsort($valores );//Ordena pelo valor
-        }
+        }*/
 
-        $maisVendidos = array_slice($valores, 0, 5, true);
-
-        //para utilizar em querys diferentes;
-        $artistasPopulares = array();
-
-        //top5 musicas + compradas
-        $arrayMusicas = array();
-
-        foreach ($maisVendidos as $idMusica => $nCompras){
-            $modelMusica = Musica::findOne($idMusica);
-            array_push($arrayMusicas, $modelMusica);
-        }
+//        $maisVendidos = array_slice($valores, 0, 5, true);
+//
+//        //para utilizar em querys diferentes;
+//        $artistasPopulares = array();
+//
+//        //top5 musicas + compradas
+//        $arrayMusicas = array();
+//
+//        foreach ($maisVendidos as $idMusica => $nCompras){
+//            $modelMusica = Musica::findOne($idMusica);
+//            array_push($arrayMusicas, $modelMusica);
+//        }
 
 
 
@@ -130,11 +163,9 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             var_dump("oi".$model->login());
 
@@ -170,43 +201,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        $model = new LoginForm();
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return mixed
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-            }
-
-            return $this->refresh();
-        } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
+        return $this->redirect(['site/login']);
     }
 
     /**
@@ -226,7 +221,7 @@ class SiteController extends Controller
                 $compra->valor_total = 0;
 
                 $compra->save(false);
-
+                $model->sendEmail();
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }
@@ -255,6 +250,8 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
             }
         }
+
+
 
         return $this->render('requestPasswordResetToken', [
             'model' => $model,
@@ -286,4 +283,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+
+
 }

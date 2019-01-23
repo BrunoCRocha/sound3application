@@ -17,12 +17,11 @@ class FavoritosCest
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
 
-        $I->see('Easier To Run');
-        $I->amOnRoute('/detalhes/album/', ['id' => '5']);
-        $I->click('#criarFavorito');
+        $I->amOnRoute('detalhes/artista',['id'=>1]);
+        $I->click('Adicionar aos Favoritos');
 
         $I->click('Favoritos');
-        $I->click('Álbuns');
-        $I->see('Meteora (2)');
+        $I->click('Artistas');
+        $I->see('Ed Sheeran');
     }
 }

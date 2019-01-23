@@ -29,13 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                ['header' => 'ID do Artista Favorito',
-                    'attribute' => 'id',
-                    'headerOptions' => [
-                        'style' => 'color:#3277b3'
-                    ],
-                ],
-
                 ['header' => 'Artista',
                     'attribute' => 'artista.nome',
                     'headerOptions' => [

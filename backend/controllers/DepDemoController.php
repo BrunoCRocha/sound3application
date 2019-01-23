@@ -17,9 +17,25 @@ class DepDemoController extends \yii\web\Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'subcat' => ['POST'],
+                    'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['subcat','prod'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['subcat'],
+                            'roles' => ['admin', 'Moderador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['prod'],
+                            'roles' => ['admin', 'Moderador'],
+                        ],
+                    ],
+                ],
         ];
     }
 
@@ -37,7 +53,7 @@ class DepDemoController extends \yii\web\Controller
                 $cat_id = $parents[0];
                 $albuns = Album::find()
                     ->select(['id', 'nome'])
-                    ->where(['id_genero' => $cat_id])
+                    ->where(['id_artista' => $cat_id])
                     ->all();
 
                 $v = array();

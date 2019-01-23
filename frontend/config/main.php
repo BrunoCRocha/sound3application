@@ -17,6 +17,19 @@ return [
         ],
     ],
     'components' => [
+        'mailer' =>
+            [
+                'class' => 'yii\swiftmailer\Mailer',
+                'transport' => [
+                    'class' => 'Swift_SmtpTransport',
+                    'host' => 'smtp.gmail.com', //Se falhar usar ip v4…
+                    'username' => 'sound3online@gmail.com',
+                    'password' => 'edsheran',
+                    'port' => '465', //465 ou 587',
+                    'encryption' => 'ssl', //ssl ou tls
+                ],
+                'viewPath' => '@app/mail',
+            ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'parsers' =>
@@ -195,6 +208,14 @@ return [
                 ],
             ]
         ],
+        'urlManagerBackEnd' => [
+            'class' => 'yii\web\UrlManager',
+            'hostInfo' => 'http://localhost/sound3application/backend',
+            'baseUrl' => 'http://localhost/sound3application/backend',
+            'enablePrettyUrl' => false,
+            'showScriptName' => false,
+        ]
+
 
     ],
 

@@ -29,7 +29,7 @@ if($favAlbPesquisados != null){
                 <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>"><?=$album->nome.' ('.count($album->musicas).')'?></a>
             </h4>
             <h5>
-                <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $album->id])?>"><?= $album->artista->nome?></a>
+                <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $album->artista->id])?>"><?= $album->artista->nome?></a>
             </h5>
         </div>
 

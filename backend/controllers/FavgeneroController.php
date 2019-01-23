@@ -27,6 +27,32 @@ class FavgeneroController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>
+                ['class' => \yii\filters\AccessControl::className(),
+                    'only' => ['view', 'create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['admin', 'Moderador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['admin', 'Moderador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['admin', 'Moderador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['admin', 'Moderador'],
+                        ],
+                    ],
+                ],
         ];
     }
 
@@ -108,9 +134,9 @@ class FavgeneroController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id_utilizador,$id_genero)
     {
-        $model = $this->findModel($id);
+        $model = Fav_Genero::find()->where(['and',['id_utilizador'=>$id_utilizador,'id_genero'=>$id_genero]])->one();
         $model->delete();
 
         return $this->redirect(['index', 'idUtilizador' => $model->id_utilizador]);

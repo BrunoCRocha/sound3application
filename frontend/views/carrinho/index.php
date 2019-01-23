@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 $this->title = 'Carrinho';
 ?>
@@ -40,12 +41,12 @@ $this->title = 'Carrinho';
 
                                 <td>
                                     <h4>
-                                        <a href="<?= Url::toRoute(['detalhes/detalhesArtista', 'id' => $musica->id])?>"><?= $musica->album->artista->nome ?></a>
+                                        <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->id])?>"><?= $musica->album->artista->nome ?></a>
                                     </h4>
                                 </td>
                                 <td>
                                     <h4>
-                                        <a href="<?= Url::toRoute(['detalhes/detalhesAlbum', 'id' => $musica->id])?>"><?= $musica->album->nome ?></a>
+                                        <a href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->id])?>"><?= $musica->album->nome ?></a>
                                     </h4>
                                 </td>
                                 <td>
@@ -92,8 +93,15 @@ $this->title = 'Carrinho';
                 </table>
 
                 <span style=" float: right">
-                    <h4 style="color: white;">Valor total a pagar: <?= $valorTotal ?>€</h4>
-                    <a href="<?= Url::toRoute(['pagamento/checkout','items'=> $musicas])?>" class="button btn btn-info">Proceder ao Pagamento</a>
+                    <h4 style="color: white;" >Valor total a pagar: <?= $valorTotal ?>€</h4>
+                    <?php
+                        if(count($musicas)==0){?>
+                            <?= Html::Button('Proceder ao Pagamento', ['class' => 'btn btn-info', 'disabled' => true]) ?>
+                        <?php }else{?>
+                            <?= Html::a('Proceder ao Pagamento', ['pagamento/checkout'], ['class' => 'btn btn-primary']) ?>
+                       <?php }
+                    ?>
+
                 </span>
             </div>
 

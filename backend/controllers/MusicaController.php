@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use common\models\Album;
 use common\models\DownloadMusica;
+use common\models\Fav_Musica;
+use common\models\LinhaCompra;
 use common\models\User;
 use Yii;
 use common\models\Musica;
@@ -38,22 +40,27 @@ class MusicaController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['readMusica'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createMusica'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateMusica'],
+                            'roles' => ['admin','Moderador'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['deleteMusica'],
+                            'roles' => ['admin'],
+                        ],
+                        [
+                            'allow' => false,
+                            'actions' => ['delete'],
+                            'roles' => ['Moderador'],
                         ],
                     ],
                 ],
@@ -144,10 +151,12 @@ class MusicaController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    //Serve para eliminar tudo o que esteja associado a Musica em causa
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $musica=$this->findModel($id);
+        $musica->delete();
         return $this->redirect(['index']);
     }
 

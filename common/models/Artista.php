@@ -114,6 +114,24 @@ class Artista extends \yii\db\ActiveRecord
         $this->fazPublish("DELETE",$myJSON);
     }*/
 
+    public function beforeDelete()
+    {
+        $albuns=Album::find()->where(['id_artista' => $this->id])->all();
+
+        foreach ($albuns as $album){
+            $album->delete();
+        }
+
+        $favArtistas=Fav_Artista::find()->where(['id_artista'=>$this->id])->all();
+        if(count($favArtistas)>0){
+            foreach ($favArtistas as $favArtista){
+                $favArtista->delete();
+            }
+        }
+
+        return parent::beforeDelete();
+    }
+
     public function fazPublish($canal,$msg)
     {
         $server = "127.0.0.1";
