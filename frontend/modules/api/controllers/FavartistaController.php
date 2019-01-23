@@ -45,5 +45,43 @@ class FavartistaController extends \yii\rest\ActiveController
         return $artistas;
     }
 
+    public function actionFindfavartista($userId, $artistaId){
+        $fav = Fav_Artista::find()
+            ->where(['and',['id_utilizador' => $userId, 'id_artista' => $artistaId]])
+            ->one();
+
+        if($fav != null){
+            return true;
+        }
+        return false;
+    }
+
+    //Criar Favorito Artista
+    public function actionCriarfavoritoartista(){
+        $idUser = \Yii::$app->request->post('id_utilizador');
+        $idArtista = \Yii::$app->request->post('id_artista');
+
+        $climodel = new Fav_Artista();
+        $climodel->id_utilizador = $idUser;
+        $climodel->id_artista = $idArtista;
+
+        $ret = $climodel->save();
+
+        return $ret;
+    }
+
+    // Apagar Favoritos Artista
+    public function actionApagarfavartista($userId, $artistaId){
+        $favArtista = Fav_Artista::find()
+            ->where(['and',['id_utilizador' => $userId, 'id_artista' => $artistaId]])
+            ->one();
+
+        $ret = $favArtista->delete();
+        if ($ret == true){
+            return false;
+        }
+        return true;
+    }
+
 
 }

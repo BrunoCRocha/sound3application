@@ -45,10 +45,10 @@ class GeneroController extends \yii\rest\ActiveController{
         return ['totalalbuns' => count($albuns)];
     }
 
-    public function actionFindgenerobyid($id){
-        $genero = Genero::findOne($id);
+    public function actionFindgenerobyid($generoId){
+        $genero = Genero::findOne($generoId);
 
-        return $genero;
+        return ["genero" => $genero];
     }
 
     public function actionFindalbuns($id){
@@ -63,6 +63,15 @@ class GeneroController extends \yii\rest\ActiveController{
             ->all();
 
         return $generoSearch;
+    }
+
+    public function actionFindalbunsgenero($generoId){
+        $albuns = array();
+        $albuns = Album::find()
+            ->where(['id_genero' => $generoId])
+            ->all();
+
+        return $albuns;
     }
 
 }

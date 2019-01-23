@@ -13,6 +13,18 @@ class FavgeneroController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Fav_Genero';
 
+    //Verifica se o Genero está nos Favoritos
+    public function actionFindfavgenero($userId, $generoId){
+        $fav = Fav_Genero::find()
+            ->where(['and',['id_utilizador' => $userId, 'id_genero' => $generoId]])
+            ->one();
+
+        if($fav != null){
+            return true;
+        }
+        return false;
+    }
+
     public function actionGetallgenerosfavoritos($userId){
         $favGenero = Fav_Genero::find()
             ->where(['id_utilizador' => $userId])
@@ -44,6 +56,33 @@ class FavgeneroController extends \yii\rest\ActiveController
         }
 
         return $generos;
+    }
+
+    //Criar Favorito Genero
+    public function actionCriarfavoritogenero(){
+        $idUser = \Yii::$app->request->post('id_utilizador');
+        $idGenero = \Yii::$app->request->post('id_genero');
+
+        $climodel = new Fav_Genero();
+        $climodel->id_utilizador = $idUser;
+        $climodel->id_genero = $idGenero;
+
+        $ret = $climodel->save();
+
+        return $ret;
+    }
+
+    // Apagar Favoritos Genero
+    public function actionApagarfavgenero($userId, $generoId){
+        $favGenero = Fav_Genero::find()
+            ->where(['and',['id_utilizador' => $userId, 'id_genero' => $generoId]])
+            ->one();
+
+        $ret = $favGenero->delete();
+        if ($ret == true){
+            return false;
+        }
+        return true;
     }
 
 }
