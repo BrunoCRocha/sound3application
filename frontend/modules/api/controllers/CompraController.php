@@ -153,7 +153,6 @@ class CompraController extends \yii\rest\ActiveController
         return "false";
     }
 
-
     public function actionGetcomprasregistadas($userId){
         $compras = Compra::find()->where(['and',['id_utilizador'=> $userId,'efetivada'=>1]])->asArray()->all();
 
@@ -183,10 +182,28 @@ class CompraController extends \yii\rest\ActiveController
 
             $musicasAlbum = ArrayHelper::getColumn($musicasAlbum, 'id');
 
+
             $musicas_para_adicionar = array_diff($musicasAlbum, $musicasCarrinho);
 
             if(count($musicas_para_adicionar)==0){
                 return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
+    public function actionCheckmusicacarrinho($userLogado, $musicaId){
+        $musica = Musica::findOne($musicaId);
+        $check=false;
+        if($musica != null) {
+
+            $carrinho = Compra::find()
+                ->where(['and', ['id_utilizador' => $userLogado, 'efetivada' => 0]])
+                ->with('linhaCompras')
+                ->one();
+
+            $musicasCarrinho = array();
             }
         }
         return false;
