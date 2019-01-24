@@ -13,27 +13,7 @@ class AlbumController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Album';
 
-    /*public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(),'auth' => function ($username, $password)
-            {
-                $user = \common\models\User::findByUsername($username);
-
-                if($user && \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash))
-                {
-                    return $user;
-                }
-            }
-        ];
-
-        return $behaviors;
-    }*/
-
-
     public function actionTopalbuns(){
-
         $compras = Compra::find()->select('id')
             ->where(['efetivada' => 1])
             ->distinct()->all();
@@ -55,8 +35,6 @@ class AlbumController extends \yii\rest\ActiveController
 
         $maisVendidos = array_slice($valores, 0, 5, true);
 
-        //para utilizar em querys diferentes;
-        $artistasPopulares = array();
 
         //top5 musicas + compradas
         $arrayMusicas = array();
@@ -66,13 +44,11 @@ class AlbumController extends \yii\rest\ActiveController
             array_push($arrayMusicas, $modelMusica);
         }
 
-
         $albuns = array();
 
         foreach ($arrayMusicas as $musica){
             array_push($albuns, Album::findOne($musica->id_album));
         }
-
 
         return $albuns;
     }
@@ -125,7 +101,9 @@ class AlbumController extends \yii\rest\ActiveController
 
     // Vai Buscar Albuns do Artista
     public function actionAlbunsartista($artistaId){
-        $albuns = Album::find()->where(['id_artista' => $artistaId])->all();
+        $albuns = Album::find()
+            ->where(['id_artista' => $artistaId])
+            ->all();
 
         return $albuns;
     }

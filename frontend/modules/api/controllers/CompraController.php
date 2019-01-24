@@ -198,7 +198,6 @@ class CompraController extends \yii\rest\ActiveController
     }
 
 
-
     public function actionCheckmusicacarrinho($userId, $musicaId){
         $musica = Musica::findOne($musicaId);
         $check=false;
