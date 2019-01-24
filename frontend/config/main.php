@@ -85,7 +85,6 @@ return [
                         'GET findmusicas' => 'findmusicas',
                         'GET artistaalbum' => 'artistaalbum',
                         'GET findalbumbysearch' => 'findalbumbysearch',
-                        'GET artistaalbum' => 'artistaalbum',
                         'GET albunsartista' => 'albunsartista',
                     ],
                 ],
@@ -190,7 +189,6 @@ return [
                         'DELETE remover' => 'remover',
                         'GET checkalbumcarrinho' => 'checkalbumcarrinho',
                         'GET checkmusicacarrinho' => 'checkmusicacarrinho',
-
                         'DELETE removealbumcarrinho' => 'removealbumcarrinho',
                     ]
                 ],
