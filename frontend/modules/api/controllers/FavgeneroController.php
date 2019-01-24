@@ -46,4 +46,52 @@ class FavgeneroController extends \yii\rest\ActiveController
         return $generos;
     }
 
+
+    //Verifica se o Album está nos Favoritos
+    public function actionFindfavoritogenero($userId, $generoId){
+        $fav = Fav_Genero::find()
+            ->where(['and',['id_utilizador' => $userId, 'id_genero' => $generoId]])
+            ->one();
+
+        if($fav != null){
+            return true;
+        }
+        return false;
+    }
+
+    //Criar Favorito Genero
+    public function actionCriarfavoritogenero(){
+        $idUser = \Yii::$app->request->post('id_utilizador');
+        $idGenero = \Yii::$app->request->post('id_genero');
+
+        $climodel = new Fav_Genero();
+        $climodel->id_utilizador = $idUser;
+        $climodel->id_genero = $idGenero;
+
+        $ret = $climodel->save();
+
+        if($ret == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    // Apagar Favorito Genero
+    public function actionApagarfavgenero($userId, $generoId){
+
+        $model = Fav_Genero::find()
+            ->where(['and', ['id_utilizador' => $userId, 'id_genero' => $generoId]])
+            ->one();
+
+        $ret = $model->delete();
+
+        if($ret == 1){
+            return false;
+        }else{
+            return true;
+        }
+
+    }
 }

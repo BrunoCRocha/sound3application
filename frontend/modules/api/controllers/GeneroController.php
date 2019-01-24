@@ -10,51 +10,27 @@ class GeneroController extends \yii\rest\ActiveController{
 
     public $modelClass = 'common\models\Genero';
 
-    /*public function behaviors()
-
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(),'auth' => function ($username, $password)
-            {
-                $user = \common\models\User::findByUsername($username);
-
-                if($user && \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash))
-                {
-                    return $user;
-                }
-            }
-        ];
-
-        return $behaviors;
-    }*/
 
     public function actionTotalalbuns($id){
-
-        //solicitar autenticação
-
-        /*$this->getBehavior('authenticator');
-
-
-        if(!Genero::findOne($id)){
-            return ;
-        }*/
 
         $albuns = Album::find()->where(['id_genero' =>$id])->all();
 
         return ['totalalbuns' => count($albuns)];
     }
 
-    public function actionFindgenerobyid($id){
-        $genero = Genero::findOne($id);
+    public function actionFindgenerobyid($generoId){
+        $genero = Genero::findOne($generoId);
 
-        return $genero;
+        return ['genero' => $genero];
+
     }
 
-    public function actionFindalbuns($id){
-        $genero = Genero::findOne($id);
+    public function actionFindalbunsgenero($generoId){
+        $albuns = Album::find()
+            ->where(['id_genero' => $generoId])
+            ->all();
 
-        return $genero->albums;
+        return $albuns;
     }
 
     public function actionFindgenerobysearch($search){

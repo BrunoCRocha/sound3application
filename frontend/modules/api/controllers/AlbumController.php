@@ -13,27 +13,7 @@ class AlbumController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Album';
 
-    /*public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(),'auth' => function ($username, $password)
-            {
-                $user = \common\models\User::findByUsername($username);
-
-                if($user && \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash))
-                {
-                    return $user;
-                }
-            }
-        ];
-
-        return $behaviors;
-    }*/
-
-
     public function actionTopalbuns(){
-
         $compras = Compra::find()->select('id')
             ->where(['efetivada' => 1])
             ->all();
@@ -55,8 +35,6 @@ class AlbumController extends \yii\rest\ActiveController
 
         $maisVendidos = array_slice($valores, 0, 5, true);
 
-        //para utilizar em querys diferentes;
-        $artistasPopulares = array();
 
         //top5 musicas + compradas
         $arrayMusicas = array();
@@ -66,13 +44,11 @@ class AlbumController extends \yii\rest\ActiveController
             array_push($arrayMusicas, $modelMusica);
         }
 
-
         $albuns = array();
 
         foreach ($arrayMusicas as $musica){
             array_push($albuns, Album::findOne($musica->id_album));
         }
-
 
         return $albuns;
     }
@@ -88,10 +64,10 @@ class AlbumController extends \yii\rest\ActiveController
     }
 
     public function actionFindalbumbyid($id){
-
         $album = Album::findOne($id);
 
         return ["album" => $album];
+
     }
 
     public function actionFindmusicas($id){
@@ -113,6 +89,28 @@ class AlbumController extends \yii\rest\ActiveController
         $artista = Artista::findOne($album->id_artista);
 
         return ["artista" => $artista];
+    }
+
+
+    // Vai buscar o artista do Album
+    public function actionArtistaalbum($albumId){
+        $album = Album::findOne($albumId);
+
+        $artista = Artista::find()
+            ->where(['id' => $album->id_artista])
+            ->one();
+
+        return ['artista' => $artista];
+    }
+
+
+    // Vai Buscar Albuns do Artista
+    public function actionAlbunsartista($artistaId){
+        $albuns = Album::find()
+            ->where(['id_artista' => $artistaId])
+            ->all();
+
+        return $albuns;
     }
 
 }

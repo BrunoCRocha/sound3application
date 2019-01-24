@@ -21,24 +21,6 @@ use yii\filters\VerbFilter;
 class CompraController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Compra';
-    /**
-     * {@inheritdoc}
-     */
-    /*public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(), 'auth' => function ($username, $password) {
-                $user = \common\models\User::findByUsername($username);
-
-                if ($user && \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash)) {
-                    return $user;
-                }
-            }
-        ];
-
-        return $behaviors;
-    }*/
 
     //return musicas compradas
     public function actionMusicascompradas($idcompra)
@@ -57,18 +39,16 @@ class CompraController extends \yii\rest\ActiveController
     //return de compras efetivadas
     public function actionComprasuser($idutilizador)
     {
-        //solicitar autenticação
-        //$this->getBehavior('authenticator');
-
         $comprasEfetivadas=$this->getCompras($idutilizador);
         return $comprasEfetivadas;
-
-
     }
 
     //return compras efetivadas
     public function getCompras($id){
-        $comprasEfetivadas=Compra::find()->select('id')->where(['and',['id_utilizador'=> $id,'efetivada'=>1]])->all();
+        $comprasEfetivadas=Compra::find()
+            ->select('id')
+            ->where(['and',['id_utilizador'=> $id,'efetivada'=>1]])
+            ->all();
         return $comprasEfetivadas;
     }
 
@@ -100,11 +80,11 @@ class CompraController extends \yii\rest\ActiveController
         if($musica != null){
 
             $compra = Compra::find()
-                ->where(['and',['id_utilizador'=> $userId,'efetivada'=>0]])
-                ->all();
+            ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
+            ->one();
 
             $linhaCompra = new LinhaCompra();
-            $linhaCompra->id_compra = $compra[0]->id;
+            $linhaCompra->id_compra = $compra->id;
             $linhaCompra->id_musica = $musica->id;
             $linhaCompra->save();
             return "true";
@@ -145,11 +125,10 @@ class CompraController extends \yii\rest\ActiveController
                 $linhaCompra->id_musica = $musica;
                 $linhaCompra->save();
             }
-
-            return "true";
+            return true;
         }
 
-        return "false";
+        return false;
     }
 
     //remover uma musica do carrinho
@@ -169,12 +148,11 @@ class CompraController extends \yii\rest\ActiveController
                     }
                 }
             }
-
             return "true";
         }
-
         return "false";
     }
+
 
     public function actionGetcomprasregistadas($userId){
         $compras = Compra::find()->where(['and',['id_utilizador'=> $userId,'efetivada'=>1]])->asArray()->all();
@@ -218,7 +196,6 @@ class CompraController extends \yii\rest\ActiveController
         $musica = Musica::findOne($musicaId);
         $check=false;
         if($musica != null) {
-
             $carrinho = Compra::find()
                 ->where(['and', ['id_utilizador' => $userId, 'efetivada' => 0]])
                 ->with('linhaCompras')
