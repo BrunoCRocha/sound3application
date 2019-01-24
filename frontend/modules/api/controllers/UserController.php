@@ -24,6 +24,17 @@ class UserController extends \yii\rest\ActiveController
         $model->username=$request["username"];
         $model->email=$request["email"];
         $model->password=$request["password"];
+        $testeusername = \common\models\User::findByUsername($request["username"]);
+        $testeemail = User::find()->select('email')->where(['email' => $request["email"]])->one();
+
+        if($testeusername != null){
+            return 1;
+        }
+
+        if($testeemail != null){
+            return 2;
+        }
+
         if ($user = $model->signup()) {
             //ENVIAR EMAIL DE INFORMAÇÃO
             $compra = new Compra();
@@ -34,10 +45,10 @@ class UserController extends \yii\rest\ActiveController
 
             $compra->save(false);
 
-            return "true";
+            return ["user" => $user];
         }
 
-        return "false";
+        return 3;
     }
 
     public function actionVerificarlogin(){
