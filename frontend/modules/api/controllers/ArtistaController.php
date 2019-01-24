@@ -44,7 +44,7 @@ class ArtistaController extends \yii\rest\ActiveController
     public function actionFindartistabyid($id){
         $artista = Artista::findOne($id);
 
-        return ["artista" => $artista];
+        return ['artista' => $artista];
     }
 
     public function actionFindartistabysearch($search){

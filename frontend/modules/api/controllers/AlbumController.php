@@ -111,27 +111,23 @@ class AlbumController extends \yii\rest\ActiveController
     }
 
 
-    public function actionAlbunsartista($artistaId){
-        $albuns = array();
-
-        $albuns = Album::find()
-            ->where(['id_artista' => $artistaId])
-            ->all();
-
-        return $albuns;
-    }
-
-
+    // Vai buscar o artista do Album
     public function actionArtistaalbum($albumId){
-        $album = Album::find()
-            ->where(['id' => $albumId])
-            ->one();
+        $album = Album::findOne($albumId);
 
         $artista = Artista::find()
             ->where(['id' => $album->id_artista])
             ->one();
 
-        return ["artista" => $artista];
+        return ['artista' => $artista];
+    }
+
+
+    // Vai Buscar Albuns do Artista
+    public function actionAlbunsartista($artistaId){
+        $albuns = Album::find()->where(['id_artista' => $artistaId])->all();
+
+        return $albuns;
     }
 
 }

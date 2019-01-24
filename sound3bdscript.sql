@@ -148,8 +148,8 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('admin', '1', NULL),
-('cliente', '17', 1548178049),
-('Moderador', '16', NULL);
+('cliente', '3', NULL),
+('Moderador', '2', NULL);
 
 -- --------------------------------------------------------
 

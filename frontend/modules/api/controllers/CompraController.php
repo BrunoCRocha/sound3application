@@ -21,24 +21,6 @@ use yii\filters\VerbFilter;
 class CompraController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Compra';
-    /**
-     * {@inheritdoc}
-     */
-    /*public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(), 'auth' => function ($username, $password) {
-                $user = \common\models\User::findByUsername($username);
-
-                if ($user && \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash)) {
-                    return $user;
-                }
-            }
-        ];
-
-        return $behaviors;
-    }*/
 
     //return musicas compradas
     public function actionMusicascompradas($idcompra)
@@ -57,13 +39,8 @@ class CompraController extends \yii\rest\ActiveController
     //return de compras efetivadas
     public function actionComprasuser($idutilizador)
     {
-        //solicitar autenticação
-        //$this->getBehavior('authenticator');
-
         $comprasEfetivadas=$this->getCompras($idutilizador);
         return $comprasEfetivadas;
-
-
     }
 
     //return compras efetivadas
@@ -171,61 +148,76 @@ class CompraController extends \yii\rest\ActiveController
                     }
                 }
             }
-
             return "true";
         }
-
         return "false";
     }
 
+
+    // OLE
+
+
     public function actionCheckalbumcarrinho($userId, $albumId){
         $album = Album::findOne($albumId);
-        if($album != null) {
-            $compra = Compra::find()
-                ->where(['and', ['id_utilizador' => $userId, 'efetivada' => 0]])
+
+        $musicasAlbum = array();
+
+        if($album != null){
+            foreach ($album->musicas as $musica){
+                array_push($musicasAlbum, $musica);
+            }
+
+            $carrinho = Compra::find()
+                ->where(['and', ['id_utilizador' => $userId,'efetivada' => 0]])
                 ->with('linhaCompras')
                 ->one();
 
             $musicasCarrinho = array();
 
-            $musicasAlbum = Musica::find()
-                ->select('id')
-                ->where(['id_album' => $album->id])
-                ->all();
 
-            foreach ($compra->relatedRecords as $lcArray) {
-                foreach ($lcArray as $lc) {
-                    array_push($musicasCarrinho, Musica::findOne($lc->id_musica)->id);
+            foreach ($carrinho->relatedRecords as $lcArray){
+                if(count($lcArray) > 0){
+                    foreach ($lcArray as $lc){
+                        array_push($musicasCarrinho, Musica::findOne($lc->id_musica));
+                    }
                 }
             }
 
-            $musicasAlbum = ArrayHelper::getColumn($musicasAlbum, 'id');
+            $musicas_para_adicionar = array();
 
-            $musicas_diferentes = array_diff($musicasAlbum, $musicasCarrinho);
+            $musicas_para_adicionar = array_diff($musicasAlbum, $musicasCarrinho);
 
-            if(count($musicas_diferentes)==0){
+
+            if(count($musicas_para_adicionar)== 0){
                 return true;
+            }else{
+                return false;
             }
-            return false;
         }
+        return "não ha";
     }
 
-    public function actionRemovealbumcarrinho($userId, $albumId){
-        $album = Album::findOne($albumId);
-        if($album != null) {
-            $compra = Compra::find()
+
+
+    public function actionCheckmusicacarrinho($userId, $musicaId){
+        $musica = Musica::findOne($musicaId);
+        $check=false;
+        if($musica != null) {
+            $carrinho = Compra::find()
                 ->where(['and', ['id_utilizador' => $userId, 'efetivada' => 0]])
                 ->with('linhaCompras')
                 ->one();
 
-            $musicasCarrinho = array();
-
-            foreach ($compra->relatedRecords as $lcArray) {
-                foreach ($lcArray as $lc) {
-                    $lc->delete();
+            foreach ($carrinho->relatedRecords as $lcArray) {
+                if (count($lcArray) > 0) {
+                    foreach ($lcArray as $lc) {
+                        if ($lc->id_musica == $musica->id){
+                            $check = true;
+                        }
+                    }
                 }
             }
         }
-        return false;
+        return $check;
     }
 }

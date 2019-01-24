@@ -27,7 +27,7 @@ class CommentController extends \yii\rest\ActiveController
         /*foreach ($comments as $comment){
             $comment->id_utilizador=$comment->utilizador->username;
         }*/
-
+      
         return $comments;
     }
 
@@ -58,6 +58,4 @@ class CommentController extends \yii\rest\ActiveController
         }
         return $check;
     }
-
-
 }

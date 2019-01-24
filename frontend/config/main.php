@@ -83,8 +83,7 @@ return [
                         'GET albunsrecentes' => 'albunsrecentes',                    
                         'GET findalbumbyid' => 'findalbumbyid',
                         'GET findmusicas' => 'findmusicas',
-                        'GET albunsartista' => 'albunsartista',
-                        'GET artistaalbum' => 'artistaalbum'
+                        'GET artistaalbum' => 'artistaalbum',
                     ],
                 ],
                 [
@@ -95,6 +94,9 @@ return [
                         'GET artistasrandom' => 'artistasrandom',
                         'GET findartistabyid' => 'findartistabyid',
                         'GET albunsartista' => 'albunsartista',
+                        'POST criarfavoritoartista' => 'criarfavoritoartista',
+                        'DELETE apagarfavoritoartista' => 'apagarfavoritoartista',
+                        'GET albunsacrtista' => 'albunsartista'
                     ],
                 ],
                 [
@@ -104,7 +106,6 @@ return [
                     'extraPatterns' => [
                         'GET totalalbuns' => 'totalalbuns',
                         'GET findgenerobyid' => 'findgenerobyid',
-                        'GET findalbuns' => 'findalbuns',
                         'GET findalbunsgenero' => 'findalbunsgenero',
                     ],
                 ],
@@ -125,7 +126,9 @@ return [
                         'GET findfavgenero' => 'findfavgenero',
                         'GET getallgenerosfavoritos' => 'getallgenerosfavoritos',
                         'GET getgenerosfavoritos' => 'getgenerosfavoritos',
-                        'DELETE apagarfavgenero' => 'apagarfavgenero',
+                        'GET criarfavoritogenero' => 'criarfavoritogenero',
+                        'DELETE apagarfavoritogenero' => 'apagarfavoritogenero'
+
                     ]
                 ],
                 [
@@ -184,8 +187,6 @@ return [
                         'GET checkalbumcarrinho' => 'checkalbumcarrinho',
                         'DELETE removealbumcarrinho' => 'removealbumcarrinho',
                     ]
-
-
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -193,6 +194,8 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET getallcomments' => 'getallcomments',
+                        'POST criarcomment' => 'criarcomment'
+
                     ]
                 ],
                 [
@@ -215,8 +218,6 @@ return [
             'enablePrettyUrl' => false,
             'showScriptName' => false,
         ]
-
-
     ],
 
 

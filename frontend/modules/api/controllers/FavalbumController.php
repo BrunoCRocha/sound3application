@@ -49,7 +49,11 @@ class FavalbumController extends \yii\rest\ActiveController
 
         $ret = $climodel->save();
 
-        return $ret;
+        if($ret == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
@@ -89,16 +93,19 @@ class FavalbumController extends \yii\rest\ActiveController
 
 
     public function actionApagarfavalbum($userId, $albumId){
-        $favAlbum = Fav_Album::find()
-            ->where(['and',['id_utilizador' => $userId, 'id_album' => $albumId]])
+        $favorito = Fav_Album::find()
+            ->where(['and', ['id_utilizador' => $userId, 'id_album' => $albumId]])
             ->one();
 
-        $ret = $favAlbum->delete();
-            if ($ret == true){
+        if($favorito != null){
+            $ret = $favorito->delete();
+
+            if($ret == 1){
                 return false;
+            }else{
+                return true;
             }
-        return true;
-    }
-
-
+        }else{
+            return false;
+        }
 }

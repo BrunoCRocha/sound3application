@@ -50,6 +50,12 @@ class FavartistaController extends \yii\rest\ActiveController
             ->where(['and',['id_utilizador' => $userId, 'id_artista' => $artistaId]])
             ->one();
 
+    //Verifica se o Artista está nos Favoritos
+    public function actionFindfavartista($userId, $artistaId){
+        $fav = Fav_Artista::find()
+            ->where(['and',['id_utilizador' => $userId, 'id_artista' => $artistaId]])
+            ->one();
+
         if($fav != null){
             return true;
         }
@@ -67,21 +73,29 @@ class FavartistaController extends \yii\rest\ActiveController
 
         $ret = $climodel->save();
 
-        return $ret;
-    }
-
-    // Apagar Favoritos Artista
-    public function actionApagarfavartista($userId, $artistaId){
-        $favArtista = Fav_Artista::find()
-            ->where(['and',['id_utilizador' => $userId, 'id_artista' => $artistaId]])
-            ->one();
-
-        $ret = $favArtista->delete();
-        if ($ret == true){
+        if($ret == 1){
+            return true;
+        }else{
             return false;
         }
-        return true;
     }
 
 
+    // Apagar Favorito Artista
+    public function actionApagarfavoritoartista($userId, $artistaId){
+
+        $model = Fav_Artista::find()
+            ->where(['and', ['id_utilizador' => $userId, 'id_artista' => $artistaId]])
+            ->one();
+
+        $ret = $model->delete();
+
+        if($ret == 1){
+            return false;
+        }else{
+            return true;
+        }
+
+    }
 }
+
