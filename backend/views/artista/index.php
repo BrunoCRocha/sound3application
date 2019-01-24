@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Criar Artista', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Listar Artista', ['mostrar'], ['class' => 'btn btn-success']) ?>
     </p>
     <div class="fundo-form">
         <?= GridView::widget([
@@ -23,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
                 'id',
                 'nome',
                 'nacionalidade',

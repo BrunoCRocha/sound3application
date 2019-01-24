@@ -83,6 +83,7 @@ return [
                         'GET albunsrecentes' => 'albunsrecentes',                    
                         'GET findalbumbyid' => 'findalbumbyid',
                         'GET findmusicas' => 'findmusicas',
+                        'GET artistaalbum' => 'artistaalbum',
                     ],
                 ],
                 [
@@ -93,6 +94,9 @@ return [
                         'GET artistasrandom' => 'artistasrandom',
                         'GET findartistabyid' => 'findartistabyid',
                         'GET albunsartista' => 'albunsartista',
+                        'POST criarfavoritoartista' => 'criarfavoritoartista',
+                        'DELETE apagarfavoritoartista' => 'apagarfavoritoartista',
+                        'GET albunsacrtista' => 'albunsartista'
                     ],
                 ],
                 [
@@ -102,7 +106,7 @@ return [
                     'extraPatterns' => [
                         'GET totalalbuns' => 'totalalbuns',
                         'GET findgenerobyid' => 'findgenerobyid',
-                        'GET findalbuns' => 'findalbuns',
+                        'GET findalbunsgenero' => 'findalbunsgenero',
                     ],
                 ],
                 [
@@ -121,6 +125,8 @@ return [
                     'extraPatterns' => [
                         'GET getallgenerosfavoritos' => 'getallgenerosfavoritos',
                         'GET getgenerosfavoritos' => 'getgenerosfavoritos',
+                        'GET criarfavoritogenero' => 'criarfavoritogenero',
+                        'DELETE apagarfavoritogenero' => 'apagarfavoritogenero'
                     ]
                 ],
                 [
@@ -142,6 +148,7 @@ return [
                         'POST criarfavoritoalbum' => 'criarfavoritoalbum',
                         'GET getallalbunsfavoritos' => 'getallalbunsfavoritos',
                         'GET getalbunsfavoritos' => 'getalbunsfavoritos',
+                        'DELETE apagarfavalbum' => 'apagarfavalbum',
                     ],
 
                 ],
@@ -164,11 +171,18 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/compra',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET checkalbumcarrinho' => 'checkalbumcarrinho',
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/comment',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getallcomments' => 'getallcomments',
+                        'POST criarcomment' => 'criarcomment'
+                    ]
                 ],
             ]
         ],

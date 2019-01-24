@@ -44,7 +44,7 @@ class ArtistaController extends \yii\rest\ActiveController
     public function actionFindartistabyid($id){
         $artista = Artista::findOne($id);
 
-        return $artista;
+        return ['artista' => $artista];
     }
 
     public function actionFindartistabysearch($search){
@@ -60,7 +60,9 @@ class ArtistaController extends \yii\rest\ActiveController
 
         $artistasRand = array_rand($artistas, 5);
 
-        $artistasObjeto = Artista::find()->where(['id' => $artistasRand])->all();
+        $artistasObjeto = Artista::find()
+            ->where(['id' => $artistasRand])
+            ->all();
 
         return $artistasObjeto;
     }
