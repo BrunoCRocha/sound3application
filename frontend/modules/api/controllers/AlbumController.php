@@ -36,7 +36,7 @@ class AlbumController extends \yii\rest\ActiveController
 
         $compras = Compra::find()->select('id')
             ->where(['efetivada' => 1])
-            ->distinct()->all();
+            ->all();
 
         $valores = array();
 
@@ -78,7 +78,7 @@ class AlbumController extends \yii\rest\ActiveController
     }
 
     public function actionAlbunsrecentes(){
-        $albuns = Album::find()->all();
+        $albuns = Album::find() ->all();
 
         $inverter = array_reverse($albuns);
 
@@ -91,15 +91,7 @@ class AlbumController extends \yii\rest\ActiveController
 
         $album = Album::findOne($id);
 
-        $artista = Artista::findOne($album->id_artista);
-
-        //var_dump($album->artista->nome);
-        //die();
-
-
-        $artista->nome;
-
-        return ["album" => $album, "artista" => $artista->nome];
+        return ["album" => $album];
     }
 
     public function actionFindmusicas($id){
@@ -114,6 +106,13 @@ class AlbumController extends \yii\rest\ActiveController
             ->all();
 
         return $albumSearch;
+    }
+    public function actionArtistaalbum($albumId){
+        $album = Album::findOne($albumId);
+
+        $artista = Artista::findOne($album->id_artista);
+
+        return ["artista" => $artista];
     }
 
 }

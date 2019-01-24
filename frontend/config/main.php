@@ -83,6 +83,7 @@ return [
                         'GET albunsrecentes' => 'albunsrecentes',                    
                         'GET findalbumbyid' => 'findalbumbyid',
                         'GET findmusicas' => 'findmusicas',
+                        'GET artistaalbum' => 'artistaalbum',
                     ],
                 ],
                 [
@@ -164,6 +165,17 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/compra',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getcomprasregistadas' => 'getcomprasregistadas',
+                        'GET adicionar' => 'adicionar',
+                        'GET adicionaralbum' => 'adicionaralbum',
+                        'GET remover' => 'remover',
+                        'GET musicascompradas' => 'musicascompradas',
+                        'GET comprasuser' => 'comprasuser',
+                        'GET getcarrinho' => 'getcarrinho',
+                        'GET checkmusicacarrinho' => 'checkmusicacarrinho',
+                        'GET checkalbumcarrinho' => 'checkalbumcarrinho',
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',

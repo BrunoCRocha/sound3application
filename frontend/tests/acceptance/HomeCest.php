@@ -10,8 +10,8 @@ class HomeCest
         $I->amOnPage('/site/index');
         $I->click('Login');
         $I->see('Altere-a');
-        $I->fillField('Username', 'admin');
-        $I->fillField('Password', 'adminadmin');
+        $I->fillField('Username', 'joao');
+        $I->fillField('Password', 'joaojoao');
         $I->click('login-button');
         $I->amOnPage('/site/index');
         $I->see('Carrinho');
@@ -21,6 +21,11 @@ class HomeCest
 
 
         $I->amOnPage('/site/index');
+        $I->fillField('search', 'AClara');
+        $I->click('buttonSearch');
+        $I->wait(3);
+        $I->see('Resultados de pesquisa para: "AClara"');
+        $I->wait(3);
         $I->click(  'AClara');
         $I->see ('Piruka');
         $I->click('#criarComment-button');
