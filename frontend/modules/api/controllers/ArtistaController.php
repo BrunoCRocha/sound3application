@@ -11,28 +11,11 @@ class ArtistaController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Artista';
 
-    /*public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(),'auth' => function ($username, $password)
-            {
-                $user = \common\models\User::findByUsername($username);
-
-                if($user && \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash))
-                {
-                    return $user;
-                }
-            }
-        ];
-
-        return $behaviors;
-    }*/
-
-
     public function actionDetalhes($id, $userLogado){
-        $artista = Artista::find()->where(['id' => $id])
+        $artista = Artista::find()
+            ->where(['id' => $id])
             ->one();
+        return $artista;
     }
   
     public function actionAlbunsartista($id)
@@ -41,10 +24,11 @@ class ArtistaController extends \yii\rest\ActiveController
 
         return $artista->albums;
     }
+
     public function actionFindartistabyid($id){
         $artista = Artista::findOne($id);
 
-        return $artista;
+        return ['artista' => $artista];
     }
 
     public function actionFindartistabysearch($search){
@@ -60,7 +44,9 @@ class ArtistaController extends \yii\rest\ActiveController
 
         $artistasRand = array_rand($artistas, 5);
 
-        $artistasObjeto = Artista::find()->where(['id' => $artistasRand])->all();
+        $artistasObjeto = Artista::find()
+            ->where(['id' => $artistasRand])
+            ->all();
 
         return $artistasObjeto;
     }

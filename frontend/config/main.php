@@ -83,6 +83,9 @@ return [
                         'GET albunsrecentes' => 'albunsrecentes',                    
                         'GET findalbumbyid' => 'findalbumbyid',
                         'GET findmusicas' => 'findmusicas',
+                        'GET findalbumbysearch' => 'findalbumbysearch',
+                        'GET artistaalbum' => 'artistaalbum',
+                        'GET albunsartista' => 'albunsartista',
                     ],
                 ],
                 [
@@ -90,9 +93,10 @@ return [
                     'controller' => 'api/artista',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET artistasrandom' => 'artistasrandom',
-                        'GET findartistabyid' => 'findartistabyid',
                         'GET albunsartista' => 'albunsartista',
+                        'GET findartistabyid' => 'findartistabyid',
+                        'GET findartistabysearch' => 'findartistabysearch',
+                        'GET artistasrandom' => 'artistasrandom',
                     ],
                 ],
                 [
@@ -102,7 +106,8 @@ return [
                     'extraPatterns' => [
                         'GET totalalbuns' => 'totalalbuns',
                         'GET findgenerobyid' => 'findgenerobyid',
-                        'GET findalbuns' => 'findalbuns',
+                        'GET findalbunsgenero' => 'findalbunsgenero',
+                        'GET findgenerobysearch' => 'findgenerobysearch',
                     ],
                 ],
                 [
@@ -110,9 +115,10 @@ return [
                     'controller' => 'api/musica',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'GET top5musicas' => 'top5musicas',
                         'GET findmusicabyid' => 'findmusicabyid',
+                        'GET findmusicabysearch' => 'findmusicabysearch',
                     ],
-
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -121,6 +127,9 @@ return [
                     'extraPatterns' => [
                         'GET getallgenerosfavoritos' => 'getallgenerosfavoritos',
                         'GET getgenerosfavoritos' => 'getgenerosfavoritos',
+                        'GET findfavoritogenero' => 'findfavgenero',
+                        'POST criarfavoritogenero' => 'criarfavoritogenero',
+                        'DELETE apagarfavoritogenero' => 'apagarfavoritogenero',
                     ]
                 ],
                 [
@@ -130,6 +139,9 @@ return [
                     'extraPatterns' => [
                         'GET getallartistasfavoritos' => 'getallartistasfavoritos',
                         'GET getartistasfavoritos' => 'getartistasfavoritos',
+                        'GET findfavartista' => 'findfavartista',
+                        'POST criarfavoritoartista' => 'criarfavoritoartista',
+                        'DELETE apagarfavartista' => 'apagarfavartista'
                     ]
                 ],
                 [
@@ -142,6 +154,7 @@ return [
                         'POST criarfavoritoalbum' => 'criarfavoritoalbum',
                         'GET getallalbunsfavoritos' => 'getallalbunsfavoritos',
                         'GET getalbunsfavoritos' => 'getalbunsfavoritos',
+                        'DELETE apagarfavalbum' => 'apagarfavalbum',
                     ],
 
                 ],
@@ -158,17 +171,45 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/linha-compra',
                     'pluralize' => false,
-
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/compra',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET musicascompradas' => 'musicascompradas',
+                        'GET comprauser' => 'comprauser',
+                        'GET compras' => 'compras',
+                        'GET getcarrinho' => 'getcarrinho',
+                        'POST adicionar' => 'adicionar',
+                        'POST adicionaralbum' => 'adicionaralbum',
+                        'DELETE remover' => 'remover',
+                        'GET checkalbumcarrinho' => 'checkalbumcarrinho',
+                        'GET checkmusicacarrinho' => 'checkmusicacarrinho',
+
+                        'DELETE removealbumcarrinho' => 'removealbumcarrinho',// Esta a faltar
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/comment',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET getallcomments' => 'getallcomments',
+                        'POST criarcomment' => 'criarcomment',
+                        'DELETE removecomment' => 'removecomment'
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/pesquisa',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET pesquisaalbuns' => 'pesquisaalbuns',
+                        'GET pesquisageneros' => 'pesquisageneros',
+                        'GET pesquisaartistas' => 'pesquisaartistas',
+                        'GET pesquisamusicas' => 'pesquisamusicas',
+                    ]
                 ],
             ]
         ],
@@ -179,8 +220,6 @@ return [
             'enablePrettyUrl' => false,
             'showScriptName' => false,
         ]
-
-
     ],
 
 
