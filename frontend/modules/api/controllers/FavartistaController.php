@@ -45,6 +45,10 @@ class FavartistaController extends \yii\rest\ActiveController
         return $artistas;
     }
 
+    public function actionFindfavartista($userId, $artistaId){
+        $fav = Fav_Artista::find()
+            ->where(['and',['id_utilizador' => $userId, 'id_artista' => $artistaId]])
+            ->one();
 
     //Verifica se o Artista está nos Favoritos
     public function actionFindfavartista($userId, $artistaId){
@@ -57,7 +61,6 @@ class FavartistaController extends \yii\rest\ActiveController
         }
         return false;
     }
-
 
     //Criar Favorito Artista
     public function actionCriarfavoritoartista(){
@@ -94,6 +97,5 @@ class FavartistaController extends \yii\rest\ActiveController
         }
 
     }
-
-
 }
+

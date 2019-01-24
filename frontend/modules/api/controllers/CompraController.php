@@ -58,12 +58,11 @@ class CompraController extends \yii\rest\ActiveController
         $carrinho = Compra::find()
             ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
             ->with('linhaCompras')
-            ->distinct()
-            ->all();
+            ->one();
 
         $musicas = array();
 
-        foreach ($carrinho[0]->relatedRecords as $lcArray){
+        foreach ($carrinho->relatedRecords as $lcArray){
 
             if(count($lcArray) > 0){
                 foreach ($lcArray as $lc){
@@ -82,11 +81,10 @@ class CompraController extends \yii\rest\ActiveController
 
             $compra = Compra::find()
                 ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
-                ->distinct()
-                ->all();
+                ->one();
 
             $linhaCompra = new LinhaCompra();
-            $linhaCompra->id_compra = $compra[0]->id;
+            $linhaCompra->id_compra = $compra->id;
             $linhaCompra->id_musica = $musica->id;
             $linhaCompra->save();
             return "true";
@@ -96,14 +94,13 @@ class CompraController extends \yii\rest\ActiveController
     }
 
     //adicionar todas as musicas de um album ao carrinho
-    public function actionAdicionarAlbum($userLogado, $albumId){
+    public function actionAdicionaralbum($userId, $albumId){
         $album = Album::findOne($albumId);
         if($album != null){
             $compra = Compra::find()
-                ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
+                ->where(['and',['id_utilizador'=> $userId,'efetivada'=>0]])
                 ->with('linhaCompras')
-                ->distinct()
-                ->all();
+                ->one();
 
             $musicasCarrinho = array();
 
@@ -112,7 +109,7 @@ class CompraController extends \yii\rest\ActiveController
                 ->where(['id_album' => $album->id])
                 ->all();
 
-            foreach ($compra[0]->relatedRecords as $lcArray){
+            foreach ($compra->relatedRecords as $lcArray){
                 foreach ($lcArray as $lc){
                     array_push($musicasCarrinho, Musica::findOne($lc->id_musica)->id);
                 }
@@ -124,15 +121,14 @@ class CompraController extends \yii\rest\ActiveController
 
             foreach ($musicas_para_adicionar as $musica){
                 $linhaCompra = new LinhaCompra();
-                $linhaCompra->id_compra = $compra[0]->id;
+                $linhaCompra->id_compra = $compra->id;
                 $linhaCompra->id_musica = $musica;
                 $linhaCompra->save();
             }
-
-            return "true";
+            return true;
         }
 
-        return "false";
+        return false;
     }
 
     //remover uma umsica do carrinho
@@ -143,10 +139,9 @@ class CompraController extends \yii\rest\ActiveController
             $compra = Compra::find()
                 ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
                 ->with('linhaCompras')
-                ->distinct()
-                ->all();
+                ->one();
 
-            foreach ($compra[0]->relatedRecords as $lcArray){
+            foreach ($compra->relatedRecords as $lcArray){
                 foreach ($lcArray as $lc){
                     if($lc->id_musica == $musica->id){
                         $lc->delete();
@@ -157,8 +152,6 @@ class CompraController extends \yii\rest\ActiveController
         }
         return "false";
     }
-
-
 
 
     // OLE
@@ -180,6 +173,7 @@ class CompraController extends \yii\rest\ActiveController
                 ->one();
 
             $musicasCarrinho = array();
+
 
             foreach ($carrinho->relatedRecords as $lcArray){
                 if(count($lcArray) > 0){
@@ -209,7 +203,6 @@ class CompraController extends \yii\rest\ActiveController
         $musica = Musica::findOne($musicaId);
         $check=false;
         if($musica != null) {
-
             $carrinho = Compra::find()
                 ->where(['and', ['id_utilizador' => $userId, 'efetivada' => 0]])
                 ->with('linhaCompras')

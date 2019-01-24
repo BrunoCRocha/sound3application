@@ -116,17 +116,19 @@ return [
                     'extraPatterns' => [
                         'GET findmusicabyid' => 'findmusicabyid',
                     ],
-
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/favgenero',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'POST criarfavoritogenero' => 'criarfavoritogenero',
+                        'GET findfavgenero' => 'findfavgenero',
                         'GET getallgenerosfavoritos' => 'getallgenerosfavoritos',
                         'GET getgenerosfavoritos' => 'getgenerosfavoritos',
                         'GET criarfavoritogenero' => 'criarfavoritogenero',
                         'DELETE apagarfavoritogenero' => 'apagarfavoritogenero'
+
                     ]
                 ],
                 [
@@ -136,6 +138,10 @@ return [
                     'extraPatterns' => [
                         'GET getallartistasfavoritos' => 'getallartistasfavoritos',
                         'GET getartistasfavoritos' => 'getartistasfavoritos',
+                        'GET findfavartista' => 'findfavartista',
+                        'GET findfavartista' => 'findfavartista',
+                        'POST criarfavoritoartista' => 'criarfavoritoartista',
+                        'DELETE apagarfavartista' => 'apagarfavartista'
                     ]
                 ],
                 [
@@ -172,7 +178,14 @@ return [
                     'controller' => 'api/compra',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'GET musicascompradas' => 'musicascompradas',
+                        'GET comprauser' => 'comprauser',
+                        'GET getcarrinho' => 'getcarrinho',
+                        'POST adicionar' => 'adicionar',
+                        'POST adicionaralbum' => 'adicionaralbum',
+                        'DELETE remover' => 'remover',
                         'GET checkalbumcarrinho' => 'checkalbumcarrinho',
+                        'DELETE removealbumcarrinho' => 'removealbumcarrinho',
                     ]
                 ],
                 [
@@ -182,6 +195,18 @@ return [
                     'extraPatterns' => [
                         'GET getallcomments' => 'getallcomments',
                         'POST criarcomment' => 'criarcomment'
+
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/pesquisa',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET pesquisaalbuns' => 'pesquisaalbuns',
+                        'GET pesquisageneros' => 'pesquisageneros',
+                        'GET pesquisaartistas' => 'pesquisaartistas',
+                        'GET pesquisamusicas' => 'pesquisamusicas',
                     ]
                 ],
             ]
@@ -193,8 +218,6 @@ return [
             'enablePrettyUrl' => false,
             'showScriptName' => false,
         ]
-
-
     ],
 
 

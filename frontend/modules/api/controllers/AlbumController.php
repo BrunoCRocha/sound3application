@@ -88,9 +88,7 @@ class AlbumController extends \yii\rest\ActiveController
     }
 
     public function actionFindalbumbyid($id){
-
         $album = Album::findOne($id);
-
         $artista = Artista::findOne($album->id_artista);
 
         $artista->nome;

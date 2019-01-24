@@ -108,8 +108,4 @@ class FavalbumController extends \yii\rest\ActiveController
         }else{
             return false;
         }
-
-    }
-
-
 }

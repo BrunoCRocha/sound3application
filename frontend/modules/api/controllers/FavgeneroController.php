@@ -13,6 +13,18 @@ class FavgeneroController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Fav_Genero';
 
+    //Verifica se o Genero está nos Favoritos
+    public function actionFindfavgenero($userId, $generoId){
+        $fav = Fav_Genero::find()
+            ->where(['and',['id_utilizador' => $userId, 'id_genero' => $generoId]])
+            ->one();
+
+        if($fav != null){
+            return true;
+        }
+        return false;
+    }
+
     public function actionGetallgenerosfavoritos($userId){
         $favGenero = Fav_Genero::find()
             ->where(['id_utilizador' => $userId])
@@ -46,6 +58,7 @@ class FavgeneroController extends \yii\rest\ActiveController
         return $generos;
     }
 
+
     //Verifica se o Album está nos Favoritos
     public function actionFindfavgenero($userId, $generoId){
         $fav = Fav_Genero::find()
@@ -57,7 +70,6 @@ class FavgeneroController extends \yii\rest\ActiveController
         }
         return false;
     }
-
 
     //Criar Favorito Genero
     public function actionCriarfavoritogenero(){
@@ -94,7 +106,4 @@ class FavgeneroController extends \yii\rest\ActiveController
         }
 
     }
-
-
-
 }
