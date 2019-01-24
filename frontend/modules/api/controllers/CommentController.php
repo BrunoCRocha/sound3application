@@ -31,7 +31,7 @@ class CommentController extends \yii\rest\ActiveController
         return $comments;
     }
 
-    public function actionCreatecomment(){
+    public function actionCriarcomment(){
         $userId = \Yii::$app->request->post('userId');
         $albumId = \Yii::$app->request->post('albumId');
         $conteudo = \Yii::$app->request->post('conteudo');

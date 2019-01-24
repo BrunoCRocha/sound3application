@@ -83,7 +83,9 @@ return [
                         'GET albunsrecentes' => 'albunsrecentes',                    
                         'GET findalbumbyid' => 'findalbumbyid',
                         'GET findmusicas' => 'findmusicas',
+                        'GET findalbumbysearch' => 'findalbumbysearch',
                         'GET artistaalbum' => 'artistaalbum',
+                        'GET albunsartista' => 'albunsartista',
                     ],
                 ],
                 [
@@ -91,12 +93,10 @@ return [
                     'controller' => 'api/artista',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET artistasrandom' => 'artistasrandom',
-                        'GET findartistabyid' => 'findartistabyid',
                         'GET albunsartista' => 'albunsartista',
-                        'POST criarfavoritoartista' => 'criarfavoritoartista',
-                        'DELETE apagarfavoritoartista' => 'apagarfavoritoartista',
-                        'GET albunsacrtista' => 'albunsartista'
+                        'GET findartistabyid' => 'findartistabyid',
+                        'GET findartistabysearch' => 'findartistabysearch',
+                        'GET artistasrandom' => 'artistasrandom',
                     ],
                 ],
                 [
@@ -107,6 +107,7 @@ return [
                         'GET totalalbuns' => 'totalalbuns',
                         'GET findgenerobyid' => 'findgenerobyid',
                         'GET findalbunsgenero' => 'findalbunsgenero',
+                        'GET findgenerobysearch' => 'findgenerobysearch',
                     ],
                 ],
                 [
@@ -114,7 +115,9 @@ return [
                     'controller' => 'api/musica',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'GET top5musicas' => 'top5musicas',
                         'GET findmusicabyid' => 'findmusicabyid',
+                        'GET findmusicabysearch' => 'findmusicabysearch',
                     ],
                 ],
                 [
@@ -122,13 +125,11 @@ return [
                     'controller' => 'api/favgenero',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'POST criarfavoritogenero' => 'criarfavoritogenero',
-                        'GET findfavgenero' => 'findfavgenero',
                         'GET getallgenerosfavoritos' => 'getallgenerosfavoritos',
                         'GET getgenerosfavoritos' => 'getgenerosfavoritos',
-                        'GET criarfavoritogenero' => 'criarfavoritogenero',
-                        'DELETE apagarfavoritogenero' => 'apagarfavoritogenero'
-
+                        'GET findfavoritogenero' => 'findfavgenero',
+                        'POST criarfavoritogenero' => 'criarfavoritogenero',
+                        'DELETE apagarfavoritogenero' => 'apagarfavoritogenero',
                     ]
                 ],
                 [
@@ -138,7 +139,6 @@ return [
                     'extraPatterns' => [
                         'GET getallartistasfavoritos' => 'getallartistasfavoritos',
                         'GET getartistasfavoritos' => 'getartistasfavoritos',
-                        'GET findfavartista' => 'findfavartista',
                         'GET findfavartista' => 'findfavartista',
                         'POST criarfavoritoartista' => 'criarfavoritoartista',
                         'DELETE apagarfavartista' => 'apagarfavartista'
@@ -171,7 +171,6 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/linha-compra',
                     'pluralize' => false,
-
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -180,12 +179,15 @@ return [
                     'extraPatterns' => [
                         'GET musicascompradas' => 'musicascompradas',
                         'GET comprauser' => 'comprauser',
+                        'GET compras' => 'compras',
                         'GET getcarrinho' => 'getcarrinho',
                         'POST adicionar' => 'adicionar',
                         'POST adicionaralbum' => 'adicionaralbum',
                         'DELETE remover' => 'remover',
                         'GET checkalbumcarrinho' => 'checkalbumcarrinho',
-                        'DELETE removealbumcarrinho' => 'removealbumcarrinho',
+                        'GET checkmusicacarrinho' => 'checkmusicacarrinho',
+
+                        'DELETE removealbumcarrinho' => 'removealbumcarrinho',// Esta a faltar
                     ]
                 ],
                 [
@@ -194,8 +196,8 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET getallcomments' => 'getallcomments',
-                        'POST criarcomment' => 'criarcomment'
-
+                        'POST criarcomment' => 'criarcomment',
+                        'DELETE removecomment' => 'removecomment'
                     ]
                 ],
                 [

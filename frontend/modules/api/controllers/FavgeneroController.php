@@ -13,18 +13,6 @@ class FavgeneroController extends \yii\rest\ActiveController
 {
     public $modelClass = 'common\models\Fav_Genero';
 
-    //Verifica se o Genero está nos Favoritos
-    public function actionFindfavgenero($userId, $generoId){
-        $fav = Fav_Genero::find()
-            ->where(['and',['id_utilizador' => $userId, 'id_genero' => $generoId]])
-            ->one();
-
-        if($fav != null){
-            return true;
-        }
-        return false;
-    }
-
     public function actionGetallgenerosfavoritos($userId){
         $favGenero = Fav_Genero::find()
             ->where(['id_utilizador' => $userId])
@@ -60,7 +48,7 @@ class FavgeneroController extends \yii\rest\ActiveController
 
 
     //Verifica se o Album está nos Favoritos
-    public function actionFindfavgenero($userId, $generoId){
+    public function actionFindfavoritogenero($userId, $generoId){
         $fav = Fav_Genero::find()
             ->where(['and',['id_utilizador' => $userId, 'id_genero' => $generoId]])
             ->one();
@@ -91,7 +79,7 @@ class FavgeneroController extends \yii\rest\ActiveController
 
 
     // Apagar Favorito Genero
-    public function actionApagarfavoritogenero($userId, $generoId){
+    public function actionApagarfavgenero($userId, $generoId){
 
         $model = Fav_Genero::find()
             ->where(['and', ['id_utilizador' => $userId, 'id_genero' => $generoId]])
