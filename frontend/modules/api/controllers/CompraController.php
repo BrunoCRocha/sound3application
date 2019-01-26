@@ -46,10 +46,11 @@ class CompraController extends \yii\rest\ActiveController
 
     //return compras efetivadas
     public function getCompras($id){
-        $comprasEfetivadas=Compra::find()
+        $comprasEfetivadas = Compra::find()
             ->select('id')
             ->where(['and',['id_utilizador'=> $id,'efetivada'=>1]])
             ->all();
+
         return $comprasEfetivadas;
     }
 
@@ -64,7 +65,6 @@ class CompraController extends \yii\rest\ActiveController
         $musicas = array();
 
         foreach ($carrinho->relatedRecords as $lcArray){
-
             if(count($lcArray) > 0){
                 foreach ($lcArray as $lc){
                     array_push($musicas, Musica::findOne($lc->id_musica));
@@ -76,22 +76,26 @@ class CompraController extends \yii\rest\ActiveController
     }
 
     //adicionar musica ao carrinho
-    public function actionAdicionar($userId,$musicaId){
-        $musica = Musica::findOne($musicaId);
-        if($musica != null){
+    public function actionAdicionarmusicacarrinho(){
+        $idUser = \Yii::$app->request->post('id_utilizador');
+        $idMusica = \Yii::$app->request->post('id_musica');
 
+        $musica = Musica::findOne($idMusica);
+
+        if($musica != null){
             $compra = Compra::find()
-            ->where(['and',['id_utilizador'=> $userId,'efetivada'=>0]])
+            ->where(['and',['id_utilizador'=> $idUser, 'efetivada'=>0]])
             ->one();
 
             $linhaCompra = new LinhaCompra();
             $linhaCompra->id_compra = $compra->id;
             $linhaCompra->id_musica = $musica->id;
-            $linhaCompra->save();
-            return "true";
+            $ret = $linhaCompra->save();
+
+            return $ret;
         }
 
-        return "false";
+        return false;
     }
 
     //adicionar todas as musicas de um album ao carrinho
@@ -149,9 +153,9 @@ class CompraController extends \yii\rest\ActiveController
                     }
                 }
             }
-            return "true";
+            return true;
         }
-        return "false";
+        return false;
     }
 
 
@@ -189,6 +193,7 @@ class CompraController extends \yii\rest\ActiveController
             if(count($musicas_para_adicionar)==0){
                 return true;
             }
+
         }
         return false;
     }
@@ -214,6 +219,27 @@ class CompraController extends \yii\rest\ActiveController
         }
         return $check;
     }
+
+
+    public function actionCheckmusicasalbumcarrinho($userId){
+        $carrinho = Compra::find()
+            ->where(['and',['id_utilizador'=> $userId,'efetivada' => 0]])
+            ->with('linhaCompras')
+            ->one();
+
+        $musicas = array();
+
+        foreach ($carrinho->relatedRecords as $lcArray) {
+            foreach ($lcArray as $lc) {
+
+                var_dump($lc);die();
+                if ($lc->id_musica == $musica->id){
+                    $check = true;
+                }
+            }
+        }
+    }
+
 
     public function actionRemovealbumcarrinho($userId,$albumId){
         $album = Album::findOne($albumId);

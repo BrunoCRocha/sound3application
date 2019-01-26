@@ -12,7 +12,8 @@ class MusicaController extends \yii\rest\ActiveController
     public $modelClass = 'common\models\Musica';
 
     public function actionTop5musicas(){
-        $compras = Compra::find()->select('id')
+        $compras = Compra::find()
+            ->select('id')
             ->where(['efetivada' => 1])
             ->distinct()->all();
 

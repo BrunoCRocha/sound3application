@@ -63,14 +63,22 @@ class FavalbumController extends \yii\rest\ActiveController
             ->where(['id_utilizador' => $userId])
             ->all();
 
-        $album = array();
+        $albuns = array();
         foreach ($favAlbum as $favorito) {
-            array_push($album, Album::find()
+            array_push($albuns, Album::find()
                 ->where(['id' => $favorito->id_album])
                 ->one());
         }
 
-        return $album;
+        $artistas = array();
+
+        foreach ($albuns as $album){
+            array_push($artistas, Artista::find()
+                ->where(['id' => $album->id_artista])
+                ->one());
+        }
+
+        return ['albuns' => $albuns, ['artistas' => $artistas]];
     }
 
     //Vais Buscar 5 Albuns aos Favoritos para Mostrar na Atividade dos Favoritos
@@ -82,26 +90,22 @@ class FavalbumController extends \yii\rest\ActiveController
         $favAlbum = array_slice($favAlbum, 0, 5, true);
 
         $albuns = array();
+
         foreach ($favAlbum as $favorito) {
             array_push($albuns, Album::find()
                 ->where(['id' => $favorito->id_album])
                 ->one());
         }
 
-        return $albuns;
-    }
-
-    public function actionApagarfavalbum($userId, $albumId){
-        $favAlbum = Fav_Album::find()
-            ->where(['and',['id_utilizador' => $userId, 'id_album' => $albumId]])
-            ->one();
-
-        if($favAlbum != null){
-            $favAlbum->delete();
-
-            return false;
+        $artistas = array();
+        
+        foreach ($albuns as $album){
+            array_push($artistas, Artista::find()
+                ->where(['id' => $album->id_artista])
+                ->one());
         }
-        return false;
+
+        return ['albuns' => $albuns, ['artistas' => $artistas]];
     }
 
 
