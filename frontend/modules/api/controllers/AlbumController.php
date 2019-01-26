@@ -50,7 +50,14 @@ class AlbumController extends \yii\rest\ActiveController
             array_push($albuns, Album::findOne($musica->id_album));
         }
 
-        return $albuns;
+        $artistas = array();
+        foreach ($albuns as $album){
+            array_push($artistas, Artista::find()
+                ->where(['id' => $album->id_artista])
+                ->one());
+        }
+
+        return ['albuns' => $albuns, 'artistas' => $artistas];
     }
 
     public function actionAlbunsrecentes(){
@@ -60,20 +67,28 @@ class AlbumController extends \yii\rest\ActiveController
 
         $albunsMaisRecentes = array_slice($inverter, 0 , 5, true);
 
-        return $albunsMaisRecentes;
+        $artistas = array();
+        foreach ($albunsMaisRecentes as $album){
+            array_push($artistas, Artista::find()
+                ->where(['id' => $album->id_artista])
+                ->one());
+        }
+
+        return ["albuns" => $albunsMaisRecentes, "artistas" => $artistas];
     }
+
+
 
     public function actionFindalbumbyid($id){
         $album = Album::findOne($id);
 
         return ["album" => $album];
-
     }
 
     public function actionFindmusicas($id){
         $album = Album::findOne($id);
 
-        return $album->musicas;
+        return ["musica" => $album->musicas, "album" => $album];
     }
 
     public function actionFindalbumbysearch($search){
@@ -92,25 +107,22 @@ class AlbumController extends \yii\rest\ActiveController
     }
 
 
-    // Vai buscar o artista do Album
-    public function actionArtistaalbum($albumId){
-        $album = Album::findOne($albumId);
-
-        $artista = Artista::find()
-            ->where(['id' => $album->id_artista])
-            ->one();
-
-        return ['artista' => $artista];
-    }
-
-
     // Vai Buscar Albuns do Artista
     public function actionAlbunsartista($artistaId){
         $albuns = Album::find()
             ->where(['id_artista' => $artistaId])
             ->all();
 
-        return $albuns;
+
+        $artistas = array();
+
+        foreach ($albuns as $album){
+            array_push($artistas, Artista::find()
+                ->where(['id' => $album->id_artista])
+                ->one());
+        }
+
+        return ['albuns' => $albuns, 'artistas' => $artistas];
     }
 
 }

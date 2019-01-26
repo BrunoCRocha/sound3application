@@ -50,4 +50,8 @@ class ArtistaController extends \yii\rest\ActiveController
 
         return $artistasObjeto;
     }
+
+
+
+
 }
