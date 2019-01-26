@@ -4,6 +4,7 @@ namespace frontend\modules\api\controllers;
 
 use common\models\Album;
 use common\models\Compra;
+use common\models\Fav_Musica;
 use common\models\LinhaCompra;
 use common\models\Musica;
 use common\models\User;
@@ -80,7 +81,7 @@ class CompraController extends \yii\rest\ActiveController
         if($musica != null){
 
             $compra = Compra::find()
-            ->where(['and',['id_utilizador'=> $userLogado,'efetivada'=>0]])
+            ->where(['and',['id_utilizador'=> $userId,'efetivada'=>0]])
             ->one();
 
             $linhaCompra = new LinhaCompra();
@@ -254,5 +255,32 @@ class CompraController extends \yii\rest\ActiveController
 
         }
         return false;
+    }
+
+    public function actionCheckmusicasalbumfavoritos($userId, $albumId){
+
+        $musicasAlbum = Musica::find()
+            ->where(['id_album' => $albumId])
+            ->all();
+        $musicasFavoritos = array();
+        $musicasFavAlbum = array();
+
+        foreach ($musicasAlbum as $musica){
+            $fav= Fav_Musica::find()
+                ->where(['and',['id_utilizador' => $userId, 'id_musica' => $musica->id]])
+                ->one();
+
+            if($fav!=null){
+                array_push($musicasFavoritos, $musica);
+            }
+
+        }
+        if(count($musicasFavoritos) > 0){
+            var_dump($musicasFavoritos);die();
+        }
+        return false;
+
+
+
     }
 }
