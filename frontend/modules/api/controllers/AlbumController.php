@@ -61,7 +61,7 @@ class AlbumController extends \yii\rest\ActiveController
     }
 
     public function actionAlbunsrecentes(){
-        $albuns = Album::find() ->all();
+        $albuns = Album::find()->all();
 
         $inverter = array_reverse($albuns);
 
@@ -105,7 +105,6 @@ class AlbumController extends \yii\rest\ActiveController
 
         return ["artista" => $artista];
     }
-
 
     // Vai Buscar Albuns do Artista
     public function actionAlbunsartista($artistaId){

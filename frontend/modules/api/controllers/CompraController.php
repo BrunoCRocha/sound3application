@@ -4,6 +4,7 @@ namespace frontend\modules\api\controllers;
 
 use common\models\Album;
 use common\models\Compra;
+use common\models\Fav_Musica;
 use common\models\LinhaCompra;
 use common\models\Musica;
 use common\models\User;
@@ -157,6 +158,7 @@ class CompraController extends \yii\rest\ActiveController
         return false;
     }
 
+
     public function actionGetcomprasregistadas($userId){
         $compras = Compra::find()->where(['and',['id_utilizador'=> $userId,'efetivada'=>1]])->asArray()->all();
 
@@ -191,25 +193,10 @@ class CompraController extends \yii\rest\ActiveController
             if(count($musicas_para_adicionar)==0){
                 return true;
             }
+
         }
         return false;
     }
-
-    /*public function actionCheckmusicacarrinho($userLogado, $musicaId){
-        $musica = Musica::findOne($musicaId);
-        $check=false;
-        if($musica != null) {
-
-            $carrinho = Compra::find()
-                ->where(['and', ['id_utilizador' => $userLogado, 'efetivada' => 0]])
-                ->with('linhaCompras')
-                ->one();
-
-            $musicasCarrinho = array();
-
-        }
-        return false;
-    }*/
 
     public function actionCheckmusicacarrinho($userId, $musicaId){
         $musica = Musica::findOne($musicaId);
@@ -294,5 +281,32 @@ class CompraController extends \yii\rest\ActiveController
 
         }
         return false;
+    }
+
+    public function actionCheckmusicasalbumfavoritos($userId, $albumId){
+
+        $musicasAlbum = Musica::find()
+            ->where(['id_album' => $albumId])
+            ->all();
+        $musicasFavoritos = array();
+        $musicasFavAlbum = array();
+
+        foreach ($musicasAlbum as $musica){
+            $fav= Fav_Musica::find()
+                ->where(['and',['id_utilizador' => $userId, 'id_musica' => $musica->id]])
+                ->one();
+
+            if($fav!=null){
+                array_push($musicasFavoritos, $musica);
+            }
+
+        }
+        if(count($musicasFavoritos) > 0){
+            var_dump($musicasFavoritos);die();
+        }
+        return false;
+
+
+
     }
 }
