@@ -166,6 +166,37 @@ class CarrinhoController extends \yii\web\Controller
         return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
     }
 
+    public function actionGetmusicascompradas($userId){
+
+        $compras = Compra::find()
+            ->where(['and', ['id_utilizador' => $userId, 'efetivada' => 1]])
+            ->with('linhaCompras')
+            ->all();
+
+        $musicas = array();
+
+
+        foreach ($compras as $compra) {
+            foreach ($compra->relatedRecords as $lcArray) {
+                foreach ($lcArray as $lc) {
+                    array_push($musicas, $lc);
+                }
+            }
+        }
+
+        var_dump($musicas);die();
+
+        $albuns = array();
+        foreach ($musicas as $musica){
+            if(!in_array(Album::findOne($musica->id_album),$albuns)){
+                array_push($albuns, Album::findOne($musica->id_album));
+            }
+
+        }
+
+        return ['musicas' => $musicas, 'albuns' => $albuns];
+    }
+
     public function getFavoritos($musicas){
 
         $userLogado = Yii::$app->user->identity;

@@ -286,7 +286,37 @@ class CompraController extends \yii\rest\ActiveController
         }
         return false;
 
+    }
+
+    public function actionGetmusicascompradas($userId){
+
+        $compras = Compra::find()
+            ->where(['and', ['id_utilizador' => $userId, 'efetivada' => 1]])
+            ->with('linhaCompras')
+            ->all();
+
+        $musicas = array();
 
 
+        foreach ($compras as $compra) {
+            foreach ($compra->relatedRecords as $lcArray) {
+                foreach ($lcArray as $lc) {
+                    $mus=Musica::findOne($lc->id_musica);
+
+                    array_push($musicas, $mus);
+                }
+            }
+        }
+
+        //var_dump($musicas);
+
+        $albuns = array();
+        foreach ($musicas as $musica){
+            array_push($albuns, Album::findOne($musica->id_album));
+        }
+
+        //var_dump($albuns);die();
+
+        return ['musicas' => $musicas, 'albuns' => $albuns];
     }
 }
