@@ -105,7 +105,7 @@ class FavalbumController extends \yii\rest\ActiveController
                 ->one());
         }
 
-        return ['albuns' => $albuns, ['artistas' => $artistas]];
+        return ['albuns' => $albuns, 'artistas' => $artistas];
     }
 
 

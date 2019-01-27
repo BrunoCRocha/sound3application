@@ -191,7 +191,7 @@ return [
                         'POST adicionaralbum' => 'adicionaralbum',
                         'DELETE remover' => 'remover',
                         'GET checkalbumcarrinho' => 'checkalbumcarrinho',
-                        'GET checkmusicacarrinho' => 'checkmusicacarrinho'
+                        'GET checkmusicacarrinho' => 'checkmusicacarrinho',
                         'GET checkmusicasalbumcarrinho' => 'checkmusicasalbumcarrinho',
                         'DELETE removealbumcarrinho' => 'removealbumcarrinho',
                         'GET checkmusicasalbumfavoritos' => 'checkmusicasalbumfavoritos',
