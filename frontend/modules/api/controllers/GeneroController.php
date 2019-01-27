@@ -2,6 +2,7 @@
 
 namespace frontend\modules\api\controllers;
 use common\models\Album;
+use common\models\Artista;
 use common\models\Genero;
 use yii\filters\auth\HttpBasicAuth;
 
@@ -30,7 +31,15 @@ class GeneroController extends \yii\rest\ActiveController{
             ->where(['id_genero' => $generoId])
             ->all();
 
-        return $albuns;
+        $artistas = array();
+
+        foreach ($albuns as $album){
+            array_push($artistas, Artista::find()
+                ->where(['id' => $album->id_artista])
+                ->one());
+        }
+
+        return ['albuns' => $albuns, 'artistas' => $artistas];
     }
 
     public function actionFindgenerobysearch($search){

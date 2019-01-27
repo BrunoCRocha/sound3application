@@ -18,14 +18,24 @@ class FavmusicaController extends \yii\rest\ActiveController
             ->where(['id_utilizador' => $userId])
             ->all();
 
-        $musica =array();
+        $musicas = array();
+
         foreach ($favMusica as $favorito){
-            array_push($musica, Musica::find()
+            array_push($musicas, Musica::find()
                 ->where(['id' => $favorito->id_musica])
                 ->one());
         }
 
-        return $musica;
+        $albuns = array();
+
+        foreach ($musicas as $musica){
+            array_push($albuns, Album::find()
+                ->where(['id' => $musica->id_album])
+                ->one());
+        }
+
+
+        return ['musicas' => $musicas, "albuns" => $albuns];
     }
 
     //SO 5 ALBUNS PARA MOSTRAR NA VIEW FAVORITOS
@@ -43,8 +53,100 @@ class FavmusicaController extends \yii\rest\ActiveController
                 ->one());
         }
 
-        return $musicas;
+        $albuns = array();
 
+        foreach ($musicas as $musica){
+            array_push($albuns, Album::find()
+                ->where(['id' => $musica->id_album])
+                ->one());
+        }
+
+
+        return ['musicas' => $musicas, "albuns" => $albuns];
+
+    }
+
+
+    public function actionAdicionarmusicafavoritos(){
+        $idUser = \Yii::$app->request->post('id_utilizador');
+        $idMusica = \Yii::$app->request->post('id_musica');
+
+        $climodel = new Fav_Musica();
+        $climodel->id_utilizador = $idUser;
+        $climodel->id_musica = $idMusica;
+
+        $ret = $climodel->save();
+
+        return $ret;
+    }
+
+
+    /*public function actionCheckmusicasalbumfavoritos($userId, $albumId){
+
+        $musicasAlbum = Musica::find()
+            ->where(['id_album' => $albumId])
+            ->all();
+
+        $musicasFavoritos = array();
+        $musicasFavAlbum = array();
+
+        foreach ($musicasAlbum as $musica){
+            $fav = Fav_Musica::find()
+                ->where(['and', ['id_utilizador' => $userId, 'id_musica' => $musica->id]])
+                ->one();
+
+            if($fav != null){
+                array_push($musicasFavoritos, $musica);
+            }
+        }
+
+        if(count($musicasFavoritos) > 0){
+            foreach ($musicasFavoritos as $m){
+                array_push($musicasFavAlbum, Musica::find()->where(['id' => $m->id_musica])->one());
+            }
+        }
+
+        var_dump($musicasFavAlbum);die();
+        return $musicasFavAlbum;
+    }*/
+
+
+    public function actionCheckmusicasalbumfavoritos($userId, $albumId){
+
+        $musicasAlbum = Musica::find()
+            ->where(['id_album' => $albumId])
+            ->all();
+
+        $musicasFavoritos = array();
+        $musicasFavAlbum = array();
+
+        foreach ($musicasAlbum as $musica){
+            $fav = Fav_Musica::find()
+                ->where(['and',['id_utilizador' => $userId, 'id_musica' => $musica->id]])
+                ->one();
+
+            if($fav != null){
+                array_push($musicasFavoritos, $musica);
+            }
+
+        }
+        if(count($musicasFavoritos) > 0){
+            var_dump($musicasFavoritos);
+            die();
+        }
+
+        return $musicasFavoritos;
+    }
+
+
+    public function actionApagarFavoritoMusica($userId, $musicaId){
+        $model = Fav_Musica::find()
+            ->where(['and', ['id_utilizador' => $userId, 'id_musica' => $musicaId]])
+            ->one();
+
+        $ret = $model->delete();
+
+        return $ret;
     }
 
 }

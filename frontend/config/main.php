@@ -129,7 +129,7 @@ return [
                         'GET getgenerosfavoritos' => 'getgenerosfavoritos',
                         'GET findfavoritogenero' => 'findfavgenero',
                         'POST criarfavoritogenero' => 'criarfavoritogenero',
-                        'DELETE apagarfavoritogenero' => 'apagarfavoritogenero',
+                        'DELETE apagarfavoritogenero' => 'apagarfavgenero',
                     ]
                 ],
                 [
@@ -165,6 +165,9 @@ return [
                     'extraPatterns' => [
                         'GET getallmusicasfavoritos' => 'getallmusicasfavoritos',
                         'GET getmusicasfavoritos' => 'getmusicasfavoritos',
+                        'POST adicionarmusicafavoritos' => 'adicionarmusicafavoritos',
+                        'GET checkmusicasalbumfavoritos' => 'checkmusicasalbumfavoritos',
+                        'DELETE apagarfavoritomusica' => 'apagarfavoritomusica'
                     ]
                 ],
                 [
@@ -184,12 +187,15 @@ return [
                         'GET comprauser' => 'comprauser',
                         'GET compras' => 'compras',
                         'GET getcarrinho' => 'getcarrinho',
-                        'POST adicionar' => 'adicionar',
+                        'POST adicionarmusicacarrinho' => 'adicionarmusicacarrinho',
                         'POST adicionaralbum' => 'adicionaralbum',
                         'DELETE remover' => 'remover',
                         'GET checkalbumcarrinho' => 'checkalbumcarrinho',
                         'GET checkmusicacarrinho' => 'checkmusicacarrinho',
+                        'GET checkmusicasalbumcarrinho' => 'checkmusicasalbumcarrinho',
                         'DELETE removealbumcarrinho' => 'removealbumcarrinho',
+                        'GET checkmusicasalbumfavoritos' => 'checkmusicasalbumfavoritos',
+
                     ]
                 ],
                 [
