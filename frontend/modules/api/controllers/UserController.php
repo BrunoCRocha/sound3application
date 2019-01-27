@@ -76,7 +76,7 @@ class UserController extends \yii\rest\ActiveController
 
     public function actionCheckout($userLogado)
     {
-
+        $IP="192.168.1.119";
         $paypal = new \PayPal\Rest\ApiContext(
             new \PayPal\Auth\OAuthTokenCredential(
                 'AS-mpIvVyQUAjq7YhTib-Ul5BCM2DMd1SGUjYQXpwqcwmQoBLp5Z7nhpNUh6CnGi8tjCv6XnRs2iJi80',
@@ -133,10 +133,9 @@ class UserController extends \yii\rest\ActiveController
             ->setDescription('Sound3 - Compra de Músicas')
             ->setInvoiceNumber(uniqid());
 
-        //urls de redirect após a transação, consoante o resultado
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl('http://localhost'.Url::toRoute(['pagamento/finish','resultado'=>'true']))
-            ->setCancelUrl('http://localhost'.Url::toRoute(['pagamento/finish','resultado'=>'false']));
+        $redirectUrls->setReturnUrl('http://'.$IP.Url::toRoute(['user/finish','resultado'=>'true', 'userLogado' => $userLogado]))
+            ->setCancelUrl('http://'.$IP.Url::toRoute(['user/finish','resultado'=>'false', 'userLogado' => $userLogado]));
 
         //efetuar o pedido
         $payment = new Payment();
@@ -154,6 +153,31 @@ class UserController extends \yii\rest\ActiveController
         $UrlConfirmacao = $payment->getApprovalLink();
 
         return $this->redirect($UrlConfirmacao);
+    }
+
+    public function actionFinish($resultado, $userLogado){
+        if($resultado == true){
+
+            $compra = Compra::find()
+                ->where(['and', ['id_utilizador' => $userLogado, 'efetivada' => 0]])
+                ->one();
+
+            //registar compra
+            $compra->efetivada = 1;
+            $compra->data_compra = date('Y-m-d');
+            $compra->valor_total = $compra->getValorTotal();
+            $compra->save(false);
+
+            //criar carrinho
+            $compra = new Compra();
+            $compra->efetivada = 0;
+            $compra->id_utilizador = $userLogado;
+            $compra->save(false);
+
+            return $this->redirect('../../../web/site/sucesso');
+        }else{
+            return $this->redirect('../../../web/site/erro');
+        }
     }
 
 }

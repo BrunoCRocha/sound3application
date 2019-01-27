@@ -233,6 +233,16 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionSucesso()
+    {
+        return $this->render('sucesso_pagamento');
+    }
+
+    public function actionErro()
+    {
+        return $this->render('erro_pagamento');
+    }
+
     /**
      * Requests password reset.
      *
