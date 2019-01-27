@@ -62,5 +62,4 @@ class UserController extends \yii\rest\ActiveController
         return -1;
     }
 
-
 }
