@@ -35,8 +35,15 @@ class PesquisaController extends Controller
             ->where(['like', 'nome', $pesquisa])
             ->all();
 
-        //$favAlbPesquisados=$this->getFavAlbPesquisados($albumSearch);
-        return $albumSearch;
+      $artista = array();
+
+      foreach ($albumSearch as $album){
+          array_push($artista, Artista::find()
+              ->where(['id' => $album->id_artista])
+              ->one());
+      }
+
+        return ['albuns' => $albumSearch, 'artistas' => $artista];
     }
 
     public function actionPesquisageneros($pesquisa){
@@ -64,12 +71,15 @@ class PesquisaController extends Controller
             ->where(['like', 'nome', $pesquisa])
             ->all();
 
-        /*$favMusPesquisadas=$this->getFavMusPesquisados($musicaSearch);
+        $albuns = array();
 
+        foreach ($musicaSearch as $musica){
+            array_push($albuns, Album::find()
+                ->where(['id' => $musica->id_album])
+                ->one());
+        }
 
-        $userLogado = Yii::$app->user->identity;
-        $itemsCarrinho = $this->getItemsCarrinho($userLogado);*/
-        return $musicaSearch;
+        return ['musicas' => $musicaSearch, 'albuns' => $albuns];
     }
 
 

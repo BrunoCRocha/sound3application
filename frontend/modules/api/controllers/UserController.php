@@ -156,5 +156,4 @@ class UserController extends \yii\rest\ActiveController
         return $this->redirect($UrlConfirmacao);
     }
 
-
 }
