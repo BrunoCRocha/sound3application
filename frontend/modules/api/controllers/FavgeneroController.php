@@ -48,7 +48,7 @@ class FavgeneroController extends \yii\rest\ActiveController
 
 
     //Verifica se o Album está nos Favoritos
-    public function actionFindfavoritogenero($userId, $generoId){
+    public function actionFindfavgenero($userId, $generoId){
         $fav = Fav_Genero::find()
             ->where(['and',['id_utilizador' => $userId, 'id_genero' => $generoId]])
             ->one();
