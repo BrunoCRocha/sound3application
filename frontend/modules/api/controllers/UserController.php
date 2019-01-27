@@ -3,6 +3,7 @@
 namespace frontend\modules\api\controllers;
 
 use common\models\Compra;
+use common\models\Musica;
 use common\models\User;
 use frontend\models\SignupForm;
 use Yii;
@@ -61,5 +62,6 @@ class UserController extends \yii\rest\ActiveController
         }
         return -1;
     }
+    
 
 }
