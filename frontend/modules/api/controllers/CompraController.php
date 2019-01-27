@@ -221,26 +221,6 @@ class CompraController extends \yii\rest\ActiveController
     }
 
 
-    public function actionCheckmusicasalbumcarrinho($userId){
-        $carrinho = Compra::find()
-            ->where(['and',['id_utilizador'=> $userId,'efetivada' => 0]])
-            ->with('linhaCompras')
-            ->one();
-
-        $musicas = array();
-
-        foreach ($carrinho->relatedRecords as $lcArray) {
-            foreach ($lcArray as $lc) {
-
-                var_dump($lc);die();
-                if ($lc->id_musica == $musica->id){
-                    $check = true;
-                }
-            }
-        }
-    }
-
-
     public function actionRemovealbumcarrinho($userId,$albumId){
         $album = Album::findOne($albumId);
         if($albumId != null) {
