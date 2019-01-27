@@ -34,3 +34,7 @@ phpunit.phar
 # vagrant runtime
 /.vagrant
 common/img/artistas/michael_jackson.jpg
+frontend/modules/api/controllers/AlbumController.php
+frontend/modules/api/controllers/ArtistaController.php
+frontend/modules/api/controllers/AlbumController.php
+frontend/modules/api/controllers/ArtistaController.php
