@@ -195,6 +195,7 @@ return [
                         'GET checkmusicasalbumcarrinho' => 'checkmusicasalbumcarrinho',
                         'DELETE removealbumcarrinho' => 'removealbumcarrinho',
                         'GET checkmusicasalbumfavoritos' => 'checkmusicasalbumfavoritos',
+                        'GET getmusicascompradas' => 'getmusicascompradas'
 
                     ]
                 ],

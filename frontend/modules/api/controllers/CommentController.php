@@ -32,7 +32,7 @@ class CommentController extends \yii\rest\ActiveController
         }
 
         return ["comments" => $comments, "users" => $users];
-        return $comments;
+
     }
 
     public function actionCriarcomment(){
@@ -52,16 +52,13 @@ class CommentController extends \yii\rest\ActiveController
         return $check;
     }
 
-    public function actionRemovecomment($commentId){
+    public function actionApagarcomment($commentId, $albumId){
         $comment = Comment::findOne($commentId);
-
         $check=$comment->delete();
 
-        if($check == 1){
-            $check = true;
-        } else{
-            $check = false;
+        if ($check == true){
+            return $this->actionGetallcomments($albumId);
         }
-        return $check;
+
     }
 }
