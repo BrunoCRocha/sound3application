@@ -168,7 +168,10 @@ class CompraController extends \yii\rest\ActiveController
 
 
     public function actionGetcomprasregistadas($userId){
-        $compras = Compra::find()->where(['and',['id_utilizador'=> $userId,'efetivada'=>1]])->asArray()->all();
+        $compras = Compra::find()
+            ->where(['and',['id_utilizador'=> $userId,'efetivada'=>1]])
+            ->asArray()
+            ->all();
 
         return $compras;
     }
@@ -244,7 +247,6 @@ class CompraController extends \yii\rest\ActiveController
             $musicasCarrinho = array();
 
             foreach ($carrinho->relatedRecords as $lcArray){
-
                 if(count($lcArray) > 0){
                     foreach ($lcArray as $lc){
                         array_push($musicasCarrinho, Musica::findOne($lc->id_musica));
@@ -293,8 +295,38 @@ class CompraController extends \yii\rest\ActiveController
             var_dump($musicasFavoritos);die();
         }
         return false;
-
-
-
     }
+
+
+    public function actionGetmusicascompradas($userId){
+
+        $compras = Compra::find()
+            ->where(['and', ['id_utilizador' => $userId, 'efetivada' => 1]])
+            ->with('linhaCompras')
+            ->all();
+
+        $musicas = array();
+
+
+        foreach ($compras as $compra) {
+            foreach ($compra->relatedRecords as $lcArray) {
+                foreach ($lcArray as $lc) {
+                    $mus=Musica::findOne($lc->id_musica);
+
+                    array_push($musicas, $mus);
+                }
+            }
+        }
+
+
+        $albuns = array();
+        foreach ($musicas as $musica){
+            array_push($albuns, Album::findOne($musica->id_album));
+        }
+
+
+
+        return ['musicas' => $musicas, 'albuns' => $albuns];
+    }
+
 }
