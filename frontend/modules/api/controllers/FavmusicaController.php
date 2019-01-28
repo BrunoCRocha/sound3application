@@ -130,10 +130,6 @@ class FavmusicaController extends \yii\rest\ActiveController
             }
 
         }
-        if(count($musicasFavoritos) > 0){
-            var_dump($musicasFavoritos);
-            die();
-        }
 
         return $musicasFavoritos;
     }
@@ -144,9 +140,9 @@ class FavmusicaController extends \yii\rest\ActiveController
             ->where(['and', ['id_utilizador' => $userId, 'id_musica' => $musicaId]])
             ->one();
 
-        $ret = $model->delete();
+        $model->delete();
 
-        return $ret;
+        return false;
     }
 
 }

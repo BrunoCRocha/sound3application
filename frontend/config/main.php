@@ -168,7 +168,7 @@ return [
                         'GET getmusicasfavoritos' => 'getmusicasfavoritos',
                         'POST adicionarmusicafavoritos' => 'adicionarmusicafavoritos',
                         'GET checkmusicasalbumfavoritos' => 'checkmusicasalbumfavoritos',
-                        'DELETE apagarfavoritomusica' => 'apagarfavoritomusica'
+                        'DELETE apagar-favorito-musica' => 'apagar-favorito-musica'
                     ]
                 ],
                 [

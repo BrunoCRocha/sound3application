@@ -161,7 +161,7 @@ class CompraController extends \yii\rest\ActiveController
                     }
                 }
             }
-            return true;
+            return false;
         }
         return false;
     }
@@ -271,32 +271,6 @@ class CompraController extends \yii\rest\ActiveController
         }
         return false;
     }
-
-
-    public function actionCheckmusicasalbumfavoritos($userId, $albumId){
-
-        $musicasAlbum = Musica::find()
-            ->where(['id_album' => $albumId])
-            ->all();
-        $musicasFavoritos = array();
-        $musicasFavAlbum = array();
-
-        foreach ($musicasAlbum as $musica){
-            $fav= Fav_Musica::find()
-                ->where(['and',['id_utilizador' => $userId, 'id_musica' => $musica->id]])
-                ->one();
-
-            if($fav!=null){
-                array_push($musicasFavoritos, $musica);
-            }
-
-        }
-        if(count($musicasFavoritos) > 0){
-            var_dump($musicasFavoritos);die();
-        }
-        return false;
-    }
-
 
     public function actionGetmusicascompradas($userId){
 
