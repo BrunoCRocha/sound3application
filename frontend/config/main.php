@@ -72,6 +72,7 @@ return [
                     'except' =>['delete'],
                     'extraPatterns' => [
                         'GET verificarlogin' => 'verificarlogin',
+                        'GET checkout' => 'checkout'
                     ],
                 ],
                 [
@@ -196,7 +197,6 @@ return [
                         'DELETE removealbumcarrinho' => 'removealbumcarrinho',
                         'GET checkmusicasalbumfavoritos' => 'checkmusicasalbumfavoritos',
                         'GET getmusicascompradas' => 'getmusicascompradas'
-
                     ]
                 ],
                 [

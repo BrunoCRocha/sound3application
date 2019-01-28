@@ -231,10 +231,6 @@ class CompraController extends \yii\rest\ActiveController
         return $check;
     }
 
-
-
-
-
     public function actionRemovealbumcarrinho($userId, $albumId){
         $album = Album::findOne($albumId);
         if($albumId != null) {
@@ -275,6 +271,7 @@ class CompraController extends \yii\rest\ActiveController
         }
         return false;
     }
+
 
     public function actionCheckmusicasalbumfavoritos($userId, $albumId){
 
