@@ -5,6 +5,7 @@ namespace frontend\modules\api\controllers;
 use common\models\Album;
 use common\models\Artista;
 use common\models\Compra;
+use common\models\Fav_Musica;
 use common\models\LinhaCompra;
 use common\models\Musica;
 use yii\filters\auth\HttpBasicAuth;
@@ -85,10 +86,36 @@ class AlbumController extends \yii\rest\ActiveController
         return ["album" => $album];
     }
 
-    public function actionFindmusicas($id){
+    public function actionFindmusicas($id, $userId){
         $album = Album::findOne($id);
 
-        return ["musica" => $album->musicas, "album" => $album];
+        $musicasFavoritas=array();
+        foreach ($album->musicas as $musica){
+            $fav = Fav_Musica::find()
+                ->where(['and',['id_utilizador' => $userId, 'id_musica' => $musica->id]])
+                ->one();
+
+            if($fav != null){
+                array_push($musicasFavoritas, $musica);
+            }
+
+        }
+        $carrinho = Compra::find()
+            ->where(['and',['id_utilizador'=> $userId,'efetivada'=>0]])
+            ->with('linhaCompras')
+            ->one();
+
+        $musicasCarrinho = array();
+
+        foreach ($carrinho->relatedRecords as $lcArray){
+            if(count($lcArray) > 0){
+                foreach ($lcArray as $lc){
+                    array_push($musicasCarrinho, Musica::findOne($lc->id_musica));
+                }
+            }
+        }
+
+        return ["musica" => $album->musicas, "album" => $album, "musicasFavoritas" => $musicasFavoritas, "carrinho" => $musicasCarrinho];
     }
 
     public function actionFindalbumbysearch($search){

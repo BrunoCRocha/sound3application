@@ -4,6 +4,7 @@ namespace frontend\modules\api\controllers;
 
 use common\models\Album;
 use common\models\Artista;
+use common\models\Compra;
 use common\models\Fav_Artista;
 use common\models\Fav_Musica;
 use common\models\Musica;
@@ -33,9 +34,23 @@ class FavmusicaController extends \yii\rest\ActiveController
                 ->where(['id' => $musica->id_album])
                 ->one());
         }
+        $carrinho = Compra::find()
+            ->where(['and',['id_utilizador'=> $userId,'efetivada'=>0]])
+            ->with('linhaCompras')
+            ->one();
+
+        $musicasCarrinho = array();
+
+        foreach ($carrinho->relatedRecords as $lcArray){
+            if(count($lcArray) > 0){
+                foreach ($lcArray as $lc){
+                    array_push($musicasCarrinho, Musica::findOne($lc->id_musica));
+                }
+            }
+        }
 
 
-        return ['musicas' => $musicas, "albuns" => $albuns];
+        return ['musicas' => $musicas, "albuns" => $albuns, "carrinho" => $musicasCarrinho];
     }
 
     //SO 5 ALBUNS PARA MOSTRAR NA VIEW FAVORITOS
@@ -61,8 +76,23 @@ class FavmusicaController extends \yii\rest\ActiveController
                 ->one());
         }
 
+        $carrinho = Compra::find()
+            ->where(['and',['id_utilizador'=> $userId,'efetivada'=>0]])
+            ->with('linhaCompras')
+            ->one();
 
-        return ['musicas' => $musicas, "albuns" => $albuns];
+        $musicasCarrinho = array();
+
+        foreach ($carrinho->relatedRecords as $lcArray){
+            if(count($lcArray) > 0){
+                foreach ($lcArray as $lc){
+                    array_push($musicasCarrinho, Musica::findOne($lc->id_musica));
+                }
+            }
+        }
+
+
+        return ['musicas' => $musicas, "albuns" => $albuns, "carrinho" => $musicasCarrinho];
 
     }
 
@@ -111,7 +141,7 @@ class FavmusicaController extends \yii\rest\ActiveController
     }*/
 
 
-    public function actionCheckmusicasalbumfavoritos($userId, $albumId){
+    public function actionCheckmusicasfavoritos($userId, $albumId){
 
         $musicasAlbum = Musica::find()
             ->where(['id_album' => $albumId])
@@ -135,7 +165,7 @@ class FavmusicaController extends \yii\rest\ActiveController
     }
 
 
-    public function actionApagarFavoritoMusica($userId, $musicaId){
+    public function actionApagarfavoritomusica($userId, $musicaId){
         $model = Fav_Musica::find()
             ->where(['and', ['id_utilizador' => $userId, 'id_musica' => $musicaId]])
             ->one();

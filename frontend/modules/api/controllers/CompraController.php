@@ -80,7 +80,19 @@ class CompraController extends \yii\rest\ActiveController
                 ->one());
         }
 
-        return ['musicas' => $musicas, 'albuns' => $albuns];
+        $musicasFavoritas=array();
+        foreach ($musicas as $musica){
+            $fav = Fav_Musica::find()
+                ->where(['and',['id_utilizador' => $userId, 'id_musica' => $musica->id]])
+                ->one();
+
+            if($fav != null){
+                array_push($musicasFavoritas, $musica);
+            }
+
+        }
+
+        return ['musicas' => $musicas, 'albuns' => $albuns, 'favoritas' => $musicasFavoritas];
     }
 
     //adicionar musica ao carrinho

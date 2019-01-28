@@ -66,7 +66,7 @@ class PesquisaController extends Controller
         return $artistaSearch;
     }
 
-    public function actionPesquisamusicas($pesquisa){
+    public function actionPesquisamusicas($pesquisa, $userId){
         $musicaSearch = Musica::find()
             ->where(['like', 'nome', $pesquisa])
             ->all();
@@ -79,7 +79,36 @@ class PesquisaController extends Controller
                 ->one());
         }
 
-        return ['musicas' => $musicaSearch, 'albuns' => $albuns];
+        $musicasFavoritas = array();
+        $musicasCarrinho = array();
+        if(count($musicaSearch)>0){
+            foreach ($musicaSearch as $musica){
+                $fav = Fav_Musica::find()
+                    ->where(['and',['id_utilizador' => $userId, 'id_musica' => $musica->id]])
+                    ->one();
+
+                if($fav != null){
+                    array_push($musicasFavoritas, $musica);
+                }
+                $fav=null;
+
+            }
+            $carrinho = Compra::find()
+                ->where(['and',['id_utilizador'=> $userId,'efetivada'=>0]])
+                ->with('linhaCompras')
+                ->one();
+
+            foreach ($carrinho->relatedRecords as $lcArray){
+                if(count($lcArray) > 0){
+                    foreach ($lcArray as $lc){
+                        array_push($musicasCarrinho, Musica::findOne($lc->id_musica));
+                    }
+                }
+            }
+        }
+
+
+        return ['musicas' => $musicaSearch, 'albuns' => $albuns, 'favoritas' => $musicasFavoritas, 'carrinho' => $musicasCarrinho];
     }
 
 
