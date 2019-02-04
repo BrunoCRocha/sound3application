@@ -29,7 +29,7 @@ else{
 }
 ?>
 
-<li>
+<li class="item-pesquisa">
 
     <div class="musica" id="objeto">
         <div class="imagem_album-musica">

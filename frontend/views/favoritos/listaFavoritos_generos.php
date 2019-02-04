@@ -5,7 +5,7 @@
             <img src="<?=Yii::getAlias('@generosF').'/'.$genero->caminhoImagem?>">
         </div>
         <div class="info_body-genero">
-            <h4 class="media-heading"><a href="<?= Url::toRoute(['detalhes/genero', 'id' => $genero->id])?>"><?= $genero->nome?></a></h4>
+            <h4 class="media-heading"><?= $genero->nome?></h4>
     </div>
     <div id="imagem_favoritos_sozinha">
         <a href="<?= Url::toRoute(['favoritos/rem-fav-genero', 'id' => $genero->id])?>">

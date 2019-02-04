@@ -76,7 +76,7 @@ class UserController extends \yii\rest\ActiveController
 
     public function actionCheckout($userLogado)
     {
-        $IP = "192.168.1.83";
+        $IP = "10.200.10.177";
         $paypal = new \PayPal\Rest\ApiContext(
             new \PayPal\Auth\OAuthTokenCredential(
                 'AS-mpIvVyQUAjq7YhTib-Ul5BCM2DMd1SGUjYQXpwqcwmQoBLp5Z7nhpNUh6CnGi8tjCv6XnRs2iJi80',

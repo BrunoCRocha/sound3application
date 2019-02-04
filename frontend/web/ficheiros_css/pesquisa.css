@@ -18,7 +18,7 @@
 }
 
 .menu_pesquisa{
-    color: black;
+    color: #D4C9CE;
     padding: 8px;
     cursor: pointer;
     width: 70%;
@@ -71,14 +71,15 @@
     margin-top: 20px;
     width: 65%;
     padding-left: 12px;
+
 }
 
 .info_body h4{
-    color:black;
+    color: white;
 }
 
 .info_body h4 a{
-    color: black;
+    color: white;
 }
 
 .info_body h5 a:hover{
@@ -223,16 +224,16 @@ li{
     padding-left: 12px;
 }
 
-.info_body-artista a{
-    color: black;
+.info_body-artista h4 a:hover{
+    color: white!important;
 }
 
-.info_body-artista a:hover{
-    color: black;
+.info_body-artista h4 a{
+    color: #D4C9CE!important;
 }
 
 .info_body-artista h5{
-    color: #D4C9CE;
+    color: #D4C9CE!important;
 }
 
 
@@ -244,6 +245,10 @@ li{
 
 .info_body-genero a{
     color: black;
+}
+
+.info_body-genero h4{
+    color: #D4C9CE;
 }
 
 .info_body-genero a:hover{

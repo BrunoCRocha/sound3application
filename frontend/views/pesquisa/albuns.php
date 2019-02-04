@@ -17,7 +17,7 @@ if($favAlbPesquisados != null){
 }
 ?>
 
-<li>
+<li class="item-pesquisa">
     <div id="objeto">
         <div class="imagem_album-musica">
             <a href="<?= Url::toRoute(['detalhes/album', 'id' => $album->id])?>">

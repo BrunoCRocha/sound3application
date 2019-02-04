@@ -27,8 +27,8 @@ else{
         <div class="info_body">
             <h4 class="media-heading"><?= $musica->nome ?></h4>
             <h5>
-                <a href="<?= Url::toRoute(['detalhes/detalhesArtista', 'id' => $musica->id])?>"><?= $musica->album->artista->nome ?></a> -
-                <a href="<?= Url::toRoute(['detalhes/detalhesAlbum', 'id' => $musica->id])?>"><?= $musica->album->nome ?></a> -
+                <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $musica->album->artista->id])?>"><?= $musica->album->artista->nome ?></a> -
+                <a href="<?= Url::toRoute(['detalhes/album', 'id' => $musica->album->id])?>"><?= $musica->album->nome ?></a> -
                 <?= $musica->duracao ?>
             </h5>
         </div>

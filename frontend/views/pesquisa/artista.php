@@ -19,7 +19,7 @@ if($favArtPesquisados != null){
 }
 ?>
 
-<li>
+<li class="item-pesquisa">
     <div class="objeto_genero-musica" >
         <div id="imagem_artista-genero">
             <a href="<?= Url::toRoute(['detalhes/artista', 'id' => $artista->id])?>">

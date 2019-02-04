@@ -56,7 +56,6 @@ class CompraController extends \yii\rest\ActiveController
 
     //return dos itens no carrinho do userlogado
     public function actionGetcarrinho($userId){
-
         $carrinho = Compra::find()
             ->where(['and',['id_utilizador'=> $userId,'efetivada'=>0]])
             ->with('linhaCompras')
